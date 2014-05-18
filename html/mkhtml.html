@@ -1,0 +1,88 @@
+<HTML>
+<HEAD>
+<TITLE>Option: mkhtml</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="makedcls.html">-makedcls</A><HR><P>
+<H2>Option: <font color=#FF0080>mkhtml</font></H2><P>
+<A NAME="mkhtml"></A><DT><B><A HREF="mkhtml.html">-mkhtml</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Produce HTML documentation from source. Creates individual
+HTML files from ftnchek analysis and code comments. All comments
+immediately preceding and following the function or subroutine
+definition are captured to the HTML file. No reformatting of
+source comments is performed other than stripping of FORTRAN
+comment characters.  In addition, the HTML file lists the local
+variables declared, common block variables used, functions and
+subroutines called, I/O unit usage, and other information about each
+subprogram.
+Usually you will also want to specify <B>-call=tree</B> to create the
+root HTML file CallTree.html.  (Perhaps this file should be
+named index.html.)
+<P>
+
+Various options for the form of the HTML files are controlled
+by the <I>list</I>, which consists of keywords
+separated by commas or colons.
+There are three special keywords: <B>all</B> to turn on all the
+options, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="mkhtml.html">-mkhtml</A></B> is equivalent to
+<B><A HREF="mkhtml.html">-mkhtml</A>=documents</B> (i.e. produce the HTML document files
+using the default options), and
+<B>-nomkhtmls</B> is equivalent to <B><A HREF="mkhtml.html">-mkhtml</A>=none</B>.
+<P>
+
+For the sake of simplicity, the options for <B><A HREF="mkhtml.html">-mkhtml</A></B> are the
+same as those for <B><A HREF="makedcls.html">-makedcls</A></B> except for those that are
+inapplicable.  Likewise,  a numeric
+form of this setting can be used, formed as the sum of
+the numbers in parentheses in the list below.
+The warning keywords with their meanings are as follows:
+<DL COMPACT>
+<DT><B>documents</B> (1):<DD>
+Create the HTML documents.  (This is implied by any of the other
+options, and can be omitted if any other options are given.)
+<DT><B>compact</B> (4):<DD>
+The declarations are normally prettyprinted to line up neatly in
+common columns.
+This option value selects instead compact output, without column
+alignment.
+<DT><B>use-continuation-lines</B> (8):<DD>
+Causes continuation lines to be used instead of
+beginning a new declaration on each line.  This option
+is appropriate to use together with <B>compact</B>.
+<DT><B>keywords-lowercase</B> (16):<DD>
+Output Fortran keywords in lowercase, instead of the default
+uppercase.
+<DT><B>vars-and-consts-lowercase</B> (32):<DD>
+Output variables and constants in lowercase, instead of the default
+uppercase.   Character string constants are not affected by this
+option.
+<DT><B>exclude-sftran3</B> (64):<DD>
+Omit declarations of internal integer variables produced by the
+SFTRAN3 preprocessor,
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+xsf3">xsf3</A></B>(1L).
+
+(See <B><A HREF="makedcls.html">-makedcls</A></B> for discussion.)
+<DT><B>suppress-array-dimensions</B> (512):<DD>
+Suppress dimensioning of arrays in the generated declarations.  This
+is normally undesirable, but is available if for some reason you
+do not want the array dimensions to appear in the HTML.
+<DT><B>free-form</B> (1024):<DD>
+Produce variable declarations in free source form.  This mode is automatically
+used if the input source is free form.  This mainly affects the form
+of continuation lines if they are used.
+</DL>
+<P>
+
+See also: <B><A HREF="calltree.html">-calltree</A></B>, <B><A HREF="makedcls.html">-makedcls</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="novice.html">-novice</A>
+</BODY></HTML>

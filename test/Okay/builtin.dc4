@@ -1,0 +1,20 @@
+C====>Begin Module %MAIN                  File builtin.f                
+C---->Makedcls Options: All variables                                   
+C
+C     Intrinsic functions
+C
+      intrinsic           DSQRT,       SQRT
+C
+C     Built-in functions
+C
+      double precision    DSQRT
+C
+      double precision    DSQRT
+C
+C     Local variables
+C
+      double precision    X
+C
+      real                Y
+C
+C====>End Module   %MAIN                  File builtin.f                

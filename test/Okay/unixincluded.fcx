@@ -1,0 +1,21 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File unixincluded.f:
+      0 # 1 "unixinclude.f"
+"unixinclude.f", near line 0: Warning: Nonstandard syntax: preprocessor
+ directive
+      0 # 1 "./unixdefs.h"
+"./unixdefs.h", near line 0: Warning: Nonstandard syntax: preprocessor
+ directive
+      2 # 3 "unixinclude.f"
+"unixinclude.f", near line 2: Warning: Nonstandard syntax: preprocessor
+ directive
+
+"unixinclude.f", line 4: Warning in module %MAIN: Variables set but never
+ used:
+"unixinclude.f", line 4:     A set
+
+ 0 syntax errors detected in file unixincluded.f
+ 4 warnings issued in file unixincluded.f
+

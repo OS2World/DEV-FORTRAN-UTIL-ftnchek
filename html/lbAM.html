@@ -1,0 +1,142 @@
+<HTML>
+<HEAD>
+<TITLE>BUGS</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="lbAL.html">NEW FEATURES</A><HR><P>
+<A NAME="lbAM">&nbsp;</A> <H2>BUGS</H2>
+
+<B>ftnchek</B> still has much room for improvement.
+Your feedback is appreciated.  We want to know about any bugs you notice.
+Bugs include not only cases in which <B>ftnchek</B> issues an error message
+where no error exists, but also if <B>ftnchek</B> fails to issue a warning when
+it ought to.  Note, however, that <B>ftnchek</B> is not intended to catch all
+syntax errors (see section on Limitations).
+Also, it is not considered a bug for a variable to be
+reported as used before set, if the reason is that the usage of the
+variable occurs prior in the text to where the variable is set.  For
+instance, this could occur when a GOTO causes execution to loop backward
+to some previously skipped statements.  <B>ftnchek</B> does not analyze the
+program flow, but assumes that statements occurring earlier in the text
+are executed before the following ones.
+<P>
+
+We especially want to know if <B>ftnchek</B> crashes for any reason.  It is
+not supposed to crash, even on programs with syntax errors.  Suggestions
+are welcomed for additional features which you would find useful.  Tell
+us if any of <B>ftnchek</B>'s
+messages are incomprehensible.  Comments on the
+readability and accuracy of this document are also welcome.
+<P>
+
+You may also suggest support for additional extensions to the
+Fortran language.  These will be included only if it is felt that the
+extensions are sufficiently widely accepted by compilers.
+<P>
+
+If you find a bug in <B>ftnchek</B>,
+first consult the list of known bugs
+below to see if it has already been reported.  Also check the section
+entitled ``Limitations and Extensions'' above for restrictions
+that could be causing the problem.  If you do not find the problem
+documented in either place, then send a report including
+<DL COMPACT>
+<DT>1.<DD>
+The operating system and CPU type on which <B>ftnchek</B> is running.
+<DT>2.<DD>
+The version of <B>ftnchek</B> and values of any environment options or
+settings defined in startup file.  (Capturing the output of ftnchek
+-help is useful for this.)
+<DT>3.<DD>
+A brief description of the bug.
+<DT>4.<DD>
+If possible, a small sample program showing the bug.
+</DL>
+<P>
+
+<BR>
+
+The report should be sent to the following address:
+<CENTER>
+<A HREF="mailto:moniot@fordham.edu">moniot@fordham.edu</A><BR>
+</CENTER>
+
+<P>
+
+Highest priority will be given to bugs which cause <B>ftnchek</B> to crash.
+<P>
+
+Certain problems that arise when checking large programs can be fixed
+by increasing the sizes of the data areas in <B>ftnchek</B>.  (These
+problems are generally signaled by error messages beginning with ``Oops''.)
+The simplest way to increase the table sizes is by
+recompiling <B>ftnchek</B> with the LARGE_MACHINE macro name
+defined.  Consult the makefile and README file for the
+method of doing this.
+<P>
+
+The following is a list of known bugs.
+<DL COMPACT>
+<DT>1.<DD>
+Bug: Used-before-set message is suppressed for any variable which
+is used as the loop index in an implied-do loop, even if it was in
+fact used before being set in some earlier statement.
+For example, consider J in the statement
+<DL COMPACT><DT><DD>
+<P>
+
+<PRE>
+      WRITE(5,*) (A(J), J=1,10)
+</PRE>
+
+<P>
+
+Here <B>ftnchek</B> parses the I/O expression,
+A(J), where J is used, before it parses the implied loop
+where J is set.  Normally this would cause
+<B>ftnchek</B> to report a spurious used-before-set warning for J.
+Since this report is usually in error and occurs fairly commonly,
+<B>ftnchek</B> suppresses the warning for J altogether.
+<P>
+
+Prognosis: A future version of  <B>ftnchek</B> is planned which will handle
+implied-do loops correctly.
+</DL>
+
+<DT>2.<DD>
+Bug: Variables used (not as arguments) in statement-function
+subprograms do not have their usage status updated when the statement
+function is invoked.
+<DL COMPACT><DT><DD>
+<P>
+
+Prognosis: To be fixed in a future version of <B>ftnchek</B>.
+</DL>
+
+<DT>3.<DD>
+Bug: VAX version does not expand wildcards in filenames on the
+command line if they are followed without space by an option, e.g.
+ftnchek *.f/calltree would not expand the *.f.
+This is because VMS<A HREF="style.html">-style</A> options without intervening
+space are not supported by the GNU shell_mung routine that is used
+to expand wildcards.
+<DL COMPACT><DT><DD>
+<P>
+
+Prognosis: unlikely to be fixed.
+</DL>
+
+<DT>4.<DD>
+Bug: checking for nonstandard format edit descriptors is done only in
+FORMAT statements, not in character strings used as formats.
+<DL COMPACT><DT><DD>
+<P>
+
+Prognosis: may be fixed someday.
+</DL>
+
+<P>
+</DL>
+<P><HR><P>Next: <A HREF="lbAN.html">ACKNOWLEDGEMENTS</A>
+</BODY></HTML>

@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+<TITLE>Option: library</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="intrinsic.html">-intrinsic</A><HR><P>
+<H2>Option: <font color=#FF0080>library</font></H2><P>
+<A NAME="library"></A><DT><B><A HREF="library.html">-library</A></B>
+
+<DD>
+<DL COMPACT><DT><DD>
+This switch is used when a number of subprograms are
+contained in a file, but not all of them are used by the application.
+Normally, <B>ftnchek</B> warns you if any subprograms are defined but
+never used.  This switch will suppress these warnings.  Default = no.
+<P>
+
+This switch also controls which subprogram calls and COMMON
+block declarations are checked.  If a file
+is read with the <B><A HREF="library.html">-library</A></B> flag in effect, the subprogram calls
+and COMMON declarations contained in a routine in that file will
+be checked only if that routine is in the main program's call tree.
+On the other hand, if the <B><A HREF="library.html">-library</A></B> switch is
+turned off, then <B>ftnchek</B> checks the calls of every routine by
+every other routine, regardless of whether those routines could ever
+actually be invoked at run time, and likewise all COMMON block
+declarations are compared for agreement.
+<P>
+
+The difference between this switch and the <B><A HREF="usage.html">-usage</A>=no-ext-unused</B>
+option for subprograms is that the latter suppresses only the warning
+about routines being declared but not used.  The <B><A HREF="library.html">-library</A></B> switch
+goes further and excludes unused routines processed while it is in
+effect from all cross-checking of arguments and COMMON block
+declarations as well.
+<P>
+
+(If there is no main program anywhere in the set of files that
+<B>ftnchek</B> has read, so that there is no call tree, then
+<B>ftnchek</B> will look for any non-library routines that are not called
+by any other routine, and use these as substitutes for the main
+program in constructing the call tree and deciding what to check.
+If no such top-level non-library routines are found, then
+all inter-module calls and all COMMON declarations will be checked.)
+<P>
+
+See also: <B><A HREF="arguments.html">-arguments</A></B>, <B><A HREF="calltree.html">-calltree</A></B>, <B><A HREF="common.html">-common</A></B>,
+<B><A HREF="extern.html">-extern</A></B>, <B><A HREF="usage.html">-usage</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="list.html">-list</A>
+</BODY></HTML>

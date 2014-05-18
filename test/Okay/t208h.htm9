@@ -1,0 +1,21 @@
+<HTML>
+<HEAD><TITLE>Source t208h.f</TITLE></HEAD>
+<BODY>
+<a name="FOO"><h3>SUBROUTINE FOO ( X )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>REAL              +X
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208h.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Intrinsic Functions Called</b><br></td></tr>
+<tr><td><pre>GENERIC            SQRT
+</pre></td></tr></table>
+<table><tr><td align="left"><b>External Functions and Subroutines Called</b><br></td></tr>
+<tr><td><pre>REAL               R1MACH
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

@@ -1,0 +1,24 @@
+C====>Begin Module %MAIN                  File t208e.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Local variables
+C
+      INTEGER             M
+C
+C====>End Module   %MAIN                  File t208e.f                  
+C====>Begin Module SUB                    File t208e.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Common variables
+C
+      REAL                A,           B,           C
+C
+C====>End Module   SUB                    File t208e.f                  
+C====>Begin Module FUN                    File t208e.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Common variables
+C
+      REAL                A,           B,           C
+C
+C====>End Module   FUN                    File t208e.f                  

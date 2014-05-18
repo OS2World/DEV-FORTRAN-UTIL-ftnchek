@@ -1,0 +1,81 @@
+C====>Begin Module SYMSF                  File t208d.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     External functions
+C
+      EXTERNAL            KARASC,      KARCM2,      KARUC
+C
+      INTEGER             KARASC,      KARCM2,      KARUC,       MIN0
+      INTEGER             MOD
+C
+C     Argument variables
+C
+      INTEGER             FONT(1),     SWCHAR(1)
+C
+C     Local variables
+C
+      INTEGER             ACCENT,      ALPHA,       AMPSND,      AT
+      INTEGER             BA,          BETA,        CARET,       CC
+      INTEGER             CG,          CHI,         CI,          COLON
+      INTEGER             COMMA,       CR,          CS,          CYA
+      INTEGER             CYB,         CYCHE,       CYD,         CYE
+      INTEGER             CYEE,        CYEEK,       CYF,         CYG
+      INTEGER             CYK,         CYKHA,       CYL,         CYM
+      INTEGER             CYMZNK,      CYN,         CYO,         CYOO
+      INTEGER             CYP,         CYR,         CYS,         CYSH
+      INTEGER             CYSHCH,      CYT,         CYTSE,       CYTZNK
+      INTEGER             CYV,         CYYA,        CYYE,        CYYIRI
+      INTEGER             CYYOO,       CYZ,         CYZHE,       DEL
+      INTEGER             DELTA,       DOLLAR,      DQUOTE,      DR
+      INTEGER             EPSLON,      EQUALS,      ETA,         EXCLPT
+      INTEGER             FCASE,       FTYPE,       FVAR,        GAMMA
+      INTEGER             GE,          GG,          GI,          I
+      INTEGER             IDIG,        IG,          II,          ILC
+      INTEGER             IOTA,        IR,          IUC,         KAPPA
+      INTEGER             KG,          KR,          LAMBDA,      LANGLE
+      INTEGER             LBRACE,      LBRAKT,      LCA,         LCB
+      INTEGER             LCC,         LCD,         LCE,         LCF
+      INTEGER             LCG,         LCH,         LCI,         LCJ
+      INTEGER             LCK,         LCL,         LCM,         LCN
+      INTEGER             LCO,         LCP,         LCQ,         LCR
+      INTEGER             LCS,         LCT,         LCU,         LCV
+      INTEGER             LCW,         LCX,         LCY,         LCZ
+      INTEGER             LOC0,        LOC0SV,      LOCLC,       LOCUC
+      INTEGER             LPAREN,      MINUS,       MU,          NOCHAR
+      INTEGER             NU,          NUL,         NUMBER,      OMCRON
+      INTEGER             OMEGA,       PERCNT,      PERIOD,      PHI
+      INTEGER             PI,          PLUS,        PSI,         QUERY
+      INTEGER             RANGLE,      RBRACE,      RBRAKT,      RHO
+      INTEGER             RPAREN,      RSLANT,      SA,          SCOLON
+      INTEGER             SG,          SIGMA,       SLASH,       SPACE
+      INTEGER             SQUOTE,      SR,          SS,          STAR
+      INTEGER             TAU,         THETA,       TILDE,       TR
+      INTEGER             UCA,         UCB,         UCC,         UCD
+      INTEGER             UCE,         UCF,         UCG,         UCH
+      INTEGER             UCI,         UCJ,         UCK,         UCL
+      INTEGER             UCM,         UCN,         UCO,         UCP
+      INTEGER             UCQ,         UCR,         UCS,         UCT
+      INTEGER             UCU,         UCV,         UCW,         UCX
+      INTEGER             UCY,         UCZ,         UPSLON,      USCORE
+      INTEGER             VBAR,        XI,          ZETA
+C
+      LOGICAL             ERROR
+C
+C     Common variables
+C
+      INTEGER             CASESW,      KFONT,       MAXFNT,      NFONT
+      INTEGER             NFUSED
+C
+      COMMON / SYM02  /   CASESW,      KFONT,       MAXFNT,      NFONT
+      COMMON / SYM02  /   NFUSED
+C
+C     Common variables
+C
+      INTEGER             ASCII(96,5), BSWTCH(5),   FONTID(5)
+      INTEGER             FONTNM(5,5), FSWTCH(5),   LSWTCH(5)
+      INTEGER             USWTCH(5)
+C
+      COMMON / SYM03  /   ASCII,       BSWTCH,      FONTID,      FONTNM
+      COMMON / SYM03  /   FSWTCH,      LSWTCH,      USWTCH
+C
+C====>End Module   SYMSF                  File t208d.f                  

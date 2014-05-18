@@ -1,0 +1,33 @@
+		/* These sizeofs are used in determining what kind of
+		   int is needed to have enough bits to hold a flag
+		   field.  It is OK for the sizes defined here to be
+		   smaller than the true sizes: at worst it will just
+		   use more space than necessary.  The generic version
+		   uses values of 2, 4, 4 which should work fine on all
+		   recent-vintage 32-bit machines.  */
+
+#define SIZEOF_SHORT	@SIZEOF_SHORT@
+#define SIZEOF_INT	@SIZEOF_INT@
+#define SIZEOF_LONG	@SIZEOF_LONG@
+
+		/* If unistd.h exists, use it to declare unlink in ftnchek.c */
+#define HAVE_UNISTD_H	@HAVE_UNISTD_H@
+
+		/* If stdlib.h exists, use it to declare malloc and friends */
+#define HAVE_STDLIB_H	@HAVE_STDLIB_H@
+
+		/* Need regex.h for makehtml to work. */
+#define HAVE_REGEX_H	@HAVE_REGEX_H@
+
+		/* Either memset or bzero is needed in forlex.c: memset
+		   is preferred.
+		 */
+#define HAVE_MEMSET	@HAVE_MEMSET@
+#define HAVE_BZERO	@HAVE_BZERO@
+
+		/* Some compilers don't have strcasecmp but have stricmp
+		   or strcmpi instead.  Set up suitable defines here.
+		*/
+#define HAVE_STRCASECMP		@HAVE_STRCASECMP@
+#define HAVE_STRICMP		@HAVE_STRICMP@
+#define HAVE_STRCMPI		@HAVE_STRCMPI@

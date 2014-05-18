@@ -1,0 +1,91 @@
+#!/bin/sh
+#
+# Simple configure script to create makefile.generic from Makefile.in
+# for the ftnchek distribution, so users without a real Unix system
+# can have a generic makefile to edit for their needs.  It is run
+# during the creation of the distribution, not by installer.
+#
+# It just substitutes pathless version of all the system programs,
+# and the most commonly used values of options, into Makefile.in
+# and other configured files.  (One exception: need a full path for
+# perl at head of perl scripts.  Hope /usr/bin/perl will work.)
+# This script only needs to be changed when configure.in has new
+# substitutions.
+#
+# Also creates generic versions of other configured files.
+#
+#  R. Moniot, 2 May 1996
+
+Subst(){
+	sed -e 's%@prefix@%/usr/local%' \
+	    -e 's%@exec_prefix@%${prefix}%' \
+	    -e 's%@bindir@%${exec_prefix}/bin%' \
+	    -e 's%@datadir@%${prefix}/share%' \
+	    -e 's%@mandir@%${prefix}/man%' \
+	    -e 's%@libdir@%${exec_prefix}/lib%' \
+	    -e 's%@lispdir@%${datadir}/emacs/site-lisp%' \
+	    -e 's%@sgimansubdir@%/manl%' \
+	    -e 's%@EXE@%%' \
+	    -e 's%@CMD@%%' \
+	    -e 's%@YACC@%bison -y%' \
+	    -e 's%@AWK@%gawk%' \
+	    -e 's%@NROFF@%nroff%' \
+	    -e 's%@NROFFPLAIN@%nroff -c%' \
+	    -e 's%@MANtoPS@%./man2ps%' \
+	    -e 's%@STRIP@%strip%' \
+	    -e 's%@DCL2INC_REDIRECT@%> "/dev/stderr"%' \
+	    -e 's%@COL@%col -bx%' \
+	    -e 's%@SED@%sed%' \
+	    -e 's%@CC@%cc%' \
+	    -e 's%@CFLAGS@%-DUNIX -O $(OPTIONS)%' \
+	    -e 's%@LDFLAGS@%%' \
+	    -e 's%@INSTALL_MAN@%install-man%' \
+	    -e 's%@HAS_NROFF@%true%' \
+	    -e 's%@CPPFLAGS@%%' \
+	    -e 's%@CHMOD@%chmod%' \
+	    -e 's%@CMP@%cmp%' \
+	    -e 's%@CP@%cp%' \
+	    -e 's%@DIFF@%diff%' \
+	    -e 's%@EMACS@%emacs%' \
+	    -e 's%@EQN@%eqn%' \
+	    -e 's%@FTNPP@%ftnpp%' \
+	    -e 's%@MAKE@%make%' \
+	    -e 's%@GREP@%grep%' \
+	    -e 's%@MANtoHTML@%man2html%' \
+	    -e 's%@MKDIR@%mkdir%' \
+	    -e 's%@MV@%mv%' \
+	    -e 's%@OPT@%-O%' \
+	    -e 's%@PACK@%pack%' \
+	    -e 's%@PATCH@%patch%' \
+	    -e 's%@PERL@%/usr/bin/perl%' \
+	    -e 's%@PRINTENV@%printenv%' \
+	    -e 's%@PWD_PROG@%pwd%' \
+	    -e 's%@RM@%rm -f%' \
+	    -e 's%@RMDIR@%rmdir%' \
+	    -e 's%@SH@%sh%' \
+	    -e 's%@SOELIM@%soelim%' \
+	    -e 's%@TBL@%tbl%' \
+	    -e 's%@TAR@%tar%' \
+	    -e 's%@ZIP@%zip%' \
+	    -e 's%@HAVE_UNISTD_H@%0%' \
+	    -e 's%@HAVE_STDLIB_H@%1%' \
+	    -e 's%@HAVE_REGEX_H@%0%' \
+	    -e 's%@HAVE_STRCASECMP@%1%' \
+	    -e 's%@HAVE_STRICMP@%0%' \
+	    -e 's%@HAVE_STRCMPI@%0%' \
+	    -e 's%@SIZEOF_SHORT@%2%' \
+	    -e 's%@SIZEOF_INT@%4%' \
+	    -e 's%@SIZEOF_LONG@%4%' \
+	    -e 's%@HAVE_MEMSET@%1%' \
+	    -e 's%@HAVE_BZERO@%0%' \
+	    -e 's%@CPP@%/lib/cpp%' \
+		$1
+}
+
+for file in $*
+do
+    echo "creating $file"
+    Subst $file.in > $file
+done
+
+

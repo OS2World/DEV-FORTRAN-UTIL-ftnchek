@@ -1,0 +1,44 @@
+<HTML>
+<HEAD><TITLE>Source t208a.f</TITLE></HEAD>
+<BODY>
+<a name="DDIAPA"><h3>SUBROUTINE DDIAPA ( IX, IY )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER  IX,  IY
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Description</b></td></tr>
+<tr><td><pre>   (Add to Path) 
+   Add the point (IX,IY) to the current path, which is assumed 
+   to have  already been  started by  a call  to DDIBPA.   The 
+   current point and visibility are updated in COMMON. 
+   (27-May-1991) 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ 
+   EXTERNAL REFERENCES (FUNCTION,SUBROUTINE,COMMON) 
+ 
+   EXTERNAL REFS       TKIOLL,      TKIOWB,      TKIOWH,      TKIOWN</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208a.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Intrinsic Functions Called</b><br></td></tr>
+<tr><td><pre>INTEGER  MAX0,  MIN0
+</pre></td></tr></table>
+<table><tr><td align="left"><b>External Functions and Subroutines Called</b><br></td></tr>
+<tr><td><pre>INTEGER  TKIOLL
+SUBROUTINE  TKIOWB,  TKIOWH,  TKIOWN
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Local Variables</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER +BLANK,  DUMMY
+</pre></td></tr></table>
+<table>
+<tr><td align="left"><b>Referenced Common Block Variables</b> <small>(+ indicates altered content)</small><b></b></td></tr>
+<tr><td><pre>DDI01              INTEGER +LASTX,              +LASTY
+DDI01              INTEGER +MAXX,               +MAXY
+DDI01              INTEGER +MINX,               +MINY
+DDI01              INTEGER +NPATH
+DDI01              LOGICAL +VILAST
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

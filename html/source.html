@@ -1,0 +1,127 @@
+<HTML>
+<HEAD>
+<TITLE>Option: source</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="sort.html">-sort</A><HR><P>
+<H2>Option: <font color=#FF0080>source</font></H2><P>
+<A NAME="source"></A><DT><B><A HREF="source.html">-source</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+This setting controls certain options about the form of the Fortran
+source code.  The <I>list</I> consists of keywords
+separated by commas or colons.
+There are three special keywords: <B>all</B> to turn on all the
+options, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="source.html">-source</A></B> is equivalent to
+<B><A HREF="source.html">-source</A>=all</B>, and <B>-nosource</B> is equivalent to
+<B><A HREF="source.html">-source</A>=none</B>.
+<P>
+
+For compatibility with previous versions of <B>ftnchek</B>, a numeric
+form of this setting is also accepted:  the <I>list</I> is replaced by
+a number which is the sum of the numbers in parentheses beside
+the keywords in the following list.  (The <B>fixed</B> and <B>free</B>
+options do not have numeric values.)
+The warning keywords with their meanings are as follows:
+<DL COMPACT>
+<DT><B>fixed</B>:<DD>
+Interpret the source as fixed form (with supported extensions such as
+exclamation mark for comments).  Statements must be in columns 7 to 72
+(unless the <B>-cols</B> setting has been used to change this), and
+blanks are not significant outside character context (but warned
+about under the <B><A HREF="pretty.html">-pretty</A></B> option).  This is the default mode
+unless the source file extension is <I>.f90</I> or <I>.F90</I>.
+this option cannot be given together with <B><A HREF="source.html">-source</A>=free</B>.
+<DT><B>free</B>:<DD>
+Interpret the source as free form.  Statements may be anywhere in
+columns 1 to 132, comments can only begin with an exclamation mark,
+and blanks are required in some places such as between identifiers and
+keywords.  This is the default mode if the source
+file extension is <I>.f90</I> or <I>.F90</I>.  This option cannot be given
+together with <B><A HREF="source.html">-source</A>=fixed</B> or <B><A HREF="source.html">-source</A>=dec-tab</B>
+<DT><B>dec-tab</B> (1):<DD>
+Accept DEC<A HREF="style.html">-style</A> tab-formatted source.  A line beginning with an
+initial tab will be treated as a new statement line unless the
+character after the tab is a nonzero digit, in which case it is
+treated as a continuation line.  The next column after the
+tab or continuation mark is taken as column 7.  A warning will be
+given in the case where the line is a continuation, if
+<B><A HREF="f77.html">-f77</A>=dec-tab</B> is in effect.
+<DT><B>vms-include</B> (2):<DD>
+Accept VMS<A HREF="style.html">-style</A> INCLUDE statements.  These follow the normal
+syntax, but with the following additional features: (1) the file
+extension, if not given, defaults to the same as a normal source file
+extension; and (2) the option /LIST or /NOLIST can be
+appended to the include-file name, to control listing of its contents.
+<DT><B>unix-backslash</B> (4):<DD>
+Handle UNIX<A HREF="style.html">-style</A> backslash escapes in character strings.
+The escape sequence following the backslash will be evaluated
+according to the ANSI standard for strings in C: up to three digits signify
+an octal value, an x signifies the start of a hexadecimal constant,
+any of the letters a b f n r t signify special control codes, and any
+other character (including newline) signifies the character itself.
+When this source code option is in effect,
+a warning will be given if the <B><A HREF="f77.html">-f77</A>=backslash</B>
+setting is specified.
+<DT><DD>
+The default behavior is to treat the backslash
+like any other normal character, but a warning about
+portability will be generated if the <B><A HREF="portability.html">-portability</A></B> flag is set.
+Because of the fact that some compilers treat the backslash in a
+nonstandard way, it is possible for standard-conforming programs to be
+non-portable if they use the backslash character in strings.
+<DT><DD>
+Since <B>ftnchek</B> does not do much with the interpreted string, it
+is seldom necessary to use this option.  It is needed in order to
+avoid spurious warnings only if (a) the program being checked uses
+backslash to embed an apostrophe or quote mark in a string
+instead of using the standard mechanism of doubling the delimiter; (b)
+the backslash is used to escape the end-of-line in order to continue
+a string across multiple source lines; or (c) a PARAMETER
+definition uses an intrinsic string function such as LEN with
+such a string as argument, and that value is later used to define
+array dimensions, etc.
+<DT><B>param-implicit-type</B> (8):<DD>
+Implicit typing of a parameter by the data type of the value assigned.
+Some non-standard compilers may allow the data type of the value to
+override the
+Fortran 77 default type of a parameter that is based on the first
+letter of the parameter name.  This option only applies to
+PARAMETER statements of the standard form which has parentheses.
+A parameter that has been
+explicitly declared in a type statement prior to the PARAMETER
+statement is not affected by this option.  A warning will be given
+under the <B><A HREF="f77.html">-f77</A>=param-implicit-type</B> or
+<B><A HREF="portability.html">-portability</A>=param-implicit-type</B> option.
+<DT><DD>
+Note that this implicit typing is treated as equivalent to an explicit
+type declaration for the parameter.  Therefore, if you use
+<B><A HREF="makedcls.html">-makedcls</A>=undeclared-only</B> to generate declarations only of undeclared
+variables, these parameters will <I>not</I> be included.
+<DT><B>dec-param-standard-type</B> (16):<DD>
+Follow the Fortran 77 rule for data typing of DEC Fortran style
+parameters.  These are declared using a nonstandard form of the
+PARAMETER statement which lacks parentheses.  According to DEC
+Fortran, parameters defined by this form of the statement have their
+data type given by the data type of the value assigned.  Use this
+option to tell <B>ftnchek</B> not to follow this rule but instead to use the
+same rule as for standard PARAMETER statements.  This option
+does not apply to PARAMETER statements of the standard form.
+</DL>
+<P>
+
+By default, all these source code options are turned off, except for
+the <B>vms-include</B> option, which is on by default in the VMS version..
+<P>
+
+See also: <B><A HREF="f77.html">-f77</A></B>, <B><A HREF="include.html">-include</A></B>, <B><A HREF="portability.html">-portability</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="style.html">-style</A>
+</BODY></HTML>

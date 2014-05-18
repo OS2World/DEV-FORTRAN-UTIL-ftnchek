@@ -1,0 +1,204 @@
+<HTML>
+<HEAD>
+<TITLE>USING PROJECT FILES</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="lbAG.html">CHANGING THE DEFAULTS</A><HR><P>
+<A NAME="lbAH">&nbsp;</A> <H2>USING PROJECT FILES</H2>
+
+This section contains detailed information on how to use project files
+most effectively, and how to avoid some pitfalls.
+<P>
+
+One can divide the checks
+<B>ftnchek</B> does into two categories, local and global.  Local
+checking is restricted to within a single routine,
+and catches things like uninitialized variables, unintended loss
+of precision in arithmetic expressions, etc.  This sort of checking
+can be done on each subprogram independently.  Furthermore,
+local checking of a subprogram does not need to be repeated when some other
+subprogram is changed.  Global checking catches things like calling a
+subroutine with the wrong argument types, or disagreeing in common
+block declarations.  It requires looking at the whole set of subprograms
+interacting with each other.
+<P>
+
+The purpose of project files is to allow the local checking and global
+checking steps to be separated.  Assuming that each subprogram is in
+its own source file, you can run <B>ftnchek</B> once on each one to do local
+checking while suppressing global checking.
+Then <B>ftnchek</B> can be run once on all the project
+files together to do the global checking.  The sample makefile below
+shows how to automate this task.  The ``.f.prj'' target updates a
+project file for a particular file any time the source file changes.
+The information needed for global checking is saved
+in the project file.
+The ``check'' target does the combined global checking.
+Typically ``make check'' would repeat the ``ftnchek
+-project'' step only on changed source
+files, then do the global check.  This is obviously a big advantage
+for large programs, when many subprograms seldom if ever change.
+<P>
+
+It is best when using project files to place each subprogram
+in a separate source file.  If each source file may contain more than one
+subprogram,  it complicates the definition of ``local'' and ``global''
+checking because there is some inter-module checking that is contained
+within a file.  <B>ftnchek</B> tries to do the right thing in this
+case, but there are some complications (described below) due to the
+trade-off between avoiding re-doing cross-checks and preserving
+information about the program's structure.
+<P>
+
+Ordinarily, to do the least amount of re-checking, project files should be
+created with the <B><A HREF="library.html">-library</A></B>
+flag in effect and trimming turned on.  In this mode,
+the information saved in the project file consists of all subprogram
+declarations, all subprogram invocations not resolved by declarations in the
+same file, and one instance of each COMMON
+block declaration.  This is the minimum amount of information needed
+to check agreement between files.
+<P>
+
+If the source file contains more than one routine, there are some
+possible problems that can arise from creating the project file in
+library mode, because the calling
+hierarchy among routines defined within the file is lost.  Also,
+if the routines in the file make use of COMMON
+blocks that are shared with routines in other files, there will not be
+enough information saved for the correct checking of set and used
+status of COMMON blocks and COMMON variables according to the
+<B><A HREF="usage.html">-usage</A></B> setting.  Therefore if
+you plan to use project files when <B><A HREF="usage.html">-usage</A></B>
+checking is turned on (which is the default situation), and if
+multiple routines in one
+project file share COMMON blocks with routines in other files,
+the project files
+should be created with the <B><A HREF="library.html">-library</A></B> flag turned off.
+In this mode, <B>ftnchek</B> saves, besides
+the information listed above, one invocation of each subprogram by
+any other subprogram in the same file, and all COMMON block
+declarations.  This means that the project file will be larger than
+necessary, and that when it is read in, <B>ftnchek</B> may repeat some
+inter-module checks that it already did when the project file was
+created.  If each project file contains only one
+module, there is no loss of information in creating the project
+files in library mode.
+<P>
+
+Because of the possible loss of information entailed by creating a project file
+with the <B><A HREF="library.html">-library</A></B> flag in effect, whenever that project file is read
+in later, it will be treated as a library file regardless of the
+current setting of the <B><A HREF="library.html">-library</A></B> flag.  On the other hand, a project
+file created with library mode turned off can be read in later in either
+mode.
+<P>
+
+The foregoing discussion assumes that the trimming options of the
+<B><A HREF="project.html">-project</A></B> setting are turned on when the project file is
+created.  This is the normal situation.  The <B>no-trim</B> options of
+the <B><A HREF="project.html">-project</A></B> setting are provided in case one wants to use the
+project files for purposes other than checking the program with
+<B>ftnchek</B>.  For instance, one could write a Perl script to analyze
+the project files for information about how the different subprograms
+are called.  You should not use the <B>no-trim</B> options to deal
+with the issues of information loss discussed above, since they cause
+more information than necessary to be stored.  This makes the project
+files bigger and causes <B>ftnchek</B> to do more work later when it reads
+them to check your complete program.  Ordinarily, you should use the
+<B><A HREF="library.html">-library</A></B> option to control how much information to store for
+later use by <B>ftnchek</B> in checking your program.
+<P>
+
+Here is an example of how to use the UNIX <B>make</B> utility to
+automatically create a new project file each time the corresponding
+source file is altered, and to check the set of files for consistency.
+Add these lines to your makefile.
+The example assumes that a macro OBJS has been defined which
+lists all the names of object files to be linked together to form the
+complete executable program.
+(In this makefile, the indented lines should each begin with a
+tab, not blanks.)
+If any source file contains multiple routines that share
+common blocks among themselves, then the no-com-\* option
+should be removed from NOGLOBAL, and/or drop the <A HREF="library.html">-library</A> flag.
+<PRE>
+
+    # tell make what a project file suffix is
+    .SUFFIXES: .prj
+
+    # these options suppress global checks.
+    NOGLOBAL=<A HREF="usage.html">-usage</A>=no-ext-undefined,no-com-\*
+
+    # tell make how to create a .prj file from a .f file
+    .f.prj:
+            ftnchek <A HREF="project.html">-project</A> $(NOGLOBAL) <A HREF="library.html">-library</A> $&lt;
+
+    # set up macro PRJS containing project filenames
+    PRJS= $(OBJS:.o=.prj)
+
+    # &quot;make check&quot; will check everything that has been changed.
+    check: $(PRJS)
+            ftnchek $(PRJS)
+
+</PRE>
+
+<P>
+
+When a program uses many routines defined in a large number of
+different source files in different directories, it can be
+cumbersome to specify all the different project files needed to check
+the program properly.  To deal with such cases, <B>ftnchek</B> allows
+project files to be concatenated into a single large file.  This
+single file can then be given to <B>ftnchek</B> to provide the
+information for checking the use of any or all of the routines defined
+in the combined project files.  When using such a ``library''
+project file, you may want <B>ftnchek</B>'s error reports to document
+precisely the name of the file where the specific function is defined.
+If the various source files are in several directories,
+an error report that gives only the file name may be ambiguous, and rather
+should include the path to the file.  The solution is to create
+each of the individual project files by giving the complete path to
+the source file.  Then this complete path will appear in the error
+reports.  For example, suppose that all of the library subprogram
+source files are in subdirectories of a directory named
+/util/lib.  Then the individual project files
+could first be created by a command such as
+<PRE>
+
+find /util/lib -name '*.f' -exec ftnchek <A HREF="project.html">-project</A> '{}' ';'
+
+</PRE>
+
+(Possibly other options would be provided to <B>ftnchek</B> as
+discussed above.  Also, this step could be handled instead by a
+revised makefile rule that would provide the complete
+source file path instead of just the local name when invoking
+<B>ftnchek</B>.)  Next, concatenate all of these project files manually.
+<PRE>
+
+find /util/lib -name '*.prj' -exec cat '{}' ';' &gt; ourlib.prj
+
+</PRE>
+
+Then a program source file can be checked by using the command
+<PRE>
+
+ftnchek prog.f ... -lib ourlib.prj
+
+</PRE>
+
+and an error message related to any library routine will include
+the full path to the routine's source file.
+<P>
+
+At present, there is no archive utility like <B>ar</B> to manage the
+contents of a concatenated project file like the one in the
+illustration above.  If changes are made to one of the library
+routines, the only way to update the combined project file is to
+concatenate all the individual project files once again.  Such a
+utility would be quite easy to write.  Someone should do so and
+contribute it to the <B>ftnchek</B> effort.
+<P><HR><P>Next: <A HREF="lbAI.html">AN EXAMPLE</A>
+</BODY></HTML>

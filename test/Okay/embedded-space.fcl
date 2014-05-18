@@ -1,0 +1,66 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File embedded-space.f:
+
+      1       p r o g r a m  t e s t
+              ^
+Possibly misleading appearance near line 1 col 7: keyword PROGRAM has embedded
+ space
+                             ^
+Possibly misleading appearance near line 1 col 22: identifier TEST has
+ embedded space
+      2       realxray,zebra
+                  ^
+Possibly misleading appearance near line 2 col 11: identifier XRAY not clearly
+ separated from context
+      3       read(*,*) x ray,zebra
+                        ^
+Possibly misleading appearance near line 3 col 17: identifier XRAY has
+ embedded space
+      4       i f ( xray . eq . zebra ) w r i t e(*,*)                    xray *
+              ^
+Possibly misleading appearance near line 4 col 7: keyword IF has embedded
+ space
+                                        ^
+Possibly misleading appearance near line 4 col 33: keyword WRITE has embedded
+ space
+                                                                               ^
+Possibly misleading appearance near line 4 col 72: multi-character operator
+ has embedded space
+      5      $* zebra
+      6       if( xray .e q. zebra) write(*,*) 'h e l l o ' / / ' t h e r e'
+                       ^
+Possibly misleading appearance near line 6 col 16: keyword has embedded space
+                                                            ^
+Possibly misleading appearance near line 6 col 53: multi-character operator
+ has embedded space
+      7       if( xray / = zebra ) write(* , *) xray + zebra
+                       ^
+Warning near line 7 col 16: Nonstandard syntax for relational operator
+                       ^
+Possibly misleading appearance near line 7 col 16: multi-character operator
+ has embedded space
+      8       if( xray < zebra ) write(* , *) xray - zebra
+                       ^
+Warning near line 8 col 16: Nonstandard syntax for relational operator
+      9       end
+
+Module TEST: prog
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+      XRAY real         ZEBRA real   
+
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD READ          3 
+           *            SEQ  FMTD WRITE         4      6      7      8 
+
+ 0 syntax errors detected in file embedded-space.f
+ 12 warnings issued in file embedded-space.f
+

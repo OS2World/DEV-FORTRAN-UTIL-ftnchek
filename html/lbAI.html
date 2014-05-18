@@ -1,0 +1,319 @@
+<HTML>
+<HEAD>
+<TITLE>AN EXAMPLE</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="lbAH.html">USING PROJECT FILES</A><HR><P>
+<A NAME="lbAI">&nbsp;</A> <H2>AN EXAMPLE</H2>
+
+The following simple Fortran program illustrates the messages given by
+<B>ftnchek</B>.
+The program is intended to accept an array of test scores
+and then compute the average for the series.
+<P>
+
+<PRE>
+
+C       AUTHORS: MIKE MYERS AND LUCIA SPAGNUOLO
+C       DATE:    MAY 8, 1989
+
+C       Variables:
+C               SCORE -&gt; an array of test scores
+C               SUM -&gt;   sum of the test scores
+C               COUNT -&gt; counter of scores read in
+C               I -&gt;     loop counter
+
+        REAL FUNCTION COMPAV(SCORE,COUNT)
+            INTEGER SUM,COUNT,J,<A HREF="http://localhost/cgi-bin/man/man2html?5+SCORE">SCORE</A>(5)
+
+            DO 30 I = 1,COUNT
+                SUM = SUM + SCORE(I)
+30          CONTINUE
+            COMPAV = SUM/COUNT
+        END
+
+
+        PROGRAM AVENUM
+C
+C                       MAIN PROGRAM
+C
+C       AUTHOR:   LOIS BIGBIE
+C       DATE:     MAY 15, 1990
+C
+C       Variables:
+C               MAXNOS -&gt; maximum number of input values
+C               NUMS    -&gt; an array of numbers
+C               COUNT   -&gt; exact number of input values
+C               AVG     -&gt; average returned by COMPAV
+C               I       -&gt; loop counter
+C
+
+            PARAMETER(MAXNOS=5)
+            INTEGER I, COUNT
+            REAL NUMS(MAXNOS), AVG
+            COUNT = 0
+            DO 80 I = 1,MAXNOS
+                READ (5,*,END=100) NUMS(I)
+                COUNT = COUNT + 1
+80          CONTINUE
+100         AVG = COMPAV(NUMS, COUNT)
+        END
+
+</PRE>
+
+<P>
+
+The compiler gives no error messages when this program is compiled.
+Yet here is what happens when it is run:
+<P>
+
+<PRE>
+
+$ run average
+70
+90
+85
+&lt;EOF&gt;
+$
+
+</PRE>
+
+<P>
+
+What happened?  Why didn't the program do anything?
+The following is the output from
+<B>ftnchek</B> when it is used to debug the above
+program:
+<P>
+<P>
+
+<PRE>
+
+
+$ ftnchek <A HREF="list.html">-list</A> <A HREF="symtab.html">-symtab</A> average
+
+FTNCHEK Version 3.2 November 2002
+
+File average.f:
+
+      1 C       AUTHORS: MIKE MYERS AND LUCIA SPAGNUOLO
+      2 C       DATE:    MAY 8, 1989
+      3 
+      4 C       Variables:
+      5 C               SCORE -&gt; an array of test scores
+      6 C               SUM -&gt;   sum of the test scores
+      7 C               COUNT -&gt; counter of scores read in
+      8 C               I -&gt;     loop counter
+      9 
+     10         REAL FUNCTION COMPAV(SCORE,COUNT)
+     11             INTEGER SUM,COUNT,J,<A HREF="http://localhost/cgi-bin/man/man2html?5+SCORE">SCORE</A>(5)
+     12 
+     13             DO 30 I = 1,COUNT
+     14                 SUM = SUM + SCORE(I)
+     15 30          CONTINUE
+     16             COMPAV = SUM/COUNT
+                           ^
+Warning near line 16 col 20: integer quotient expr SUM/COUNT  converted to
+ real
+     17         END
+     18 
+
+Module COMPAV: func: real
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+    COMPAV real         COUNT intg             I intg*            J intg   
+     SCORE intg  1        SUM intg   
+
+* Variable not declared. Type has been implicitly defined.
+
+
+Warning in module COMPAV: Variables declared but never referenced:
+    J declared at line 11
+
+Warning in module COMPAV: Variables may be used before set:
+    SUM used at line 14
+    SUM set at line 14
+
+
+Statement labels defined:
+
+    Label   Line  StmtType
+     &lt;30&gt;     15      exec
+
+     19 
+     20         PROGRAM AVENUM
+     21 C
+     22 C                       MAIN PROGRAM
+     23 C
+     24 C       AUTHOR:   LOIS BIGBIE
+     25 C       DATE:     MAY 15, 1990
+     26 C
+     27 C       Variables:
+     28 C               MAXNOS -&gt; maximum number of input values
+     29 C               NUMS    -&gt; an array of numbers
+     30 C               COUNT   -&gt; exact number of input values
+     31 C               AVG     -&gt; average returned by COMPAV
+     32 C               I       -&gt; loop counter
+     33 C
+     34 
+     35             PARAMETER(MAXNOS=5)
+     36             INTEGER I, COUNT
+     37             REAL NUMS(MAXNOS), AVG
+     38             COUNT = 0
+     39             DO 80 I = 1,MAXNOS
+     40                 READ (5,*,END=100) NUMS(I)
+     41                 COUNT = COUNT + 1
+     42 80          CONTINUE
+     43 100         AVG = COMPAV(NUMS, COUNT)
+     44         END
+
+Module AVENUM: prog
+
+External subprograms referenced:
+
+    COMPAV: real*  
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+       AVG real         COUNT intg             I intg        MAXNOS intg*  
+      NUMS real  1
+
+* Variable not declared. Type has been implicitly defined.
+
+
+Warning in module AVENUM: Variables set but never used:
+    AVG set at line 43
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             5          SEQ  FMTD READ         40 
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType
+     &lt;80&gt;     42      exec    &lt;100&gt;     43      exec
+
+
+ 0 syntax errors detected in file average.f
+ 6 warnings issued in file average.f
+
+Warning: Subprogram COMPAV argument data type mismatch at position 1:
+    Dummy arg SCORE in module COMPAV line 10 file average.f is type intg
+    Actual arg NUMS in module AVENUM line 43 file average.f is type real
+
+</PRE>
+
+<P>
+
+According to <B>ftnchek</B>,
+the program contains variables which may be
+used before they are assigned an initial value, and variables which
+are not needed.  <B>ftnchek</B> also warns the user that an integer
+quotient has been converted to a real. This may assist the user in
+catching an unintended roundoff error.  Since the <B><A HREF="symtab.html">-symtab</A></B> flag
+was given, <B>ftnchek</B> prints out a table containing identifiers from
+the local module and their corresponding datatype and number of
+dimensions.  Finally, <B>ftnchek</B> warns that the function
+COMPAV is not used
+with the proper type of arguments.
+<P>
+
+With <B>ftnchek</B>'s
+help, we can debug the program.  We can see that there
+were the following errors:
+<DL COMPACT>
+<DT>1.<DD>
+SUM and COUNT
+should have been converted to real before doing the division.
+<DT>2.<DD>
+SUM should have been initialized to 0 before entering the loop.
+<DT>3.<DD>
+AVG was never printed out after being calculated.
+<DT>4.<DD>
+NUMS should have been declared INTEGER
+instead of REAL.
+</DL>
+<P>
+
+We also see that I, not J, should have been declared
+INTEGER in function COMPAV. Also, MAXNOS was not
+declared as INTEGER, nor COMPAV as REAL, in
+program AVENUM.  These are not errors, but they may indicate
+carelessness.  As it happened, the default type of these variables
+coincided with the intended type.
+<P>
+
+Here is the corrected program, and its output when run:
+<P>
+
+<PRE>
+
+C       AUTHORS: MIKE MYERS AND LUCIA SPAGNUOLO
+C       DATE:    MAY 8, 1989
+C
+C       Variables:
+C               SCORE -&gt; an array of test scores
+C               SUM -&gt;   sum of the test scores
+C               COUNT -&gt; counter of scores read in
+C               I -&gt;     loop counter
+C
+       REAL FUNCTION COMPAV(SCORE,COUNT)
+            INTEGER SUM,COUNT,I,<A HREF="http://localhost/cgi-bin/man/man2html?5+SCORE">SCORE</A>(5)
+C
+            SUM = 0
+            DO 30 I = 1,COUNT
+                SUM = SUM + SCORE(I)
+30          CONTINUE
+            COMPAV = FLOAT(SUM)/FLOAT(COUNT)
+        END
+C
+C
+        PROGRAM AVENUM
+C
+C                       MAIN PROGRAM
+C
+C       AUTHOR:   LOIS BIGBIE
+C       DATE:     MAY 15, 1990
+C
+C       Variables:
+C               MAXNOS -&gt; maximum number of input values
+C               NUMS    -&gt; an array of numbers
+C               COUNT   -&gt; exact number of input values
+C               AVG     -&gt; average returned by COMPAV
+C               I       -&gt; loop counter
+C
+C
+            INTEGER MAXNOS
+            PARAMETER(MAXNOS=5)
+            INTEGER I, NUMS(MAXNOS), COUNT
+            REAL AVG,COMPAV
+            COUNT = 0
+            DO 80 I = 1,MAXNOS
+                READ (5,*,END=100) NUMS(I)
+                COUNT = COUNT + 1
+80          CONTINUE
+100         AVG = COMPAV(NUMS, COUNT)
+            WRITE(6,*) 'AVERAGE =',AVG
+        END
+$ run average
+70
+90
+85
+&lt;EOF&gt;
+AVERAGE =   81.66666
+$
+
+</PRE>
+
+<P>
+
+With <B>ftnchek</B>'s
+help, our program is a success!
+<P>
+<P><HR><P>Next: <A HREF="lbAJ.html">INTERPRETING THE OUTPUT</A>
+</BODY></HTML>

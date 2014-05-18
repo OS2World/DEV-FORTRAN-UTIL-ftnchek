@@ -1,0 +1,15 @@
+<HTML>
+<HEAD><TITLE>Source t208m.f</TITLE></HEAD>
+<BODY>
+<a name="%MAIN"><h3>PROGRAM %MAIN ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208m.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>INTEGER            MAXDIM             (MAXDIM = 100+200)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

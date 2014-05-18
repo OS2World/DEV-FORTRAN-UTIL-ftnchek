@@ -1,0 +1,21 @@
+c====>Begin Module FOO                    File t208n.f                  
+c---->Makedcls Options: All variables                                   
+c
+      INTEGER             ICHAR
+c
+c     Parameter variables
+c
+      REAL                S
+      PARAMETER           (S = ICHAR(')'))
+      REAL                T
+      PARAMETER           (T = ICHAR(')'))
+      REAL                U
+      PARAMETER           (U = 25.0)
+      REAL                V
+      PARAMETER           (V = 2.18281828D+00)
+c
+c     Argument variables
+c
+      REAL                A(1),        B(*),        C(21,*),     D(2)
+c
+c====>End Module   FOO                    File t208n.f                  

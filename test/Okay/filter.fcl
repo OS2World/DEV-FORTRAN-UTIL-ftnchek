@@ -1,0 +1,24 @@
+
+FTNCHEK Version 3.2 November 2002
+
+     71      1           ('*',K=1,MOD(IBM(J),10)))
+Error near line 71 file include.f: parse error, unexpected ')', expecting ','
+ (A parse error means that I am not able to make sense of this statement, 
+ because your program has broken some rule of Fortran syntax.)
+
+Warning in module PRINTSTATS in file include.f: Labels defined but not used:
+    <30> defined at line 82 file include.f
+    106       Do O = 1,26
+                 ^
+Warning near line 106 col 10 file include.f: DO index is not integer
+    107         N(O) = 0
+                  ^
+Warning near line 107 col 11 file include.f: subscript is not integer
+
+ 1 syntax error detected in file std_input
+ 3 warnings issued in file std_input
+
+Warning: Common block STATS array dimen/size mismatch at position 7:
+    Variable IBM in module GETSTATS line 1 file Include/stats.h (included at
+ line 29 in include.f) has size 255
+    Variable N in module INITIALIZE line 105 file include.f has size 26

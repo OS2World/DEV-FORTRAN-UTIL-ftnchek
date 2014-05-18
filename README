@@ -1,0 +1,73 @@
+		 README file for ftnchek version 3.2
+
+Author: Robert Moniot
+	Fordham University
+	New York, NY  10023  USA
+	Telephone: (212) 636-6311
+	E-mail:  moniot@fordham.edu
+
+Date:	November 20, 2002
+
+Ftnchek (short for Fortran checker) is designed to detect certain
+errors in a Fortran program that a compiler usually does not.  Ftnchek
+is not primarily intended to detect syntax errors.  Its purpose is to
+assist the user in finding semantic errors.  Semantic errors are legal
+in the Fortran language but are wasteful or may cause incorrect
+operation.  For example, variables which are never used may indicate
+some omission in the program; uninitialized variables contain garbage
+which may cause incorrect results to be calculated; and variables
+which are not declared may not have the intended type.
+
+Ftnchek is written in C.  You must have a C compiler for the machine
+on which you wish to build it.  The URL for ftnchek's home page is
+http://www.dsm.fordham.edu/~ftnchek.  Source code, binary executables
+for some platforms, and other information are available there.
+
+
+		  INSTALLING FTNCHEK
+		  ------------------
+
+See the file INSTALL for detailed instructions on how to install
+ftnchek on your system.
+
+
+		   NEW FEATURES
+		   ------------
+
+Here are the new features in version 3.2:
+
+   1.  New option -mkhtml to generate HTML documentation files from
+       the source code.  Thanks go to Mark McVeigh for contributing
+       this feature.
+
+   2.  I/O unit usage information is now provided under the -symtab
+       option.  A table is printed listing each I/O unit by name
+       and/or number, together with the opera- tions performed on it.
+
+   3.  A single large project file, created by concatenating a number
+       of separately produced project files, can be input for use as a
+       library project file.
+
+   4.  Combined type declarations and data-statement-like
+       initializers, as in INTEGER N / 100 / are accepted.
+
+   5.  Fixed a bug that caused ftnchek to crash if a parameter is
+       declared with the same name as the subprogram containing it.
+       New error message for same.
+
+   6.  Fixed a bug in checking type agreement between variables and
+       their initial values in Fortran 90-style declarations with
+       initializers, as in INTEGER :: N=100.
+
+   7.  New error message when an internal file is a constant rather
+       than a variable.  Some compilers permit this for READ
+       operations, but it is prohibited by the F90 Standard.
+
+See the file PATCHES for further changes made after the initial
+release of this version.
+
+NOTE: For VMS, it is recommendend to obtain the file shell_mung.c.
+This file is not necessary to build ftnchek, but without it wildcards
+in file names on the command line will not be expanded.  This file is
+no longer bundled with ftnchek, but is obtainable at the ftnchek home
+site and elsewhere.

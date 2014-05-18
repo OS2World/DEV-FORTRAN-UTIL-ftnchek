@@ -1,0 +1,74 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File iffy.f:
+
+      1       SUBROUTINE IFFY ( USE1, USE2, L )
+      2 * Tests parsing & type-checking of various IF forms.
+      3 *
+      4       LOGICAL USE1, USE2
+      5       INTEGER L
+      6       INTEGER M
+      7       REAL X
+      8 * this block-if statement is OK
+      9       IF ( USE1 ) THEN
+     10          M = 1
+     11 * else-if statement is OK
+     12       ELSE IF ( USE2 ) THEN
+     13          M = 2
+     14       ELSE
+     15          M = 3
+     16       END IF
+     17 * this logical if is OK
+     18       IF( M .eq. 3 ) L = L+1
+     19 * this arithmetic if is OK
+     20       IF( L ) 100, 100, 100
+     21  100  X = L
+     22 * this arithmetic if is OK
+     23       IF( X ) 150, 150, 150
+     24  150  CONTINUE
+     25 * violate a block if statement
+     26       IF ( L ) THEN
+                   ^
+"iffy.f", line 26 col 12: Error: logical expression required
+     27          M = M+1
+     28 * violate an elseif statement
+     29       ELSE IF ( M ) THEN
+                        ^
+"iffy.f", line 29 col 17: Error: logical expression required
+     30          M = M+2
+     31       ELSE
+     32          M = M+3
+     33       END IF
+     34 * violate a logical if statement
+     35       IF( M ) L = L+1
+                  ^
+"iffy.f", line 35 col 11: Error: logical expression required
+     36 * violate an arithmetic if statement
+     37       IF( L .EQ. 3 ) 200, 200, 200
+                  ^
+"iffy.f", line 37 col 11: Error: integer, real, or double precision expression
+ required
+     38  200  CONTINUE
+     39       END
+
+Module IFFY: subr
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         L intg             M intg          USE1 logl          USE2 logl   
+         X real   
+
+
+
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType    Label   Line  StmtType
+    <100>     21      exec    <150>     24      exec    <200>     38      exec
+
+
+ 4 syntax errors detected in file iffy.f
+
+No main program found

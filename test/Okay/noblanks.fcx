@@ -1,0 +1,18 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File noblanks.f:
+    101    85 hitest=cuthi/float(n)
+                          ^
+"noblanks.f", line 101 col 19: Warning: promotion may not give desired
+ precision: dble CUTHI / real expr FLOAT(N)
+
+"noblanks.f", line 70: Warning in module DNRM2: Variables may be used before
+ set:
+"noblanks.f", line 70:     J used
+"noblanks.f", line 105:     J set
+
+ 0 syntax errors detected in file noblanks.f
+ 2 warnings issued in file noblanks.f
+
+No main program found

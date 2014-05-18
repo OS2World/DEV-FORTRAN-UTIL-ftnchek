@@ -1,0 +1,29 @@
+C====>Begin Module FOO                    File t208r.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      CHARACTER*(*)       S
+      PARAMETER           (S = 'hello')
+C
+      INTEGER             MAXY
+      PARAMETER           (MAXY = 54321)
+      INTEGER             MAXZ
+      PARAMETER           (MAXZ = 12345+MAXY)
+      INTEGER             MAXTOK
+      PARAMETER           (MAXTOK = 10)
+C
+C     Argument variables
+C
+      CHARACTER*(*)       ARGCHR(MAXROW,MAXCOL,*)
+C
+      INTEGER             MAXCOL,      MAXROW
+C
+C     Local variables
+C
+      CHARACTER           ONE,         ONEAGAIN
+      CHARACTER*3         THREE
+      CHARACTER*(MAXTOK)  TOKLST
+      CHARACTER*2         TWO,         TWOB
+C
+C====>End Module   FOO                    File t208r.f                  

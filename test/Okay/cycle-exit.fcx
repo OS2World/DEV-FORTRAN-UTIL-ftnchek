@@ -1,0 +1,53 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File cycle-exit.f:
+
+      1 C  Testing of recognition of CYCLE and EXIT statements.
+      2 C  Also tests that no-path warning is generated.
+      3       do i=1,100
+              ^
+"cycle-exit.f", line 3 col 7: Warning: Nonstandard syntax
+      4          if( mod(i,2) .eq. 0 ) then
+      5             print *, i
+      6             cycle
+                    ^
+"cycle-exit.f", line 6 col 13: Warning: Nonstandard syntax: CYCLE statement
+      7             print *, i*i ! no path to this statement
+                                 ^
+"cycle-exit.f", line 7 col 26: Warning: Nonstandard syntax: inline comment
+"cycle-exit.f", near line 7: Error: No path to this statement
+      8          endif
+      9          if( i .gt. 10 ) exit
+                                 ^
+"cycle-exit.f", line 9 col 26: Warning: Nonstandard syntax: EXIT statement
+     10          print *, i*i  ! there is a path to this statement
+                               ^
+"cycle-exit.f", line 10 col 24: Warning: Nonstandard syntax: inline comment
+     11       end do
+              ^
+"cycle-exit.f", line 11 col 7: Warning: Nonstandard syntax
+     12       end
+
+Module %MAIN: prog
+
+External subprograms referenced:
+
+       MOD: intrns 
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         I intg*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD PRINT         5      7     10 
+
+ 1 syntax error detected in file cycle-exit.f
+ 7 warnings issued in file cycle-exit.f
+

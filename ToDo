@@ -1,0 +1,37 @@
+			      To-Do List
+
+			     FTNCHEK 3.1
+			      May, 2001
+
+Below is a preliminary list of features that could be added to ftnchek
+relatively easily, and ought to be implemented as soon as possible, in
+order to support a larger number of Fortran 90 features.  They are
+more or less in order of increasing effort required.  Volunteers to
+work on implementing any of these items are welcomed, and should
+contact moniot@fordham.edu for advice and assistance.
+
+1. Fortran 90 intrinsics, especially the kind functions, which will be
+   needed for implementing kind types.
+
+2. Check attribute-based declarations for violating various simple
+   constraints, e.g. more than one LEN or KIND keyword in a specifier
+   list.
+
+3. Array sections.
+
+4. POINTER and TARGET statements and attributes.  Pointer assignment
+   statements.  Catch use of unassigned pointers.
+
+5. ALLOCATABLE statement attribute.  ALLOCATE, NULLIFY, and DEALLOCATE
+   statements.  Catch use of non-allocated arrays.
+
+6. INTENT and OPTIONAL statements and attributes.  Use these to adjust
+   checking of agreement of subprogram arguments.
+
+7. Array constructors.
+
+8. Check formats for legality, and for agreement with their I/O lists.
+
+9. Kind types.  Kind parameters on constants.  Catch disagreement
+   between kinds.  (Parsing of KIND specifiers in type declarations is
+   already implemented; the big task is to interpret them.)

@@ -1,0 +1,38 @@
+
+FTNCHEK Version 3.2 November 2002
+Cannot open file nosuch.f
+
+File dims.f:
+     10       character *10 c(len('won''t'))
+                              ^
+Warning near line 10 col 23 file dims.f: Nonstandard syntax: array bounds expr
+ cannot have array or function reference
+     13      $     :ichar(str("won""t",40) (1:1))) = 'x'
+                              ^
+Warning near line 13 col 23 file dims.f: Nonstandard syntax: character string
+ should be delimited by apostrophes
+
+Error in module FOO at line 7 file dims.f: STR3 cannot be adjustable size
+
+Warning in module FOO in file dims.f: Variables declared but never referenced:
+    B declared at line 4 file dims.f
+    D declared at line 5 file dims.f (dummy argument)
+    STR2 declared at line 7 file dims.f
+    STR3 declared at line 7 file dims.f
+    STR4 declared at line 7 file dims.f
+
+Warning in module FOO in file dims.f: Variables set but never used:
+    C set at line 12 file dims.f
+
+Warning in module FOO in file dims.f: Variables may be used before set:
+    A used at line 11 file dims.f
+    A set at line 11 file dims.f
+
+ 1 syntax error detected in file dims.f
+ 5 warnings issued in file dims.f
+
+No main program found
+Warning: Common block XX unused anywhere
+
+Warning: Subprogram STR never defined
+    Invoked in module FOO line 13 file dims.f

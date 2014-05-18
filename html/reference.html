@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<TITLE>Option: reference</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="quiet.html">-quiet</A><HR><P>
+<H2>Option: <font color=#FF0080>reference</font></H2><P>
+<A NAME="reference"></A><DT><B><A HREF="reference.html">-reference</A></B>
+
+<DD>
+<DL COMPACT><DT><DD>
+Specifies that a who-calls-who table be printed.
+This table lists each subprogram followed by a list of the
+routines it calls.  This switch is equivalent to <B><A HREF="calltree.html">-calltree</A>=reference</B>.
+Default = no.
+<P>
+
+The reference list omits routines
+called by unused library modules.  Thus it contains the same
+information as for the call-tree format, namely the hierarchy of
+subprogram calls, but printed in a different way.  This prints out
+a breadth-first traversal of the call tree whereas <B><A HREF="calltree.html">-calltree</A>=tree</B> prints
+out a depth-first traversal.
+<P>
+
+See also: <B><A HREF="calltree.html">-calltree</A></B>, <B><A HREF="crossref.html">-crossref</A></B>, <B><A HREF="library.html">-library</A></B>,
+<B><A HREF="sort.html">-sort</A></B>, <B><A HREF="symtab.html">-symtab</A></B>, <B><A HREF="vcg.html">-vcg</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="resources.html">-resources</A>
+</BODY></HTML>

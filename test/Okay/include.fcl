@@ -1,0 +1,334 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File include.f:
+
+      1 C  Derived from Brian Downing's WC program, replacing common decls by INCLUDEs
+      2 C
+      3 C     main(){   Get a file, open it, read and determine semi-useful
+      4 C               statistics, print them to screen, and exit quietly.
+      5 C           };
+      6 C
+      7 C     This program is an example word counter that makes use of several
+      8 C     Fortran intrinsic functions and data structures, such as; 
+      9 C     common, sub-routines, functions, inplied do loops, and much, much more.
+     10 C
+     11       Program WC
+     12 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+     13 C     Program:    Word_Count_And_Other_Stuff                                 C
+     14 C     Written_By: Brian Downing                                              C
+     15 C                 Fordham University                                         C
+     16 C     Date:       October 1st-16th, 1990                                     C
+     17 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+     18       Character Fname*80
+     19 
+     20       Call Initialize
+     21       Call GetFileName(Fname)
+     22       Call GetStats(Fname)
+     23       Call PrintStats
+     24       End
+     25 C
+     26 C     SubRoutine to get all kinds of neat statistics.
+
+Module WC: prog
+
+External subprograms referenced:
+
+GETFILENAME: subr     GETSTATS: subr   INITIALIZE: subr   PRINTSTATS: subr   
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+     FNAME char80  
+
+
+
+
+Warning in module WC: Names longer than 6 chars (nonstandard):
+    GETFILENAME referenced at line 21
+    GETSTATS referenced at line 22
+    INITIALIZE referenced at line 20
+    PRINTSTATS referenced at line 23
+     27 C
+     28       SubRoutine GetStats(Fname)
+     29       Include 'stats.h'
+              ^
+Warning near line 29 col 7: Nonstandard syntax
+Including file ./Include/stats.h:
+      1       Common /Stats/ACPW,AWPS,NW,NP,NL,NC,NEC(255)
+Resuming file include.f:
+     30       Character Inline*82, Fname*80, Ch
+     31 
+     32       Open (Unit=8,File=Fname,Err=999)
+     33       Do While (.TRUE.)
+              ^
+Warning near line 33 col 7: Nonstandard syntax
+     34           Read(8,10,End=888)InLine
+     35           NL = NL + 1
+     36           LastPos = INDEX(InLine,'  ')
+     37           Do J = 1,LastPos
+                  ^
+Warning near line 37 col 11: Nonstandard syntax
+     38               Ch = InLine(J:J)
+     39               L = IntUpCase(ICHAR(Ch))
+     40               NEC(L) = NEC(L) + 1
+     41               If ((Ch.NE.' ').AND.(Ch.NE.'.')) Then
+     42                   NC = NC + 1
+     43               ElseIf (Ch.EQ.'.') Then            
+     44                   NP = NP + 1
+     45               Else
+     46                   NW = NW + 1
+     47               EndIf
+     48           EndDo
+                  ^
+Warning near line 48 col 11: Nonstandard syntax
+     49       EndDo
+              ^
+Warning near line 49 col 7: Nonstandard syntax
+     50 888   Continue
+     51       ACPW = REAL(NC)/REAL(NW)
+     52       AWPS = REAL(NW)/REAL(NP)
+     53       Return
+     54 10    Format(a)
+     55 999   Print*,'Error opening file, please verify filename and try again.'
+     56 C
+     57 C     In the event of improper filename exit abruptly.
+     58 C
+     59       STOP
+     60       End
+     61 C
+     62 C     SubRoutine to print to terminal all of these neat statistics.
+
+Module GETSTATS: subr
+
+External subprograms referenced:
+
+     ICHAR: intrns      INDEX: intrns  INTUPCASE: intg*        REAL: intrns 
+
+Common blocks referenced:
+
+     STATS         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+      ACPW real*         AWPS real*           CH char         FNAME char80  
+    INLINE char82            J intg*            L intg*      LASTPOS intg*  
+        NC intg*          NEC intg* 1         NL intg*           NP intg*  
+        NW intg*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+
+Warning in module GETSTATS: Names longer than 6 chars (nonstandard):
+    GETSTATS declared at line 28
+    INTUPCASE referenced at line 39
+    LASTPOS first occurrence at line 36
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             8          SEQ  FMTD OPEN         32 
+             8          SEQ  FMTD READ         34 
+           *            SEQ  FMTD PRINT        55 
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType    Label   Line  StmtType
+     <10>     54    format    <888>     50      exec    <999>     55      exec
+
+     63 C
+     64       SubRoutine PrintStats
+     65       Include 'stats.h'
+              ^
+Warning near line 65 col 7: Nonstandard syntax
+     66 
+Including file ./Include/stats.h:
+      1       Common /Stats/ACPW,AWPS,NW,NP,NL,NC,NEC(255)
+Resuming file include.f:
+     67       Write(5,10)ACPW,AWPS,NW,NP,NL,NC
+     68       Write(5,20)
+     69       Do J = 65,90
+              ^
+Warning near line 69 col 7: Nonstandard syntax
+     70           Write(5,40)(CHAR(J),NEC(J),('@',K=1,(NEC(J)/10)),
+     71      1           ('*',K=1,MOD(NEC(J),10)))
+Error near line 71: parse error, unexpected ')', expecting ','
+ (A parse error means that I am not able to make sense of this statement, 
+ because your program has broken some rule of Fortran syntax.)
+     72       EndDo
+              ^
+Warning near line 72 col 7: Nonstandard syntax
+     73       Write(5,50)                      
+     74 10    Format('1'30X'Word Statistics'/1x,80('*')/
+     75      1       1X'Average characters per word = 'F6.2/
+     76      2       1X'Average words per sentence  = 'F6.2/
+     77      3       1X'Total number of words       = 'I5/
+     78      4       1X'Total number of sentences   = 'I5/
+     79      5       1X'Total number of lines       = 'I5/
+     80      6       1X'Total number of characters  = 'I5/)
+     81 20    Format(29x'Character Statistics'/1x,80('*')/)
+     82 30    Format(1X,A)
+     83 40    Format(1X,A','I3,1x,125(A))
+     84 50    Format(1X'Legend:'/9x'@ equals ten characters',
+     85      1         ', * equals one character.')
+     86       Return      
+     87       End
+     88 C
+     89 C     SubRoutine to prompt for and return a filename.
+
+Module PRINTSTATS: subr
+
+External subprograms referenced:
+
+      CHAR: intrns        MOD: intrns 
+
+Common blocks referenced:
+
+     STATS         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+      ACPW real*         AWPS real*            J intg*            K intg*  
+        NC intg*          NEC intg* 1         NL intg*           NP intg*  
+        NW intg*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+
+Warning in module PRINTSTATS: Names longer than 6 chars (nonstandard):
+    PRINTSTATS declared at line 64
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             5          SEQ  FMTD WRITE        67     68     73 
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType    Label   Line  StmtType
+     <10>     74    format     <20>     81    format     <30>     82    format
+     <40>     83    format     <50>     84    format
+
+
+Warning in module PRINTSTATS: Labels defined but not used:
+    <30> defined at line 82
+     90 C
+     91       SubRoutine GetFileName(Fname)
+     92       Character Fname*80, Prompt*7
+     93 
+     94       Prompt = '_File: '
+     95       Write(5,10)Prompt
+     96       Read(5,20)Fname
+     97 10    Format(1XA$)
+                        ^
+Warning near line 97 col 17: Nonstandard syntax
+     98 20    Format(A)
+     99       Return
+    100       End
+    101 C
+    102 C     SubRoutine to initailize globally used variables.
+
+Module GETFILENAME: subr
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+     FNAME char80       PROMPT char7  
+
+
+
+
+Warning in module GETFILENAME: Names longer than 6 chars (nonstandard):
+    GETFILENAME declared at line 91
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             5          SEQ  FMTD READ         96 
+             5          SEQ  FMTD WRITE        95 
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType
+     <10>     97    format     <20>     98    format
+
+    103 C
+    104       SubRoutine Initialize
+    105       Common /Stats/A,B,J,K,L,M,N(26)
+    106       Do O = 1,26
+                 ^
+Warning near line 106 col 10: DO index is not integer
+              ^
+Warning near line 106 col 7: Nonstandard syntax
+    107         N(O) = 0
+                  ^
+Warning near line 107 col 11: subscript is not integer
+    108       EndDo
+              ^
+Warning near line 108 col 7: Nonstandard syntax
+    109       A = 0.0
+    110       B = 0.0
+    111       J = 0
+    112       K = 0
+    113       L = 0
+    114       M = 0
+    115       Return
+    116       End
+    117 C
+    118 C     Function to return integer value of a character in range of uppercase.
+
+Module INITIALIZE: subr
+
+Common blocks referenced:
+
+     STATS         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real*            B real*            J intg*            K intg*  
+         L intg*            M intg*            N intg* 1          O real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+
+Warning in module INITIALIZE: Names longer than 6 chars (nonstandard):
+    INITIALIZE declared at line 104
+    119 C
+    120       Function IntUpCase (I)
+    121 
+    122       If ((I.LE.ICHAR('z')).AND.(I.GE.ICHAR('a'))) Then
+    123           IntUpCase = I - ICHAR(' ')
+    124       Else
+    125           IntUpCase = I
+    126       EndIf
+    127       Return
+    128       End
+
+Module INTUPCASE: func: intg*
+
+External subprograms referenced:
+
+     ICHAR: intrns 
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         I intg*    INTUPCASE intg*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+
+Warning in module INTUPCASE: Names longer than 6 chars (nonstandard):
+    INTUPCASE declared at line 120
+
+ 1 syntax error detected in file include.f
+ 24 warnings issued in file include.f
+
+Warning: Common block STATS array dimen/size mismatch at position 7:
+    Variable NEC in module GETSTATS line 1 file ./Include/stats.h (included at
+ line 29 in include.f) has size 255
+    Variable N in module INITIALIZE line 105 file include.f has size 26

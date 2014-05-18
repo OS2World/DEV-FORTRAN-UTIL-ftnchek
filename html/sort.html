@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<TITLE>Option: sort</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="sixchar.html">-sixchar</A><HR><P>
+<H2>Option: <font color=#FF0080>sort</font></H2><P>
+<A NAME="sort"></A><DT><B><A HREF="sort.html">-sort</A></B>
+
+<DD>
+<DL COMPACT><DT><DD>
+Specifies that a sorted list of all modules used in the
+program be printed.  This list is in ``prerequisite'' order, i.e. each
+module is printed only after all the modules from which it is called
+have been printed.  This is also called a ``topological sort'' of the
+call tree.  Each module is listed only once.  Routines that are not in
+the call tree of the main program are omitted.  If there are any
+cycles in the call graph (illegal in standard Fortran) they
+will be detected and diagnosed.  Default = no.
+<P>
+
+See also: <B><A HREF="calltree.html">-calltree</A></B>,
+<B><A HREF="crossref.html">-crossref</A></B>, <B><A HREF="reference.html">-reference</A></B>, <B><A HREF="symtab.html">-symtab</A></B>, <B><A HREF="vcg.html">-vcg</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="source.html">-source</A>
+</BODY></HTML>

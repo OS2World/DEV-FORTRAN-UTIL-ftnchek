@@ -1,0 +1,677 @@
+<HTML>
+<HEAD>
+<TITLE>INTERPRETING THE OUTPUT</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="lbAI.html">AN EXAMPLE</A><HR><P>
+<A NAME="lbAJ">&nbsp;</A> <H2>INTERPRETING THE OUTPUT</H2>
+
+The messages given by
+<B>ftnchek</B> include not only
+syntax errors but also warnings and informational messages
+about things that are legal Fortran but that may indicate errors or
+carelessness.
+Most of these messages can be turned off by
+command-line options.  Which option controls each message
+depends on
+the nature of the condition being warned about.  See the
+descriptions of the command-line flags in the previous sections,
+and of individual messages below.
+Each message is prefixed with a word or phrase indicating the nature
+of the condition and its severity.
+<P>
+
+``Error'' means a syntax error.  The simplest
+kind of syntax errors are typographical errors, for example unbalanced
+parentheses or misspelling of a keyword.  This type of error is caught
+by the parser and appears with the description ``parse error'' or
+``syntax error'' (depending on whether the parser was built using GNU
+<B>bison</B> or UNIX <B>yacc</B> respectively).
+This type of error message cannot be
+suppressed.  Be aware that this type of error often means
+that <B>ftnchek</B> has not properly interpreted the statement where the
+error occurs, so that its subsequent checking operations will be
+compromised.  You should eliminate all syntax errors before proceeding to
+interpret the other messages <B>ftnchek</B> gives.
+<P>
+
+``Warning: Nonstandard syntax'' indicates an extension to Fortran that
+<B>ftnchek</B> supports but that is not according to the Fortran 77 Standard.
+The extensions that <B>ftnchek</B> accepts
+are described in the section on Extensions below.
+One example is the DO ... ENDDO construction.
+If a program uses these extensions, warnings will be
+given according to specifications under the <B><A HREF="f77.html">-f77</A></B> setting.
+The default behavior is to give no warnings.
+<P>
+
+``Warning'' in other cases
+means a condition that is suspicious but that may or may not
+be a programming error.  Frequently these conditions are legal under
+the standard.  Some are illegal but do not fall under the heading
+of syntax errors.
+Usage errors are one example.
+These refer to the possibility that a variable may be used before
+it has been assigned a value (generally an error),
+or that a variable is declared but never used (harmless but may
+indicate carelessness).
+The amount of checking for usage errors is controlled by
+the <B><A HREF="usage.html">-usage</A></B> flag, which specifies
+the maximum amount of checking by default.
+<P>
+
+Truncation warnings cover situations in which accuracy may be lost
+unintentionally, for example when a double precision value is assigned
+to a real variable.  These warnings are controlled by the
+<B><A HREF="truncation.html">-truncation</A></B> setting, which is on by default.
+<P>
+
+``Nonportable usage'' warns about some feature that may not be
+accepted by some compilers even though it is not contrary
+to the Fortran 77 Standard, or that may cause the program to perform
+differently on different platforms.
+For example, equivalencing real
+and integer variables is usually a non-portable practice.
+The use of extensions to the standard language is, of course, another
+source of non-portability, but this is handled as a separate case.  To
+check a program for true portability, both the <B><A HREF="portability.html">-portability</A></B> and
+the <B><A HREF="f77.html">-f77</A></B> flags should be used.  They are both turned off by
+default.  The <B><A HREF="wordsize.html">-wordsize</A></B> setting is provided to check only those
+nonportable usages that depend on a particular machine wordsize.
+<P>
+
+``Possibly misleading appearance'' is used for legal constructions that may not
+mean what they appear to mean at first glance.  For example, Fortran is
+insensitive to blank space, so extraneous space within variable names
+or the lack of space between a keyword and a variable can convey the wrong
+impression to the reader.
+These messages can be suppressed by turning off the <B><A HREF="pretty.html">-pretty</A></B>
+flag, which is on by default.
+<P>
+
+Other messages that are given after all the files are processed,
+and having to do with agreement between modules, do not use the word
+``warning'' but generally fall into that category.
+Examples include type mismatches between corresponding variables in
+different COMMON
+block declarations, or between dummy and actual arguments of a
+subprogram.
+These warnings are controlled by the <B><A HREF="common.html">-common</A></B> and
+<B><A HREF="arguments.html">-arguments</A></B> settings respectively.  By default both are set for
+maximum strictness of checking.
+<P>
+
+Another group of warnings about conditions that are often harmless
+refer to cases where the array properties of a variable
+passed as a subprogram argument differ between the two routines.
+For instance, an array element might be passed to a subroutine that
+expects a whole array.  This is a commonly-used technique for
+processing single rows or columns of two-dimensional arrays.
+However, it could also indicate a programming error.  The
+<B><A HREF="array.html">-array</A></B> setting allows the user to adjust the degree of
+strictness to be used in checking this kind of agreement between
+actual and dummy array arguments.  By default
+the strictness is maximum.
+<P>
+
+``Oops'' indicates a technical
+problem, meaning either a bug in <B>ftnchek</B> or that its resources have
+been exceeded.
+<P>
+
+The syntax error messages and warnings include
+the filename along with the line number and column
+number.  <B>ftnchek</B> has two different options for the
+appearance of these error messages.  If <B><A HREF="novice.html">-novice</A></B> is in effect,
+which is the default,
+the messages are in a style approximating
+normal English.  (In default style, the filename is
+not printed in messages within the body of the program if <B><A HREF="list.html">-list</A></B> is in
+effect.)  The other style of error messages is selected by the
+<B>-nonovice</B> option.  In this
+style, the appearance of the messages is similar to that of the
+UNIX <B>lint</B> program.
+<P>
+
+<B>ftnchek</B> is still blind to some kinds of syntax errors.
+The two most important ones are detailed checking of FORMAT statements,
+and almost anything to do with control of execution
+flow by means of IF, DO,
+and GOTO statements: namely correct nesting of control structures,
+matching of opening statements such as IF ... THEN with
+closing statements such as ENDIF, and the proper use of
+statement labels (numbers).  Most compilers will catch these errors.
+See the section on Limitations for a more detailed discussion.
+<P>
+
+If <B>ftnchek</B> gives you a syntax error message when the compiler does
+not, it may be because your program contains an extension to
+standard Fortran which is accepted by the compiler but not by
+<B>ftnchek</B>.  (See the section on Extensions.)
+On a VAX/VMS system, you can use the compiler option /STANDARD
+to cause the compiler to accept only standard Fortran.
+On most UNIX or UNIX-like systems, this can be accomplished by
+setting the flag <B>-ansi.</B>
+<P>
+
+Many of the messages given by <B>ftnchek</B> are self-explanatory.
+Those that need some additional explanation are listed below in
+alphabetical order.
+<DL COMPACT>
+<DT><I>Common block NAME: data type mismatch at position n</I>
+
+<DD>
+The <I>n</I>-th variable in the COMMON block differs in data type
+in two different declarations of the COMMON block.  By default
+(<B><A HREF="common.html">-common</A></B> strictness level 3), <B>ftnchek</B> is very picky about
+COMMON blocks: the variables listed in them must match exactly
+by data type and array dimensions.  That is, the legal pair of
+declarations in different modules:
+<PRE>
+     COMMON /COM1/ A,B
+and
+     COMMON /COM1/ <A HREF="http://localhost/cgi-bin/man/man2html?2+A">A</A>(2)
+</PRE>
+
+<BR>
+
+will cause <B>ftnchek</B> to give warnings at strictness level 3.  These
+two declarations are legal in Fortran since they both declare two real
+variables.  At strictness level 1 or 2, no warning would be given in
+this example, but the warning would
+be given if there were a data type mismatch, for instance, if B
+were declared INTEGER.
+Controlled by <B><A HREF="common.html">-common</A></B> setting.
+<P>
+<DT><I>Common block NAME has long data type following short data type</I>
+
+<DD>
+Some compilers require alignment of multi-byte items so that each item
+begins at an address that is a multiple of the item size.  Thus if a
+short (e.g. single-precision real) item is followed by a long (e.g.
+double precision real) item, the latter may not be aligned correctly.
+Controlled by <B><A HREF="portability.html">-portability</A>=common-alignment</B> option.
+<P>
+<DT><I>Common block NAME has mixed character and non-character variables</I>
+
+<DD>
+The ANSI standard requires that if any variable in a COMMON
+block is of type CHARACTER, then all other variables in the
+same COMMON block must also be of type CHARACTER.
+Controlled by <B><A HREF="f77.html">-f77</A>=mixed-common</B> option.
+<P>
+<DT><I>Common block NAME: varying length</I>
+
+<DD>
+For <B><A HREF="common.html">-common</A></B> setting level 2, this message means that
+a COMMON block is declared to have different numbers of words in two
+different subprograms.  A word is the amount of storage occupied by
+one integer or real variable.
+For <B><A HREF="common.html">-common</A></B> setting level 3, it means that the two declarations
+have different numbers of variables, where an array of any size is
+considered one variable.
+This is not
+necessarily an error, but it may indicate that a variable is missing
+from one of the lists.  Note that according to the Fortran 77 Standard,
+it is an error for named COMMON blocks (but not blank COMMON) to differ
+in number of words in declarations in different modules.
+Given for <B><A HREF="common.html">-common</A></B> setting 2 or 3.
+<P>
+<DT><I>Error: Badly formed logical/relational operator or constant</I>
+
+<DD>
+<DT><I>Error: Badly formed real constant</I>
+
+<DD>
+The syntax analyzer has found the start of
+one of the special words that begin and
+end with a period (e.g. .EQ.), or the start of a numeric constant,
+but did not succeed in finding a complete item of that kind.
+<P>
+<DT><I>Error: cannot be adjustable size in module NAME</I>
+
+<DD>
+A character variable cannot be declared with a size that is an
+asterisk in parentheses unless it is a dummy argument, a parameter, or
+the name of the function defined in the module.
+<P>
+<DT><I>Error: cannot be declared in SAVE statement in module NAME</I>
+
+<DD>
+Only local variables and common blocks can be declared in a
+SAVE statement.
+<P>
+<DT><I>Error: No path to this statement</I>
+
+<DD>
+<B>ftnchek</B> will detect statements which are ignored or by-passed because
+there is no foreseeable route to the statement.  For example, an
+unnumbered statement (a statement without a statement label), occurring
+immediately after a GOTO
+statement, cannot possibly be executed.
+<P>
+<DT><I>Error: Parse error</I>
+
+<DD>
+This means that the parser, which analyzes the Fortran
+program into expressions,
+statements, etc., has been unable to find a valid interpretation for some
+portion of a statement in the program.  If your compiler does not report a
+syntax error at the same place, the most common explanations are: (1) use of an
+extension to ANSI standard Fortran that is not recognized by
+<B>ftnchek</B>, or (2) the statement requires more lookahead than
+<B>ftnchek</B> uses (see section on Bugs).
+<DT><DD>
+NOTE: This message means that the affected statement is not interpreted.
+Therefore, it is possible that <B>ftnchek</B>'s
+subsequent processing will be in error, if it depends on any matters
+affected by this statement (type declarations, etc.).
+<P>
+<DT><I>Error: Syntax error</I>
+
+<DD>
+This is the same as ``Error: Parse error'' (see above).  It is generated
+if your version of <B>ftnchek</B> was built using the UNIX <B>yacc</B>
+parser generator rather than GNU <B>bison</B>.
+<P>
+<DT><I>Identifiers which are not unique in first six chars</I>
+
+<DD>
+Warns that two identifiers which are longer than 6 characters do not
+differ in the first 6 characters.  This is for portability: they may not
+be considered distinct by some compilers.
+Controlled by <B><A HREF="sixchar.html">-sixchar</A></B> option.
+<P>
+<DT><I>Nonportable usage: argument precision may not be correct for intrinsic function</I>
+
+<DD>
+The precision of an argument passed to an intrinsic function may be
+incorrect on some computers.  Issued when a numeric variable declared
+with explicit precision (e.g.  REAL*8 X) is passed to a
+specific intrinsic function (e.g. DSQRT(X)).
+Controlled by <B><A HREF="portability.html">-portability</A>=mixed-size</B> and <B><A HREF="wordsize.html">-wordsize</A></B>.
+<P>
+<DT><I>Nonportable usage: character constant/variable length exceeds 255</I>
+
+<DD>
+Some compilers do not support character strings more than 255
+characters in length.
+Controlled by <B><A HREF="portability.html">-portability</A>=long-string</B>.
+<P>
+<DT><I>Nonportable usage: File contains tabs</I>
+
+<DD>
+<B>ftnchek</B> expands tabs to be equivalent to spaces up to the next column
+which is a multiple of 8.  Some compilers treat tabs differently, and
+also it is possible that files sent by electronic mail will have the tabs
+converted to blanks in some way.  Therefore files containing tabs may not
+be compiled correctly after being transferred.  <B>ftnchek</B> does not give
+this message if tabs only occur within comments or character constants.
+Controlled by <B><A HREF="portability.html">-portability</A>=tab</B>.
+<P>
+<DT><I>Nonportable usage: non-integer DO loop bounds</I>
+
+<DD>
+This warning is only given when the DO index and bounds are
+non-integer.
+Use of non-integer quantities in a DO statement may cause
+unexpected errors, or different results on different machines, due to
+roundoff effects.
+Controlled by <B><A HREF="portability.html">-portability</A>=real-do</B>.
+<P>
+<DT><I>Possibly it is an array which was not declared</I>
+
+<DD>
+This message is appended to warnings related to
+a function invocation or to an argument type
+mismatch, for which the possibility exists that what appears to be a
+function is actually meant to be an array.  If the programmer forgot to
+dimension an array, references to the array will be interpreted as
+function invocations.  This message will be suppressed if the name in
+question appears in an EXTERNAL or INTRINSIC statement.
+Controlled by the <B><A HREF="novice.html">-novice</A></B> option.
+<P>
+<DT><I>Possibly misleading appearance: characters past 72 columns</I>
+
+<DD>
+The program is being processed with the statement field width at its
+standard value of 72, and some nonblank characters have been found
+past column 72.  In this case,
+<B>ftnchek</B> is not processing the characters past column 72, and is
+notifying the user that the statement may not have the meaning that it
+appears to have.  These characters might be intended by the programmer to be
+significant, but they will be ignored by the compiler.  Controlled by
+<B><A HREF="pretty.html">-pretty</A>=long-line</B>.
+<P>
+<DT><I>Possibly misleading appearance: Common block declared in more than one statement</I>
+
+<DD>
+Such multiple declarations are legal and have the same effect as
+a continuation of the original declaration of the block.
+This warning is only given if the two declarations are separated by
+one or more intervening statements.
+Controlled by <B><A HREF="pretty.html">-pretty</A>=multiple-common</B>.
+<P>
+<DT><I>Possibly misleading appearance: Continuation follows comment or blank line</I>
+
+<DD>
+<B>ftnchek</B> issues this warning message to alert the user that a
+continuation of a statement is interspersed with comments, making it easy
+to overlook.
+Controlled by <B><A HREF="pretty.html">-pretty</A>=continuation</B>.
+<P>
+<DT><I>Possibly misleading appearance: Extraneous parentheses</I>
+
+<DD>
+Warns about parentheses surrounding a variable by itself in an
+expression.  When a parenthesized variable is passed as an argument to
+a subprogram, it is treated as an expression, not as a variable whose
+value can be modified by the called routine.
+Controlled by <B><A HREF="pretty.html">-pretty</A>=parentheses</B>.
+<P>
+<DT><I>Subprogram NAME: argument data type mismatch at position n</I>
+
+<DD>
+The subprogram's
+<I>n</I>-th actual argument (in the CALL or the
+usage of a function) differs in datatype or precision from the <I>n</I>-th dummy
+argument (in the SUBROUTINE or FUNCTION
+declaration).  For instance, if the user defines a
+subprogram by
+<PRE>
+     SUBROUTINE SUBA(X)
+     REAL X
+</PRE>
+
+and elsewhere invokes SUBA by
+<PRE>
+     CALL <A HREF="http://localhost/cgi-bin/man/man2html?2+SUBA">SUBA</A>(2)
+</PRE>
+
+<BR>
+
+<B>ftnchek</B> will detect the error.  The reason here
+is that the number 2 is integer, not real.  The user should have written
+<PRE>
+     CALL SUBA(2.0)
+</PRE>
+
+<DT><DD>
+When checking an argument which is a subprogram, <B>ftnchek</B> must be
+able to determine whether it is a function or a subroutine.  The rules
+used by <B>ftnchek</B> to do this are as follows: If the subprogram,
+besides being passed as an actual argument, is also invoked directly
+elsewhere in the same module, then its type is determined by that
+usage.  If not, then if the name of the subprogram does not appear in
+an explicit type declaration, it is assumed to be a subroutine; if it
+is explicitly typed it is taken as a function.  Therefore, subroutines
+passed as actual arguments need only be declared by an EXTERNAL
+statement in the calling module, whereas functions must also be
+explicitly typed in order to avoid generating this error message.
+Controlled by <B><A HREF="arguments.html">-arguments</A></B> setting.
+<P>
+<DT><I>Subprogram NAME: argument arrayness mismatch at position n</I>
+
+<DD>
+Similar to the preceding situation, but
+the subprogram dummy argument differs from the corresponding actual
+argument in its number of dimensions or number of elements.
+Controlled by <B><A HREF="array.html">-array</A></B> together with <B><A HREF="arguments.html">-arguments</A></B> settings.
+<P>
+<DT><I>Subprogram NAME: argument mismatch at position n</I>
+
+<DD>
+A character dummy argument is larger than the corresponding actual
+argument, or a Hollerith dummy argument is larger than the
+corresponding actual argument.  Controlled by <B><A HREF="arguments.html">-arguments</A></B> setting.
+<P>
+<DT><I>Subprogram NAME: argument usage mismatch</I>
+
+<DD>
+<B>ftnchek</B> detects a possible conflict between the way a subprogram uses
+an argument and the way in which the argument is supplied to the
+subprogram.  The conflict can be one of two types, as outlined below.
+<P>
+<DT><BR>
+&nbsp;&nbsp;&nbsp;
+
+<DD>
+
+<I>Dummy arg is modified, Actual arg is const or expr</I>
+
+A dummy argument is an argument as named in a SUBROUTINE or
+FUNCTION statement and used within the subprogram.  An actual
+argument is an argument as passed to a subroutine or function by the
+caller.  <B>ftnchek</B> is saying that a dummy argument is modified by
+the subprogram, implying that its value is changed in the calling module.
+The corresponding actual argument should not be a constant or
+expression, but rather a variable or array element which can be
+legitimately assigned to.
+Controlled by the <B><A HREF="usage.html">-usage</A>=arg-const-modified</B> option.
+<P>
+<DT><BR>
+&nbsp;&nbsp;&nbsp;
+
+<DD>
+
+<I>Dummy arg used before set, Actual arg not set</I>
+
+Here a dummy argument may be used in the subprogram
+before having a value assigned to it by the subprogram.  The
+corresponding actual argument should have a value assigned to it by the
+caller prior to invoking the subprogram.
+Controlled by the <B><A HREF="usage.html">-usage</A>=var-uninitialized</B> option.
+<DT><DD>
+This warning is not affected by the <B><A HREF="arguments.html">-arguments</A></B> setting.
+<P>
+<DT><I>Subprogram NAME invoked inconsistently</I>
+
+<DD>
+Here the mismatch is between the datatype of the subprogram itself as
+used and as defined. For instance, if the user declares
+<PRE>
+     INTEGER FUNCTION COUNT(A)
+</PRE>
+
+and invokes COUNT in another module as
+<PRE>
+     N = COUNT(A)
+</PRE>
+
+<BR>
+
+without declaring its datatype, it will default to real type, based on
+the first letter of its name.  The calling module should have included
+the declaration
+<PRE>
+     INTEGER COUNT
+</PRE>
+
+<DT><DD>
+Given for <B><A HREF="arguments.html">-arguments</A></B> setting 2 or 3.
+<P>
+<DT><I>Subprogram NAME:  varying length argument lists:</I>
+
+<DD>
+An inconsistency has been found between the number of dummy arguments
+(parameters) a subprogram has and the number of actual arguments given it
+in an invocation.
+<B>ftnchek</B> keeps track of all invocations of subprograms
+(CALL
+statements and expressions using functions) and compares them with
+the definitions of the subprograms elsewhere in the source code.  The
+Fortran compiler normally does not catch this type of error.
+Given for <B><A HREF="arguments.html">-arguments</A></B> setting 1 or 3.
+<P>
+<DT><I>Variable not declared.  Type has been implicitly defined</I>
+
+<DD>
+When printing the symbol table for a module,
+<B>ftnchek</B> will flag with an asterisk
+all identifiers that are not explicitly typed
+and will show the datatype that was assigned through implicit typing.
+This provides support for users who wish to declare all variables as
+is required in Pascal or some other languages.
+This message appears only when the <B><A HREF="symtab.html">-symtab</A></B> option is in effect.
+Alternatively, use the <B><A HREF="declare.html">-declare</A></B> flag if you want to get a list of all
+undeclared variables.
+<P>
+<DT><I>Variables declared but never referenced</I>
+
+<DD>
+Detects any identifiers that were declared in your program but were
+never used, either to be assigned a value or to have their value
+accessed.  Variables in COMMON are excluded.
+Controlled by the <B><A HREF="usage.html">-usage</A>=var-unused</B> option.
+<P>
+<DT><I>Variables set but never used</I>
+
+<DD>
+<B>ftnchek</B> will notify the user when a variable has been assigned a
+value, but the variable is not otherwise used in the program.  Usually
+this results from an oversight.
+Controlled by the <B><A HREF="usage.html">-usage</A>=var-set-unused</B> option.
+<P>
+<DT><I>Variables used before set</I>
+
+<DD>
+This message indicates that an identifier is used to compute a value
+prior to its initialization.  Such usage may lead to an incorrect value
+being computed, since its initial value is not controlled.
+Controlled by the <B><A HREF="usage.html">-usage</A>=var-uninitialized</B> option.
+<P>
+<DT><I>Variables may be used before set</I>
+
+<DD>
+Similar to used before set except that <B>ftnchek</B> is not able to
+determine its status with certainty.  <B>ftnchek</B> assumes a variable
+may be used before set if the first usage of the variable occurs prior
+in the program text to its assignment.
+Controlled by the <B><A HREF="usage.html">-usage</A>=var-uninitialized</B> option.
+<P>
+<DT><I>Warning: DO index is not integer</I>
+
+<DD>
+This warning is only given when the DO bounds are integer, but
+the DO index is not.  It may indicate a failure to declare the
+index to be an integer.
+Controlled by <B><A HREF="truncation.html">-truncation</A>=real-do</B> option.
+<P>
+<DT><I>Warning: integer quotient expr ... converted to real</I>
+
+<DD>
+The quotient of two integers results in an integer type result, in
+which the fractional part is dropped.  If such an integer expression
+involving division is later converted to a real datatype, it may be that
+a real type division had been intended.
+Controlled by <B><A HREF="truncation.html">-truncation</A>=int-div-real</B> option.
+<P>
+<DT><I>Warning: Integer quotient expr ... used in exponent</I>
+
+<DD>
+The quotient of two integers results in an integer type result, in
+which the fractional part is dropped.  If such an integer expression
+is used as an exponent, it is quite likely that a real type division was
+intended.
+Controlled by <B><A HREF="truncation.html">-truncation</A>=int-div-exponent</B> option.
+<P>
+<DT><I>Warning: NAME not set when RETURN encountered</I>
+
+<DD>
+The way that functions in Fortran return a value is by assigning the
+value to the name of the function.  This message indicates that the
+function was not assigned a value before the point where a
+RETURN statement was found.  Therefore it is possible that the
+function could return an undefined value.
+<P>
+<DT><I>Warning: Nonstandard syntax: adjustable size cannot be concatenated here</I>
+
+<DD>
+The Fortran 77 Standard (sec. 6.2.2) forbids concatenating character variables
+whose size is an asterisk in parentheses, except in an assignment
+statement.   Controlled by <B><A HREF="f77.html">-f77</A>=mixed-expr</B>.
+<P>
+<DT><I>Warning: Nonstandard syntax : significant characters past 72 columns</I>
+
+<DD>
+This warning is given under the <B><A HREF="f77.html">-f77</A>=long-line</B> setting if the
+<B><A HREF="columns.html">-columns</A></B> setting has been used to increase the statement field width,
+and a statement has meaningful program text beyond column 72.
+Standard Fortran ignores all text in those columns, but some compilers
+do not.  Thus the program may be treated differently by different
+compilers.
+<P>
+<DT><I>Warning: Nonstandard syntax : Statement out of order.</I>
+
+<DD>
+<B>ftnchek</B> will detect statements that are out of the
+sequence specified for ANSI standard Fortran 77.  Table 1 illustrates the
+allowed sequence of statements in the Fortran language.  Statements which are
+out of order are nonetheless interpreted by
+<B>ftnchek</B>,
+to prevent ``cascades'' of error messages.
+The sequence counter is also rolled back to prevent
+repetition of the error message for a block of similar statements.
+Controlled by the <B><A HREF="f77.html">-f77</A>=statement-order</B> option.
+<DT><DD>
+<PRE>
+
+--------------------------------------------------------
+                  |               | implicit
+                  |  parameter    |---------------------
+                  |               | other specification
+        format    |---------------|---------------------
+         and      |               | statement-function
+        entry     |  data         |---------------------
+                  |               | executable
+--------------------------------------------------------
+
+                      Table 1
+
+</PRE>
+
+<P>
+<DT><I>Warning: Possible division by zero</I>
+
+<DD>
+This message is printed out wherever division is done (except division
+by a constant).  Use it to
+help locate a runtime division by zero problem.
+Controlled by <B><A HREF="division.html">-division</A></B> option.
+<P>
+<DT><I>Warning: real truncated to intg</I>
+
+<DD>
+<B>ftnchek</B> has detected an assignment statement which has a real
+expression on the right, but an integer variable on the left.  The
+fractional part of the real value will be lost.  If you explicitly
+convert the real expression to integer using the INT or
+NINT intrinsic function, no warning will be printed.  A similar
+message is printed if a double precision expression is assigned to a
+single precision variable, etc.
+Controlled by <B><A HREF="truncation.html">-truncation</A>=demotion</B> option.
+<P>
+<DT><I>Warning: subscript is not integer</I>
+
+<DD>
+Since array subscripts are normally integer quantities, the use of a
+non-integer expression here may signal an error.
+Controlled by <B><A HREF="truncation.html">-truncation</A>=real-subscript</B> option.
+<P>
+<DT><I>Warning: Unknown intrinsic function</I>
+
+<DD>
+This message warns the user that a name declared in an
+INTRINSIC statement is unknown to <B>ftnchek</B>.  Probably it is
+a nonstandard intrinsic function, and so the program will not be
+portable.  The function will be treated by <B>ftnchek</B> as a
+user-defined function.  This warning is not suppressed by any
+option, since it affects <B>ftnchek</B>'s analysis of
+the program.  However, if the intrinsic function is in one of the
+supported sets of nonstandard intrinsics, you can use the
+<B><A HREF="intrinsic.html">-intrinsic</A></B> setting to cause <B>ftnchek</B> to recognize it.
+<P>
+</DL>
+<P><HR><P>Next: <A HREF="lbAK.html">LIMITATIONS AND EXTENSIONS</A>
+</BODY></HTML>

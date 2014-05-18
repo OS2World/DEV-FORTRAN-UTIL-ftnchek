@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+<TITLE>Option: brief</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="array.html">-array</A><HR><P>
+<H2>Option: <font color=#FF0080>brief</font></H2><P>
+<A NAME="brief"></A><DT><B><A HREF="brief.html">-brief</A></B>
+
+<DD>
+<DL COMPACT><DT><DD>
+Selects a shorter format for some warning messages.  At present, the
+only warnings controlled by this flag are those that are printed at
+the end of processing each subprogram.  These include warnings about
+variables that are set but not used or used before set, variable names
+that do not conform to the Fortran 77 standard, etc.  (These warnings
+may be suppressed entirely depending on other flags, such as the
+<B><A HREF="usage.html">-usage</A></B> or <B><A HREF="f77.html">-f77</A></B> flags.)  In the default format each
+variable is listed on a separate line, along with the line number
+where the variable is declared, set or used, according to the nature
+of the warning.  The briefer format simply lists all variables to
+which the warning applies, with up to 4 variables per line.
+<P>
+
+See also: <B><A HREF="quiet.html">-quiet</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="calltree.html">-calltree</A>
+</BODY></HTML>

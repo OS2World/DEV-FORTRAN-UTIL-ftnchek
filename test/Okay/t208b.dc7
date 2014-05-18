@@ -1,0 +1,19 @@
+*====>Begin Module %MAIN                  File t208b.f                  
+*---->Makedcls Options: All variables                                   
+*
+*     Intrinsic functions
+*
+      INTRINSIC           COS,         SIN,         SQRT
+*
+*     External functions
+*
+      EXTERNAL            MYSQRT,      MYSUB
+*
+      REAL                MYSQRT
+*
+*     Parameter variables
+*
+      INTEGER             NPI
+      PARAMETER           (NPI = 9)
+*
+*====>End Module   %MAIN                  File t208b.f                  

@@ -1,0 +1,155 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File blockcheck.f90:
+
+      1 program blocks
+      2 ! program to check parsing of block structures
+      3   real x
+      4   integer n
+      5   x = bar(1.0)
+      6   if( x .gt. 0 ) then
+      7      call baz(x)
+      8      n = int(x)
+      9      select case (n)
+     10         case(1)
+     11            call baz(2.0)
+     12         case(2:10)
+     13            call baz(3.0)
+     14         case(-1,11:100,300)
+     15            call baz(4.0)
+     16         case default
+     17            call baz(5.0)
+     18      end select
+     19   else
+     20      k = 0
+     21      loop1: do i=1,100
+     22         loop2:    do j=1,10
+     23            write(*,*) i,j,i*j
+     24            if( i .eq. 50 ) exit loop1
+     25            k = k + j
+     26            if( k .eq. 50) cycle loop2
+     27         end do loop2
+     28         write(*,*) k*i**2
+     29      enddo loop1
+     30      case2: select case (n)
+     31         case(1) case2
+     32            call baz(2.0)
+     33         case(2:10) case2
+     34            call baz(3.0)
+     35         case(-1,11:100,300) case2
+     36            call baz(4.0)
+     37         case default case2
+     38            do i=1,10
+     39               if( i == 7 ) goto 200
+     40               call baz(5.0)
+     41 200        end do
+     42      end select case2
+     43   end if
+     44 end program blocks
+
+Module BLOCKS: prog
+
+External subprograms referenced:
+
+       BAR: real*         BAZ: subr          INT: intrns 
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         I intg*            J intg*            K intg*            N intg   
+         X real   
+
+* Variable not declared. Type has been implicitly defined.
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD WRITE        23     28 
+
+Statement labels defined:
+
+    Label   Line  StmtType
+    <200>     41      exec
+
+     45 function bar(c)
+     46   real a, b, c ,d
+     47   read *, a
+     48 ! This block is from section 8.1.2.3 of the F90 standard, except for
+     49 ! removing space between some keywords
+     50   if ( a .gt. 0 ) then
+     51      b = c/a
+     52      if (b .gt. 0) then
+     53         d = 1.0
+     54      endif
+     55   elseif (c .gt. 0) then
+     56      b = a/c
+     57      d = -1.0
+     58   else
+     59      b = abs (max (a, c))
+     60      d = 0
+     61   endif
+     62   bar = d*b
+     63 end function bar
+
+Module BAR: func: real*
+
+External subprograms referenced:
+
+       ABS: intrns        MAX: intrns 
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real             B real           BAR real*            C real   
+         D real   
+
+* Variable not declared. Type has been implicitly defined.
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD READ         47 
+     64 subroutine baz(c)
+     65   real a, b, c ,d
+     66   read *, a
+     67 ! Same as above but with spaces restored and construct names added
+     68   first_if: if ( a .gt. 0 ) then
+     69      b = c/a
+     70      second_if: if (b .gt. 0) then
+     71         d = 1.0
+     72      end if second_if
+     73   else if (c .gt. 0) then first_if
+     74      b = a/c
+     75      d = -1.0
+     76   else first_if
+     77      b = abs (max (a, c))
+     78      d = 0
+     79   end if first_if
+     80   print *, a, b, c, d
+     81 end subroutine baz
+
+Module BAZ: subr
+
+External subprograms referenced:
+
+       ABS: intrns        MAX: intrns 
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real             B real             C real             D real   
+
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD PRINT        80 
+           *            SEQ  FMTD READ         66 
+
+ 0 syntax errors detected in file blockcheck.f90
+ 2 warnings issued in file blockcheck.f90
+

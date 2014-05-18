@@ -1,0 +1,34 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File intrinstest.f:
+      5       z = sqrt(i)
+                       ^
+Error near line 5 col 16 file intrinstest.f: illegal argument data type for
+ intrinsic function SQRT: intg I
+      6       i = max(x,i)
+                      ^
+Error near line 6 col 15 file intrinstest.f: type mismatch between intrinsic
+ function arguments: real X , intg I
+     15       x = rand()
+                  ^
+Error near line 15 col 11 file intrinstest.f: wrong number of arguments for
+ intrinsic function RAND
+
+Warning in module %MAIN in file intrinstest.f: Variables set but never used:
+    Z set at line 5 file intrinstest.f
+
+Warning in module %MAIN in file intrinstest.f: Variables used before set
+    Y used at line 3 file intrinstest.f; never set
+
+Warning in module %MAIN in file intrinstest.f: Variables may be used before
+ set:
+    I used at line 5 file intrinstest.f
+    I set at line 6 file intrinstest.f
+
+ 3 syntax errors detected in file intrinstest.f
+ 3 warnings issued in file intrinstest.f
+
+Warning: Subprogram RAN never defined
+    Invoked in module %MAIN line 18 file intrinstest.f
+    (possibly it is an array which was not declared)

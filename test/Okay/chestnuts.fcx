@@ -1,0 +1,56 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File chestnuts.f:
+      6       DOUBLE PRECISION I=1,10
+                ^
+"chestnuts.f", line 6 col 9: Warning: DO index is not integer
+              ^
+"chestnuts.f", line 6 col 7: Warning: Nonstandard syntax
+      8       END DO
+              ^
+"chestnuts.f", line 8 col 7: Warning: Nonstandard syntax
+
+"chestnuts.f", line 4: Warning in module %MAIN: Variables set but never used:
+"chestnuts.f", line 4:     DO10I set
+"chestnuts.f", line 7:     DOUBLEPRECISIONI set
+"chestnuts.f", line 10:     FORMAT set
+
+"chestnuts.f", line 10: Warning in module %MAIN: Variables used before set
+"chestnuts.f", line 10:     H3 used; never set
+"chestnuts.f", line 10:     I10 used; never set
+"chestnuts.f", line 10:     I9 used; never set
+
+"chestnuts.f", line 7: Warning in module %MAIN: Names longer than 6 chars
+ (nonstandard):
+"chestnuts.f", line 7:     DOUBLEPRECISIONI first occurrence
+"chestnuts.f", line 6:     UBLEPRECISIONI first occurrence
+
+"chestnuts.f", line 9: Warning in module %MAIN: Labels defined but not used:
+"chestnuts.f", line 9:     <1> defined
+"chestnuts.f", line 10:     <2> defined
+     13       REALFUNCTIONF(M,N)
+                            ^
+"chestnuts.f", line 13 col 21: Warning: Nonstandard syntax: local array cannot
+ have variable size
+                              ^
+"chestnuts.f", line 13 col 23: Warning: Nonstandard syntax: local array cannot
+ have variable size
+
+"chestnuts.f", line 14: Warning in module F: Statement functions defined but
+ never referenced:
+"chestnuts.f", line 14:     REALFUNCTIONF defined
+
+"chestnuts.f", line 15: Warning in module F: Variables set but never used:
+"chestnuts.f", line 15:     FUNCTIONF set
+
+"chestnuts.f", line 13: Warning in module F: Names longer than 6 chars
+ (nonstandard):
+"chestnuts.f", line 13:     FUNCTIONF declared
+"chestnuts.f", line 14:     REALFUNCTIONF defined
+
+ 0 syntax errors detected in file chestnuts.f
+ 12 warnings issued in file chestnuts.f
+
+"chestnuts.f", line 12: Warning: Subprogram F never invoked
+"chestnuts.f", line 12:    Defined in module F

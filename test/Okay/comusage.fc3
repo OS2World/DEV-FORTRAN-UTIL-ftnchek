@@ -1,0 +1,31 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File comusage.f:
+ 0 syntax errors detected in file comusage.f
+Warning: Common block %BLANK Elements used but never set: all
+
+Warning: Common block INP Elements never used, never set:
+    X4
+
+Warning: Common block LAST Elements used but never set:
+    N3
+
+Warning: Common block LAST Elements set but never used:
+    N1 N2
+
+Warning: Common block ZAP unused anywhere
+
+Warning: Common block INP varying length:
+    Has 4 variables in module INPUT line 10 file comusage.f
+    Has 3 variables in module COMP line 20 file comusage.f
+
+Warning: Common block LAST data type mismatch at position 1:
+    Variable Y1 in module INPUT line 12 file comusage.f is type real
+    Variable N1 in module OUTPUT line 32 file comusage.f is type intg
+  and at position 2:
+    Variable Y2 in module INPUT line 12 file comusage.f is type real
+    Variable N2 in module OUTPUT line 32 file comusage.f is type intg
+  and at position 3:
+    Variable Y3 in module INPUT line 12 file comusage.f is type real
+    Variable N3 in module OUTPUT line 32 file comusage.f is type intg

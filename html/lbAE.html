@@ -1,0 +1,412 @@
+<HTML>
+<HEAD>
+<TITLE>INVOKING FTNCHEK</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="lbAD.html">DESCRIPTION</A><HR><P>
+<A NAME="lbAE">&nbsp;</A> <H2>INVOKING FTNCHEK</H2>
+
+<B>ftnchek</B> is
+invoked through a command of the form:
+<P>
+<CENTER>
+$ ftnchek [-option -option ...] filename [filename ...]<BR>
+</CENTER>
+
+<P>
+
+The brackets indicate something which is optional.  The brackets
+themselves are not actually typed.  Here options are command-line
+switches or settings, which control the operation of the program and the
+amount of information that will be printed out.  If no option is
+specified, the default action is to print error messages, warnings,
+and informational messages, but not the program listing or symbol tables.
+<P>
+
+Each option begins with the '-' character.
+(On VAX/VMS or MS-DOS systems you may use either '/' or '-'.)
+For the sake of conformity with an increasingly common convention, options can
+also begin with '--'.
+The options are described at greater length in the next section.
+<P>
+
+<B>ftnchek</B> options fall into two categories: switches, which are either
+true or false, and settings, which have a numeric or string value.  The
+name of a switch is prefixed by 'no' or 'no-' to turn it off:
+e.g. <B>-nopure</B>
+would turn off the warnings about impure functions. The 'no' prefix
+can also be used with numeric settings, having the effect of turning
+off the corresponding warnings.
+Settings that control lists of warnings have a special syntax discussed
+below.
+Only the first 3
+characters of an option name (not counting
+the '-')
+need be provided.
+A colon may be used in place of an equals sign for numeric or string setting
+assignments; however, we show only the equals sign form below.
+<P>
+
+The switches and settings which <B>ftnchek</B> currently recognizes are
+listed below.  For each option, the default is the value used if the
+option is not explicitly specified, while the turn-on is the value
+used if the option is given without assigning it a value.
+<DL COMPACT>
+<DT><B><A HREF="arguments.html">-arguments</A>=</B><I>list</I>
+
+<DD>
+Control warnings about subprogram type and argument mismatches.
+Default = turn-on = all.
+<DT><B><A HREF="array.html">-array</A>=</B><I>list</I>
+
+<DD>
+Control warnings in checking array arguments of subprograms.
+Default = turn-on = all.
+<DT><B><A HREF="brief.html">-brief</A></B>
+
+<DD>
+Use shorter format for some error messages.  Default = no.
+<DT><B><A HREF="calltree.html">-calltree</A>=</B><I>list</I>
+
+<DD>
+Produce subprogram call hierarchy in one of 3 formats:
+text call-tree, who-calls-who and VCG.
+Default = none, turn-on = tree,prune,sort.
+<P>
+If the <B><A HREF="mkhtml.html">-mkhtml</A></B> option is invoked <I>and</I> tree is the applied
+calltree option, a file named CallTree.html, will be produced
+depicting the tree in HTML format.
+<DT><B><A HREF="check.html">-check</A></B>
+
+<DD>
+Perform checking.  Default = yes.
+<DT><B><A HREF="columns.html">-columns</A>=</B><I>num</I>
+
+<DD>
+Set maximum line length to <I>num</I> columns. (Beyond
+this is ignored.)  Turn-on = max = 132.  Default = 72.
+<DT><B><A HREF="common.html">-common</A>=</B><I>list</I>
+
+<DD>
+Set degree of strictness in checking COMMON blocks.
+Default = turn-on = all.
+<DT><B><A HREF="crossref.html">-crossref</A>=</B><I>list</I>
+
+<DD>
+Print cross-reference list of subprogram calls, label usage, and/or
+COMMON block use.  Default = none.
+<DT><B><A HREF="declare.html">-declare</A></B>
+
+<DD>
+Print a list of all identifiers whose datatype is not
+explicitly declared.  Default = no.
+<DT><B><A HREF="division.html">-division</A></B>
+
+<DD>
+Warn wherever division is done (except division by a
+constant).  Default = no.
+<DT><B><A HREF="errors.html">-errors</A>=</B><I>num</I>
+
+<DD>
+Set the maximum number of error messages per cascade.  Default =
+turn-on = 3.
+<DT><B><A HREF="extern.html">-extern</A></B>
+
+<DD>
+Warn if external subprograms which are invoked
+are never defined.  Default = yes.
+<DT><B><A HREF="f77.html">-f77</A>=</B><I>list</I>
+
+<DD>
+Control specific warnings about supported extensions to the Fortran 77
+Standard.  Default  = none, turn-on = all.
+<DT><B><A HREF="f90.html">-f90</A>=</B><I>list</I>
+
+<DD>
+Control specific warnings about supported extensions to the Fortran 77
+Standard that were not adopted as part of the Fortran 90 Standard.
+Default  = none, turn-on = all.
+<DT><B><A HREF="f95.html">-f95</A>=</B><I>list</I>
+
+<DD>
+Control specific warnings about standard Fortran 77
+features that were deleted from the Fortran 95 Standard.  Default  =
+none, turn-on = all.
+<DT><B><A HREF="help.html">-help</A></B>
+
+<DD>
+Print command summary.  Default = no.
+<DT><B><A HREF="identifier-chars.html">-identifier-chars</A>=</B><I>list</I>
+
+<DD>
+Define non-alphanumeric characters that may be used in identifiers.
+Default = turn-on = dollar sign and underscore.
+<DT><B><A HREF="include.html">-include</A>=</B><I>path</I>
+
+<DD>
+Define a directory to search for INCLUDE files before searching in the
+system-wide directory.
+Cumulative.  Default = turn-on = none.
+<DT><B><A HREF="intrinsic.html">-intrinsic</A>=</B><I>list</I>
+
+<DD>
+Control treatment of nonstandard intrinsic functions.  Default =
+all except <B>vms</B> for Unix version, all except <B>unix</B>
+for VMS version, all except <B>unix</B> and <B>vms</B> for other
+versions.  Turn-on = all.
+<DT><B><A HREF="library.html">-library</A></B>
+
+<DD>
+Begin library mode: do not warn about subprograms
+in file that are defined but never used.  Default = no.
+<DT><B><A HREF="list.html">-list</A></B>
+
+<DD>
+Print source listing of program.  Default = no.
+<DT><B><A HREF="makedcls.html">-makedcls</A>=</B><I>list</I>
+
+<DD>
+Prepare a file of declarations.  The <I>list</I> specifies options for
+the format of this file.  Default = none, turn-on = declarations.
+<DT><B><A HREF="mkhtml.html">-mkhtml</A>=</B><I>list</I>
+
+<DD>
+Create individual HTML document files from ftnchek analysis and code comments.
+Usually you will also want to specify <B>-call=tree</B> to create the
+root HTML file CallTree.html.
+Default = none, turn-on = documents.
+<DT><B><A HREF="novice.html">-novice</A></B>
+
+<DD>
+Give output suitable for novice users.  Default = yes.
+<DT><B><A HREF="output.html">-output</A>=</B><I>filename</I>
+
+<DD>
+Send output to the given file.
+Default and turn-on sends output to the screen. (Default filename
+extension is <I>.lis</I>).
+<DT><B><A HREF="pointersize.html">-pointersize</A>=</B><I>num</I>
+
+<DD>
+Set the size of ``Cray pointer'' variables to <I>num</I> bytes.  Min =
+1, max = 16.  Default = turn-on = 4
+<DT><B><A HREF="portability.html">-portability</A>=</B><I>list</I>
+
+<DD>
+Warn about non-portable usages.  Default = none, turn-on = all.
+<DT><B><A HREF="pretty.html">-pretty</A>=</B><I>list</I>
+
+<DD>
+Give warnings for possibly misleading appearance
+of source code.    Default = turn-on = all.
+<DT><B><A HREF="project.html">-project</A>=</B><I>list</I>
+
+<DD>
+Create project file (see explanation below).  Default =
+no.
+<DT><B><A HREF="pure.html">-pure</A></B>
+
+<DD>
+Assume functions are pure, i.e. have no side effects.
+Default = yes.
+<DT><B><A HREF="quiet.html">-quiet</A></B>
+
+<DD>
+Produce less verbose output.  Default = no.
+<DT><B><A HREF="reference.html">-reference</A></B>
+
+<DD>
+Print table of subprograms referenced by each subprogram.
+Default = no.
+<DT><B><A HREF="resources.html">-resources</A></B>
+
+<DD>
+Print amount of resources used in analyzing the program.
+Default = no.
+<DT><B><A HREF="sixchar.html">-sixchar</A></B>
+
+<DD>
+List any variable names which clash at 6 characters length.
+Default = no.
+<DT><B><A HREF="sort.html">-sort</A></B>
+
+<DD>
+Print list of subprograms sorted in prerequisite order.
+Default = no.
+<DT><B><A HREF="source.html">-source</A>=</B><I>list</I>
+
+<DD>
+Select source formatting options: fixed or free form, DEC Fortran
+tab-formatted lines, VMS<A HREF="style.html">-style</A> INCLUDE statement,
+UNIX<A HREF="style.html">-style</A> backslash escape sequences,
+and implicit typing of parameters.  Default = none, turn-on = all.
+<DT><B><A HREF="style.html">-style</A>=</B><I>list</I>
+
+<DD>
+Produce extra-picky warnings about obsolescent or old-fashioned
+programming constructions.  Default = none, turn-on = all.
+<DT><B><A HREF="symtab.html">-symtab</A></B>
+
+<DD>
+Print symbol table and label table for each subprogram.  Default = no.
+<DT><B><A HREF="truncation.html">-truncation</A>=</B><I>list</I>
+
+<DD>
+Check for possible loss of accuracy by truncation.
+Default = turn-on = all.
+<DT><B><A HREF="usage.html">-usage</A>=</B><I>list</I>
+
+<DD>
+Control warnings about unused or uninitialized variables, common
+blocks, etc.  Default = turn-on = all.
+<DT><B><A HREF="vcg.html">-vcg</A></B>
+
+<DD>
+Produce VCG format of call graph.
+<DT><B><A HREF="version.html">-version</A></B>
+
+<DD>
+Print version number.  Default = no.
+<DT><B><A HREF="volatile.html">-volatile</A></B>
+
+<DD>
+Assume COMMON blocks lose definition between
+activations.  Default = no. (Obsolete.  Use <B><A HREF="common.html">-common</A>=volatile</B> instead.) 
+<DT><B><A HREF="wordsize.html">-wordsize</A>=</B><I>num</I>
+
+<DD>
+Set the default word size for numeric
+quantities to <I>num</I> bytes.  Default = turn-on = 4 bytes.
+<DT><B><A HREF="wrap.html">-wrap</A>=</B><I>num</I>
+
+<DD>
+Set output column at which to wrap long error messages and
+warnings to the next line.  If set to 0, turn off wrapping.  Default =
+turn-on = 79.
+</DL>
+<P>
+
+When more than one option is used, they should be separated by a blank
+space, except on systems such as VMS where options begin with slash ( / ).
+No blank spaces may be placed around the equals sign ( = ) in a setting.
+ftnchek &quot;?&quot;
+will produce a command summary listing all options and settings.
+<P>
+
+For settings that take a list of keywords, namely
+<B><A HREF="arguments.html">-arguments</A></B>,
+<B><A HREF="array.html">-array</A></B>,
+<B><A HREF="calltree.html">-calltree</A></B>,
+<B><A HREF="common.html">-common</A></B>,
+<B><A HREF="crossref.html">-crossref</A></B>,
+<B><A HREF="f77.html">-f77</A></B>,
+<B><A HREF="f90.html">-f90</A></B>,
+<B><A HREF="f95.html">-f95</A></B>,
+<B><A HREF="intrinsic.html">-intrinsic</A></B>,
+<B><A HREF="makedcls.html">-makedcls</A></B>,
+<B><A HREF="mkhtml.html">-mkhtml</A></B>,
+<B><A HREF="portability.html">-portability</A></B>,
+<B><A HREF="pretty.html">-pretty</A></B>,
+<B><A HREF="project.html">-project</A></B>,
+<B><A HREF="source.html">-source</A></B>,
+<B><A HREF="style.html">-style</A></B>,
+<B><A HREF="truncation.html">-truncation</A></B>,
+and
+<B><A HREF="usage.html">-usage</A></B>,
+the list consists of keywords
+separated by commas or colons.
+If the list of keywords is omitted, the
+effect is to set the option to its turn-on value (same as ``all'' in most
+cases).
+Also, if the
+list is omitted, the setting name can be prefixed with <B>no</B> or
+<B>no-</B> to
+turn off all the options it controls.  For example, <B><A HREF="f77.html">-f77</A></B> turns
+on all warnings about nonstandard constructions, while
+<B>-nof77</B> turns them all off.    Three special keywords are:
+<DL COMPACT>
+<DT><B>help</B>
+
+<DD>
+Print out all the option keywords controlled by the setting,
+with a brief explanation of their meanings.
+This keyword cannot be given in a list with other keywords.
+<DT><B>all</B>
+
+<DD>
+Set all options. This turns on all options controlled by the setting.
+<DT><B>none</B>
+
+<DD>
+Clear all options.  This turns off all options controlled by the setting.
+</DL>
+<P>
+
+These three special keywords must be given in full.  For all other
+keywords, only as many letters of the keyword as are necessary to
+identify it unambiguously need be given, or a wildcard pattern
+may be used.  Including a keyword in the
+list turns the corresponding option on.
+For example, <B><A HREF="f77.html">-f77</A>=intrinsic</B> would
+turn on only the warnings about use of nonstandard intrinsic functions.
+Prefixing a keyword by <B>no-</B> turns its option off.
+For example,
+<B><A HREF="pretty.html">-pretty</A>=no-long-line</B> turns off warnings about lines
+exceeding 72 columns in length while leaving all other warnings about
+misleading appearance in effect.
+If a setting has default <B>none</B>, you can turn on all options
+except one or two by using <B>all</B> first.
+For example,
+<B><A HREF="f77.html">-f77</A>=all,no-include</B> enables warnings about all nonstandard
+extensions except INCLUDE statements.
+If a setting has default <B>all</B>, you can turn off all warnings
+except one or two by using <B>none</B> first.
+For example,
+<B><A HREF="truncation.html">-truncation</A>=none,demotion</B> would turn off all precision related
+warnings except about demotions.
+Wildcard patterns contain an asterisk to stand for any string of
+characters.  If a wildcard pattern is used, all the warnings that
+match it are affected.  If <B>no-</B> is prefixed to the pattern, all
+the matching warnings are turned off, otherwise they are all turned
+on.  The minimum unambiguous length rule does not apply to wildcard
+matching.    For example, use <B><A HREF="usage.html">-usage</A>=no-*var*</B> to turn off
+all warnings relating to variable usage (both local and common).
+(Unix users may need to
+quote any options containing wildcards in order to prevent the shell
+from attempting to expand them.)
+Wildcards are recognized only in lists of warning keywords, not in the
+top-level options themselves.
+<P>
+
+When <B>ftnchek</B> starts up, it looks for environment variables
+and also for a preferences file.
+Any options defined in the environment or in the preferences file are
+used as defaults in place of the built-in defaults.  They are
+over-ridden by any command line options.
+See the section on changing the defaults for details about the
+environment options and the preferences file.
+<P>
+
+When giving a name of an input file, the extension is optional.  If no
+extension is given, <B>ftnchek</B> will first look for a project file
+with extension <I>.prj</I>, and will use that if it exists.  If not, then
+<B>ftnchek</B> will look for a Fortran source file
+with the extension <I>.for</I> for VMS systems, <I>.f</I> for UNIX systems.
+More than one file name can be given to <B>ftnchek</B>,
+and it will process the
+modules in all files as if they were in a single file.
+<P>
+
+Wildcards are allowed in the specification of filenames on the command
+line for the VMS and MS-DOS versions,
+as also of course under UNIX and any other system that performs
+wildcard expansion in the command processor.
+<P>
+
+If no filename is given, <B>ftnchek</B> will read input from the
+standard input.
+
+
+<P><HR><P>Next: <A HREF="lbAF.html">OPTIONS</A>
+</BODY></HTML>

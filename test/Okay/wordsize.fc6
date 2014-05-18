@@ -1,0 +1,18 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File wordsize.f:
+      7       real*8 f
+                   ^
+Warning near line 7 col 12 file wordsize.f: Nonstandard syntax
+      8       real*8 x,y
+                   ^
+Warning near line 8 col 12 file wordsize.f: Nonstandard syntax
+      9       x = 1.0
+                ^
+Warning near line 9 col 9 file wordsize.f: real const 1.0 promoted to real*8 X
+ : may not give desired precision
+
+ 0 syntax errors detected in file wordsize.f
+ 3 warnings issued in file wordsize.f
+

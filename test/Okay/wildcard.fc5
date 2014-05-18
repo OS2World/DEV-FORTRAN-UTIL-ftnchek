@@ -1,0 +1,18 @@
+
+No Such Appearance Warning Option: *ugly*: ignored
+
+Appearance Warning Options:
+  alternate-return [yes]: Alternate return out of range
+  embedded-space [yes]: Space in variable names or operators
+  continuation [yes]: Continuation mark following comment line
+  long-line [yes]: Lines over 72 columns
+  missing-space [yes]: Missing space between variable & keyword
+  multiple-common [yes]: COMMON declared in multiple stmts
+  multiple-namelist [yes]: NAMELIST declared in multiple stmts
+  parentheses [yes]: Parentheses around a variable
+Prefix option name with no- to turn off option
+If no options given, equivalent to -pretty=all
+Special keywords:
+  help: Print this list
+  all: Set all options
+  none: Clear all options

@@ -1,0 +1,61 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File complex.f:
+
+      4       a = (12,32)
+                ^
+Warning near line 4 col 9: cplx const (12,32) truncated to real A
+      5       a = (5,-3e5)
+                ^
+Warning near line 5 col 9: cplx const (5,-3E5) truncated to real A
+
+Module %MAIN: prog
+
+External subprograms referenced:
+
+       ABC: subr   
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real*           CC cplx            CD cplx            DE real*  
+         I intg*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+Warning in module %MAIN: Variables set but never used:
+    CC set at line 2
+    CD set at line 3
+    DE set at line 3
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             11         SEQ  FMTD WRITE         6 
+           *            SEQ  FMTD PRINT         8 
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType
+      <7>      7    format     <22>      9    format
+
+
+Module ABC: subr
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         X intg             Z cplx   
+
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD PRINT        15 
+
+ 0 syntax errors detected in file complex.f
+ 4 warnings issued in file complex.f
+

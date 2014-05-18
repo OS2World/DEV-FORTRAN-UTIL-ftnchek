@@ -1,0 +1,20 @@
+C====>Begin Module %MAIN                  File t208f.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     Local variables
+C
+      INTEGER M, N
+C
+C====>End Module   %MAIN                  File t208f.f                  
+C====>Begin Module BIG                    File t208f.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     Local variables
+C
+      INTEGER ANOTHER_LONG_VARIABLE_NAME, ANOTHER_VARIABLE_NAME
+      INTEGER ANOTHER_VERY_LONG_VARIABLE_NAME, A_LONG_VARIABLE_NAME
+      INTEGER A_VARIABLE_NAME, A_VERY_LONG_VARIABLE_NAME
+C
+      REAL U, V, W, X, Y, Z
+C
+C====>End Module   BIG                    File t208f.f                  

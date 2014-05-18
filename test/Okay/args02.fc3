@@ -1,0 +1,8 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File args02.f:
+ 0 syntax errors detected in file args02.f
+Warning: Subprogram SUBA argument arrayness mismatch at position 1:
+    Dummy arg C in module SUBA line 5 file args02.f has 1 dim size 10
+    Actual arg C in module %MAIN line 3 file args02.f has 1 dim size 100

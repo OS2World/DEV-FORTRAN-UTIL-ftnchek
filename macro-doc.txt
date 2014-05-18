@@ -1,0 +1,260 @@
+WARNING: the information in this file is out of date, and various
+  changes (mainly new macros) have been made since it was written.
+  This description is provided since it does cover a lot of existing
+  macros, and provides a starting point for understanding how ftnchek
+  is configured.  Consult the source code for the current status and
+  meaning of the macros.
+
+This file gives details about using macro names to control the
+system-dependent choices available in compiling Ftnchek.
+
+NOTE: if you choose to alter the definitions of any of these macros
+from their default values, then "make check" will probably give some
+differences.  You should first build ftnchek using the default
+definitions, run "make check" to catch any problems, then rebuild
+ftnchek with your preferred definitions before doing "make install".
+
+Ftnchek has a number of fixed internal parameters that affect its
+operation, such as the symbol table sizes and support for various
+extensions and particular operating systems.  The following is a
+description of the most important of these parameters.  They are
+implemented as C language macro names.  If you wish to change a
+parameter defined by one of these macros, it is necessary to recompile
+Ftnchek with the macro definition changed to the desired value.
+
+Briefly, the effect of the macro names specifying the system is as
+follows: If VMS or __TURBOC__ or MSDOS is defined, then both "/" and
+"-" are allowed as option prefixes.  Otherwise only "-" is allowed.
+If VMS or __TURBOC__ or MSDOS is defined, then ".FOR" will be the
+default extension for source files, otherwise ".f" is used.  If VMS is
+defined, then support for VMS extensions is enabled by default: this
+changes the default values of options -source to 2 (VMS include
+syntax) and -intrinsics to 223 (VMS intrinsics set).  If UNIX is
+defined, then only "-" is allowed as an option prefix, the default for
+-source is 0 and -intrinsics is 222 (UNIX intrinsic set).  More
+detailed control over these options is possible by defining other
+macro names described below.
+
+This can usually be done without editing any of the source files, by
+specifying the macro definition on the C compiler command line.  Under
+UNIX, this is done with the -D option.  For example, to define the
+macro BpW that sets the default word size to be eight bytes, the
+compiler would be invoked with the additional option -DBpW=8.  Under
+VMS, the corresponding option would be /DEFINE=("BpW=8").  For other
+systems, consult your C compiler manual.  When using make, specify
+these definitions by setting the macro OPTIONS, e.g.
+	make "OPTIONS= -DBpW=8"
+If you want to put such definitions into the Makefile, do not edit
+Makefile.  Edit Makefile.in and re-run the configure script.
+
+Unless otherwise noted, the following macro names need not have any
+particular value.  They only need to be defined in order to have
+effect.  For more details on these parameters, look at ftnchek.h.
+These fall into three broad groups: system-dependent aspects, features
+and options, and table sizes.
+
+  --- System-dependent defines
+
+  Macro                 Meaning                           Remarks
+UNIX                  Compile Ftnchek for UNIX-like    Default for most
+                       operating system                 choices
+VMS                   Compile Ftnchek for VAX/VMS      Automatically defined
+                       operating system                 by VAX C compiler
+MSDOS                 Compile Ftnchek for MS-DOS       Automatic if compiler
+                       operating system                 is Turbo C
+NO_PROTOTYPES         Compiler does not accept         Defined by configure
+                       ANSI C prototypes
+NO_FLOATING_POINT     Suppress floating point          Unimportant--define if
+                       computations internally           no hardware f.p.
+DEC_TABS              Default value of -source bit 1   Default = 0 (NO)
+VMS_INCLUDE           Default value of -source bit 2   Default=0 for Unix,
+                                                         1 for VMS
+UNIX_BACKSLASH        Default value of -source bit 4   Default = 0 (NO)
+OPTION_PREFIX_SLASH   Allow options to start with      Implied by VMS and by
+                       either - or /.                   MSDOS
+NO_OPTION_PREFIX_SLASH Prohibit options with /         To override VMS or
+							 MSDOS default
+SPECIAL_HOMEDIR       Home directory for non-unix     VMS default:"SYS$DISK:[]"
+UNIX_RC_FILE	      Name of startup file.            Default: ".ftnchekrc"
+NONUNIX_RC_FILE       Alternate startup filename.      Default: "ftnchek.ini"
+DEF_SRC_EXTENSION     Default extension expected       Defaults: VMS, MSDOS:
+                       for input source files	        ".for" All others: ".f"
+DEF_LIST_EXTENSION    Default extension for output     Default: ".lis"
+                       list-files
+DEF_PROJ_EXTENSION    Default extension for input      Default: ".prj"
+                       and output project files
+DEF_DCL_EXTENSION     Default extension for            Default: ".dcl"
+                       declaration files
+DEF_INC_EXTENSION     Default extension for            Default:
+                       include files                     DEF_SRC_EXTENSION
+DEF_VCG_EXTENSION     Default extension for VCG        Default: ".vcg"
+                       output files
+STDIN_PROJ_FILENAME   Output project-file name used    Default: "ftnchek.prj"
+                       when input source is stdin
+ENV_PREFIX            Prefix for environment           Default "FTNCHEK_"
+                       variables that set options
+
+
+   --- macros that control ftnchek behavior (syntax, options, etc.)
+VCG_SUPPORT           Add the -vcg switch to allow     Default: -vcg supported
+                       call graph to be visualized.
+NO_VCG_SUPPORT        Suppress -vcg support
+VCG_GRAPH_OPTIONS     Global vcg graph options.       "color: lightgray\n"
+STRICT_SYNTAX         Set default -f77=all             Default is -f77=none
+STRICT_PORTABILITY    Set default -port=all            Default is -port=none
+UGLY_IS_OK            Set default -pretty=none         Default is -pretty=all
+LAX_TRUNCATION        Set default -trunc=none          Default is -trunc=all
+
+The following macros control whether ftnchek accepts certain syntax
+extensions.  They are all defined and cannot be undefined without
+editing ftnchek.h.  If the macros are undefined, then support for the
+extension is completely removed.  This means that the corresponding
+extension will generate syntax or parse errors, not non-standard
+warnings.  Some users might want to do this to make ftnchek smaller
+and more efficient, or out of a sense of fanaticism.
+
+ALLOW_CRAY_POINTERS	Cray pointer syntax
+ALLOW_DOLLARSIGNS	$ in variable names
+ALLOW_DO_ENDDO		DO ... ENDDO and related
+ALLOW_INCLUDE		INCLUDE statement
+ALLOW_QUOTEMARKS	Strings delimited by "
+ALLOW_TYPELESS_CONSTANTS  Binary, octal, hex
+ALLOW_UNDERSCORES	_ in variable names
+ALLOW_UNIX_BACKSLASH	Unix escape sequences in strings
+ALLOW_UNIX_CPP		Unix C preprocessor directives
+ALLOW_VMS_IO		VMS I/O keywords
+
+The following macros determine the default value of the -intrinsic
+setting.  The nonstandard double complex intrinsic functions are
+always recognized since they are needed by the double complex
+datatype.  Other groups of nonstandard functions can be selected to be
+recognized by default using these macros.
+
+STANDARD_INTRINSICS   Do not recognize extended set
+                       of intrinsic functions (Set 0)
+NONSTD_INTRINSICS     Support commonly available       Default behavior
+                       intrinsic functions (Set 1)
+UNIX_INTRINSICS       Support UNIX-specific            Default if UNIX defined
+                       intrinsic functions (Set 2)
+NO_UNIX_INTRINSICS    Do not support UNIX-specific
+                       intrinsic functions
+VMS_INTRINSICS        Support VMS-specific             Default if VMS defined
+                       intrinsic functions (Set 3)
+NO_VMS_INTRINSICS     Do not support VMS-specific
+                       intrinsic functions
+DEF_INTRINSIC_SET     Specify intrinsic set            Override above defaults
+
+RAND_NO_ARG           RAND/IRAND function has no       Default behavior:
+                       argument                         allows both 0 argument
+RAND_ONE_ARG          RAND/IRAND function has one       and 1 argument forms
+                       argument
+IARGC_NO_ARG          IARGC has no argument            Default behavior:
+IARGC_ONE_ARG         IARGC has 1 argument              both forms allowed
+
+NO_BLANKS_IN_NUMBERS  Numeric constants cannot have    Default: blanks allowed
+                       embedded blanks.
+BLANKS_IN_NUMBERS     Numeric constants may have
+                       embedded blanks.
+BpW                   Default bytes per word           Default=4
+                        (for -wordsize setting) 
+
+
+  --- Macros that set table sizes, limits, etc.
+
+MAXLINE               Maximum input line length.       Default 132
+                        Ignores past this.
+MAXIDSIZE             Longest identifier allowed       Default 31
+MAX_SRC_TEXT          Longest text string of a token   Default 20*66
+MAX_CHAR_CODE         Largest char value               Default 255
+MAX_INCLUDE_DEPTH     Max nesting depth of include     Default 16
+                       files
+MAXEXPRTEXT           Length of expr text saved in     Default 15
+                       arg lists
+MAX_RC_LINE           Max input line in rc file        Default 500
+RC_COMMENT_CHAR       Start of comment in rc file      Default '#'
+ENV_INCLUDE_VAR       Name of environment variable     Default "INCLUDE"
+                       specifying include directory
+
+DEFAULT_INCLUDE_DIR   Name of default include          Defaults:
+                       directory                        UNIX: "/usr/include"
+                                                        VMS: "SYS$LIBRARY:"
+                                                        MSDOS: "\\include"
+
+
+The following macros specify various internal table sizes.  If neither
+SMALL_MACHINE nor MEDIUM_MACHINE is defined, large table sizes will be
+used.  In any case, individual table sizes can be chosen by defining
+the corresponding macro name.  The defaults for the three size choices
+(small, medium, large) are listed in the Remarks column.  Only HASHSZ,
+LOCSYMTABSZ, and GLOBSYMTABSZ limit the maximum size of tables.  The
+other size parameters are chunk sizes for allocating additional space
+as needed.  For virtual-memory machines they only affect efficiency.
+
+SMALL_MACHINE         Table sizes appropriate for a
+                       PC without much memory
+MEDIUM_MACHINE        Intermediate table sizes
+LARGE_MACHINE         Table sizes appropriate for a
+                       mainframe or workstation
+
+                                                      small  medium large
+HASHSZ                Identifier hash table (elements)  798   2002  20930
+LOCSYMTABSZ           Local symbol table (entries)      300    800   8000
+GLOBSYMTABSZ          Global symbol table (entries)     400   1200  12000
+   The following sizes are *chunk sizes*, specifying the initial table
+   size and the size of new blocks to allocate when initial amounts
+   are used up.  Optimum sizes are dependent on properties of alloc
+   function, and do not set limits on total amounts of space.
+STRSPACESZ            Identifier string space (bytes)  4000  10000  10000
+PARAMINFOSPACESZ      Parameter info field space	 20     50    200
+			(ParamInfo's)
+TOKHEADSPACESZ        Token list header element space    50    200    500
+                       (TokenListHeader's)
+TOKENSPACESZ          Token list space (tokens). Used   200   1000  10000
+                       to store subroutine arguments
+                       and other temporary lists.
+ARGLISTHEADSZ         Argument list header element      300   1500  15000
+                       space (ArgListHeader's)
+ARGLISTELTSZ          Argument list element space      1000   5000  50000
+                       (ArgListElement's)
+COMLISTHEADSZ         Common block list header space    200   1000 10000
+                       (ComListHeader's)
+COMLISTELTSZ          Common block list element space  1000   4000 50000
+                       (ComListElement's)
+PTRSPACESZ            Pointers to array dim text and    200    400  2000
+                       parameter text (char *'s)
+WRAP_COLUMN           Default value for -wrap          Default=79
+                      setting.
+
+
+For the truly adventurous:
+
+Ftnchek has two different memory-management schemes to choose from.
+In the default case, space for the hashtable and the local and global
+symbol tables is allocated at compile time.  These tables cannot
+change size afterwards.  Initial space for strings, tokens (in lists
+and trees), token list headers, token source text, pointers to array
+dim and parameter text is allocated at compile time.  These areas can
+grow as needed by allocating additional chunks that are chained
+together in a linked-list arrangement.  Space for argument list
+headers and elements, and common list headers and elements starts at
+zero and new chunks are allocated as needed.  (None of the newly
+allocated chunks are freed, since it is considered likely that the
+space will be needed again.)  This scheme is well suited to machines
+with large address spaces and virtual memory.  The sizes of the fixed
+tables and chunk sizes for the others can be chosen in three standard
+sets: default, SMALL_MACHINE, and LARGE_MACHINE.  The latter is
+preferred for any virtual-memory machine since memory does not become
+"really" allocated until needed.
+
+The second memory-management scheme is selected by the compile-time
+option DYNAMIC_TABLES.  In this case, the fixed-size arrays for the
+hashtable and the local and global symbol tables are replaced by
+pointers, and the space they point to is allocated at the start of
+program execution.  Everything else is the same.  This version runs
+somewhat slower than the first scheme on machines I have tested.  I
+have not proceeded to take advantage of the possibility of letting the
+table sizes be selected at run time by means of command-line settings.
+To do so would require moving the allocation step performed by
+init_tables() to just before the start of processing, analogously to
+init_typesizes().  It would also need a set of command-line options to
+be installed for specifying the different table sizes.

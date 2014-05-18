@@ -1,0 +1,52 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File usage.f:
+     11      $ 		(9,9,100)
+             ^
+Possibly misleading appearance near line 11 col 6 file usage.f: Continuation
+ follows comment or blank line
+     23 	parameter (Pi = 3.14159265358979D0)
+                                ^
+Warning near line 23 col 25 file usage.f: dble const 3.14159265358979D0 
+ truncated to real PI
+     50 		www = 4.7 + (Pi * 2)**8
+                            ^
+Warning near line 50 col 21 file usage.f: real expr 4.7+(PI*2)**8 truncated to 
+ intg WWW
+     60 	dbl1 = 1.2345
+                     ^
+Warning near line 60 col 14 file usage.f: real const 1.2345 promoted to dble 
+ DBL1: may not give desired precision
+
+Warning in module YACCTEST in file usage.f: Variables used before set
+    IUNIT used at line 43 file usage.f; never set
+    PAUSE used at line 42 file usage.f; never set
+    SAVE used at line 48 file usage.f; never set
+    STOP used at line 48 file usage.f; never set
+
+Warning in module YACCTEST in file usage.f: Variables may be used before set:
+    DBL1 used at line 38 file usage.f
+    DBL1 set at line 60 file usage.f
+     75 	if( beta ) xray = 1.0D0
+                                ^
+Warning near line 75 col 25 file usage.f: dble const 1.0D0 truncated to intg 
+ XRAY
+     81 	if((x-1.0)**(sqrt(2.0))/(5/4+com6) .gt. com3) then
+                                            ^
+Warning near line 81 col 37 file usage.f: integer quotient expr 5/4  converted
+ to real
+     87 	com4(com2+com6) = com4(xray)
+                     ^
+Warning near line 87 col 14 file usage.f: subscript is not integer
+                                       ^
+Warning near line 87 col 32 file usage.f: subscript is not integer
+
+Warning in module HOME in file usage.f: Variables used before set
+    COM2 used at line 87 file usage.f; never set
+
+ 0 syntax errors detected in file usage.f
+ 11 warnings issued in file usage.f
+
+Warning: Common block BLK1 Elements used but never set:
+    COM3 COM6

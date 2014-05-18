@@ -1,0 +1,8 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File args15.f:
+ 0 syntax errors detected in file args15.f
+Warning: Subprogram SUBA argument mismatch at position 1:
+    Dummy arg I in module SUBA line 3 file args15.f is type intg
+    Actual arg 5Hjunky in module %MAIN line 1 file args15.f is type holl*5

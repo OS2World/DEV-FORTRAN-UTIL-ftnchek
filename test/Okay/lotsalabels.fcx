@@ -1,0 +1,17 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File lotsalabels.f:
+
+"lotsalabels.f", line 1548: Error in module TST: Labels referenced but not
+ defined:
+"lotsalabels.f", line 1548:     <2400> referenced
+
+"lotsalabels.f", line 1115: Warning in module TST: Labels defined but not
+ used:
+"lotsalabels.f", line 1115:     <1114> defined
+"lotsalabels.f", line 1549:     <1548> defined
+
+ 1 syntax error detected in file lotsalabels.f
+ 1 warning issued in file lotsalabels.f
+

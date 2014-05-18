@@ -1,0 +1,69 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File embedded-space.f:
+
+      1       p r o g r a m  t e s t
+              ^
+"embedded-space.f", line 1 col 7: Possibly misleading appearance: keyword 
+ PROGRAM has embedded space
+                             ^
+"embedded-space.f", line 1 col 22: Possibly misleading appearance: identifier 
+ TEST has embedded space
+      2       realxray,zebra
+                  ^
+"embedded-space.f", line 2 col 11: Possibly misleading appearance: identifier 
+ XRAY not clearly separated from context
+      3       read(*,*) x ray,zebra
+                        ^
+"embedded-space.f", line 3 col 17: Possibly misleading appearance: identifier 
+ XRAY has embedded space
+      4       i f ( xray . eq . zebra ) w r i t e(*,*)                    xray *
+              ^
+"embedded-space.f", line 4 col 7: Possibly misleading appearance: keyword IF 
+ has embedded space
+                                        ^
+"embedded-space.f", line 4 col 33: Possibly misleading appearance: keyword WRITE 
+ has embedded space
+                                                                               ^
+"embedded-space.f", line 4 col 72: Possibly misleading appearance: 
+ multi-character operator has embedded space
+      5      $* zebra
+      6       if( xray .e q. zebra) write(*,*) 'h e l l o ' / / ' t h e r e'
+                       ^
+"embedded-space.f", line 6 col 16: Possibly misleading appearance: keyword has
+ embedded space
+                                                            ^
+"embedded-space.f", line 6 col 53: Possibly misleading appearance: 
+ multi-character operator has embedded space
+      7       if( xray / = zebra ) write(* , *) xray + zebra
+                       ^
+"embedded-space.f", line 7 col 16: Warning: Nonstandard syntax for relational
+ operator
+                       ^
+"embedded-space.f", line 7 col 16: Possibly misleading appearance: 
+ multi-character operator has embedded space
+      8       if( xray < zebra ) write(* , *) xray - zebra
+                       ^
+"embedded-space.f", line 8 col 16: Warning: Nonstandard syntax for relational
+ operator
+      9       end
+
+Module TEST: prog
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+      XRAY real         ZEBRA real   
+
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD READ          3 
+           *            SEQ  FMTD WRITE         4      6      7      8 
+
+ 0 syntax errors detected in file embedded-space.f
+ 12 warnings issued in file embedded-space.f
+

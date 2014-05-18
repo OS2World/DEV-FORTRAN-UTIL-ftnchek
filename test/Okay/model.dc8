@@ -1,0 +1,33 @@
+!====>Begin Module COMPAV                 File model.f90                
+!---->Makedcls Options: All variables                                   
+!
+!     Argument variables
+!
+  INTEGER             COUNT,       SCORE(5)
+!
+!     Local variables
+!
+  INTEGER             I,           J,           SUM
+!
+!====>End Module   COMPAV                 File model.f90                
+!====>Begin Module AVENUM                 File model.f90                
+!---->Makedcls Options: All variables                                   
+!
+!     External functions
+!
+  EXTERNAL            COMPAV
+!
+  REAL                COMPAV
+!
+!     Parameter variables
+!
+  INTEGER             MAXNOS
+  PARAMETER           (MAXNOS = 5)
+!
+!     Local variables
+!
+  INTEGER             COUNT,       I
+!
+  REAL                AVG,         NUMS(MAXNOS)
+!
+!====>End Module   AVENUM                 File model.f90                

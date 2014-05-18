@@ -1,0 +1,15 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File wordsize.f:
+ 0 syntax errors detected in file wordsize.f
+Warning: Subprogram F invoked inconsistently
+    Defined in module F line 1 file wordsize.f as type dble
+    Invoked in module MAIN line 11 file wordsize.f as type real*8
+
+Warning: Subprogram F argument data type mismatch at position 1:
+    Dummy arg A in module F line 1 file wordsize.f is type dble
+    Actual arg X in module MAIN line 11 file wordsize.f is type real*8
+  and at position 2:
+    Dummy arg B in module F line 1 file wordsize.f is type dble
+    Actual arg Y in module MAIN line 11 file wordsize.f is type real*8

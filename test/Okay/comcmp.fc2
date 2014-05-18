@@ -1,0 +1,45 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File comcmp.f:
+     33       c7 = c1//c8
+                 ^
+Warning near line 33 col 10 file comcmp.f: char*9 expr C1//C8 truncated to 
+ char*7 C7
+
+ 0 syntax errors detected in file comcmp.f
+ 1 warning issued in file comcmp.f
+
+Warning: Common block INTS unused anywhere
+
+Warning: Common block BK1 unused anywhere
+
+Warning: Common block CHARS varying length:
+    Has 16 bytes in module %MAIN line 3 file comcmp.f
+    Has 15 bytes in module BAR line 27 file comcmp.f
+
+Warning: Common block INTS varying length:
+    Has 10 bytes in module %MAIN line 7 file comcmp.f
+    Has 8 bytes in module BAR line 30 file comcmp.f
+
+Warning: Common block INTS data type mismatch
+    Byte 5 is type intg*4 in module %MAIN line 7 file comcmp.f
+    Byte 5 is type intg*2 in module FOO line 19 file comcmp.f
+  and
+    Byte 9 is type intg*2 in module %MAIN line 7 file comcmp.f
+    Byte 9 is type intg*4 in module FOO line 19 file comcmp.f
+
+Warning: Common block BK1 data type mismatch
+    Word 4 is type real in module %MAIN line 8 file comcmp.f
+    Word 4 is type intg in module BAR line 31 file comcmp.f
+
+Warning: Common block BK1 data type mismatch
+    Word 1 is type real in module %MAIN line 8 file comcmp.f
+    Word 1 is type intg in module FOO line 20 file comcmp.f
+  and
+    Word 2 is type real in module %MAIN line 8 file comcmp.f
+    Word 2 is type intg in module FOO line 20 file comcmp.f
+  and
+    Word 3 is type real in module %MAIN line 8 file comcmp.f
+    Word 3 is type intg in module FOO line 20 file comcmp.f
+ etc...

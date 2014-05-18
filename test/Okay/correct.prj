@@ -1,0 +1,31 @@
+FTNCHEK_ P3
+file correct.f
+ entries 2
+ entry COMPAV class 1 type 2 size 0 flags 1 1 1 0 0 0 0 0
+ defn
+ module COMPAV file correct.f line 10 top 10 class 1 type 2 size 0 flags 1 0 0 0
+ args 2
+ arg 1 name SCORE
+ class 0 type 1 size 0 dims 1 elts 5 cblk - cndx 0 same 0 flags 1 0 0 1 1 0 0 0
+ arg 2 name COUNT
+ class 0 type 1 size 0 dims 0 elts 1 cblk - cndx 0 same 1 flags 1 0 0 1 0 0 0 0
+ end
+ entry AVENUM class 1 type 12 size 0 flags 0 0 0 0 0 0 0 0
+ defn
+ module AVENUM file correct.f line 21 top 21 class 1 type 12 size 0 flags 1 0 0 0
+ args 0
+ end
+
+ externals 1
+ external COMPAV class 1 type 2 size 0 flags 1 1 1 0 0 0 0 0
+ call
+ module AVENUM file correct.f line 45 top 45 class 1 type 2 size 0 flags 0 1 0 0
+ args 2
+ arg 1 name NUMS
+ class 0 type 1 size 0 dims 1 elts 5 cblk - cndx 0 same 0 flags 1 1 1 0 1 0 0 0
+ arg 2 name COUNT
+ class 0 type 1 size 0 dims 0 elts 1 cblk - cndx 0 same 1 flags 1 1 1 0 0 0 0 0
+ end
+
+ comblocks 0
+

@@ -1,0 +1,74 @@
+
+FTNCHEK Version 3.2 November 2002 Patch Level 2
+
+Copyright (C) 1994, 1997, 2000 by Robert K. Moniot
+This program is free software.  Permission is granted to
+modify it and/or redistribute it, retaining this notice.
+No guarantees accompany this software.
+
+Commandline options [default]:
+    -[no]brief [no]: briefer form of error messages
+    -[no]check [yes]: perform checking
+    -[no]declare [no]: list undeclared variables
+    -[no]division [no]: catch possible div by 0
+    -[no]extern [yes]: check if externals defined
+    -[no]help [no]: print help screen
+    -[no]library [no]: treat next files as library
+    -[no]list [no]: print program listing
+    -[no]novice [no]: extra help for novices
+    -[no]pure [yes]: functions have no side effects
+    -[no]quiet [no]: less verbose output
+    -[no]reference [no]: print who-calls-who reference list
+    -[no]resources [no]: show info on resource usage
+    -[no]sixchar [no]: catch nonunique names
+    -[no]sort [no]: prerequisite-order sort of modules
+    -[no]symtab [no]: print symbol table info
+    -[no]vcg [no]: print call graph in vcg format
+    -[no]version [no]: print version number
+    -[no]volatile [no]: assume volatile common blocks
+    -arguments=str [all]: check subprogram argument agreement
+        Use -arguments=help for list of options
+    -array=str [all]: check subprogram argument arrayness agreement
+        Use -array=help for list of options
+    -calltree=str [none]: subprogram call graph options
+        Use -calltree=help for list of options
+    -common=str [dimensions,exact,length,type]: check for common block mismatches
+        Use -common=help for list of options
+    -crossref=str [none]: cross-ref printing options
+        Use -crossref=help for list of options
+    -f77=str [all]: warn about non-F77 extensions
+        Use -f77=help for list of options
+    -f90=str [none]: warn about non-F90 syntax
+        Use -f90=help for list of options
+    -f95=str [none]: warn about non-F95 syntax
+        Use -f95=help for list of options
+    -identifier-chars=str [$_]: non-alphabetic chars allowed in identifiers
+    -include=str [NONE]: include-file directory
+    -intrinsic=str [unix]: specify intrinsic function options
+        Use -intrinsic=help for list of options
+    -makedcls=str [none]: make type declaration statements
+        Use -makedcls=help for list of options
+    -mkhtml=str [none]: create html documents
+        Use -mkhtml=help for list of options
+    -output=str [NONE]: output file name
+    -portability=str [none]: warn about portability problems
+        Use -portability=help for list of options
+    -pretty=str [all]: warn about deceiving appearances
+        Use -pretty=help for list of options
+    -project=str [none]: create project file
+        Use -project=help for list of options
+    -source=str [none]: select source format options
+        Use -source=help for list of options
+    -style=str [none]: catch violations of structured style
+        Use -style=help for list of options
+    -truncation=str [all]: check for truncation pitfalls
+        Use -truncation=help for list of options
+    -usage=str [all]: warn about variable and common block usage problems
+        Use -usage=help for list of options
+Settings (legal range) [default]:
+    -columns=dd (72 to 132) [72]: max fixed-form line length processed
+    -errors=dd (0 to 999) [3]: max number of error messages per cascade
+    -pointersize=dd (1 to 16) [4]: standard pointer size in bytes
+    -wordsize=dd (0 to 16) [4]: standard wordsize in bytes (0=no default)
+    -wrap=dd (0 to 999) [79]: width of page to wrap error messages
+(First 3 chars of option name significant)

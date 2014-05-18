@@ -1,0 +1,57 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File intrinstest.f:
+      5       z = sqrt(i)
+                       ^
+Error near line 5 col 16 file intrinstest.f: illegal argument data type for
+ intrinsic function SQRT: intg I
+      6       i = max(x,i)
+                      ^
+Error near line 6 col 15 file intrinstest.f: type mismatch between intrinsic
+ function arguments: real X , intg I
+
+Warning in module %MAIN in file intrinstest.f: Variables set but never used:
+    Z set at line 5 file intrinstest.f
+
+Warning in module %MAIN in file intrinstest.f: Variables used before set
+    Y used at line 3 file intrinstest.f; never set
+
+Warning in module %MAIN in file intrinstest.f: Variables may be used before
+ set:
+    I used at line 5 file intrinstest.f
+    I set at line 6 file intrinstest.f
+
+ 2 syntax errors detected in file intrinstest.f
+ 3 warnings issued in file intrinstest.f
+
+Warning: Subprogram IOR never defined
+    Invoked in module %MAIN line 8 file intrinstest.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram NOT never defined
+    Invoked in module %MAIN line 9 file intrinstest.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram GETARG never defined
+    Invoked in module %MAIN line 11 file intrinstest.f
+
+Warning: Subprogram IARGC never defined
+    Invoked in module %MAIN line 14 file intrinstest.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram IARGC varying number of arguments:
+    Invoked in module %MAIN line 14 file intrinstest.f with 1 argument
+    Invoked in module %MAIN line 13 file intrinstest.f with 0 arguments
+
+Warning: Subprogram RAND never defined
+    Invoked in module %MAIN line 16 file intrinstest.f
+    (possibly it is an array which was not declared)
+
+Warning: Subprogram RAND varying number of arguments:
+    Invoked in module %MAIN line 16 file intrinstest.f with 1 argument
+    Invoked in module %MAIN line 15 file intrinstest.f with 0 arguments
+
+Warning: Subprogram RAN never defined
+    Invoked in module %MAIN line 18 file intrinstest.f
+    (possibly it is an array which was not declared)

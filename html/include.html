@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<TITLE>Option: include</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="identifier-chars.html">-identifier-chars</A><HR><P>
+<H2>Option: <font color=#FF0080>include</font></H2><P>
+<A NAME="include"></A><DT><B><A HREF="include.html">-include</A>=</B><I>path</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Specifies a directory to be searched for files
+specified by INCLUDE statements.  Unlike other command-line
+options, this setting is cumulative; that is, if it is given more than
+once on the command line, all the directories so specified are placed
+on a list that will be searched in the same order as they are given.
+The order in which <B>ftnchek</B> searches for a file to be included is:
+the current directory; the directory specified by
+environment
+variable FTNCHEK_INCLUDE if any;
+the directories specified by any <B><A HREF="include.html">-include</A></B> options;
+the directory specified by environment variable INCLUDE;
+and finally in
+a standard system-wide directory
+(/usr/include for UNIX, SYS$LIBRARY for VMS,
+and \include
+for MSDOS).
+<P>
+
+See also: <B><A HREF="f77.html">-f77</A></B>, <B><A HREF="source.html">-source</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="intrinsic.html">-intrinsic</A>
+</BODY></HTML>

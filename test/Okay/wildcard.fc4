@@ -1,0 +1,55 @@
+
+Fortran 77 Warning Options:
+  accept-type [no]: ACCEPT and TYPE I/O statements
+  array-bounds [yes]: array bounds expressions
+  assignment-stmt [no]: assignment involving array
+  attribute-based-decl [no]: attribute-based (:: -style) variable declaration
+  automatic-array [yes]: local array of variable size
+  backslash [no]: Unix backslash escape in strings
+  byte [no]: BYTE data type
+  case-construct [no]: CASE construct
+  common-subprog-name [no]: Common block & subprog with same name
+  construct-name [no]: Construct names on DO statements
+  continuation [no]: More than 19 continuation lines
+  cpp [no]: Unix C preprocessor directives
+  cycle-exit [no]: CYCLE or EXIT statement
+  d-comment [no]: Debug comments starting with D
+  dec-tab [no]: DEC Fortran tab-formatted source
+  do-enddo [no]: DO loop extensions
+  double-complex [no]: Double complex datatype
+  format-dollarsign [yes]: $ control code in FORMAT
+  format-edit-descr [yes]: Nonstandard edit descriptors
+  function-noparen [no]: FUNCTION defined without parens
+  implicit-none [no]: IMPLICIT NONE statement
+  include [no]: INCLUDE statement
+  initializer [no]: Variable initializer in declaration
+  inline-comment [no]: Inline comments starting with !
+  internal-list-io [no]: List-directed I/O to internal file
+  intrinsic [no]: Nonstandard intrinsic functions
+  io-keywords [no]: Nonstandard I/O keywords
+  long-line [no]: Statements with code past 72 columns
+  long-name [no]: Identifiers over 6 chars
+  mixed-common [no]: Mixed char and nonchar data in common
+  mixed-expr [no]: Incompatible type combinations in exprs
+  name-dollarsign [no]: $ or other nonalnum (except _) in identifiers
+  name-underscore [no]: Underscores in identifiers
+  namelist [no]: NAMELIST statement
+  param-implicit-type [no]: implicit typing of PARAMETERs
+  param-intrinsic [no]: Intrinsics and **real in PARAMETER defns
+  param-noparen [no]: PARAMETER statement without parens
+  pointer [no]: Cray pointer syntax
+  quad-constant [no]: Quad precision constants like 1.23Q4
+  quotemark [no]: Strings delimited by "quote marks"
+  relops [no]: Relational operators < <= == /= > >=
+  semicolon [no]: Semicolon as statement separator
+  statement-order [no]: Statement out of order
+  typeless-constant [no]: Typeless constants like Z'19AF'
+  type-size [no]: Sized type declarations like REAL*8
+  variable-format [no]: Variable format repeat spec or field size
+  vms-io [no]: Nonstandard I/O keywords
+Prefix option name with no- to turn off option
+If no options given, equivalent to -f77=all
+Special keywords:
+  help: Print this list
+  all: Set all options
+  none: Clear all options

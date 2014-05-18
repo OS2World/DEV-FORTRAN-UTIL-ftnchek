@@ -1,0 +1,11 @@
+!====>Begin Module TEST1                  File dcltest.f                
+!---->Makedcls Options: All variables                                   
+!
+!     Parameter variables
+!
+  CHARACTER*6         STRING1
+  PARAMETER           (STRING1 = 'abc123')
+  CHARACTER*(6)       STRING2
+  PARAMETER           (STRING2 = 'xyz789')
+!
+!====>End Module   TEST1                  File dcltest.f                

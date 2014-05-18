@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<TITLE>Option: errors</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="division.html">-division</A><HR><P>
+<H2>Option: <font color=#FF0080>errors</font></H2><P>
+<A NAME="errors"></A><DT><B><A HREF="errors.html">-errors</A>=</B><I>num</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Set the maximum number of error messages in a ``cascade''.
+During checking of agreement of subprogram
+arguments, common block declarations, and so forth, sometimes a single
+case will generate a long string of warnings.  Often this simply
+indicates some other cause than a genuine item-by-item mismatch, such
+as for
+example a varible missing from one list.  So in such cases
+<B>ftnchek</B> stops printing the warnings after the cascade limit is
+reached, and the trailer ``etc...'' is printed to indicate that there
+were more errors not printed.  If you think that these warnings are
+likely to be genuine, use this setting to see more of them.
+Turn-on = default = 3, max = 999.  A value of 0 means no limit.
+<P>
+
+This setting does not set an overall limit on the number of error
+messages printed, only the number printed in any one cascade.  Most
+types of warnings and error messages are not subject to the cascade
+effect and so are not affected by this setting.  To turn off warnings
+generally, use the individual warning control options or the
+<B>-nocheck</B> option.
+<P>
+
+See also: <B><A HREF="check.html">-check</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="extern.html">-extern</A>
+</BODY></HTML>

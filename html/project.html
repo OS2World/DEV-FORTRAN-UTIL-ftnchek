@@ -1,0 +1,95 @@
+<HTML>
+<HEAD>
+<TITLE>Option: project</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="pretty.html">-pretty</A><HR><P>
+<H2>Option: <font color=#FF0080>project</font></H2><P>
+<A NAME="project"></A><DT><B><A HREF="project.html">-project</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+<B>ftnchek</B> will create a project file from each
+source file that is input while this option is turned on.  The project
+file will be given the same name as the input file, but with the
+extension <I>.f</I> or <I>.for</I> replaced by <I>.prj</I>.
+(If input is from standard input, the project file is named
+<I>ftnchek.prj</I>.)
+
+Default = none.
+<P>
+
+The <I>list</I> consists of keywords separated by commas or colons.
+There are three special keywords: <B>all</B> to turn on all the
+options, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="project.html">-project</A></B> is equivalent to
+<B><A HREF="project.html">-project</A>=all</B>, and <B>-noproject</B> is equivalent to
+<B><A HREF="project.html">-project</A>=none</B>.
+The keywords with their meanings are as follows:
+<DL COMPACT>
+<DT><B>create</B>:<DD>
+Produce a project file.  The default is not to produce a project
+file.  If this option is not turned on, the other options have no effect.
+<DT><B>trim-calls</B>:<DD>
+Trim the amount of information stored in the project file about
+subprogram declarations and calls.  This is the default.  Turn this
+option off only in rare situations.  (See discussion below.)
+The amount of trimming varies depending on the <B><A HREF="library.html">-library</A></B> flag.
+More information is trimmed if that flag is turned on.
+<DT><B>trim-common</B>:<DD>
+Trim the number of common block declarations stored in the project
+file.  This is the default.  Turn this option off only in rare
+situations.  (See discussion below.)
+This option has no effect if the <B><A HREF="library.html">-library</A></B> flag is turned off:
+when not in library mode, no trimming of common block declarations is
+done regardless of this option.
+</DL>
+<P>
+
+A project file contains a summary of information from the source file,
+for use in checking agreement
+among FUNCTION, SUBROUTINE, and COMMON
+usages in other files.  It
+allows incremental checking, which saves time whenever you have a
+large set of files containing shared subroutines, most of which seldom
+change.  You can run <B>ftnchek</B> once on each file with the
+<B><A HREF="project.html">-project</A></B> flag set, creating the project files.  Usually you
+would also set the <B><A HREF="library.html">-library</A></B> and <B>-noextern</B> flags at this
+time, to suppress messages relating to consistency with other files.
+Only error messages pertaining to each file by itself will be printed
+at this time.  Thereafter, run <B>ftnchek</B> without these flags on all
+the project files together, to check consistency among the different
+files.  All messages internal to the individual files will now be
+omitted.  Only when a file is altered will a new project file need to
+be made for it.
+<P>
+
+Naturally, when the <B><A HREF="project.html">-project</A></B> option is turned on, <B>ftnchek</B> will not
+read project files as input.
+<P>
+
+Ordinarily, the trim options should be left on when you intend to
+create project files for future input to <B>ftnchek</B>.  Since trimming
+is on by default, this means that simply giving the command
+<B><A HREF="project.html">-project</A></B> with no option list is the recommended mode.  The trim
+options are provided only as a convenience for those who want to make
+use of project files for purposes other than checking the program with
+<B>ftnchek</B>.  To use project files for their intended purpose, the
+trim options should not be turned off.
+<P>
+
+Project files contain only information needed for checking
+agreement between files.  This means that a project file is of no use if all
+modules of the complete program are contained in a single file.
+<P>
+
+A more detailed discussion is given in the
+section on Using Project Files.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="pure.html">-pure</A>
+</BODY></HTML>

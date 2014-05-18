@@ -1,0 +1,180 @@
+
+
+This is the OS/2 port of ftnchek, version 3.2.2, by Robert Moniot. 
+The sources compile as fetched from the authors ftp site:
+
+  ftp://ftp.dsm.fordham.edu/pub/ftnchek3.2/ftnchek-3.2.2.tar.bz2
+
+without any changes.
+
+There are two versions of this archive:
+
+  fchk322b.zip  - binary, shell scripts, and docs only
+  fchk322s.zip  - the same as above, plus full sources
+
+Normally, you will only want fchk322b.zip. If you wish to compile
+ftnchek yourself anew, however, you need either fchk322s.zip or the
+original source archive, which is smaller but may be difficult to handle
+for people still running FAT only or not having tar nor gzip or bzip2.
+
+
+Installation:
+================
+
+  ---------------- required steps --------------------
+
+0. To run this program, you need to have the EMX runtime library
+   (version 0.9d, emxfix 4 or newer) installed. You can get it (together
+   with instructions on how to install it) at: 
+   
+     http://ftp-os2.nmsu.edu/pub/os2/dev/emx/v0.9d/emxrt.zip
+
+
+1. unpack the archive into some temporary directory:
+
+     unzip fchk322b.zip   (or : unzip fchk322s.zip)
+
+2. copy ftnchek.exe to a directory which is in your PATH, if you wish,
+   virus check it first.
+
+3. read the docs.
+
+  ---------------- optional steps --------------------
+
+If you wish, you may also:
+
+4. create a .ftnchekrc file with standard options you will be using, and
+   copy it in your HOME directory, you may have to set the environment
+   variable HOME first with
+
+      set HOME=d:\users\joe
+
+   or what ever fits your system.
+
+5. copy ftnchek.1 into the man1 subdirectory of your MANPATH
+
+6. print the docs (over fifty pages), so you have them handy and can get
+   an idea of what ftnchek can do. 
+
+     dcl2inc.ps  ftnchek.ps
+
+   You will need a PostScript printer or Ghostscript installed. The man
+   page and the HTML docs contains the same information.
+
+7. copy the documentation in HTML format to a directory of your choice
+   and create a bookmark for the file 'index.html'. This displays
+   perfectly fine in WebExplorer, Lynx, or Netscape.
+
+8. In case you have LxLite installed, you can also compress the
+   executable to save about 80 kB of disk space. I do not include an LX
+   compressed binary in the OS/2 distribution, because such binaries run
+   only on OS/2 Warp 3.0 and newer, and it's possible that there is
+   still someone using OS/2 2.x out there. Also, zip cannot compress
+   lxlited binaries as well as uncompressed ones (go figure), so the zip
+   file would have been actually bigger had I compressed the executable.
+   All that said, I do run it compressed on my systems. To get that, you
+   need (to install) LxLite
+
+      ftp://hobbes.nmsu.edu/pub/os2/util/archiver/lxlt121.zip
+
+   and then just issue:
+ 
+      lxlite ftnchek.exe
+
+
+OS/2 specific changes:
+======================
+
+There were no changes needed; the original code is very portable and the
+author has kindly included the OS/2 specific changes submitted so far in
+the original distribution.
+
+Since the usual OS/2 file system(s) do not support symbolic links, I
+copied sect0.html onto sect1.html and index.html, which are symbolic
+links in the original source archive. 
+
+I added the manual page ftnchek.1 (as generated from ftnchek.man) for
+those who use GNU man.
+
+I did not change dcl2inc, you will need to edit the script with your
+favourite text editor if you need it (it's very easy, just somewhat
+installation specific).
+
+
+
+
+Compiling it yourself
+=====================
+
+This port was made using gcc 2.8.1 (emx 0.9d + emxfix4). To rebuild it
+yourself, issue:
+
+   configure_os2
+
+In case you wish to enable also the -makehtml option of ftnchek, you
+will need to have the GNU regex library (*.h, *.a) installed. You can
+get it from
+
+   http://ftp-os2.nmsu.edu/pub/os2/dev/unix/libregex-0_12-bin.zip
+   http://ftp-os2.nmsu.edu/pub/os2/dev/unix/libregex-0_12.zip
+
+You will need both, as bin contains the actual library but the header
+file is in the source archive. To configure for use of GNU regex,
+run:
+
+   configure_os2.cmd -r
+
+You get help on all options available as usual when invoked with -h.
+This script will see whether all the tools needed to compile ftnchek are
+there. If so, you'll get a message at the end, if not, it'll tell you
+what's missing. Provided configure_os2 found everything, you can then
+build the executable with:
+
+  make
+
+run the extensive test suite (this takes time!) with:
+
+  make check
+
+
+Built with regex it should report no differences, built without it it
+will report differences / missing files in the -makehtml tests and in
+the test of help.fcl and help.fcx, which is normal.
+
+In case you have 'man' installed, you will want to copy the man page
+into the appropriate directory in your manual path, such as in:
+
+  cp -p ftnchek.1 /man/man1
+
+(assuming this is where you keep manual pages). Be careful with the
+docs: You may not have things like man2html, and 'make docs' may
+overwrite the good files of the original distribution with garbage.
+
+
+Bugs:
+================
+
+None I am aware of. The OS/2 port ftnchek.exe passes all tests of 'make
+check', including the -makehtml tests. If there is a problem that is
+clearly specific to my OS/2 port, please let me know. If it is a ftnchek
+thing in general, please contact the author, Robert Moniot
+(moniot@dsm.fordham.edu).
+
+
+Disclaimer:
+===========
+
+No warranties of any kind, explicit or implied are given, no liabilities
+are accepted. The port was built on my own time and equipment and works
+here, but you use the program at your own risk.
+
+
+Have fun,  
+            Stefan
+
+
+--
+
+Stefan A. Deutscher,  sad@mailaps.org / sad@attglobal.net, 06-May-2003
+
+# eof.

@@ -1,0 +1,40 @@
+C====>Begin Module %MAIN                  File t208o.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     Parameter variables
+C
+      CHARACTER*(*)       y
+      PARAMETER           (y = 'yes, isn''t this nice')
+      CHARACTER*(*)       z
+      PARAMETER           (z = 'O''Neil''s brother''s pub')
+      CHARACTER*(*)       s
+      PARAMETER           
+     x(s = '123456789.123456789.123456789.123456789.123456789.123456789.
+     x123456789.123456789.123456789.123456789.123456789.123456789.123456
+     x789.123456789.123456789.123456789.123456789.123456789.123456789.12
+     x3456789.123456789.123456789.123456789.123456789.123456789.12345678
+     x9.123456789.123456789.123456789.123456789.')
+C
+      INTEGER             u
+      PARAMETER           (u = b'0110011010011001')
+      INTEGER             v
+      PARAMETER           (v = z'ffff')
+      INTEGER             w
+      PARAMETER           (w = 'ffff'x)
+      INTEGER             x
+      PARAMETER           (x = x'ffff')
+C
+      REAL                c
+      PARAMETER           (c = 1.23)
+      REAL                b
+      PARAMETER           (b = 2.0*c)
+      REAL                a
+      PARAMETER           (a = (b+c))
+      REAL                d
+      PARAMETER           (d = 4.0)
+      REAL                e
+      PARAMETER           (e = 5.4)
+      REAL                t
+      PARAMETER           (t = 25.0)
+C
+C====>End Module   %MAIN                  File t208o.f                  

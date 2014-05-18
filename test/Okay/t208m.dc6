@@ -1,0 +1,11 @@
+C====>Begin Module %MAIN                  File t208m.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             MAXDIM
+      PARAMETER           (MAXDIM = 100+200)
+      INTEGER             MAXARR
+      PARAMETER           (MAXARR = MAXDIM+100)
+C
+C====>End Module   %MAIN                  File t208m.f                  

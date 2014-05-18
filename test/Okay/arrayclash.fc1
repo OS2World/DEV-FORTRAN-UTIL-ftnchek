@@ -1,0 +1,32 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File arrayclash.f:
+     10 	end
+Warning near line 10 file arrayclash.f: Module contains no executable
+ statements
+
+Warning in module SUBA in file arrayclash.f: Variables declared but never
+ referenced:
+    W declared at line 9 file arrayclash.f (dummy argument)
+    Z declared at line 9 file arrayclash.f (dummy argument)
+
+Nonportable usage in file arrayclash.f: File contains tabs
+
+ 0 syntax errors detected in file arrayclash.f
+ 3 warnings issued in file arrayclash.f
+
+Warning: Subprogram SUBA argument arrayness mismatch at position 1:
+    Dummy arg W in module SUBA line 8 file arrayclash.f has 1 dim size 21
+    Actual arg A in module %MAIN line 2 file arrayclash.f has 2 dims size 21
+
+Warning: Subprogram SUBA argument arrayness mismatch at position 1:
+    Dummy arg W in module SUBA line 8 file arrayclash.f is array
+    Actual arg X in module %MAIN line 3 file arrayclash.f is scalar
+  and at position 2:
+    Dummy arg Z in module SUBA line 8 file arrayclash.f is scalar
+    Actual arg A in module %MAIN line 3 file arrayclash.f is whole array
+
+Warning: Subprogram SUBA argument arrayness mismatch at position 1:
+    Dummy arg W in module SUBA line 8 file arrayclash.f is whole array
+    Actual arg Y(1) in module %MAIN line 5 file arrayclash.f is array element

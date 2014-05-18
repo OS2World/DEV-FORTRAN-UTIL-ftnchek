@@ -1,0 +1,37 @@
+<HTML>
+<HEAD>
+<TITLE>Option: identifier-chars</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="help.html">-help</A><HR><P>
+<H2>Option: <font color=#FF0080>identifier-chars</font></H2><P>
+<A NAME="identifier-chars"></A><DT><B><A HREF="identifier-chars.html">-identifier-chars</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Define non-alphanumeric characters that may be used in identifiers.
+By default, <B>ftnchek</B> only accepts the dollar sign and underscore
+as non-alphanumeric characters in identifier names.  The characters in
+the <I>list</I> replace whatever set of accepted non-alphanumeric characters
+was previously in effect.  Thus, if dollar sign or underscore are not
+included in the list, they lose their status as acceptable characters.
+<P>
+
+This option is provided to enable <B>ftnchek</B> to handle source files
+containing non-standard identifer names that may be needed, for
+example, to access certain operating system services.  See the section
+on Limitations and Extensions for the treatment of identifiers
+containing these characters in implicit typing.
+<P>
+
+Using <B>-noidentifer-chars</B> turns off acceptance of
+non-alphanumeric characters entirely.
+<P>
+
+See also: <B><A HREF="source.html">-source</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="include.html">-include</A>
+</BODY></HTML>

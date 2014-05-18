@@ -1,0 +1,98 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File case.f:
+
+      1 
+      2       program testcase
+      3       integer ivar1
+      4       character*8 cvar1
+      5       character*1 cvar2
+      6       logical lvar1
+      7       real rvar1
+      8       ivar1 = 3
+      9       lvar1 = .true.
+     10 
+     11       select case (ivar1)
+              ^
+Warning near line 11 col 7: Nonstandard syntax
+     12           cvar1 = 'no path!'
+Error near line 12: No path to this statement
+     13       case (:-1)
+     14           cvar1 = 'path'
+     15       case (10/5 - 2)
+     16       case (1)
+     17       case (2:3, 5:7, 9)
+     18       case (10:)
+     19       case default
+     20           cvar2 = 'd'
+     21       end select
+     22 
+     23       select case (lvar1)
+              ^
+Warning near line 23 col 7: Nonstandard syntax
+     24       case (.false.)
+     25       case (.true.:)
+     26       case (:.false.)
+                     ^
+Error near line 26 col 14: ranges may not have type LOGICAL bounds
+     27       case (1.eq.0)
+     28       end select
+     29 
+     30       cvar1 = 'hamster'
+     31       select case (cvar1)
+              ^
+Warning near line 31 col 7: Nonstandard syntax
+     32       case (:'cat')
+     33       case ('dog':'fer' // 'ret')
+     34       case ('gerbil')
+     35       case ('horse':)
+     36       case default
+     37       end select
+     38 
+     39       select case (rvar1)
+              ^
+Warning near line 39 col 7: Nonstandard syntax
+                           ^
+Error near line 39 col 20: integer, character, or logical expression required
+     40       case (-1.0)
+                    ^
+Error near line 40 col 13: integer, character, or logical expression required
+     41       case (2:5.0)
+                      ^
+Error near line 41 col 15: integer, character, or logical expression required
+                      ^
+Error near line 41 col 15: range boundaries must have the same type
+     42       case (ivar1)
+                    ^
+Error near line 42 col 13: expression must evaluate to a compile-time constant
+     43       case (:.false.)
+                     ^
+Error near line 43 col 14: ranges may not have type LOGICAL bounds
+     44       end select
+     45       stop
+     46       end
+
+Module TESTCASE: prog
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+     CVAR1 char8        CVAR2 char         IVAR1 intg         LVAR1 logl   
+     RVAR1 real   
+
+
+
+Warning in module TESTCASE: Variables set but never used:
+    CVAR2 set at line 20
+
+Warning in module TESTCASE: Variables used before set
+    RVAR1 used at line 39; never set
+
+
+Warning in module TESTCASE: Names longer than 6 chars (nonstandard):
+    TESTCASE declared at line 2
+
+ 8 syntax errors detected in file case.f
+ 7 warnings issued in file case.f
+

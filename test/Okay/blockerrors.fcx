@@ -1,0 +1,186 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File blockerrors.f:
+
+      1       program blocks
+      2 ! program with various errors in balancing block structures
+      3         real x
+      4         integer n
+      5         x = bar(1.0)
+      6         if( x .gt. 0 ) then
+                ^
+"blockerrors.f", line 6 col 9: Warning: Construct name missing from IF
+ statement
+      7            call baz(x)
+      8            n = int(x)
+      9            select case (n)
+                   ^
+"blockerrors.f", line 9 col 12: Warning: Construct name missing from SELECT
+ statement
+     10               case(1)
+     11                  call baz(2.0)
+     12               case(2:10)
+     13                  call baz(3.0)
+     14               case(-1,11:100,300)
+     15                  call baz(4.0)
+     16               case default
+     17                  call baz(5.0)
+     18            end select
+     19         else
+     20            k = 0
+     21            loop1: do i=1,100
+     22               loop2:    do j=1,10
+     23                  write(*,*) i,j,i*j
+     24                  if( i .eq. 50 ) exit loopdedo   ! wrong construct name
+                                         ^
+"blockerrors.f", line 24 col 34: Error: construct name LOOPDEDO does not match
+ name of any enclosing DO construct
+     25                  k = k + j
+     26                  if( k .eq. 50) cycle loop2
+     27               end do loop2
+     28               write(*,*) k*i**2
+     29            enddo foop1
+                   ^
+"blockerrors.f", line 29 col 12: Error: Name FOOP1 does not match construct name 
+ LOOP1
+     30            case2: select case (n)
+     31               case(1) case2
+     32                  call baz(2.0)
+     33               case(2:10) caseZ
+                      ^
+"blockerrors.f", line 33 col 15: Error: Name CASEZ does not match construct name 
+ CASE2
+     34                  call baz(3.0)
+     35               case(-1,11:100,300) case2
+                      ^
+"blockerrors.f", line 35 col 15: Error: Name CASE2 does not match construct name 
+ CASEZ
+     36                  call baz(4.0)
+     37               case default case2
+     38 !  do-loops with shared terminator
+     39                  do 100 i=1,10
+                         ^
+"blockerrors.f", line 39 col 18: Warning: Construct name missing from DO
+ statement
+     40                     do 100 j=1,10
+                            ^
+"blockerrors.f", line 40 col 21: Warning: Construct name missing from DO
+ statement
+     41                        print *, i, j, i*j
+     42  100             continue
+                         ^
+"blockerrors.f", line 42 col 18: Warning: DO loop not terminated by ENDDO
+                         ^
+"blockerrors.f", line 42 col 18: Warning: Obsolescent feature: shared DO
+ terminator
+         ^
+"blockerrors.f", line 42 col 2: Warning: obsolescent feature: labeled statement
+     43                  do 200 i=1,10
+                         ^
+"blockerrors.f", line 43 col 18: Warning: Construct name missing from DO
+ statement
+     44                     do 250 j=1,10
+                            ^
+"blockerrors.f", line 44 col 21: Warning: Construct name missing from DO
+ statement
+     45                        print *, i, j, i*j
+     46  200                continue                  ! terminators out of order
+                            ^
+"blockerrors.f", line 46 col 21: Warning: DO loop not terminated by ENDDO
+                            ^
+"blockerrors.f", line 46 col 21: Error: Label 200 on DO loop terminator does not
+ match corresponding DO label 250 above
+         ^
+"blockerrors.f", line 46 col 2: Warning: obsolescent feature: labeled statement
+     47  250             end do
+                         ^
+"blockerrors.f", line 47 col 18: Error: Label 250 on DO loop terminator does not
+ match corresponding DO label 200 above
+         ^
+"blockerrors.f", line 47 col 2: Warning: obsolescent feature: labeled statement
+     48            end select case2
+     49         end if
+     50         if( x .eq. 0) exit                    ! no enclosing DO
+                              ^
+"blockerrors.f", line 50 col 23: Error: statement not within range of any DO
+ loop
+     51         else if( x .lt. 0 ) then              ! else has no matching then
+                ^
+"blockerrors.f", line 51 col 9: Error: ELSE statement does not match PROGRAM 
+ block it closes
+     52            print *, 'Hello'
+     53         end select                            ! should be end if
+                ^
+"blockerrors.f", line 53 col 9: Error: ENDSELECT statement does not match IF 
+ block it closes
+     54       end program blocks
+              ^
+"blockerrors.f", line 54 col 7: Error: no construct to end here
+
+
+     55       function bar(c)
+     56         real a, b, c ,d
+     57         read *, a
+     58 ! This block is from section 8.1.2.3 of the F90 standard, except for
+     59 ! removing space between some keywords
+     60         if ( a .gt. 0 ) then
+                ^
+"blockerrors.f", line 60 col 9: Warning: Construct name missing from IF
+ statement
+     61            b = c/a
+     62            if (b .gt. 0) then
+                   ^
+"blockerrors.f", line 62 col 12: Warning: Construct name missing from IF
+ statement
+     63               d = 1.0
+     64            endif
+     65         elseif (c .gt. 0) then
+     66            b = a/c
+     67            d = -1.0
+     68         else
+     69            b = abs (max (a, c))
+     70            d = 0
+     71         endif
+     72         bar = d*b
+     73       end subroutine
+              ^
+"blockerrors.f", line 73 col 7: Error: ENDSUBROUTINE statement does not match 
+ FUNCTION block it closes
+
+
+     74       subroutine baz(c)
+     75         real a, b, c ,d
+     76         read *, a
+     77 ! Same as above but with spaces restored and construct names added
+     78         first_if: if ( a .gt. 0 ) then
+     79            b = c/a
+     80            second_if: if (b .gt. 0) then
+     81               d = 1.0
+     82            end if second_if
+     83         else if (c .gt. 0) then firstif
+                ^
+"blockerrors.f", line 83 col 9: Error: Name FIRSTIF does not match construct 
+ name FIRST_IF
+     84            b = a/c
+     85            d = -1.0
+     86         else first_if
+                ^
+"blockerrors.f", line 86 col 9: Error: Name FIRST_IF does not match construct 
+ name FIRSTIF
+     87            b = abs (max (a, c))
+     88            d = 0
+     89         end if
+                ^
+"blockerrors.f", line 89 col 9: Error: Construct name FIRST_IF missing
+     90         print *, a, b, c, d
+     91       end subroutine bazz
+              ^
+"blockerrors.f", line 91 col 7: Error: Name BAZZ does not match subprogram name 
+ BAZ
+
+
+
+ 15 syntax errors detected in file blockerrors.f
+ 14 warnings issued in file blockerrors.f
+

@@ -1,0 +1,28 @@
+#!/bin/sh
+# ========================================================================
+# Extract COMMON block declarations from .dcl files output by ftnchek
+# 2.8.2 (or later), and provided that they are unique, output *.inc include
+# files, and modified .dcl files with extension .dcn containing INCLUDE
+# statements in place of COMMON block declarations.  In addition, write
+# a sorted list of include file dependencies on stdout for adding to a
+# Makefile.
+#
+# Usage:
+#	ftnchek -makedcls=1 *.f
+#	dcl2inc *.dcl
+#
+# You can then manually replace the old declarations in the *.f files
+# with the contents of each corresponding *.dcn file.  Any COMMON
+# blocks that are not identical to their first occurrence will be left
+# intact, instead of being replaced by INCLUDE statements, and a
+# warning will be issued for each of them.
+#
+# [11-Mar-1995]
+# ========================================================================
+#
+# To change, edit dcl2inc.in and rerun configure.
+# The following lines are edited by configure when it builds dcl2inc.
+prefix=/usr/local
+exec_prefix=${prefix}  
+libdir=${exec_prefix}/lib/ftnchek 
+exec gawk -f ${libdir}/dcl2inc.awk "$@"

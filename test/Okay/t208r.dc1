@@ -1,0 +1,15 @@
+C====>Begin Module FOO                    File t208r.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             MAXY
+      PARAMETER           (MAXY = 54321)
+      INTEGER             MAXZ
+      PARAMETER           (MAXZ = 12345+MAXY)
+C
+C     Argument variables
+C
+      INTEGER             MAXCOL,      MAXROW
+C
+C====>End Module   FOO                    File t208r.f                  

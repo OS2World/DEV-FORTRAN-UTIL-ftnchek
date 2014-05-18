@@ -1,0 +1,77 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File comtest.f:
+
+      1 	COMMON A,B,C/ABC/M,N
+      2 	COMMON X,I,J
+      3 	COMMON /ABC/Q,R,S
+                        ^
+"comtest.f", line 3 col 17: Possibly misleading appearance: Common block
+ declared in more than one statement
+      4 	END
+"comtest.f", near line 4: Warning: Module contains no executable statements
+
+Module %MAIN: prog
+
+Common blocks referenced:
+
+    %BLANK                ABC         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real*            B real*            C real*            I intg*  
+         J intg*            M intg*            N intg*            Q real*  
+         R real*            S real*            X real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+      5 	subroutine noname
+      6 	common x,y,i,a,b,n
+      7 	common /abc/ m,n
+                               ^
+"comtest.f", line 7 col 24: Error: Variable cannot be in common twice
+      8 	end
+"comtest.f", near line 8: Warning: Module contains no executable statements
+
+Module NONAME: subr
+
+Common blocks referenced:
+
+    %BLANK                ABC         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real*            B real*            I intg*            M intg*  
+         N intg*            X real*            Y real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+
+"comtest.f": Nonportable usage: File contains tabs
+
+ 1 syntax error detected in file comtest.f
+ 6 warnings issued in file comtest.f
+
+"comtest.f", line 3: Warning: Common block ABC unused anywhere
+
+"comtest.f", line 6: Warning: Common block %BLANK unused anywhere
+
+"comtest.f", line 3: Warning: Common block ABC varying length:
+"comtest.f", line 3:    Has 5 variables in module %MAIN
+"comtest.f", line 7:    Has 2 variables in module NONAME
+
+"comtest.f", line 2: Warning: Common block %BLANK data type mismatch at
+ position 3:
+"comtest.f", line 2:    Variable C in module %MAIN is type real
+"comtest.f", line 6:    Variable I in module NONAME is type intg
+"comtest.f", line 2:  and at position 5:
+"comtest.f", line 2:    Variable I in module %MAIN is type intg
+"comtest.f", line 6:    Variable B in module NONAME is type real
+
+"comtest.f", line 5: Warning: Subprogram NONAME never invoked
+"comtest.f", line 5:    Defined in module NONAME

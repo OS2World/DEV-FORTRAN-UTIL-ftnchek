@@ -1,0 +1,73 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File comcmp.f:
+     33       c7 = c1//c8
+                 ^
+Warning near line 33 col 10 file comcmp.f: char*9 expr C1//C8 truncated to 
+ char*7 C7
+
+ 0 syntax errors detected in file comcmp.f
+ 1 warning issued in file comcmp.f
+
+Warning: Common block CHARS Elements used but never set:
+    C8
+
+Warning: Common block CHARS Elements set but never used:
+    C7 C1
+
+Warning: Common block INTS unused anywhere
+
+Warning: Common block BK1 unused anywhere
+
+Warning: Common block CHARS varying length:
+    Has 3 variables in module %MAIN line 3 file comcmp.f
+    Has 2 variables in module BAR line 27 file comcmp.f
+
+Warning: Common block CHARS data type mismatch at position 1:
+    Variable C1 in module %MAIN line 3 file comcmp.f is type char*1
+    Variable C7 in module BAR line 27 file comcmp.f is type char*7
+
+Warning: Common block CHARS data type mismatch at position 1:
+    Variable C1 in module %MAIN line 3 file comcmp.f is type char*1
+    Variable C7 in module FOO line 15 file comcmp.f is type char*7
+  and at position 3:
+    Variable C7 in module %MAIN line 3 file comcmp.f is type char*7
+    Variable C1 in module FOO line 15 file comcmp.f is type char*1
+
+Warning: Common block INTS varying length:
+    Has 3 variables in module %MAIN line 7 file comcmp.f
+    Has 2 variables in module BAR line 30 file comcmp.f
+
+Warning: Common block INTS data type mismatch at position 2:
+    Variable IFOUR in module %MAIN line 7 file comcmp.f is type intg*4
+    Variable ITWO in module FOO line 19 file comcmp.f is type intg*2
+  and at position 3:
+    Variable ITWO in module %MAIN line 7 file comcmp.f is type intg*2
+    Variable IFOUR in module FOO line 19 file comcmp.f is type intg*4
+
+Warning: Common block BK1 varying length:
+    Has 7 variables in module %MAIN line 8 file comcmp.f
+    Has 5 variables in module BAR line 31 file comcmp.f
+
+Warning: Common block BK1 data type mismatch at position 2:
+    Variable B in module %MAIN line 8 file comcmp.f is type real
+    Variable J in module BAR line 31 file comcmp.f is type intg
+
+Warning: Common block BK1 array dimen/size mismatch at position 1:
+    Variable A in module %MAIN line 8 file comcmp.f has 0 dimensions
+    Variable A in module BAR line 31 file comcmp.f has 1 dimension
+  and at position 1:
+    Variable A in module %MAIN line 8 file comcmp.f has size 1
+    Variable A in module BAR line 31 file comcmp.f has size 3
+
+Warning: Common block BK1 data type mismatch at position 1:
+    Variable A in module %MAIN line 8 file comcmp.f is type real
+    Variable I in module FOO line 20 file comcmp.f is type intg
+  and at position 2:
+    Variable B in module %MAIN line 8 file comcmp.f is type real
+    Variable J in module FOO line 20 file comcmp.f is type intg
+  and at position 3:
+    Variable C in module %MAIN line 8 file comcmp.f is type real
+    Variable K in module FOO line 20 file comcmp.f is type intg
+ etc...

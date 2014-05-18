@@ -1,0 +1,75 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File labeltest.f:
+
+      1       read(unit=5,fmt=1900) x
+      2  1900 format(f10.0)
+      3       if(x) 100,250,89
+      4  89   assign 100 to icky
+      5       goto icky
+      6  100  write(6,*) 'hello'
+      7       do 123 i=1,123
+      8          read(fmt=1900,unit=5,end=200,err=909) x
+      9  123  continue
+     10  302  write(*,909) x
+     11  909  format(1x,f10.3)
+     12  200  continue
+     13       print 9, x
+     14  9    format(' Just checking')
+     15       read 10, x
+     16       type 11, sqrt(2.0)
+              ^
+"labeltest.f", line 16 col 7: Warning: Nonstandard syntax
+     17  11   format(' The sqrt of 2 is ', f15.5)
+     18       write(*,*) 'I''m outta here'
+     19       end
+
+Module %MAIN: prog
+
+External subprograms referenced:
+
+      SQRT: intrns 
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         I intg*         ICKY intg*            X real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             5          SEQ  FMTD READ          1      8 
+             6          SEQ  FMTD WRITE         6 
+           *            SEQ  FMTD PRINT        13 
+           *            SEQ  FMTD READ         15 
+           *            SEQ  FMTD TYPE         16 
+           *            SEQ  FMTD WRITE        10     18 
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType    Label   Line  StmtType
+      <9>     14    format     <11>     17    format
+     <89>      4      exec    <100>      6      exec    <123>      9      exec
+    <200>     12      exec    <302>     10      exec
+    <909>     11    format   <1900>      2    format
+
+
+"labeltest.f", line 8: Error in module %MAIN: Goto refers to a non-executable
+ stmt
+"labeltest.f", line 8:     <909> referenced
+
+"labeltest.f", line 15: Error in module %MAIN: Labels referenced but not
+ defined:
+"labeltest.f", line 15:     <10> referenced
+"labeltest.f", line 3:     <250> referenced
+
+"labeltest.f", line 10: Warning in module %MAIN: Labels defined but not used:
+"labeltest.f", line 10:     <302> defined
+
+ 2 syntax errors detected in file labeltest.f
+ 3 warnings issued in file labeltest.f
+

@@ -1,0 +1,20 @@
+<HTML>
+<HEAD><TITLE>Source t208r.f</TITLE></HEAD>
+<BODY>
+<a name="FOO"><h3>SUBROUTINE FOO ( ARGCHR, MAXROW, MAXCOL )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>CHARACTER*(*)      ARGCHR
+INTEGER            MAXCOL,     MAXROW
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208r.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>INTEGER            MAXY               (MAXY = 54321)
+INTEGER            MAXTOK             (MAXTOK = 10)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

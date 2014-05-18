@@ -1,0 +1,47 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File sequence.f:
+
+      1 C tests message about statement out of order.
+      2       data x /1.0/
+      3       integer a,b,c
+"sequence.f", near line 3: Warning: Nonstandard syntax: Statement out of
+ order.
+      4       common a,b,c
+      5       sqr(y)=y*y
+      6       double precision d
+"sequence.f", near line 6: Warning: Nonstandard syntax: Statement out of
+ order.
+      7       read(*,*) a,b,c,d
+      8       write(*,*) a,b,c,d,sqr(x)
+      9       end
+
+Module %MAIN: prog
+
+Statement functions defined:
+
+       SQR: real*  
+
+Common blocks referenced:
+
+    %BLANK         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A intg             B intg             C intg             D dble   
+         X real*            Y real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD READ          7 
+           *            SEQ  FMTD WRITE         8 
+
+ 0 syntax errors detected in file sequence.f
+ 3 warnings issued in file sequence.f
+

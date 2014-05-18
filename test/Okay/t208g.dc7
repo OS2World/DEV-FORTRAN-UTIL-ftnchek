@@ -1,0 +1,14 @@
+*====>Begin Module FOO                    File t208g.f                  
+*---->Makedcls Options: All variables                                   
+*
+*     External functions
+*
+      EXTERNAL            I1MACH
+*
+      INTEGER             I1MACH
+*
+*     Local variables
+*
+      INTEGER             N
+*
+*====>End Module   FOO                    File t208g.f                  

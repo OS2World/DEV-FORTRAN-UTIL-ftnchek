@@ -1,0 +1,20 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File mixed-equiv.f:
+
+      1       real *8 x
+      2       double precision y
+      3       equivalence( x,y)
+      4       real r
+      5       equivalence (i,r)
+      6       x = 1.0
+      7       write(*,*) y
+      8       r = 0.0
+      9       write(*,*) i
+     10       end
+
+
+
+ 0 syntax errors detected in file mixed-equiv.f
+

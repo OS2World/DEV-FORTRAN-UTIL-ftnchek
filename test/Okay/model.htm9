@@ -1,0 +1,62 @@
+<HTML>
+<HEAD><TITLE>Source model.f90</TITLE></HEAD>
+<BODY>
+<a name="COMPAV"><h3>REAL FUNCTION COMPAV ( SCORE, COUNT )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER            COUNT,      SCORE
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Description</b></td></tr>
+<tr><td><pre>AUTHORS: MIKE MYERS AND LUCIA SPAGNUOLO 
+DATE:    MAY 8, 1989 
+Variables: 
+        SCORE -> an array of test scores 
+        SUM ->   sum of the test scores 
+        COUNT -> counter of scores read in 
+        I ->     loop counter</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>model.f90</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Local Variables</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER           +I,         +SUM
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="AVENUM"><h3>PROGRAM AVENUM ( )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Description</b></td></tr>
+<tr><td><pre>                MAIN PROGRAM 
+ 
+AUTHOR:   LOIS BIGBIE 
+DATE:     MAY 15, 1990 
+ 
+Variables: 
+        MAXNOS -> maximum number of input values 
+        NUMS    -> an array of numbers 
+        COUNT   -> exact number of input values 
+        AVG     -> average returned by COMPAV 
+        I       -> loop counter</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>model.f90</td></tr>
+<tr><td></td></tr>
+</table>
+
+<table><tr><td><b>I/O Operations:</b></td></tr>
+<tr><td><pre>Unit ID  Unit No       Access  Form   Operation
+               5          SEQ  FMTD          R   
+
+<small>Operation codes A=rewind,B=backspace,C=close,E=endfile
+                I=inquire,O=open,R=read,W=write</small></pre></td></tr></table>
+<table><tr><td align="left"><b>External Functions and Subroutines Called</b><br></td></tr>
+<tr><td><pre>REAL               COMPAV
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>INTEGER            MAXNOS             (MAXNOS = 5)
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Local Variables</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER           +COUNT,     +I
+REAL              +AVG,       +NUMS
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

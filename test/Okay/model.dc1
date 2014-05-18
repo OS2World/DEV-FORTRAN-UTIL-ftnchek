@@ -1,0 +1,17 @@
+!====>Begin Module COMPAV                 File model.f90                
+!---->Makedcls Options: Undeclared variables                            
+!
+!     Local variables
+!
+  INTEGER             I
+!
+!====>End Module   COMPAV                 File model.f90                
+!====>Begin Module AVENUM                 File model.f90                
+!---->Makedcls Options: Undeclared variables                            
+!
+!     Parameter variables
+!
+  INTEGER             MAXNOS
+  PARAMETER           (MAXNOS = 5)
+!
+!====>End Module   AVENUM                 File model.f90                

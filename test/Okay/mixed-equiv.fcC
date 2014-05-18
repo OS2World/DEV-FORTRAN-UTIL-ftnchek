@@ -1,0 +1,19 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File mixed-equiv.f:
+
+Warning in module %MAIN in file mixed-equiv.f: Mixed sizes equivalenced (not
+ portable):
+    X declared at line 1 file mixed-equiv.f with type real*8
+    Y declared at line 2 file mixed-equiv.f with type dble
+
+Warning in module %MAIN in file mixed-equiv.f: Mixed types equivalenced (not
+ portable):
+    I first occurrence at line 5 file mixed-equiv.f with type intg (implicitly
+ typed)
+    R declared at line 4 file mixed-equiv.f with type real
+
+ 0 syntax errors detected in file mixed-equiv.f
+ 2 warnings issued in file mixed-equiv.f
+

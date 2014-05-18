@@ -1,0 +1,306 @@
+<HTML>
+<HEAD>
+<TITLE>Option: f77</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="extern.html">-extern</A><HR><P>
+<H2>Option: <font color=#FF0080>f77</font></H2><P>
+<A NAME="f77"></A><DT><B><A HREF="f77.html">-f77</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Use this setting to catch language extensions which violate
+the Fortran 77 Standard.  Such extensions may cause your program not
+to be portable.  Examples include the use of underscores in variable
+names; variable names longer than six characters; statement lines
+longer than 72 characters; and nonstandard statements such as the
+DO ... ENDDO structure.  <B>ftnchek</B> does not report on
+the use of lowercase letters.
+By default, all warnings are turned off.
+<P>
+
+This setting provides detailed control over the warnings about
+supported extensions to the Fortran 77 Standard.  The <I>list</I>
+consists of keywords separated by commas or colons.
+There are three special keywords: <B>all</B> to turn on all the
+warnings about nonstandard extensions, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="f77.html">-f77</A></B> is equivalent to
+<B><A HREF="f77.html">-f77</A>=all</B>, and <B>-nof77</B> is equivalent to
+<B><A HREF="f77.html">-f77</A>=none</B>.
+The warning keywords with their meanings are as follows.
+(Further details about the extensions themselves are given below in the
+section on Extensions.)
+<DL COMPACT>
+<DT><B>accept-type</B>:
+
+<DD>
+ACCEPT and TYPE I/O statements.
+<DT><B>array-bounds</B>:
+
+<DD>
+Expressions defining array bounds that contain array elements or function
+references.
+<DT><B>assignment-stmt</B>:
+
+<DD>
+Assignment statements involving arrays.  In Fortran 90, an array can
+be assigned to another array of compatible shape, or a scalar can be
+assigned to an array.  Neither of these assignments is permitted in
+Fortran 77.
+<DT><DD>
+A related warning occurs when an array is assigned to a
+scalar.  Since this is illegal also in Fortran 90, it is always warned
+about regardless of the <B><A HREF="f77.html">-f77</A></B> setting (unless all checking is
+turned off with the <B>-nocheck</B> flag).
+<DT><B>attribute-based-decl</B>:
+
+<DD>
+Type declarations in the new Fortran 90 attribute-based style.
+This style of declaration is distinguished by the use of
+a double colon (::) between the list of attributes and the list of
+declared variables.
+This option also controls warnings for use of Fortran 90 length or kind
+specifiers in type declarations.  (Although these specifiers can be
+used in non-attribute-based declarations, they are controlled by this
+option to avoid proliferation of <B><A HREF="f77.html">-f77</A></B> options.)
+<DT><B>automatic-array</B>:
+
+<DD>
+Local (not dummy) arrays which have variable size.  These would
+correspond to arrays whose storage would have to be dynamically allocated at
+run time.
+<DT><B>backslash</B>:
+
+<DD>
+Unix backslash escape in strings.  This warning will be given only if
+the <B><A HREF="source.html">-source</A>=unix-backslash</B> setting is specified to cause
+the escape interpretation of backslash..
+<DT><B>byte</B>:
+
+<DD>
+BYTE data type declaration.
+<DT><B>case-construct</B>:
+
+<DD>
+The SELECT CASE construct.
+<DT><B>common-subprog-name</B>:
+
+<DD>
+Common block and subprogram having the same name.
+<DT><B>construct-name</B>:
+
+<DD>
+Use of a construct-name to label a control statement.
+<DT><B>continuation</B>:
+
+<DD>
+More than 19 successive continuation lines.
+<DT><B>cpp</B>:
+
+<DD>
+Unix C preprocessor directives in the source code.
+<DT><B>cycle-exit</B>:
+
+<DD>
+The CYCLE and EXIT statements.
+<DT><B>d-comment</B>:
+
+<DD>
+Debugging comments starting with D in the source code.
+<DT><B>dec-tab</B>:
+
+<DD>
+DEC Fortran style tab-formatted source code.  This warning will be
+given only if the <B><A HREF="source.html">-source</A>=dec-tab</B> setting is specified to cause
+interpretation of tabs in this style.
+<DT><B>do-enddo</B>:
+
+<DD>
+DO loop extensions: terminal statement label omitted, END DO,
+and WHILE.
+<DT><B>double-complex</B>:
+
+<DD>
+Double precision complex datatype.
+<DT><B>format-dollarsign</B>:
+
+<DD>
+Dollar sign control code in FORMAT statements.
+<DT><B>format-edit-descr</B>:
+
+<DD>
+Nonstandard edit descriptors in FORMAT statements.
+<DT><B>function-noparen</B>:
+
+<DD>
+Function definition without parentheses.
+<DT><B>implicit-none</B>:
+
+<DD>
+IMPLICIT NONE statement.
+<DT><B>include</B>:
+
+<DD>
+INCLUDE statement.
+<DT><B>inline-comment</B>:
+
+<DD>
+Inline comments starting with an exclamation point.
+<DT><B>internal-list-io</B>:
+
+<DD>
+List-directed I/O to or from an internal file.
+<DT><B>intrinsic</B>:
+
+<DD>
+Nonstandard intrinsic functions.
+<DT><B>io-keywords</B>
+
+<DD>
+Nonstandard keywords used in I/O statements.  These fall into three
+groups.  The first group includes keywords that are accepted in
+Fortran 90:
+<CENTER><TABLE>
+<TR VALIGN=top><TD>ACTION</TD><TD>PAD</TD><TD>READWRITE<BR></TD></TR>
+<TR VALIGN=top><TD>ADVANCE</TD><TD>POSITION</TD><TD>SIZE<BR></TD></TR>
+<TR VALIGN=top><TD>DELIM</TD><TD>READ</TD><TD>WRITE<BR></TD></TR>
+<TR VALIGN=top><TD>EOR</TD><TD></TD><TD><BR></TD></TR>
+</TABLE></CENTER>
+
+The second group comprises the following VMS Fortran keywords:
+<CENTER><TABLE>
+<TR VALIGN=top><TD>BLOCKSIZE</TD><TD>EXTENDSIZE</TD><TD>READONLY<BR></TD></TR>
+<TR VALIGN=top><TD>BUFFERCOUNT</TD><TD>INITIALSIZE</TD><TD>RECORDSIZE<BR></TD></TR>
+<TR VALIGN=top><TD>CARRIAGECONTROL</TD><TD>MAXREC</TD><TD>RECORDTYPE<BR></TD></TR>
+<TR VALIGN=top><TD>DEFAULTFILE</TD><TD>NAME (in OPEN)</TD><TD>SHARED<BR></TD></TR>
+<TR VALIGN=top><TD>DISP</TD><TD>NOSPANBLOCK</TD><TD>TYPE<BR></TD></TR>
+<TR VALIGN=top><TD>DISPOSE</TD><TD>ORGANIZATION</TD><TD><BR></TD></TR>
+</TABLE></CENTER>
+
+(The keyword NAME is standard only in the INQUIRE
+statement.)
+The third group consists of the following IBM/MVS keyword:
+<CENTER><TABLE>
+<TR VALIGN=top><TD>NUM</TD><TD></TD><TD><BR></TD></TR>
+</TABLE></CENTER>
+
+<DT><B>long-line</B>:
+
+<DD>
+Statements with meaningful code past 72 columns.  This warning is
+given only if the <B><A HREF="columns.html">-columns</A></B> setting has been used to increase
+the statement field width.
+<DT><B>long-name</B>:
+
+<DD>
+Identifiers over 6 characters long.
+<DT><B>mixed-common</B>:
+
+<DD>
+Mixed character and noncharacter data in COMMON block.
+<DT><B>mixed-expr</B>:
+
+<DD>
+Nonstandard type combinations in expressions, for example DOUBLE
+PRECISION with COMPLEX, assigning hollerith to integer,
+logical operations on integers.
+<DT><B>name-dollarsign</B>:
+
+<DD>
+Dollar sign used as a character in identifiers.
+<DT><B>name-underscore</B>:
+
+<DD>
+Underscore used as a character in identifiers.
+<DT><B>namelist</B>:
+
+<DD>
+NAMELIST statement.
+<DT><B>param-implicit-type</B>:
+
+<DD>
+Implicit typing of a parameter by the data type of the value assigned.
+This warning can only occur if implicit parameter typing has been
+turned on by the <B><A HREF="source.html">-source</A>=param-implicit-type</B> option, or
+if the PARAMETER statement is of the nonstandard form without
+parentheses.  If this option is turned on,
+then any instances where implicit parameter typing occurs will be
+warned about.
+If you want to be warned only in those instances
+where the implicit data type differs from the default type, use
+<B><A HREF="portability.html">-portability</A>=param-implicit-type</B> instead.  According to the Fortran
+77 standard, the data type of a parameter is given by the same rules
+as for a variable, and if necessary a type conversion is done when the
+value is assigned.
+<DT><B>param-intrinsic</B>:
+
+<DD>
+Intrinsic function or exponentiation by a real used to define the value
+of a PARAMETER definition.
+<DT><B>param-noparen</B>:
+
+<DD>
+PARAMETER statement without parentheses.  The user should be
+aware that the semantics of this form of the statement differs from
+that of the standard form: in this form, the parameter takes its data
+type from the value assigned, rather than having its default data type
+based on the first letter of the parameter name.  (This form of the
+PARAMETER statement was introduced by DEC before the Fortran 77
+standard was defined, and should be avoided.)
+<DT><B>pointer</B>:
+
+<DD>
+``Cray pointer'' syntax.
+<DT><B>quad-constant</B>:
+
+<DD>
+Quad precision real constants, e.g. of the form 1.23Q4.
+<DT><B>quotemark</B>:
+
+<DD>
+Strings delimited by quote marks rather than apostrophes.
+<DT><B>relops</B>:
+
+<DD>
+Relational (comparison) operators composed of punctuation, namely: &lt;
+&lt;= == /= &gt; &gt;=.
+<DT><B>semicolon</B>:
+
+<DD>
+Semicolon used as statement separator.
+<DT><B>statement-order</B>
+
+<DD>
+Statements out of the sequence mandated by the Standard.  The allowed
+sequence is illustrated in Table 1 in the section on Interpreting the
+Output.
+<DT><B>typeless-constant</B>:
+
+<DD>
+Typeless constants, for example Z'19AF'.
+<DT><B>type-size</B>:
+
+<DD>
+Type declarations specifying a size, for example REAL*8.
+<DT><B>variable-format</B>:
+
+<DD>
+Variable repeat specification or field size in FORMAT.  These
+are of the form &lt; <I>expr</I> &gt;.
+<DT><B>vms-io</B>:
+
+<DD>
+Obsolete.  Now has the same meaning as the <B>io-keywords</B> keyword.
+</DL>
+<P>
+
+See also: <B><A HREF="f90.html">-f90</A></B>, <B><A HREF="f95.html">-f95</A></B>, <B><A HREF="portability.html">-portability</A></B>,
+<B><A HREF="pretty.html">-pretty</A></B>, <B><A HREF="style.html">-style</A></B>, <B><A HREF="wordsize.html">-wordsize</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="f90.html">-f90</A>
+</BODY></HTML>

@@ -1,0 +1,27 @@
+*====>Begin Module %MAIN                  File t208c.f                  
+*---->Makedcls Options: All variables                                   
+*
+*     Local variables
+*
+      CHARACTER           C,           CNL
+      CHARACTER*144       S,           T,           T1,          T2
+      CHARACTER*144       T3,          T4,          T5,          T6
+      CHARACTER*144       T7
+      CHARACTER*72        U
+*
+      COMPLEX*12          Y
+      COMPLEX             YNL
+*
+      INTEGER*2           SHORT
+      INTEGER             SHORTNL
+*
+      LOGICAL             LOGNL
+      LOGICAL*1           LOGVAR
+      LOGICAL*2           LOGVAR2
+*
+      REAL*16             X16
+      REAL*6              X6
+      REAL*8              X8
+      REAL                XNL
+*
+*====>End Module   %MAIN                  File t208c.f                  

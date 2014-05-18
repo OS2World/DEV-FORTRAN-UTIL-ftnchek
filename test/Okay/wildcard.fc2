@@ -1,0 +1,29 @@
+
+Usage Warning Options:
+  arg-alias [yes]: scalar argument same as another is modified
+  arg-array-alias [yes]: argument in same array as another is modified
+  arg-common-alias [yes]: scalar argument same as common variable, either is modified
+  arg-common-array-alias [yes]: array argument same as common variable, either is modified
+  arg-const-modified [yes]: constant or expression argument is modified
+  arg-unused [yes]: dummy argument declared but not used
+  com-block-unused [yes]: whole common block declared but not used
+  com-block-volatile [yes]: common block may lose definition if volatile
+  com-var-set-unused [no]: common variable set but not used
+  com-var-uninitialized [no]: common variable used but not set
+  com-var-unused [no]: common variable declared but not used
+  do-index-modified [yes]: active DO index variable modified
+  ext-multiply-defined [yes]: external multiply defined
+  ext-declared-only [yes]: name declared EXTERNAL but not defined or used
+  ext-undefined [yes]: external declared or used but not defined (= -external)
+  ext-unused [yes]: external defined but not used
+  label-undefined [yes]: label used but undefined
+  label-unused [yes]: label defined but unused
+  var-set-unused [no]: local variable set but not used
+  var-uninitialized [no]: local variable used before set
+  var-unused [no]: local variable declared but not used
+Prefix option name with no- to turn off option
+If no options given, equivalent to -usage=all
+Special keywords:
+  help: Print this list
+  all: Set all options
+  none: Clear all options

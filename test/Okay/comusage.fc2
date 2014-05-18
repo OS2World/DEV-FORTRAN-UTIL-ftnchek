@@ -1,0 +1,22 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File comusage.f:
+ 0 syntax errors detected in file comusage.f
+Warning: Common block %BLANK No elements are set, but some are used.
+
+Warning: Common block ZAP unused anywhere
+
+Warning: Common block INP varying length:
+    Has 4 words in module INPUT line 10 file comusage.f
+    Has 3 words in module COMP line 20 file comusage.f
+
+Warning: Common block LAST data type mismatch
+    Word 1 is type real in module INPUT line 12 file comusage.f
+    Word 1 is type intg in module OUTPUT line 32 file comusage.f
+  and
+    Word 2 is type real in module INPUT line 12 file comusage.f
+    Word 2 is type intg in module OUTPUT line 32 file comusage.f
+  and
+    Word 3 is type real in module INPUT line 12 file comusage.f
+    Word 3 is type intg in module OUTPUT line 32 file comusage.f

@@ -1,0 +1,13 @@
+C====>Begin Module %MAIN                  File t208v.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             MAXTOK
+      PARAMETER           (MAXTOK = 10)
+C
+C     Local variables
+C
+      CHARACTER*(MAXTOK)  TOKLST
+C
+C====>End Module   %MAIN                  File t208v.f                  

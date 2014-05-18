@@ -1,0 +1,63 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File relops.f:
+
+      1 C  Test program for acceptance of new style relational operators.  These
+      2 C  are F90 standard, not F77.
+      3       real x, y
+      4 
+      5       write(*,*) 'Enter two numbers'
+      6       read(*,*) x,y
+      7 
+      8       if( x > y ) then
+                    ^
+"relops.f", line 8 col 13: Warning: Nonstandard syntax for relational operator
+      9          write(*,*) x,' is greater than',y
+     10       endif
+     11       if( x == y ) then
+                    ^
+"relops.f", line 11 col 13: Warning: Nonstandard syntax for relational operator
+     12          write(*,*) x, ' is equal to ',y
+     13       endif
+     14       if( x /= y ) then
+                    ^
+"relops.f", line 14 col 13: Warning: Nonstandard syntax for relational operator
+     15          write(*,*) x, ' is not equal to',y
+     16       endif
+     17       if( x >= y ) then
+                    ^
+"relops.f", line 17 col 13: Warning: Nonstandard syntax for relational operator
+     18          write(*,*) x,' is greater or equal to than',y
+     19       endif
+     20       if( x < y ) then
+                    ^
+"relops.f", line 20 col 13: Warning: Nonstandard syntax for relational operator
+     21          write(*,*) x, ' is less than ',y
+     22       endif
+     23       if( x <= y ) then
+                    ^
+"relops.f", line 23 col 13: Warning: Nonstandard syntax for relational operator
+     24          write(*,*) x, ' is less than or equal to ',y
+     25       endif
+     26       end
+
+Module %MAIN: prog
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         X real             Y real   
+
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD READ          6 
+           *            SEQ  FMTD WRITE         5      9     12     15     18 
+                                               21     24 
+
+ 0 syntax errors detected in file relops.f
+ 6 warnings issued in file relops.f
+

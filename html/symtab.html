@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<TITLE>Option: symtab</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="style.html">-style</A><HR><P>
+<H2>Option: <font color=#FF0080>symtab</font></H2><P>
+<A NAME="symtab"></A><DT><B><A HREF="symtab.html">-symtab</A></B>
+
+<DD>
+<DL COMPACT><DT><DD>
+A symbol table will be printed out for each module,
+listing all identifiers mentioned in the module.  This table gives the
+name of each variable, its datatype, and the number of dimensions for
+arrays.  An asterisk (*) indicates that the variable has been
+implicitly typed, rather than being named in an explicit type
+declaration statement.  The table also lists all subprograms invoked
+by the module, all COMMON blocks declared, etc.  Default = no.
+<P>
+
+Also, for each module, a label table will be printed.  The table lists
+each label defined in the module; the line on which said statement
+label is defined; and the statement type (executable, format, or
+specification).  The labels are listed in sequential order.
+<P>
+
+Also printed is a table describing the I/O units used by the module,
+together with information about how they are used: what operations
+are performed, whether the access is sequential or direct, and whether
+the I/O is formatted or unformatted.
+<P>
+
+See also: <B><A HREF="calltree.html">-calltree</A></B>, <B><A HREF="crossref.html">-crossref</A></B>, <B><A HREF="list.html">-list</A></B>,
+<B><A HREF="reference.html">-reference</A></B>, <B><A HREF="sort.html">-sort</A></B>, <B><A HREF="vcg.html">-vcg</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="truncation.html">-truncation</A>
+</BODY></HTML>

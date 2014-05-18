@@ -1,0 +1,130 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File arg-alias.f:
+
+      1       INTEGER LIST(100)
+      2       EQUIVALENCE (E,B)
+      3       EQUIVALENCE (E,C)
+      4       EQUIVALENCE (A,C)
+      5       A = 1.0
+      6       CALL FOO(A,D,B,C)
+      7       CALL FOO(A,B,C,A)
+      8       CALL FOO(W,X,Y,Z)
+      9       DO 10 I = 1,100
+     10          LIST(I) = I
+     11  10   CONTINUE
+     12       DO 30 I = 1,100
+     13          DO 20 J = 1,I
+     14             CALL SWAP(LIST(I),LIST(J))
+     15  20      CONTINUE
+     16  30   CONTINUE
+     17       END
+
+Module %MAIN: prog
+
+External subprograms referenced:
+
+       FOO: subr         SWAP: subr   
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real*            B real*            C real*            D real*  
+         E real*            I intg*            J intg*         LIST intg  1
+         W real*            X real*            Y real*            Z real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType    Label   Line  StmtType
+     <10>     11      exec     <20>     15      exec     <30>     16      exec
+
+     18       SUBROUTINE FOO(A,B,C,D)
+     19       CALL SWAP(A,B)
+     20       B = C
+     21       C = D
+     22       D = A
+     23       END
+
+Module FOO: subr
+
+External subprograms referenced:
+
+      SWAP: subr   
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real*            B real*            C real*            D real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+     24       SUBROUTINE SWAP(X,Y)
+     25       INTEGER X,Y
+     26       INTEGER TEMP
+     27       TEMP = X
+     28       X = Y
+     29       Y = TEMP
+     30       END
+
+Module SWAP: subr
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+      TEMP intg             X intg             Y intg   
+
+
+
+
+ 0 syntax errors detected in file arg-alias.f
+ 2 warnings issued in file arg-alias.f
+
+Warning: Subprogram FOO argument usage mismatch at position 1:
+    Dummy arg A in module FOO line 18 file arg-alias.f may be modified
+    Actual arg A in module %MAIN line 6 file arg-alias.f same as arg 4: C
+  and at position 3:
+    Dummy arg C in module FOO line 18 file arg-alias.f is modified
+    Actual arg B in module %MAIN line 6 file arg-alias.f same as arg 1: A
+  and at position 4:
+    Dummy arg D in module FOO line 18 file arg-alias.f is modified
+    Actual arg C in module %MAIN line 6 file arg-alias.f same as arg 3: B
+
+Warning: Subprogram FOO argument usage mismatch at position 1:
+    Dummy arg A in module FOO line 18 file arg-alias.f may be modified
+    Actual arg A in module %MAIN line 7 file arg-alias.f same as arg 4: A
+  and at position 2:
+    Dummy arg B in module FOO line 18 file arg-alias.f is modified
+    Actual arg B in module %MAIN line 7 file arg-alias.f same as arg 1: A
+  and at position 3:
+    Dummy arg C in module FOO line 18 file arg-alias.f is modified
+    Actual arg C in module %MAIN line 7 file arg-alias.f same as arg 2: B
+ etc...
+
+Warning: Subprogram FOO argument usage mismatch at position 3:
+    Dummy arg C in module FOO line 18 file arg-alias.f is used before set
+    Actual arg Y in module %MAIN line 8 file arg-alias.f is not set
+  and at position 4:
+    Dummy arg D in module FOO line 18 file arg-alias.f is used before set
+    Actual arg Z in module %MAIN line 8 file arg-alias.f is not set
+
+Warning: Subprogram SWAP argument data type mismatch at position 1:
+    Dummy arg X in module SWAP line 24 file arg-alias.f is type intg
+    Actual arg A in module FOO line 19 file arg-alias.f is type real
+  and at position 2:
+    Dummy arg Y in module SWAP line 24 file arg-alias.f is type intg
+    Actual arg B in module FOO line 19 file arg-alias.f is type real
+
+Warning: Subprogram SWAP argument usage mismatch at position 1:
+    Dummy arg X in module SWAP line 24 file arg-alias.f is modified
+    Actual arg LIST(I) in module %MAIN line 14 file arg-alias.f may be same as
+ arg 2: LIST(J)
+  and at position 2:
+    Dummy arg Y in module SWAP line 24 file arg-alias.f is modified
+    Actual arg LIST(J) in module %MAIN line 14 file arg-alias.f may be same as
+ arg 1: LIST(I)

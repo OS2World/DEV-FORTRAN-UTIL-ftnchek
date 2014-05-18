@@ -1,0 +1,71 @@
+C====>Begin Module %MAIN                  File t208e.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     Local variables
+C
+      character           C
+      character*81        LINE
+C
+      complex             Z,           ZZ
+C
+      double complex      ZZZ,         ZZZZ
+C
+      double precision    D(10,20,30), E(40,50),    F(60)
+C
+      integer             I,           J,           K,           M
+C
+      logical             LOGVAR
+C
+      real                R,           S(70,80)
+C
+C====>End Module   %MAIN                  File t208e.f                  
+C====>Begin Module SUB                    File t208e.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     Local variables
+C
+      real                X,           Y,           Z
+C
+C     Common variables
+C
+      real                A,           B,           C
+C
+      common / SHARE  /   A,           B,           C
+C
+C====>End Module   SUB                    File t208e.f                  
+C====>Begin Module FUN                    File t208e.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     Local variables
+C
+      real                X,           Y,           Z
+C
+C     Common variables
+C
+      real                A,           B,           C
+C
+      common / SHARE  /   A,           B,           C
+C
+C====>End Module   FUN                    File t208e.f                  
+C====>Begin Module BAR                    File t208e.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     Intrinsic functions
+C
+      intrinsic           COS,         SIN,         SQRT
+C
+C     External functions
+C
+      external            MYSQRT,      MYSUB
+C
+      real                MYSQRT
+C
+C     Parameter variables
+C
+      integer             NPI
+      parameter           (NPI = 9)
+C
+      real                PI
+      parameter           (PI = 3.14159265)
+C
+C====>End Module   BAR                    File t208e.f                  

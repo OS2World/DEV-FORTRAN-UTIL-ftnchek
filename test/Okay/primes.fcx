@@ -1,0 +1,199 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File primes.f:
+
+      1       implicit none
+                       ^
+"primes.f", line 1 col 16: Warning: Nonstandard syntax
+      2       integer M, numprimes
+      3       integer MAXPRIMES
+      4 
+      5       parameter (MAXPRIMES=10000)
+      6       integer primes(MAXPRIMES)
+      7       integer makeprimes
+      8 
+      9       write(*,*) 'Enter ceiling on primes'
+     10       read(*,*) M
+     11 
+     12 C Get list of primes up to M
+     13       numprimes = makeprimes(primes,M,MAXPRIMES)
+     14 
+     15 C Print the primes
+     16       call printarray('Primes',primes,numprimes)
+     17 
+     18       end
+
+Module %MAIN: prog
+
+External subprograms referenced:
+
+MAKEPRIMES: intg   PRINTARRAY: subr   
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         M intg     MAXPRIMES intg     NUMPRIMES intg        PRIMES intg  1
+
+
+
+"primes.f", line 13: Warning in module %MAIN: Variables may be used before
+ set:
+"primes.f", line 13:     PRIMES used
+"primes.f", line 16:     PRIMES may be set
+
+
+"primes.f", line 7: Warning in module %MAIN: Names longer than 6 chars
+ (nonstandard):
+"primes.f", line 7:     MAKEPRIMES defined
+"primes.f", line 3:     MAXPRIMES declared
+"primes.f", line 2:     NUMPRIMES declared
+"primes.f", line 16:     PRINTARRAY referenced
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD READ         10 
+           *            SEQ  FMTD WRITE         9 
+     19 
+     20       subroutine printarray(heading,a,n)
+     21       implicit none
+                       ^
+"primes.f", line 21 col 16: Warning: Nonstandard syntax
+     22       character *(*) heading
+     23       integer i, n, a(1)
+     24       write(*,*) heading
+     25       do i=1,n
+              ^
+"primes.f", line 25 col 7: Warning: Nonstandard syntax
+     26          write(*,'(1x,i4,1x,i5)') i, a(i)
+     27       end do
+              ^
+"primes.f", line 27 col 7: Warning: Nonstandard syntax
+     28       end
+
+Module PRINTARRAY: subr
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A intg  1    HEADING char+            I intg             N intg   
+char+ indicates adjustable size
+
+
+
+
+"primes.f", line 22: Warning in module PRINTARRAY: Names longer than 6 chars
+ (nonstandard):
+"primes.f", line 22:     HEADING declared
+"primes.f", line 20:     PRINTARRAY declared
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD WRITE        24     26 
+     29 
+     30       integer function makeprimes(p,n,max)
+     31 C computes array of primes less than or equal to n.
+     32 C note: max = limit of number of primes, must be at least 1.
+     33       implicit none
+                       ^
+"primes.f", line 33 col 16: Warning: Nonstandard syntax
+     34       integer n, max, p(max)
+     35       integer i, numprimes
+     36       logical divisible
+     37 C put the even prime into the list
+     38       numprimes = 1
+     39       p(numprimes) = 2
+     40 C loop thru odd integers, testing if divisible
+     41       do i=3,n,2
+              ^
+"primes.f", line 41 col 7: Warning: Nonstandard syntax
+     42          if( .not. divisible(i,p,numprimes) ) then
+     43             numprimes = numprimes+1
+     44             if( numprimes .gt. max ) then
+     45                write(*,*) 'Ran out of space at p=',i
+     46                stop
+     47             else
+     48                p(numprimes) = i
+     49             end if
+     50          end if
+     51       end do
+              ^
+"primes.f", line 51 col 7: Warning: Nonstandard syntax
+     52 C return number of primes found
+     53       makeprimes = numprimes
+     54       return
+     55       end
+
+Module MAKEPRIMES: func: intg
+
+External subprograms referenced:
+
+ DIVISIBLE: logl   
+
+
+"primes.f", line 39: Warning in module MAKEPRIMES: Function modifies argument 
+ P
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         I intg    MAKEPRIMES intg           MAX intg             N intg   
+ NUMPRIMES intg             P intg  1
+
+
+
+
+"primes.f", line 36: Warning in module MAKEPRIMES: Names longer than 6 chars
+ (nonstandard):
+"primes.f", line 36:     DIVISIBLE defined
+"primes.f", line 30:     MAKEPRIMES declared
+"primes.f", line 35:     NUMPRIMES declared
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD WRITE        45 
+     56       logical function divisible(n,p,nump)
+     57       implicit none
+                       ^
+"primes.f", line 57 col 16: Warning: Nonstandard syntax
+     58       integer n, nump, p(1)
+     59       integer i
+     60       do i=1,nump
+              ^
+"primes.f", line 60 col 7: Warning: Nonstandard syntax
+     61          if( mod(n,p(i)) .eq. 0 ) then
+     62             divisible = .true.
+     63             return
+     64          end if
+     65       end do
+              ^
+"primes.f", line 65 col 7: Warning: Nonstandard syntax
+     66       divisible = .false.
+     67       return
+     68       end
+
+Module DIVISIBLE: func: logl
+
+External subprograms referenced:
+
+       MOD: intrns 
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+ DIVISIBLE logl             I intg             N intg          NUMP intg   
+         P intg  1
+
+
+
+
+"primes.f", line 56: Warning in module DIVISIBLE: Names longer than 6 chars
+ (nonstandard):
+"primes.f", line 56:     DIVISIBLE declared
+
+ 0 syntax errors detected in file primes.f
+ 16 warnings issued in file primes.f
+
+"primes.f", line 20: Warning: Subprogram PRINTARRAY argument usage mismatch at
+ position 2:
+"primes.f", line 20:    Dummy arg A in module PRINTARRAY is used before set
+"primes.f", line 16:    Actual arg PRIMES in module %MAIN is not set

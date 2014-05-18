@@ -1,0 +1,100 @@
+<HTML>
+<HEAD>
+<TITLE>Option: check</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="calltree.html">-calltree</A><HR><P>
+<H2>Option: <font color=#FF0080>check</font></H2><P>
+<A NAME="check"></A><DT><B><A HREF="check.html">-check</A></B>
+
+<DD>
+<DL COMPACT><DT><DD>
+This switch is provided so that errors and warning messages can be
+turned off when <B>ftnchek</B> is used for purposes other than finding
+bugs, such as making declarations or printing the call tree.  It is
+positional, so after turning all checks off, selected checks can be
+turned back on.  The effect of <B>-nocheck</B> is to put all switches,
+numeric settings, and settings controlling lists of warnings
+to their turn-off values, as if they had all been
+specified with the -no prefix.
+Switches and settings that specify
+options and modes of operation, rather than controlling warnings, are
+unaffected.
+These are
+<B><A HREF="columns.html">-columns</A></B>, <B><A HREF="crossref.html">-crossref</A></B>,
+<B><A HREF="include.html">-include</A></B>, <B><A HREF="intrinsic.html">-intrinsic</A></B>,
+<B><A HREF="library.html">-library</A></B>, <B><A HREF="list.html">-list</A></B>,
+<B><A HREF="makedcls.html">-makedcls</A></B>,
+<B><A HREF="novice.html">-novice</A></B>,
+<B><A HREF="output.html">-output</A></B>,
+<B><A HREF="pointersize.html">-pointersize</A></B>, <B><A HREF="project.html">-project</A></B>,
+<B><A HREF="quiet.html">-quiet</A></B>,
+<B><A HREF="reference.html">-reference</A></B>, <B><A HREF="resources.html">-resources</A></B>,
+<B><A HREF="sort.html">-sort</A></B>, <B><A HREF="source.html">-source</A></B>, <B><A HREF="symtab.html">-symtab</A></B>,
+<B><A HREF="vcg.html">-vcg</A></B>, <B><A HREF="version.html">-version</A></B>,
+<B><A HREF="wordsize.html">-wordsize</A></B>,
+and
+<B><A HREF="wrap.html">-wrap</A></B>.
+Default = yes.
+<P>
+
+Parse errors (syntax errors due to unrecognized or malformed
+statements) are not suppressed by this switch, since the results may
+be incorrect if <B>ftnchek</B> has not parsed the program correctly.
+<P>
+
+There are some miscellaneous errors and warning messages that are not
+controlled by any other switch, and so can be turned off only by this
+switch.  Note that using <B><A HREF="check.html">-check</A></B> following <B>-nocheck</B> only
+has the effect of turning these special warnings back on, and does not
+restore all the checks it turned off.  These warnings are:
+<DL COMPACT>
+<DT>o<DD>
+Module contains no executable statements.
+<DT>o<DD>
+In free source form, missing space where space is required
+(e.g. between a keyword and an identifier) or space
+present where none is allowed (e.g. within an identifier).
+<DT>o<DD>
+Zero or negative length specification in a data type declaration of the
+form type*len.
+<DT>o<DD>
+Array assigned to scalar.
+<DT>o<DD>
+Type mismatch between DO index and bounds.
+<DT>o<DD>
+Undefined common block declared in SAVE statement.
+<DT>o<DD>
+Intrinsic function explicitly declared with an incompatible type.
+<DT>o<DD>
+Unknown intrinsic function explicitly declared in an
+INTRINSIC statement.
+<DT>o<DD>
+Intrinsic function passed as a subprogram argument is not declared
+in an INTRINSIC statement.
+<DT>o<DD>
+Intrinsic function or statement function invoked incorrectly.
+<DT>o<DD>
+Function does not set return value prior to RETURN statement.
+<DT>o<DD>
+Parameter constant value not evaluated (this is <B>ftnchek</B>'s fault,
+and it is just informing you of the fact).
+<DT>o<DD>
+Entry point of a subprogram is later used as a different subprogram's
+name.
+<DT>o<DD>
+Unknown keyword used in an I/O statement.
+<DT>o<DD>
+Illegal label reference (e.g. GOTO refers to a non-executable
+statement; I/O statement refers to a non-format statement).
+</DL>
+<P>
+
+See also: <B><A HREF="errors.html">-errors</A></B>.
+</DL>
+
+<P>
+<P>
+<P><HR><P>Next: <A HREF="columns.html">-columns</A>
+</BODY></HTML>

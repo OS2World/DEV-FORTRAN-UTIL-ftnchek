@@ -1,0 +1,181 @@
+<HTML>
+<HEAD>
+<TITLE>Option: intrinsic</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="include.html">-include</A><HR><P>
+<H2>Option: <font color=#FF0080>intrinsic</font></H2><P>
+<A NAME="intrinsic"></A><DT><B><A HREF="intrinsic.html">-intrinsic</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Controls whether <B>ftnchek</B> recognizes certain nonstandard
+intrinsic functions as intrinsic.
+The <I>list</I> consists of keywords
+separated by commas or colons.  Some of the keywords control whether
+to recognize certain groups of functions, and other keywords
+control the expected syntax for invoking
+some nonstandard intrinsics.
+Include a keyword to turn on recognition of the corresponding
+set of intrinsics or to allow the corresponding syntax.  Include a
+keyword prefixed by
+<B>no-</B> to turn off that recognition.
+<P>
+
+There are three special keywords: <B>all</B>  turns on recognition of
+all the nonstandard intrinsics (listed below) and accepts either syntax for
+those that have variations.
+Use <B>none</B> to turn off recognition of all nonstandard intrinsics
+except those noted below.
+Use <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="intrinsic.html">-intrinsic</A></B> is equivalent to
+<B><A HREF="intrinsic.html">-intrinsic</A>=all</B>, and <B>-nointrinsic</B> is equivalent to
+<B><A HREF="intrinsic.html">-intrinsic</A>=none</B>.
+<P>
+
+The nonstandard intrinsic functions needed to support the nonstandard
+extended precision data types (double complex and quad precision) are
+always recognized.  The intrinsics for the double complex data type are:
+
+<CENTER><TABLE>
+<TR VALIGN=top><TD>CDABS</TD><TD>CDSQRT</TD><TD>DREAL</TD><TD>ZLOG<BR></TD></TR>
+<TR VALIGN=top><TD>CDCOS</TD><TD>DCMPLX</TD><TD>IMAG</TD><TD>ZSIN<BR></TD></TR>
+<TR VALIGN=top><TD>CDEXP</TD><TD>DCONJG</TD><TD>ZABS</TD><TD>ZSQRT<BR></TD></TR>
+<TR VALIGN=top><TD>CDLOG</TD><TD>DIMAG</TD><TD>ZEXP</TD><TD>ZCOS<BR></TD></TR>
+<TR VALIGN=top><TD>CDSIN</TD><TD></TD><TD></TD><TD><BR></TD></TR>
+</TABLE></CENTER>
+
+
+The intrinsics for the quad precision and quad complex types are:
+
+<CENTER><TABLE>
+<TR VALIGN=top><TD>CQABS</TD><TD>QARCOS</TD><TD>QEXT</TD><TD>QNINT<BR></TD></TR>
+<TR VALIGN=top><TD>CQCOS</TD><TD>QARSIN</TD><TD>QEXTD</TD><TD>QPROD<BR></TD></TR>
+<TR VALIGN=top><TD>CQEXP</TD><TD>QATAN</TD><TD>QFLOAT</TD><TD>QREAL<BR></TD></TR>
+<TR VALIGN=top><TD>CQLOG</TD><TD>QATAN2</TD><TD>QIMAG</TD><TD>QSIGN<BR></TD></TR>
+<TR VALIGN=top><TD>CQSIN</TD><TD>QCMPLX</TD><TD>QINT</TD><TD>QSIN<BR></TD></TR>
+<TR VALIGN=top><TD>CQSQRT</TD><TD>QCONJG</TD><TD>QLOG</TD><TD>QSINH<BR></TD></TR>
+<TR VALIGN=top><TD>DBLEQ</TD><TD>QCOS</TD><TD>QLOG10</TD><TD>QSQRT<BR></TD></TR>
+<TR VALIGN=top><TD>IQINT</TD><TD>QCOSH</TD><TD>QMAX1</TD><TD>QTAN<BR></TD></TR>
+<TR VALIGN=top><TD>IQNINT</TD><TD>QDIM</TD><TD>QMIN1</TD><TD>QTANH<BR></TD></TR>
+<TR VALIGN=top><TD>QABS</TD><TD>QEXP</TD><TD>QMOD</TD><TD>SNGLQ<BR></TD></TR>
+</TABLE></CENTER>
+
+
+The keywords controlling recognition of other nonstandard intrinsic
+functions are as follows:
+<DL COMPACT>
+<DT><B>extra</B>:
+
+<DD>
+recognize the following commonly available nonstandard intrinsics (all
+except EXIT and LOC are defined in MIL-STD 1753):
+
+<CENTER><TABLE>
+<TR VALIGN=top><TD>BTEST</TD><TD>IBCLR</TD><TD>IEOR</TD><TD>ISHFTC<BR></TD></TR>
+<TR VALIGN=top><TD>EXIT</TD><TD>IBITS</TD><TD>IOR</TD><TD>LOC<BR></TD></TR>
+<TR VALIGN=top><TD>IAND</TD><TD>IBSET</TD><TD>ISHFT</TD><TD>NOT<BR></TD></TR>
+</TABLE></CENTER>
+
+
+<DT><B>unix</B>:
+
+<DD>
+recognize these common Unix-specific intrinsic functions:
+
+<CENTER><TABLE>
+<TR VALIGN=top><TD>ABORT</TD><TD>GMTIME</TD><TD>LTIME</TD><TD>SRAND<BR></TD></TR>
+<TR VALIGN=top><TD>AND</TD><TD>IARGC</TD><TD>OR</TD><TD>SYSTEM<BR></TD></TR>
+<TR VALIGN=top><TD>GETARG</TD><TD>IRAND</TD><TD>RAND</TD><TD>TIME<BR></TD></TR>
+<TR VALIGN=top><TD>GETENV</TD><TD>LSHIFT</TD><TD>RSHIFT</TD><TD>XOR<BR></TD></TR>
+</TABLE></CENTER>
+
+
+<DT><B>vms</B>:
+
+<DD>
+recognize these common VMS-specific intrinsic functions:
+
+<CENTER><TABLE>
+<TR VALIGN=top><TD>DATE</TD><TD>IDATE</TD><TD>SECNDS</TD><TD>TIME<BR></TD></TR>
+<TR VALIGN=top><TD>ERRSNS</TD><TD>RAN</TD><TD>SIZEOF</TD><TD><BR></TD></TR>
+</TABLE></CENTER>
+
+
+<DT><B>iargc-no-argument</B>:
+
+<DD>
+specify that IARGC may be invoked with no arguments.
+<DT><B>iargc-one-argument</B>:
+
+<DD>
+specify that IARGC may be invoked with one argument.
+<DT><B>rand-no-argument</B>:
+
+<DD>
+specify that RAND and IRAND may be invoked with no
+arguments.
+<DT><B>rand-one-argument</B>:
+
+<DD>
+specify that RAND and IRAND may be invoked with one
+argument.
+</DL>
+<P>
+
+The <B>no-argument</B> and <B>one-argument</B> keywords work as
+follows: turning the option on causes <B>ftnchek</B> to accept the
+corresponding syntax for invocation of the function, without excluding
+the possibility of the alternative syntax.  Turning the option off
+causes the corresponding syntax not to be accepted.  If both options
+are turned on at once (the default), then either syntax is accepted.
+Turning both options off at once would not be meaningful.
+These options have no effect if recognition of Unix intrinsics has
+been turned off.
+<P>
+
+Note that this setting does not control whether non-standard warnings
+are issued about these functions.  It controls whether the
+functions are assumed to be intrinsic or not, which determines how their
+usage is checked.  When functions in any of these sets are
+included, their invocations will be checked according to the rules
+for the intrinsic functions; otherwise they will be checked as normal
+(user-written) external functions.  The non-standard warnings
+are controlled by the <B><A HREF="f77.html">-f77</A>=intrinsic</B> option.
+<P>
+
+The default value of this setting is equivalent to
+<B><A HREF="intrinsic.html">-intrinsic</A>=all</B> followed by <B><A HREF="intrinsic.html">-intrinsic</A>=no-vms</B> for the
+Unix version, <B><A HREF="intrinsic.html">-intrinsic</A>=no-unix</B> for the VMS version,
+and <B><A HREF="intrinsic.html">-intrinsic</A>=no-unix,no-vms</B> for other versions.
+<P>
+
+Note: In versions of <B>ftnchek</B> prior to 2.10, the
+<B><A HREF="intrinsic.html">-intrinsic</A></B> flag took a numeric argument instead of a list of
+options.
+For the sake of users who may have written scripts invoking
+<B>ftnchek</B> in this way, the numeric form is still
+accepted.  The numeric form of the setting consists of three digits.
+The
+ones digit selects the set of intrinsic functions to be supported.
+The digit 0 selects only Fortran 77 standard intrinsics plus those needed to
+support the nonstandard extended precision data types.  The digit 1 is
+equivalent to <B>extra</B>, 2 is
+equivalent to <B>extra,unix</B>, and 3 is equivalent to
+<B>extra,vms</B>.
+The tens digit of this setting controls the syntax of the RAND
+intrinsic function, and the hundreds
+digit controls the syntax of the IARGC function.
+For these digits,
+specify 0 to require invocation with no argument,
+1 to require one argument, and 2 to allow either form.
+<P>
+
+See also: <B><A HREF="f77.html">-f77</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="library.html">-library</A>
+</BODY></HTML>

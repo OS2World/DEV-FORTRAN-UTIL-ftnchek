@@ -1,0 +1,13 @@
+C====>Begin Module %MAIN                  File params.f                 
+C---->Makedcls Options: All variables                                   
+C
+C     Parameter variables
+C
+      real*8              PI
+      parameter           (PI = .31415926535897932D+01)
+      real*8              MINUS1
+      parameter           (MINUS1 = -.01D2)
+      real*8              HALF
+      parameter           (HALF = 5.D-1)
+C
+C====>End Module   %MAIN                  File params.f                 

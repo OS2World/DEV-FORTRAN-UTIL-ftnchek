@@ -1,0 +1,48 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File dectab.f:
+
+      3       1 ,c
+              ^
+Warning near line 3 col 7: Nonstandard syntax: continuation mark not in column
+ 6
+      6       2 / c
+              ^
+Warning near line 6 col 7: Nonstandard syntax: continuation mark not in column
+ 6
+                ^
+Warning near line 6 col 9: Possible division by zero
+      9    3 +2
+             ^
+Possibly misleading appearance near line 9 col 6: Continuation follows comment
+ or blank line
+     10       c = 2/3
+                   ^
+Warning near line 10 col 12: integer const expr yields result of 0
+                ^
+Warning near line 10 col 9: integer quotient expr 2/3  converted to real
+
+Module ABC: subr
+
+Common blocks referenced:
+
+    %BLANK         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real*            B real*            C real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD PRINT        11 
+
+ 0 syntax errors detected in file dectab.f
+ 7 warnings issued in file dectab.f
+
+No main program found

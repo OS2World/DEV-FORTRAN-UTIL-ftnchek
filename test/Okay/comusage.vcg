@@ -1,0 +1,27 @@
+graph: {
+title: "comusage.f"
+color: lightgray
+
+graph: {
+title:"[MAIN]"
+node: { title: "MAIN" label: "MAIN \n (comusage.f)" info1:"1" }
+edge: { sourcename: "MAIN" targetname: "COMP" class:1} 
+edge: { sourcename: "MAIN" targetname: "INPUT" class:1} 
+edge: { sourcename: "MAIN" targetname: "OUTPUT" class:1} 
+
+graph: {
+title:"[COMP]"
+node: { title: "COMP" label: "COMP \n (comusage.f)" info1:"2" }
+}
+
+graph: {
+title:"[INPUT]"
+node: { title: "INPUT" label: "INPUT \n (comusage.f)" info1:"2" }
+}
+
+graph: {
+title:"[OUTPUT]"
+node: { title: "OUTPUT" label: "OUTPUT \n (comusage.f)" info1:"2" }
+}
+}
+}

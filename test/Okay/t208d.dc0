@@ -1,0 +1,95 @@
+C====>Begin Module SYMSF                  File t208d.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     External functions
+C
+      EXTERNAL            KARASC,      KARCM2,      KARUC
+C
+      INTEGER             KARASC,      KARCM2,      KARUC,       MIN0
+      INTEGER             MOD
+C
+C     Argument variables
+C
+      INTEGER             FONT(1),     SWCHAR(1)
+C
+C     Local variables
+C
+      INTEGER             ACCENT,      ALPHA,       AMPSND,      AT
+      INTEGER             BA,          BETA,        CARET,       CC
+      INTEGER             CG,          CHI,         CI,          COLON
+      INTEGER             COMMA,       CR,          CS,          CYA
+      INTEGER             CYB,         CYCHE,       CYD,         CYE
+      INTEGER             CYEE,        CYEEK,       CYF,         CYG
+      INTEGER             CYK,         CYKHA,       CYL,         CYM
+      INTEGER             CYMZNK,      CYN,         CYO,         CYOO
+      INTEGER             CYP,         CYR,         CYS,         CYSH
+      INTEGER             CYSHCH,      CYT,         CYTSE,       CYTZNK
+      INTEGER             CYV,         CYYA,        CYYE,        CYYIRI
+      INTEGER             CYYOO,       CYZ,         CYZHE,       DEL
+      INTEGER             DELTA,       DOLLAR,      DQUOTE,      DR
+      INTEGER             EPSLON,      EQUALS,      ETA,         EXCLPT
+      INTEGER             FCASE,       FTYPE,       FVAR,        GAMMA
+      INTEGER             GE,          GG,          GI,          I
+      INTEGER             IDIG,        IG,          II,          ILC
+      INTEGER             IOTA,        IR,          IUC,         KAPPA
+      INTEGER             KG,          KR,          LAMBDA,      LANGLE
+      INTEGER             LBRACE,      LBRAKT,      LCA,         LCB
+      INTEGER             LCC,         LCD,         LCE,         LCF
+      INTEGER             LCG,         LCH,         LCI,         LCJ
+      INTEGER             LCK,         LCL,         LCM,         LCN
+      INTEGER             LCO,         LCP,         LCQ,         LCR
+      INTEGER             LCS,         LCT,         LCU,         LCV
+      INTEGER             LCW,         LCX,         LCY,         LCZ
+      INTEGER             LOC0,        LOC0SV,      LOCLC,       LOCUC
+      INTEGER             LPAREN,      MINUS,       MU,          N20147
+      INTEGER             NOCHAR,      NPR001,      NPR002,      NPR003
+      INTEGER             NPR004,      NPR005,      NPR006,      NPR007
+      INTEGER             NPR008,      NPR009,      NPR010,      NPR011
+      INTEGER             NPR012,      NPR013,      NPR014,      NPR015
+      INTEGER             NPR016,      NPR017,      NPR018,      NPR019
+      INTEGER             NPR020,      NPR021,      NPR022,      NPR023
+      INTEGER             NPR024,      NPR025,      NPR026,      NPR027
+      INTEGER             NPR028,      NPR029,      NPR030,      NPR031
+      INTEGER             NPR032,      NPR033,      NPR034,      NPR035
+      INTEGER             NPR036,      NPR037,      NPR038,      NPR039
+      INTEGER             NPR040,      NPR041,      NPR042,      NPR043
+      INTEGER             NPR044,      NPR045,      NU,          NUL
+      INTEGER             NUMBER,      NX0028,      NX0050,      NX0061
+      INTEGER             NX0100,      NX0114,      NX0141,      NX0204
+      INTEGER             NX0244,      OMCRON,      OMEGA,       PERCNT
+      INTEGER             PERIOD,      PHI,         PI,          PLUS
+      INTEGER             PSI,         QUERY,       RANGLE,      RBRACE
+      INTEGER             RBRAKT,      RHO,         RPAREN,      RSLANT
+      INTEGER             SA,          SCOLON,      SG,          SIGMA
+      INTEGER             SLASH,       SPACE,       SQUOTE,      SR
+      INTEGER             SS,          STAR,        TAU,         THETA
+      INTEGER             TILDE,       TR,          UCA,         UCB
+      INTEGER             UCC,         UCD,         UCE,         UCF
+      INTEGER             UCG,         UCH,         UCI,         UCJ
+      INTEGER             UCK,         UCL,         UCM,         UCN
+      INTEGER             UCO,         UCP,         UCQ,         UCR
+      INTEGER             UCS,         UCT,         UCU,         UCV
+      INTEGER             UCW,         UCX,         UCY,         UCZ
+      INTEGER             UPSLON,      USCORE,      VBAR,        XI
+      INTEGER             ZETA
+C
+      LOGICAL             ERROR
+C
+C     Common variables
+C
+      INTEGER             CASESW,      KFONT,       MAXFNT,      NFONT
+      INTEGER             NFUSED
+C
+      COMMON / SYM02  /   CASESW,      KFONT,       MAXFNT,      NFONT
+      COMMON / SYM02  /   NFUSED
+C
+C     Common variables
+C
+      INTEGER             ASCII(96,5), BSWTCH(5),   FONTID(5)
+      INTEGER             FONTNM(5,5), FSWTCH(5),   LSWTCH(5)
+      INTEGER             USWTCH(5)
+C
+      COMMON / SYM03  /   ASCII,       BSWTCH,      FONTID,      FONTNM
+      COMMON / SYM03  /   FSWTCH,      LSWTCH,      USWTCH
+C
+C====>End Module   SYMSF                  File t208d.f                  

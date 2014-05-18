@@ -1,0 +1,77 @@
+FTNCHEK Version 3.2 November 2002
+File comcmp.f:
+"comcmp.f", line 19: Warning in module FOO: Common block INTS has long data
+ type following short data type (may not be portable)
+     33       c7 = c1//c8
+                 ^
+"comcmp.f", line 33 col 10: Warning: char*9 expr C1//C8 truncated to char*7 C7
+ 2 warnings issued in file comcmp.f
+List of subprogram references:
+%MAIN calls:
+          FOO
+FOO calls:
+          BAR
+BAR calls: none
+
+"comcmp.f", line 15: Warning: Common block CHARS Elements used but never set:
+    C8
+"comcmp.f", line 15: Warning: Common block CHARS Elements set but never used:
+    C7 C1
+"comcmp.f", line 19: Warning: Common block INTS unused anywhere
+"comcmp.f", line 20: Warning: Common block BK1 unused anywhere
+"comcmp.f", line 3: Warning: Common block CHARS varying length:
+"comcmp.f", line 3:    Has 3 variables in module %MAIN
+"comcmp.f", line 27:    Has 2 variables in module BAR
+"comcmp.f", line 3: Warning: Common block CHARS data type mismatch at position
+ 1:
+"comcmp.f", line 3:    Variable C1 in module %MAIN is type char*1
+"comcmp.f", line 27:    Variable C7 in module BAR is type char*7
+"comcmp.f", line 3: Warning: Common block CHARS data type mismatch at position
+ 1:
+"comcmp.f", line 3:    Variable C1 in module %MAIN is type char*1
+"comcmp.f", line 15:    Variable C7 in module FOO is type char*7
+"comcmp.f", line 3:  and at position 3:
+"comcmp.f", line 3:    Variable C7 in module %MAIN is type char*7
+"comcmp.f", line 15:    Variable C1 in module FOO is type char*1
+"comcmp.f", line 7: Warning: Common block INTS varying length:
+"comcmp.f", line 7:    Has 3 variables in module %MAIN
+"comcmp.f", line 30:    Has 2 variables in module BAR
+"comcmp.f", line 7: Warning: Common block INTS data type mismatch at position
+ 1:
+"comcmp.f", line 7:    Variable IPLAIN in module %MAIN is type intg
+"comcmp.f", line 30:    Variable IFOUR in module BAR is type intg*4
+"comcmp.f", line 7:  and at position 2:
+"comcmp.f", line 7:    Variable IFOUR in module %MAIN is type intg*4
+"comcmp.f", line 30:    Variable IPLAIN in module BAR is type intg
+"comcmp.f", line 7: Warning: Common block INTS data type mismatch at position
+ 2:
+"comcmp.f", line 7:    Variable IFOUR in module %MAIN is type intg*4
+"comcmp.f", line 19:    Variable ITWO in module FOO is type intg*2
+"comcmp.f", line 7:  and at position 3:
+"comcmp.f", line 7:    Variable ITWO in module %MAIN is type intg*2
+"comcmp.f", line 19:    Variable IFOUR in module FOO is type intg*4
+"comcmp.f", line 8: Warning: Common block BK1 varying length:
+"comcmp.f", line 8:    Has 7 variables in module %MAIN
+"comcmp.f", line 31:    Has 5 variables in module BAR
+"comcmp.f", line 8: Warning: Common block BK1 data type mismatch at position
+ 2:
+"comcmp.f", line 8:    Variable B in module %MAIN is type real
+"comcmp.f", line 31:    Variable J in module BAR is type intg
+"comcmp.f", line 8: Warning: Common block BK1 array dimen/size mismatch at
+ position 1:
+"comcmp.f", line 8:    Variable A in module %MAIN has 0 dimensions
+"comcmp.f", line 31:    Variable A in module BAR has 1 dimension
+"comcmp.f", line 8:  and at position 1:
+"comcmp.f", line 8:    Variable A in module %MAIN has size 1
+"comcmp.f", line 31:    Variable A in module BAR has size 3
+"comcmp.f", line 8: Warning: Common block BK1 data type mismatch at position
+ 1:
+"comcmp.f", line 8:    Variable A in module %MAIN is type real
+"comcmp.f", line 20:    Variable I in module FOO is type intg
+"comcmp.f", line 8:  and at position 2:
+"comcmp.f", line 8:    Variable B in module %MAIN is type real
+"comcmp.f", line 20:    Variable J in module FOO is type intg
+"comcmp.f", line 8:  and at position 3:
+"comcmp.f", line 8:    Variable C in module %MAIN is type real
+"comcmp.f", line 20:    Variable K in module FOO is type intg
+ etc...

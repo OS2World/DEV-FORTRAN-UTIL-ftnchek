@@ -1,0 +1,13 @@
+C====>Begin Module FOO                    File dims.f                   
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             N
+      PARAMETER           (N = 1)
+      INTEGER             M
+      PARAMETER           (M = 2)
+      INTEGER             K
+      PARAMETER           (K = 3)
+C
+C====>End Module   FOO                    File dims.f                   

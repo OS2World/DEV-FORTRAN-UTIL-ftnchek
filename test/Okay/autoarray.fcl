@@ -1,0 +1,41 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File autoarray.f:
+
+      1       program main
+      2       call test(100)
+      3       end
+
+Module MAIN: prog
+
+External subprograms referenced:
+
+      TEST: subr   
+
+
+
+      4       subroutine test(n)
+      5       integer n
+      6 C the following local array cannot have variable bounds.
+      7       integer auto(n)
+                           ^
+Warning near line 7 col 20: Nonstandard syntax: local array cannot have
+ variable size
+      8       auto(1) = 5
+      9       auto(2) = auto(1)*2
+     10       end
+
+Module TEST: subr
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+      AUTO intg  1          N intg   
+
+
+
+
+ 0 syntax errors detected in file autoarray.f
+ 1 warning issued in file autoarray.f
+

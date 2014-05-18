@@ -1,0 +1,158 @@
+# Macintosh Programmer's Workshop (MPW) version of Makefile
+# for Fortran program checker.  Execution requires Absoft C compiler.
+# Should be easy to convert to MPW C.
+
+# For shipping purposes, Mac special characters have been changed, and
+# must be restored as follows
+#	Replace \ with option-d
+#	Replace : with option-f
+
+#    Copyright (C) 1991-2001 by Robert K. Moniot.
+#    This program is free software.  Permission is granted to
+#    modify it and/or redistribute it, retaining this notice.
+#    No guarantees accompany this software.
+
+### MAKEFILE PREAMBLE ###
+
+TargetName   =  ftnchek
+Makefile     =  Makefile
+
+# Power Macintosh tools and default settings 
+
+c_ppc            = "{AbsoftTools}ACC" -A  -c
+c_ppc_opts       =  -O -N92
+
+# Object and resource files used for this build
+
+PPC_LIBS =  \
+ "{AbsoftLibraries}mrwe_stubs.o" \
+ "{AbsoftLibraries}libfio.o" \
+ "{AbsoftLibraries}libfmath.o"
+
+PPC_OBJECTS = \
+ "fortran.o" \
+ "advance.o" \
+ "argcheck.o" \
+ "calltree.o" \
+ "comcheck.o" \
+ "exprtype.o" \
+ "forlex.o" \
+ "ftnchek.o" \
+ "include.o" \
+ "intrins.o" \
+ "iokeywds.o" \
+ "keywords.o" \
+ "labels.o" \
+ "loccheck.o" \
+ "makedcls.o" \
+ "makehtml.o" \
+ "message.o" \
+ "options.o" \
+ "pgsymtab.o" \
+ "plsymtab.o" \
+ "prlists.o" \
+ "prlocsym.o" \
+ "project.o" \
+  "symspace.o" \
+ "symtab.o" \
+ "symutils.o \
+ "utils.o"
+
+# Linkage rule
+
+"{TargetName}" :: {PPC_OBJECTS} {makefile}
+ lnk -O  -aliases "{AbsoftLibraries}"absoft_aliases \
+    -o "{TargetName}" {PPC_OBJECTS} {PPC_LIBS} \
+    -c 'MPS ' -t MPST \
+    "{AbsoftLibraries}absoft_init.o" \
+    "{AbsoftLibraries}ACLib.o" \
+    "{PPCLibraries}StdCRuntime.o" \
+    "{SharedLibraries}StdCLib" \
+    "{SharedLibraries}InterfaceLib"
+
+
+# Compilation rules
+
+"fortran.o" : "fortran.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "fortran.o" fortran.c
+
+"advance.o" : "advance.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "advance.o" advance.c
+
+"argcheck.o" : "argcheck.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "argcheck.o" argcheck.c
+
+"calltree.o" : "calltree.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "calltree.o" calltree.c
+
+"comcheck.o" : "comcheck.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "comcheck.o" comcheck.c
+
+"exprtype.o" : "exprtype.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "exprtype.o" exprtype.c
+
+"forlex.o" : "forlex.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "forlex.o" forlex.c
+
+"ftnchek.o" : "ftnchek.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "ftnchek.o" ftnchek.c
+
+"include.o" : "include.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "include.o" include.c
+
+"intrins.o" : "intrins.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "intrins.o" intrins.c
+
+"iokeywds.o:" : "iokeywds.c"  {makefile}
+ {c_ppc} {c_ppc_opts} -o "iokeywds.o" iokeywds.c
+
+"keywords.o" : "keywords.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "keywords.o" keywords.c
+
+"labels.o" : "labels.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "labels.o" labels.c
+
+"loccheck.o" : "loccheck.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "loccheck.o" loccheck.c
+
+"makedcls.o" : "makedcls.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "makedcls.o" makedcls.c
+
+"makehtml.o" : "makehtml.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "makehtml.o" makehtml.c
+
+"message.o" : "message.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "message.o" message.c
+
+"options.o" : "options.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "options.o" options.c
+
+"pgsymtab.o" : "pgsymtab.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "pgsymtab.o" pgsymtab.c
+
+"plsymtab.o" : "plsymtab.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "plsymtab.o" plsymtab.c
+
+"prlists.o" : "prlists.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "prlists.o" prlists.c
+
+"prlocsym.o" : "prlocsym.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "prlocsym.o" prlocsym.c
+
+"project.o" : "project.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "project.o" project.c
+
+"symspace.o" : "symspace.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "symspace.o" symspace.c
+
+"symtab.o" : "symtab.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "symtab.o" symtab.c
+
+"symutils.o" : "symutils.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "symutils.o" symutils.c
+
+"utils.o" : "utils.c" {makefile}
+ {c_ppc} {c_ppc_opts} -o "utils.o" utils.c
+
+clean :
+ Delete -i "{TargetName}" {PPC_OBJECTS}

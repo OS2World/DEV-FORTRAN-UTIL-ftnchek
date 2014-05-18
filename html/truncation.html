@@ -1,0 +1,116 @@
+<HTML>
+<HEAD>
+<TITLE>Option: truncation</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="symtab.html">-symtab</A><HR><P>
+<H2>Option: <font color=#FF0080>truncation</font></H2><P>
+<A NAME="truncation"></A><DT><B><A HREF="truncation.html">-truncation</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Warn about possible truncation (or roundoff) errors.  Most of these
+are related to integer arithmetic.  By default, all warnings are
+turned on.
+<P>
+
+This setting provides detailed control over the warnings about
+possible truncation errors.  The <I>list</I> consists of keywords
+separated by commas or colons.
+Since all warnings are on by default, include a keyword prefixed by
+<B>no-</B> to turn off a particular warning.
+There are three special keywords: <B>all</B> to turn on all the
+warnings about truncation, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="truncation.html">-truncation</A></B> is equivalent to
+<B><A HREF="truncation.html">-truncation</A>=all</B>, and <B>-notruncation</B> is equivalent to
+<B><A HREF="truncation.html">-truncation</A>=none</B>.
+The warning keywords with their meanings are as follows:
+<DL COMPACT>
+<DT><B>int-div-exponent</B>:
+
+<DD>
+use of the result of integer division as an exponent.
+This suggests that a real quotient is intended.
+An example would be writing X**(1/3) to evaluate the cube root
+of X. The correct expression is X**(1./3.).
+<DT><B>int-div-real</B>:
+
+<DD>
+Conversion of an expression involving an integer division to real.
+This suggests that a real quotient is intended.
+<DT><B>int-div-zero</B>:
+
+<DD>
+division in an integer constant expression that
+yields a result of zero.
+<DT><B>int-neg-power</B>:
+
+<DD>
+exponentiation of an integer by a negative
+integer (which yields zero unless the base integer is 1 in magnitude).
+This suggests that a real base is intended.
+<DT><B>promotion</B>:
+
+<DD>
+automatic conversion of a lower precision quantity to one of higher
+precision.  The loss of accuracy for real variables in this process is
+comparable to the corresponding demotion.  No warning is given for
+promotion of integer quantities to real since this is ordinarily
+exact.
+<DT><B>real-do-index</B>:
+
+<DD>
+use of a non-integer DO index in a
+loop with integer bounds.
+An integer DO index with real bounds is always
+warned about regardless of this setting.
+<DT><B>real-subscript</B>:
+
+<DD>
+use of a non-integer array subscript.
+<DT><B>significant-figures</B>:
+
+<DD>
+overspecifying a single precision constant.  This may indicate that a
+double precision constant was intended.
+<DT><B>size-demotion</B>:
+
+<DD>
+automatic conversion of a higher precision quantity to one of lower
+precision of the same type.  This warning only occurs when an explicit
+size is used in declaring the type of one or both operands in an
+assignment.  For example, a warning wil be issued where a REAL*8
+variable is assigned to a REAL variable, if the default wordsize
+of 4 is in effect.  A warning is also issued if a long integer is
+assigned to a shorter one, for example, if an INTEGER
+expression is assigned to an INTEGER*2 variable.  There is one
+exception to this last case, namely if the right hand side of the assignment
+is a small literal constant (less than 128).
+<B>type-demotion</B>:
+
+automatic conversion of a higher precision quantity to one of lower
+precision of different type.  This warning includes conversion of real
+quantities to integer, double precision to single precision real, and
+assignment of a longer character string to a shorter one.
+</DL>
+<P>
+
+The warnings about promotion and demotion also apply to complex
+constants, considering the precision to be that of the real or
+imaginary part.
+Warnings about promotions and demotions are given only when
+the conversion is done automatically, e.g. in expressions of mixed
+precision or in an assignment statement.  If intrinsic
+functions such as INT are used to perform the conversion, no warning
+is given.
+<P>
+
+See also: <B><A HREF="portability.html">-portability</A></B>, <B><A HREF="wordsize.html">-wordsize</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="usage.html">-usage</A>
+</BODY></HTML>

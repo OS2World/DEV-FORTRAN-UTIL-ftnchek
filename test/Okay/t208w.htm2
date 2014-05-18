@@ -1,0 +1,91 @@
+<HTML>
+<HEAD><TITLE>Source t208w.f</TITLE></HEAD>
+<BODY>
+<a name="S"><h3>DOUBLE PRECISION FUNCTION S ( X )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>DOUBLE PRECISION  X
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Description</b></td></tr>
+<tr><td><pre>ftnchek test file: t208w.f, Mon Mar 13 14:01:03 1995</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208w.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Intrinsic Functions Called</b><br></td></tr>
+<tr><td><pre>DOUBLE PRECISION  DFLOAT,  DSQRT
+SUBROUTINE  DSIN
+</pre></td></tr></table>
+<table><tr><td align="left"><b>External Functions and Subroutines Called</b><br></td></tr>
+<tr><td><pre>SUBROUTINE  EXTSUB,  SUBEXT
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Local Variables</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>DOUBLE PRECISION +Y
+</pre></td></tr></table>
+<table>
+<tr><td align="left"><b>Referenced Common Block Variables</b> <small>(+ indicates altered content)</small><b></b></td></tr>
+<tr><td><pre>ONE                INTEGER  A,   B,              C
+TWO                INTEGER  D,   E,              F
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="%MAIN"><h3>PROGRAM %MAIN ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208w.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>External Functions and Subroutines Called</b><br></td></tr>
+<tr><td><pre>SUBROUTINE  FOO
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>INTEGER  L2NG                         (L2NG = 6)
+INTEGER  NG                           (NG = 2**L2NG)
+INTEGER  NB                           (NB = NG+2)
+INTEGER  NBP1                         (NBP1 = NB+1)
+</pre></td></tr></table>
+<table>
+<tr><td align="left"><b>Referenced Equivalenced Variables</b> <small>(+ indicates altered content)</small><b></b></td></tr>
+<tr><td><pre>
+
+EQUIV              DOUBLE PRECISION  D()         Local Var
+                   DOUBLE PRECISION  P()         COMMON /PRES/
+EQUIV              DOUBLE PRECISION  F()         COMMON /FORCE/
+                   DOUBLE PRECISION  W2()        Local Var
+                   DOUBLE PRECISION  W1()        Local Var</pre></td></tr></table>
+<table>
+<tr><td align="left"><b>Referenced Common Block Variables</b> <small>(+ indicates altered content)</small><b></b></td></tr>
+<tr><td><pre>FORCE              DOUBLE PRECISION  F(0:NBP1,0:NBP1,2)
+PRES               DOUBLE PRECISION  P(0:NBP1,0:NBP1)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="%MAIN"><h3>PROGRAM %MAIN ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208w.f</td></tr>
+<tr><td></td></tr>
+</table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="%MAIN"><h3>PROGRAM %MAIN ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208w.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>External Functions and Subroutines Called</b><br></td></tr>
+<tr><td><pre>SUBROUTINE  SUBRTN
+</pre></td></tr></table>
+<table>
+<tr><td align="left"><b>Referenced Equivalenced Variables</b> <small>(+ indicates altered content)</small><b></b></td></tr>
+<tr><td><pre>
+
+EQUIV              DOUBLE PRECISION  X()         COMMON /ONE/
+                   DOUBLE PRECISION  Z()         Local Var
+                   DOUBLE PRECISION  Y()         Local Var</pre></td></tr></table>
+<table>
+<tr><td align="left"><b>Referenced Common Block Variables</b> <small>(+ indicates altered content)</small><b></b></td></tr>
+<tr><td><pre>ONE                DOUBLE PRECISION  X(10)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

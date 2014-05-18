@@ -1,0 +1,41 @@
+*====>Begin Module FOO                    File dims.f                   
+*---->Makedcls Options: All variables                                   
+*
+*     External functions
+*
+      EXTERNAL            STR
+*
+      CHARACTER           CHAR
+      CHARACTER           STR
+*
+      INTEGER             ICHAR,       LEN
+*
+*     Parameter variables
+*
+      INTEGER             N
+      PARAMETER           (N = 1)
+      INTEGER             M
+      PARAMETER           (M = 2)
+      INTEGER             K
+      PARAMETER           (K = 3)
+*
+*     Argument variables
+*
+      INTEGER             D(*,*)
+*
+*     Local variables
+*
+      CHARACTER*10        C(LEN('won''t'))
+      CHARACTER*(N)       STR2(K*M)
+      CHARACTER*(*)       STR3
+      CHARACTER*(M+N*K)   STR4
+*
+      INTEGER             A(1:M*N,-N+2),            B(N*(M+K)*2,K+1)
+*
+*     Common variables
+*
+      CHARACTER*17        XX(101)
+*
+      COMMON / XX     /   XX
+*
+*====>End Module   FOO                    File dims.f                   

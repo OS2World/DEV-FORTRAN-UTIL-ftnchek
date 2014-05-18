@@ -1,0 +1,117 @@
+<HTML>
+<HEAD>
+<TITLE>Option: common</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="columns.html">-columns</A><HR><P>
+<H2>Option: <font color=#FF0080>common</font></H2><P>
+<A NAME="common"></A><DT><B><A HREF="common.html">-common</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+This setting controls the strictness of
+checking of COMMON blocks.
+By default, all warnings except <B>volatile</B> are turned on.
+<P>
+
+The <I>list</I> consists of keywords separated by commas or colons.
+Since most of these warnings are on by default, include a keyword prefixed by
+<B>no-</B> to turn off a particular warning.
+There are three special keywords: <B>all</B> to turn on all the
+warnings, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="common.html">-common</A></B> is equivalent to
+<B><A HREF="common.html">-common</A>=dimensions,exact,length,type</B>,
+and <B>-nocommon</B> is equivalent to
+<B><A HREF="common.html">-common</A>=none</B>.
+The warning keywords with their meanings are as follows:
+<DL COMPACT>
+<DT><B>dimensions</B>:
+
+<DD>
+corresponding arrays in each declaration of a block must
+agree in size and number of dimensions.  This option only has an effect
+when used together with <B>exact</B>.
+<DT><B>exact</B>:
+
+<DD>
+the comparison of two blocks is done variable-by-variable rather than
+simply requiring agreement between corresponding storage locations.
+Use this if all declarations of a given COMMON block are supposed to be
+identical, which is a good programming practice.
+<DT><B>length</B>:
+
+<DD>
+warn if different declarations of the same block are not equal in
+total length.
+The Fortran 77 Standard requires each named common block, but not
+blank common, to be
+the same length in all modules of the program.
+<DT><B>type</B>:
+
+<DD>
+in each declaration of a given COMMON block,
+corresponding memory locations (words or bytes) must agree in data type.
+If used together with <B>exact</B>, this will require that
+corresponding variables agree in data type.
+<DT><B>volatile</B>:
+
+<DD>
+Assume that COMMON blocks are volatile.
+</DL>
+<P>
+
+Many Fortran programmers assume that variables, whether
+local or in COMMON, are static, i.e. that
+once assigned a value, they retain that value permanently until
+assigned a different value by the program.  However, in fact the
+Fortran 77 Standard does not require this to be the case.
+Local variables may
+become undefined between activations of a module in which they are
+declared.  Similarly, COMMON blocks may become undefined if no module
+in which they are declared is active.  (The technical term for
+entities with this behavior is ``automatic'',
+but <B>ftnchek</B> uses the word ``volatile'' since it
+is clearer to the nonspecialist.)  Only COMMON blocks declared
+in a SAVE statement, or
+declared in the main program or in a block data subprogram remain
+defined as long as the program is running.  Variables and COMMON
+blocks that can become undefined at some point are called volatile.
+<P>
+
+If the <B><A HREF="common.html">-common</A>=volatile</B> flag is turned on,
+<B>ftnchek</B> will warn you if it finds
+a volatile COMMON block.  If, at the same time, the
+<B><A HREF="usage.html">-usage</A>=com-block-volatile </B> option is turned on (which is the default),
+<B>ftnchek</B> will try to check whether
+such a block can lose its defined status between activations of the
+modules where it is declared.  <B>ftnchek</B> does not do a very good job of
+this: the rule used is to see whether the block is declared in two
+separated subtrees of the call tree.  For instance, this would be the
+case if two modules, both called from the main program, shared a
+volatile COMMON block.  A block can also become undefined between two
+successive calls of the same subprogram, but <B>ftnchek</B> is not smart
+enough to tell whether a subprogram can be called more than once, so
+this case is not checked for.
+<P>
+
+The <B><A HREF="common.html">-common</A>=volatile</B> flag does not affect the way <B>ftnchek</B>
+checks the usage of local variables.
+<P>
+
+For compatibility with previous versions of <B>ftnchek</B>,  a numeric
+form of this setting is also accepted: the <I>list</I> is replaced by a
+number from 0 to 3.  A value of 0 turns all the warnings off,
+1 or greater turns on <B>type</B>, 2 or greater turns on <B>length</B>, and
+3 turns on <B>dimensions</B> and <B>exact</B> also.  The numeric form
+cannot turn on the <B>volatile</B> option.
+<P>
+
+See also: <B><A HREF="library.html">-library</A></B>, <B><A HREF="usage.html">-usage</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="crossref.html">-crossref</A>
+</BODY></HTML>

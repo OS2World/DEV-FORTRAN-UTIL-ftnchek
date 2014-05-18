@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<TITLE>Option: columns</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="check.html">-check</A><HR><P>
+<H2>Option: <font color=#FF0080>columns</font></H2><P>
+<A NAME="columns"></A><DT><B><A HREF="columns.html">-columns</A>=</B><I>num</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Set maximum statement length to <I>num</I> columns.
+(Beyond this is ignored.)
+This setting is provided to allow checking of programs which may
+violate the Fortran standard limit of 72 columns for the length of a
+statement.  According to
+the standard, all characters past column 72 are ignored.
+If this setting is used when the <B><A HREF="f77.html">-f77</A>=long-line</B> option is in effect, a
+warning will be given for any lines in which characters past column 72
+are processed.
+Turn-on = max = 132.  Default = 72.
+<P>
+
+This setting does not suppress warnings about the presence of
+characters beyond column 72.
+To process code with meaningful program text beyond column 72, use
+this setting and be sure the <B><A HREF="f77.html">-f77</A></B> <B>long-line</B> option is off.
+To process code with sequence numbers in columns 73 to 80, leave the
+the columns setting at the default value and use the
+<B><A HREF="pretty.html">-pretty</A>=no-long-line</B> flag.
+<P>
+
+See also: <B><A HREF="f77.html">-f77</A></B>, <B><A HREF="pretty.html">-pretty</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="common.html">-common</A>
+</BODY></HTML>

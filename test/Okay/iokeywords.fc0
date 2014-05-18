@@ -1,0 +1,16 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File iokeywords.f:
+
+Warning in module F90_STUFF in file iokeywords.f: Variables set but never
+ used:
+    C1 set at line 55 file iokeywords.f
+    C2 set at line 55 file iokeywords.f
+    I1 set at line 55 file iokeywords.f
+    INPUTSIZE set at line 53 file iokeywords.f
+    VAL set at line 54 file iokeywords.f
+
+ 0 syntax errors detected in file iokeywords.f
+ 1 warning issued in file iokeywords.f
+

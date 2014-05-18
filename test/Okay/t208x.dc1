@@ -1,0 +1,495 @@
+C====>Begin Module PROB5_4DIM             File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             NR
+      PARAMETER           (NR = 32)
+      INTEGER             NT
+      PARAMETER           (NT = 16)
+      INTEGER             NR2
+      PARAMETER           (NR2 = NR+2)
+      INTEGER             NT1
+      PARAMETER           (NT1 = NT+1)
+      INTEGER             NW
+      PARAMETER           (NW = 2*NT+15)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Local variables
+C
+      REAL                DZSUB
+C
+C     Common variables
+C
+      INTEGER             NFIL
+C
+C     Common variables
+C
+      INTEGER             METHOD,      MTHLIM
+C
+C     Common variables
+C
+      INTEGER             NK
+C
+C====>End Module   PROB5_4DIM             File t208x.f                  
+C====>Begin Module UINIT                  File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             NR
+      PARAMETER           (NR = 32)
+      INTEGER             NT
+      PARAMETER           (NT = 16)
+      INTEGER             NR2
+      PARAMETER           (NR2 = NR+2)
+      INTEGER             NT1
+      PARAMETER           (NT1 = NT+1)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Common variables
+C
+      INTEGER             NK
+C
+C====>End Module   UINIT                  File t208x.f                  
+C====>Begin Module XINIT                  File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C====>End Module   XINIT                  File t208x.f                  
+C====>Begin Module NAVS2D                 File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C====>End Module   NAVS2D                 File t208x.f                  
+C====>Begin Module TRIDGX                 File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             N
+      PARAMETER           (N = NG-1)
+      INTEGER             NP1
+      PARAMETER           (NP1 = N+1)
+      INTEGER             NM1
+      PARAMETER           (NM1 = N-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C====>End Module   TRIDGX                 File t208x.f                  
+C====>Begin Module TRIDGY                 File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             N
+      PARAMETER           (N = NG-1)
+      INTEGER             NP1
+      PARAMETER           (NP1 = N+1)
+      INTEGER             NM1
+      PARAMETER           (NM1 = N-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C====>End Module   TRIDGY                 File t208x.f                  
+C====>Begin Module NEWU                   File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C====>End Module   NEWU                   File t208x.f                  
+C====>Begin Module DIV                    File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C====>End Module   DIV                    File t208x.f                  
+C====>Begin Module FFT2D                  File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             N
+      PARAMETER           (N = NG)
+      INTEGER             M
+      PARAMETER           (M = L2NG)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      INTEGER             ISIGN
+C
+C====>End Module   FFT2D                  File t208x.f                  
+C====>Begin Module PHIA2D                 File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      INTEGER             N
+C
+C====>End Module   PHIA2D                 File t208x.f                  
+C====>Begin Module ZAG2D                  File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      INTEGER             N
+C
+C====>End Module   ZAG2D                  File t208x.f                  
+C====>Begin Module PLOT                   File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             NR
+      PARAMETER           (NR = 32)
+      INTEGER             NT
+      PARAMETER           (NT = 16)
+      INTEGER             NR2
+      PARAMETER           (NR2 = NR+2)
+      INTEGER             NT1
+      PARAMETER           (NT1 = NT+1)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Common variables
+C
+      INTEGER             NFIL
+C
+C====>End Module   PLOT                   File t208x.f                  
+C====>Begin Module MARKERS                File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C====>End Module   MARKERS                File t208x.f                  
+C====>Begin Module PHIN2D                 File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Argument variables
+C
+      INTEGER             N
+C
+C====>End Module   PHIN2D                 File t208x.f                  
+C====>Begin Module CHEM2D                 File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Argument variables
+C
+      INTEGER             N
+C
+C====>End Module   CHEM2D                 File t208x.f                  
+C====>Begin Module CHLFAC                 File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Argument variables
+C
+      INTEGER             NN
+C
+C====>End Module   CHLFAC                 File t208x.f                  
+C====>Begin Module CHLSLV                 File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             MAX
+      PARAMETER           (MAX = NBP1)
+C
+C     Argument variables
+C
+      INTEGER             NM1
+C
+C====>End Module   CHLSLV                 File t208x.f                  
+C====>Begin Module PERIOD                 File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C====>End Module   PERIOD                 File t208x.f                  
+C====>Begin Module DIFFU                  File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C====>End Module   DIFFU                  File t208x.f                  
+C====>Begin Module REACT                  File t208x.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             NR
+      PARAMETER           (NR = 32)
+      INTEGER             NT
+      PARAMETER           (NT = 16)
+      INTEGER             NR2
+      PARAMETER           (NR2 = NR+2)
+      INTEGER             NT1
+      PARAMETER           (NT1 = NT+1)
+C
+C     Common variables
+C
+      INTEGER             NK
+C
+C====>End Module   REACT                  File t208x.f                  

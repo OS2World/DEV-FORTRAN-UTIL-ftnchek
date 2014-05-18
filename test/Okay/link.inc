@@ -1,0 +1,8 @@
+C
+C     Common variables
+C
+      DOUBLE PRECISION    ELF(0:NBP1,0:NBP1,0:NR2,NT1)
+      DOUBLE PRECISION    ELFN(0:NBP1,0:NBP1,0:NR2,NT1)
+C
+      COMMON / LINK   /   ELF,         ELFN
+C

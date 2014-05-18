@@ -1,0 +1,447 @@
+dnl configure.in   Process with autoconf to produce a configure script.
+dnl  This autoconf input file is for ftnchek version 2.9, April 1996
+dnl  Acknowledgement and thanks to Judah Milgram for help producing this file.
+
+AC_INIT(ftnchek.c)
+AC_CONFIG_HEADER(config.h)
+
+AC_CANONICAL_HOST
+
+dnl Look for yacc or bison. If bison, then -y used, so don't need
+dnl to worry about YSTEM. (but what if it finds byacc?)
+
+AC_PROG_YACC
+if test -z "$YACC"; then  
+   AC_MSG_WARN([Didn't find yacc or bison])
+fi
+
+dnl Look for mawk/nawk/awk:
+
+AC_PROG_AWK
+if test "$AWK" = "awk"; then
+   case $host_os in
+   aix*)
+      AC_MSG_WARN([This awk might not work in dcl2inc. Need gawk or nawk]) ;;
+   esac
+fi
+
+dnl Provide the workaround for redirection of output with nawk as
+dnl described in comments at the end of dcl2inc.awk.in.
+if test "$AWK" = "gawk"; then
+   DCL2INC_REDIRECT='> "/dev/stderr"'
+else
+   DCL2INC_REDIRECT='| "cat 1>&2"'
+fi
+
+dnl Check for gcc/cc
+
+AC_PROG_CC
+
+dnl Check for floating point option (really on applies to Suns, I
+dnl think, and probably only Solaris at that).
+
+AC_CHECK_PROGS(FPVERSION,fpversion)
+if test "$FPVERSION" ; then
+  AC_MSG_CHECKING([for a floating point option])
+  CG_FLAG=`$FPVERSION -foption`
+  if test "CG_FLAG"; then CG_FLAG=-$CG_FLAG; fi
+  AC_MSG_RESULT([ $CG_FLAG ])
+fi
+
+
+dnl The following system utilities should be standard on all UNIX systems.
+dnl If they are not found on standard path, they are left pathless.
+
+STDPATH=/bin:/usr/bin:/usr/ucb:/usr/5bin
+LOCALPATH=$STDPATH:/usr/local/bin
+
+AC_PATH_PROG(CHMOD,chmod,chmod,$STDPATH)
+AC_PATH_PROG(CMP,cmp,cmp,$STDPATH)
+AC_PATH_PROG(CP,cp,cp,$STDPATH)
+AC_PATH_PROG(DIFF,diff,diff,$STDPATH)
+AC_PATH_PROG(EQN,eqn,eqn,$STDPATH)
+AC_PATH_PROG(GREP,grep,grep,$STDPATH)
+AC_CHECK_PROGS(MAKE,make,make,$STDPATH)
+AC_PATH_PROG(MKDIR,mkdir,mkdir,$STDPATH)
+AC_PATH_PROG(MV,mv,mv,$STDPATH)
+AC_PATH_PROG(PATCH,patch,patch,$STDPATH)
+AC_PATH_PROG(PRINTENV,printenv,printenv,$STDPATH)
+AC_PATH_PROG(PWD_PROG,pwd,pwd,$STDPATH)
+AC_PATH_PROG(RM,rm,rm,$STDPATH)
+AC_PATH_PROG(RMDIR,rmdir,rmdir,$STDPATH)
+AC_PATH_PROG(SED,sed,sed,$STDPATH)
+AC_PATH_PROG(SH,sh,sh,$STDPATH)
+AC_PATH_PROG(SOELIM,soelim,soelim,$STDPATH)
+AC_PATH_PROG(TAR,tar,tar,$STDPATH)
+AC_PATH_PROG(TBL,tbl,tbl,$STDPATH)
+AC_PATH_PROG(ZIP,zip,zip,$STDPATH)
+
+dnl  Add the necessary flag to RM.
+RM="$RM -f"
+
+dnl Look for pack (needed only for make install-man-sgi)
+AC_PATH_PROG(PACK,pack,pack,$STDPATH)
+
+dnl Check for nroff; groff will do too.
+AC_PATH_PROGS(NROFF,nroff groff, nroff)
+
+dnl  If this is GNU nroff, need to use -c flag (no colors) to get plain
+dnl  text w/o escape codes, for VMS help document and similar things.
+if test -x "$NROFF" && "$NROFF" --version | grep 'GNU nroff (groff)' >/dev/null 2>/dev/null ; then
+   NROFFPLAIN="$NROFF -c"
+else
+   NROFFPLAIN="$NROFF"
+fi
+
+dnl Look for man-to-ps filter.  Take groff if present but settle for others.
+
+AC_PATH_PROGS(TROFF,groff)
+if test -n "$TROFF" ; then
+    MANtoPS="$TROFF -man"
+else
+  AC_PATH_PROGS(TROFF,psroff)
+  if test -n "$TROFF" ; then
+    MANtoPS="$TROFF -t -man"
+  else
+dnl		Solaris 2.1
+    if test -f /usr/lib/lp/postscript/dpost ; then
+       MANtoPS='troff -man | /usr/lib/lp/postscript/dpost'
+    else
+dnl		Nothing found: say groff and let them figure it out.
+       MANtoPS='groff -man'
+    fi
+  fi
+fi
+
+
+dnl Look for man-to-html filter.  The scripts for converting the raw html
+dnl into the files in the html directory depend on the specific
+dnl filter's output style, so another converter probably won't do.
+dnl At present the scripts require man2html, a.k.a. vh-man2html, which
+dnl is now part of the standard RedHat distribution.  We won't worry much
+dnl about this since users generally won't be messing with the docs.
+AC_PATH_PROGS(MANtoHTMLPROG,man2html rman)
+
+case "$MANtoHTMLPROG" in
+dnl There are at least two man2html's out there, and probably many more,
+dnl so we try to detect whether we have the one that works with the converters.
+    *man2html)
+	if  "$MANtoHTMLPROG" -version < /dev/null 2>&1 | grep 'Content-type: text/html' 1>/dev/null 2>&1
+        then
+	    true
+	else
+	    WRONG_MANtoHTML=true
+	fi
+	MANtoHTML="$MANtoHTMLPROG"
+	;;
+dnl rman is ok to make ftnchek.html, but "make htmldocs" won't work
+    *rman)
+	MANtoHTML="$MANtoHTMLPROG -f HTML -r '/cgi-bin/man2html?%s&amp;%s'"
+	WRONG_MANtoHTML=true
+	;;
+    *)
+	MANtoHTML="man2html"
+	AC_MSG_WARN([man-to-html converter not found: cannot re-make htmldocs if deleted])
+	;;
+esac
+if test -n "$WRONG_MANtoHTML"
+then
+  AC_MSG_WARN([man-to-html converter does not appear to be the right one])
+  AC_MSG_WARN([for re-making html docs if deleted.  Need vh-man2html.])
+fi
+
+
+dnl Look for strip.  If not, use a harmless substitute
+
+AC_PATH_PROGS(STRIP,strip,[echo >/dev/null])
+
+
+dnl See if col is on the path.  If not, it may be BSD-like and user may
+dnl not have /usr/5bin on path.
+
+AC_PATH_PROGS(COL,col)
+if test -n "$COL" ; then
+   COL="$COL -bx"
+else
+   AC_MSG_CHECKING([for /usr/5bin/col])
+   if test -f /usr/5bin/col ; then
+      AC_MSG_RESULT([found it])
+      COL='/usr/5bin/col -bx'
+   else
+      AC_MSG_RESULT([col not found -- using cat instead])
+      COL=cat
+   fi
+fi
+
+
+dnl Look for ftnpp and if it is installed, it will be tested for compatibility
+dnl as a filter for ftnchek.
+AC_PATH_PROG(FTNPP,ftnpp,ftnpp,$LOCALPATH)
+
+dnl Look for perl
+AC_PATH_PROGS(PERL,perl,perl)
+
+dnl Get sizes needed for declarations of some bit vectors.
+dnl These tests generate autoconf warning ``AC_TRY_RUN called without
+dnl default to allow cross compiling.''  Ignore unless you plan to
+dnl cross-compile ftnchek.
+
+AC_CHECK_SIZEOF(short)
+AC_CHECK_SIZEOF(int)
+AC_CHECK_SIZEOF(long)
+
+dnl Sanity test (can fail if compiler bombs on the above tests)
+if test "$ac_cv_sizeof_short" -le 2 -a "$ac_cv_sizeof_int" -le 2 -a "$ac_cv_sizeof_long" -le 2; then
+  AC_MSG_ERROR(Unable to find an integer datatype with more than 16 bits);
+fi
+
+dnl If unistd.h is found, it is used to define unlink().
+AC_CHECK_HEADERS(unistd.h)
+
+dnl If stdlib.h is found, it is used to declare malloc() and free().
+AC_CHECK_HEADERS(stdlib.h)
+
+dnl Need regex.h for makehtml.c to compile.  Without it, the -mkhtml feature
+dnl must be turned off.
+AC_CHECK_HEADERS(regex.h, break,
+   AC_MSG_WARN(No regex.h -- -mkhtml option will not work!))
+
+
+dnl Check for memset.  This should be pretty universal by now, but you
+dnl never know.  The alternative is bzero.
+AC_CHECK_FUNCS( memset, break, AC_DEFINE(HAVE_MEMSET,0) )
+AC_CHECK_FUNCS( bzero, break, AC_DEFINE(HAVE_BZERO,0) )
+
+dnl Check for strcasecmp or its common equivalents.
+AC_CHECK_FUNCS( strcasecmp, break, AC_DEFINE(HAVE_STRCASECMP,0) )
+AC_CHECK_FUNCS( stricmp, break, AC_DEFINE(HAVE_STRICMP,0) )
+AC_CHECK_FUNCS( strcmpi, break, AC_DEFINE(HAVE_STRCMPI,0) )
+
+
+dnl Sanity test (can fail if compiler bombs on the above tests)
+if  test -z  "$ac_cv_func_memset" -a -z "$ac_cv_func_bzero"; then
+  AC_MSG_ERROR(Unable to find if memset or bzero available);
+fi
+
+dnl Define emacs site-lisp directory to install ftnchek.el in.
+lispdir='${datadir}/emacs/site-lisp'
+dnl Check for emacs.  If it is present, ftnchek.el will be byte-compiled.
+AC_PATH_PROG(EMACS,emacs,emacs)
+
+dnl Set compiler options depending on operating system:
+
+dnl Here's the place to tweak compiler settings, not in 
+dnl Makefile.in, (and certainly not in Makefile!)
+
+INSTALL_MAN='install-man'
+sgimansubdir="/manl"
+
+if test -n "$CC_SAVE"; then
+  CC=$CC_SAVE
+fi
+
+OS_FLAGS=
+OPT=
+LDFLAGS=
+case $host_os in
+  aix*)
+    if test -z "$GCC"; then
+      if test "$CC" = cc ; then
+        CC=c89
+      fi
+dnl _XOPEN_SOURCE seems to be needed to get pipe() properly declared.
+      OS_FLAGS="-DAIXC -D_BSD -D_XOPEN_SOURCE"
+      OPT="-O"
+    else
+      OPT="-O2"
+    fi;;
+  hpux*)
+    if test -z "$GCC"; then
+      if test "$CC" = cc ; then
+        CC=c89
+      fi
+      OPT=" +O2 +Onolimit"
+    else
+      OPT="-O2"
+    fi;;
+  irix*)
+dnl If gcc is being used, then all is simple.
+    if test -n "$GCC"; then
+	OPT="-O2"
+    else
+dnl The optimization flag for IRIX changed at some point.  The following
+dnl test for where the transition occurred is based on advice of Guido Germano.
+     if cc -version 1>/dev/null 2>&1 ; then
+       ccnew=`cc -version 2>&1 | awk '{if($4 >= "7.2.1") print 1; else print 0}'`
+     else
+       ccnew=0
+     fi
+     if test "$ccnew" = "1"; then
+       OPT="-O2 -OPT:Olimit=5000"
+     else
+       OPT="-O2 -Olimit 5000"
+     fi
+    fi
+    INSTALL_MAN='install-man-sgi'
+dnl old, old SGI systems put man pages into $mandir.  Recent versions use
+dnl $mandir/man1 or $mandir/manl.  We look for these and use
+dnl them if they exist.
+    eval MANDIR=$mandir
+    MANDIR=`echo "$MANDIR" | sed "s%NONE%$ac_default_prefix%"`
+    if test -d "$MANDIR/manl"; then
+	sgimansubdir="/manl"
+    elif test -d "$MANDIR/man1"; then
+	sgimansubdir="/man1"
+    else
+	sgimansubdir=""
+    fi;;
+  linux*)
+    if test -n "$GCC"; then
+      OPT="-O2";
+    fi;;
+  next*)
+    OPT="-O2";;
+
+dnl OSF non-GCC options from John Faricelli of DEC:
+dnl The option -ieee_with_inexact will cause earlier Alpha implementations
+dnl to trap to software on floating operations that are not exact,
+dnl in the mathematical sense (e.g. 2/7). This can be a large performance
+dnl penalty. If all you wish to do is allow IEEE exceptional values
+dnl (e.g. NaN, Infinity, etc), the correct option to use is
+dnl -ieee_with_no_inexact.
+dnl Also, in Digital Unix 4.0, the default C compiler has changed.
+dnl The option "-Olimit 1000" is no longer needed, but is silently accepted
+dnl by the compiler.
+  osf*) 
+    if test -z "$GCC"; then 
+      OS_FLAGS="-ieee_with_no_inexact"
+      OPT="-O -Olimit 1000"
+    else
+       OPT="-O2"
+    fi;;
+  sunos*)
+    OPT="-O2";;
+  solaris*)
+    cpucc="$host_cpu"-"$CC"
+    case $cpucc in
+       sparc-cc) OS_FLAGS="-Xc"
+		 OPT="-xO4 $CG_FLAG";;
+       *gcc)     OPT="-O2";;
+       *cc)      OPT="-O";; 
+    esac;;
+  ultrix*)
+    if test -z "$GCC"; then
+      OPT="-O2 -Olimit 1000"
+    else
+      OPT="-O2"
+    fi;;
+  *)
+    AC_MSG_WARN([Operating system not determined. Using generic flags.])
+    OPT="-O";;
+esac
+
+dnl If using gcc on Intel x86, add suitable submodel flag.
+dnl This can be suppressed by --disable-submodel configure option.
+use_submodel_flag="yes"
+AC_ARG_ENABLE(submodel,dnl
+changequote(<<, >>)dnl
+<<  --enable-submodel       provide gcc -march submodel flag [yes]>>,
+changequote([, ])dnl
+	use_submodel_flag="$enableval",
+	use_submodel_flag="yes")
+if test "$use_submodel_flag" = "yes" -a -n "$GCC"; then
+  case "$host_cpu" in
+  i386*)
+    OPT="$OPT -march=i386"
+    ;;
+  i486*)
+    OPT="$OPT -march=i486"
+    ;;
+  i586*)
+    OPT="$OPT -march=i586"
+    ;;
+  i686*)
+    OPT="$OPT -march=i686"
+    ;;
+  k6*)
+    OPT="$OPT -march=k6"
+    ;;
+  esac
+fi
+
+AC_MSG_CHECKING([whether $CC accepts function prototypes])
+dnl the test prog includes specific code that chokes some compilers
+AC_CACHE_VAL(ac_cv_prog_CC_protos,[
+AC_TRY_COMPILE([],
+  [extern int foo(int arg); /* basic prototype */
+   static int (*ii_fun[]) ( int *args )={ 0, };],
+  ac_cv_prog_CC_protos=yes,ac_cv_prog_CC_protos=no)])
+AC_MSG_RESULT([$ac_cv_prog_CC_protos])
+if test $ac_cv_prog_CC_protos = yes ; then
+   PROTOFLAG=""
+else
+   PROTOFLAG="-DNO_PROTOTYPES"
+fi
+
+
+CFLAGS="-DUNIX \$(OPT) $OS_FLAGS $PROTOFLAG \$(OPTIONS)"
+AC_MSG_RESULT([Compile command is $CC $CFLAGS])
+AC_MSG_RESULT([\$(OPT) is $OPT])
+AC_MSG_RESULT([\$(OPTIONS) is for optional defines, normally blank])
+if test $GCC; then
+AC_MSG_RESULT([If you prefer using cc, setenv CC cc and re-run configure])
+fi
+
+dnl Here we define EXE and CMD prefixes to be null, as needed by Unix.
+dnl Do this way just so they can be substituted otherwise for OS/2 et al.
+
+EXE=
+CMD=
+AC_SUBST(EXE)
+AC_SUBST(CMD)
+
+AC_SUBST(YACC)
+AC_SUBST(AWK)
+AC_SUBST(NROFF)
+AC_SUBST(NROFFPLAIN)
+AC_SUBST(MANtoPS)
+AC_SUBST(MANtoHTML)
+AC_SUBST(STRIP)
+AC_SUBST(DCL2INC_REDIRECT)
+AC_SUBST(COL)
+AC_SUBST(SED)
+AC_SUBST(CC)
+AC_SUBST(CFLAGS)
+AC_SUBST(OPT)
+AC_SUBST(LDFLAGS)
+AC_SUBST(INSTALL_MAN)
+AC_SUBST(lispdir)
+AC_SUBST(sgimansubdir)
+
+AC_SUBST(CHMOD)
+AC_SUBST(CMP)
+AC_SUBST(CP)
+AC_SUBST(DIFF)
+AC_SUBST(EMACS)
+AC_SUBST(EQN)
+AC_SUBST(FTNPP)
+AC_SUBST(GREP)
+AC_SUBST(MAKE)
+AC_SUBST(MKDIR)
+AC_SUBST(MV)
+AC_SUBST(PACK)
+AC_SUBST(PATCH)
+AC_SUBST(PERL)
+AC_SUBST(PRINTENV)
+AC_SUBST(PWD_PROG)
+AC_SUBST(RM)
+AC_SUBST(RMDIR)
+AC_SUBST(SHELL)
+AC_SUBST(SOELIM)
+AC_SUBST(TAR)
+AC_SUBST(TBL)
+AC_SUBST(ZIP)
+AC_SUBST(FILTER_H)
+
+AC_OUTPUT( Makefile dcl2inc.awk dcl2inc make_blockmatch.pl test/Makefile test/Compare.sh )
+chmod +x dcl2inc make_blockmatch.pl test/Compare.sh

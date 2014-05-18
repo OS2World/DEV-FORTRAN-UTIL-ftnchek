@@ -1,0 +1,17 @@
+<HTML>
+<HEAD><TITLE>Source t208t.f</TITLE></HEAD>
+<BODY>
+<a name="FOO"><h3>SUBROUTINE FOO ( D, E, F )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>CHARACTER*(*)      d
+CHARACTER*127      e
+CHARACTER*(*)      f
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208t.f</td></tr>
+<tr><td></td></tr>
+</table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

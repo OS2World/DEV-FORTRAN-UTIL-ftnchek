@@ -1,0 +1,17 @@
+<HTML>
+<HEAD><TITLE>Source t208u.f</TITLE></HEAD>
+<BODY>
+<a name="%MAIN"><h3>PROGRAM %MAIN ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208u.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>INTEGER            maxtok             (maxtok = 10)
+INTEGER            maxtk1             (maxtk1 = 10)
+INTEGER            maxtk2             (maxtk2 = 10)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

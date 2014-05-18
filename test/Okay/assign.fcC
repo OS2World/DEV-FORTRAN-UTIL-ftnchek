@@ -1,0 +1,147 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File assign.f:
+      5       c1 = c5
+                 ^
+Warning near line 5 col 10 file assign.f: char*5 C5 truncated to char*1 C1
+     10       c5 = 5Hhello
+                   ^
+Warning near line 10 col 12 file assign.f: hollerith constant may not be
+ portable
+                 ^
+Error near line 10 col 10 file assign.f: type mismatch: holl*5 const 5Hhello 
+ assigned to char*5 C5
+     11       c5 = 11Hhello there
+                   ^
+Warning near line 11 col 12 file assign.f: hollerith constant may not be
+ portable
+                 ^
+Error near line 11 col 10 file assign.f: type mismatch: holl*11 const 11Hhello
+ there assigned to char*5 C5
+
+Warning in module SIZEPROP in file assign.f: Variables declared but never
+ referenced:
+    C10 declared at line 4 file assign.f
+    I declared at line 2 file assign.f (dummy argument)
+    X declared at line 2 file assign.f (dummy argument)
+
+Warning in module SIZEPROP in file assign.f: Variables may be used before set:
+    C5 used at line 5 file assign.f
+    C5 set at line 6 file assign.f
+     31       i = m
+                ^
+Nonportable usage near line 31 col 9 file assign.f: mixed default and explicit 
+ precision items: intg*4 M assigned to intg I
+     34       i = i2
+                ^
+Nonportable usage near line 34 col 9 file assign.f: mixed default and explicit 
+ precision items: intg*2 I2 assigned to intg I
+     35       i = i4
+                ^
+Nonportable usage near line 35 col 9 file assign.f: mixed default and explicit 
+ precision items: intg*4 I4 assigned to intg I
+     36       i4 = i
+                 ^
+Warning near line 36 col 10 file assign.f: intg I truncated to intg*4 I4
+     38       i2 = i4
+                 ^
+Warning near line 38 col 10 file assign.f: intg*4 I4 truncated to intg*2 I2
+     39       i = 4habcd
+                  ^
+Warning near line 39 col 11 file assign.f: hollerith constant may not be
+ portable
+                ^
+Nonportable usage near line 39 col 9 file assign.f: mixed default and explicit 
+ size items: holl*4 const 4Habcd assigned to intg I
+     40       i = 8habcdefgh
+                  ^
+Warning near line 40 col 11 file assign.f: hollerith constant may not be
+ portable
+                ^
+Nonportable usage near line 40 col 9 file assign.f: mixed default and explicit 
+ size items: holl*8 const 8Habcdefgh assigned to intg I
+     41       x = r4
+                ^
+Warning near line 41 col 9 file assign.f: real*4 R4 promoted to real X: may
+ not give desired precision
+     42       x = r8
+                ^
+Nonportable usage near line 42 col 9 file assign.f: mixed default and explicit 
+ precision items: real*8 R8 assigned to real X
+     43       x = c
+                ^
+Warning near line 43 col 9 file assign.f: cplx C truncated to real X
+     44       d = x
+                ^
+Warning near line 44 col 9 file assign.f: real X promoted to dble D: may not
+ give desired precision
+     45       x = d
+                ^
+Warning near line 45 col 9 file assign.f: dble D truncated to real X
+     47       d = z
+                ^
+Warning near line 47 col 9 file assign.f: dcpx Z truncated to dble D
+     48       r16 = d
+                  ^
+Nonportable usage near line 48 col 11 file assign.f: mixed default and
+ explicit precision items: dble D assigned to real*16 R16
+     49       r16 = r8
+                  ^
+Warning near line 49 col 11 file assign.f: real*8 R8 promoted to real*16 R16:
+ may not give desired precision
+     50       d = r4
+                ^
+Warning near line 50 col 9 file assign.f: real*4 R4 promoted to dble D: may
+ not give desired precision
+     51       d = r8
+                ^
+Warning near line 51 col 9 file assign.f: real*8 R8 promoted to dble D: may
+ not give desired precision
+     52       d = r16
+                ^
+Nonportable usage near line 52 col 9 file assign.f: mixed default and explicit 
+ precision items: real*16 R16 assigned to dble D
+     54       c = z
+                ^
+Warning near line 54 col 9 file assign.f: dcpx Z truncated to cplx C
+     55       i = L4
+                ^
+Error near line 55 col 9 file assign.f: type mismatch: logl*4 L4 assigned to 
+ intg I
+
+Warning in module %MAIN in file assign.f: Variables declared but never
+ referenced:
+    C16 declared at line 29 file assign.f
+    C32 declared at line 30 file assign.f
+    J declared at line 13 file assign.f
+    L declared at line 20 file assign.f
+    L2 declared at line 21 file assign.f
+    Y declared at line 17 file assign.f
+
+Warning in module %MAIN in file assign.f: Variables used before set
+    L4 used at line 55 file assign.f; never set
+    R4 used at line 41 file assign.f; never set
+    R8 used at line 42 file assign.f; never set
+
+Warning in module %MAIN in file assign.f: Variables may be used before set:
+    C used at line 43 file assign.f
+    C set at line 53 file assign.f
+    I2 used at line 34 file assign.f
+    I2 set at line 38 file assign.f
+    I4 used at line 35 file assign.f
+    I4 set at line 36 file assign.f
+
+ 3 syntax errors detected in file assign.f
+ 29 warnings issued in file assign.f
+
+Warning: Subprogram SIZEPROP argument data type mismatch at position 2:
+    Dummy arg I in module SIZEPROP line 2 file assign.f is type intg
+    Actual arg I2 in module %MAIN line 56 file assign.f is type intg*2
+  and at position 3:
+    Dummy arg X in module SIZEPROP line 2 file assign.f is type real
+    Actual arg R16 in module %MAIN line 56 file assign.f is type real*16
+
+Warning: Subprogram SIZEPROP argument usage mismatch at position 1:
+    Dummy arg CADJ in module SIZEPROP line 2 file assign.f is modified
+    Actual arg 'hello' in module %MAIN line 56 file assign.f is const or expr

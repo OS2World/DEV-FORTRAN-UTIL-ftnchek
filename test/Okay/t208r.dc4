@@ -1,0 +1,29 @@
+C====>Begin Module FOO                    File t208r.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     Parameter variables
+C
+      character*(*)       S
+      parameter           (S = 'hello')
+C
+      integer             MAXY
+      parameter           (MAXY = 54321)
+      integer             MAXZ
+      parameter           (MAXZ = 12345+MAXY)
+      integer             MAXTOK
+      parameter           (MAXTOK = 10)
+C
+C     Argument variables
+C
+      character*(*)       ARGCHR(MAXROW,MAXCOL,*)
+C
+      integer             MAXCOL,      MAXROW
+C
+C     Local variables
+C
+      character           ONE,         ONEAGAIN
+      character*3         THREE
+      character*(MAXTOK)  TOKLST
+      character*2         TWO,         TWOB
+C
+C====>End Module   FOO                    File t208r.f                  

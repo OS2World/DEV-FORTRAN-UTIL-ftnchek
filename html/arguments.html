@@ -1,0 +1,73 @@
+<HTML>
+<HEAD>
+<TITLE>Option: arguments</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="lbAF.html">OPTIONS</A><HR><P>
+<H2>Option: <font color=#FF0080>arguments</font></H2><P>
+<A NAME="arguments"></A><DT><B><A HREF="arguments.html">-arguments</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Controls warnings about
+mismatches between actual and dummy subprogram arguments, and also
+about mismatches between expected and actual subprogram type.  (An actual
+argument is an argument passed to the subprogram by the caller; a
+dummy argument is an argument received by the subprogram.)
+By default, all warnings are turned on.
+<P>
+
+The <I>list</I> consists of keywords separated by commas or colons.
+Since all these warnings are on by default, include a keyword prefixed by
+<B>no-</B> to turn off a particular warning.
+There are three special keywords: <B>all</B> to turn on all the
+warnings about arguments, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="arguments.html">-arguments</A></B> is equivalent to
+<B><A HREF="arguments.html">-arguments</A>=all</B>, and <B>-noarguments</B> is equivalent to
+<B><A HREF="arguments.html">-arguments</A>=none</B>.
+The warning keywords with their meanings are as follows:
+<DL COMPACT>
+<DT><B>arrayness</B>:
+
+<DD>
+warn about inconsistent use of arguments that are arrays.
+These warnings can be further controlled by the <B><A HREF="array.html">-array</A></B> option.
+<DT><B>type</B>:
+
+<DD>
+warn about dummy arguments of a different data type from the actual arguments.
+<DT><B>function-type</B>:
+
+<DD>
+warn if the invocation assumes the function's return value is a
+different type than it actually is.  Also warns if a function is
+called as a subroutine, or vice-versa.
+<DT><B>number</B>:
+
+<DD>
+warn about invoking a subprogram with a different number of arguments
+than the subprogram expects.
+</DL>
+<P>
+
+For compatibility with previous versions of <B>ftnchek</B>,  a numeric
+form of this setting is also accepted: the <I>list</I> is replaced by a
+number from 0 to 3.  A value of 0 turns all the warnings off,
+1 turns on only <B>number</B>, 2 turns on all
+except <B>number</B>, and 3 turns all the warnings on.
+<P>
+
+This setting does not apply to checking invocations
+of intrinsic functions or statement functions, which can
+only be turned off by the <B>-nocheck</B> option.
+<P>
+
+See also: <B><A HREF="array.html">-array</A></B>, <B><A HREF="library.html">-library</A></B>, <B><A HREF="usage.html">-usage</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="array.html">-array</A>
+</BODY></HTML>

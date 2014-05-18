@@ -1,0 +1,83 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File do_enddo.f:
+      4       do i=1,100
+              ^
+Warning near line 4 col 7 file do_enddo.f: Nonstandard syntax
+      6       enddo
+              ^
+Warning near line 6 col 7 file do_enddo.f: Nonstandard syntax
+      7       print *,sum  !@#$*&
+                           ^
+Warning near line 7 col 20 file do_enddo.f: Nonstandard syntax: inline comment
+     10       do while(other_sum .lt. 2000)
+              ^
+Warning near line 10 col 7 file do_enddo.f: Nonstandard syntax
+     13 ! here we have a nonstandard comment
+        ^
+Warning near line 13 col 1 file do_enddo.f: Nonstandard syntax: inline comment
+     12       end do
+              ^
+Warning near line 12 col 7 file do_enddo.f: Nonstandard syntax
+     15       dowhile ( x .ne. (1,2))
+              ^
+Warning near line 15 col 7 file do_enddo.f: Nonstandard syntax
+     17       end do
+              ^
+Warning near line 17 col 7 file do_enddo.f: Nonstandard syntax
+     18       do 100 while (.true.)
+              ^
+Warning near line 18 col 7 file do_enddo.f: Nonstandard syntax
+     20          if( sum .eq. 0.0 ) exit
+                                    ^
+Warning near line 20 col 29 file do_enddo.f: Nonstandard syntax: EXIT
+ statement
+     22       do 200, while (.false.)
+              ^
+Warning near line 22 col 7 file do_enddo.f: Nonstandard syntax
+     24  200  end do
+              ^
+Warning near line 24 col 7 file do_enddo.f: Nonstandard syntax
+
+Warning in module ABC in file do_enddo.f: Variables may be used before set:
+    X used at line 15 file do_enddo.f
+    X set at line 16 file do_enddo.f
+
+Warning in module ABC in file do_enddo.f: Names longer than 6 chars
+ (nonstandard):
+    OTHER_SUM first occurrence at line 9 file do_enddo.f
+
+Warning in module ABC in file do_enddo.f: Names containing nonstandard
+ characters:
+    OTHER_SUM first occurrence at line 9 file do_enddo.f
+     26       include 'average.f'
+              ^
+Warning near line 26 col 7 file do_enddo.f: Nonstandard syntax
+Including file average.f:
+     16             COMPAV = SUM/COUNT
+                           ^
+Warning near line 16 col 20 file average.f: integer quotient expr SUM/COUNT 
+ converted to real
+
+Warning in module COMPAV in file average.f: Variables may be used before set:
+    SUM used at line 14 file average.f
+     included at line 26 file do_enddo.f
+    SUM set at line 14 file average.f
+     included at line 26 file do_enddo.f
+
+Warning in module AVENUM in file average.f: Variables set but never used:
+    AVG set at line 43 file average.f
+     included at line 26 file do_enddo.f
+
+ 0 syntax errors detected in file do_enddo.f
+ 19 warnings issued in file do_enddo.f
+
+Warning: Subprogram ABC never invoked
+    Defined in module ABC line 2 file do_enddo.f
+
+Warning: Subprogram COMPAV argument data type mismatch at position 1:
+    Dummy arg SCORE in module COMPAV line 10 file average.f (included at line 
+ 26 in do_enddo.f) is type intg
+    Actual arg NUMS in module AVENUM line 43 file average.f (included at line 
+ 26 in do_enddo.f) is type real

@@ -1,0 +1,92 @@
+<HTML>
+<HEAD>
+<TITLE>CHANGING THE DEFAULTS</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="lbAF.html">OPTIONS</A><HR><P>
+<A NAME="lbAG">&nbsp;</A> <H2>CHANGING THE DEFAULTS</H2>
+
+<B>ftnchek</B> includes two mechanisms for changing the
+default values of all options:
+by defining environment variables
+or by creating a preferences file.
+When <B>ftnchek</B> starts up,
+it looks in its environment for any variables whose names are composed by
+prefixing the string
+FTNCHEK_
+onto the uppercased version of the option
+name.  If such a
+variable is found, its value is used to specify the default for the
+corresponding switch or setting.  In the case of settings (for example,
+the <B><A HREF="common.html">-common</A></B> strictness setting)
+the value of the environment variable is read as the
+default setting value.  In the case of switches, the default switch will
+be taken as true or yes unless the environment variable has the value
+0 or NO.
+<P>
+
+Note that the environment variable name must be constructed with the
+full-length option name, which must be in uppercase.  For example, to
+make
+<B>ftnchek</B> print a source listing by default, set the environment
+variable
+FTNCHEK_LIST
+to 1 or YES or anything other than 0 or NO.
+The names
+FTNCHEK_LIS
+(not the full option name) or
+ftnchek_list
+(lower case) would not be recognized.
+<P>
+
+Here are some examples of how to set environment variables on various
+systems.  For simplicity, all the examples set the default <B><A HREF="list.html">-list</A></B>
+switch to YES.
+<P>
+
+
+
+
+
+
+&gt;1. UNIX, Bourne shell:  &gt;$ FTNCHEK_LIST=YES
+
+<BR>
+
+&gt;                        &gt;$ export FTNCHEK_LIST
+<P>
+&gt;2. UNIX, C shell:       &gt;% setenv FTNCHEK_LIST YES
+<P>
+&gt;3. VAX/VMS:             &gt;$ DEFINE FTNCHEK_LIST YES
+<P>
+&gt;4. MSDOS:               &gt;$ SET FTNCHEK_LIST=YES
+
+<P>
+
+After processing any environment variables, ftnchek looks for a
+preferences file containing options and settings.
+It will search in the following order, using only the
+first file found: (1) <I>.ftnchekrc</I> in the current directory, (2)
+<I>ftnchek.ini</I> in the current directory, (3) <I>.ftnchekrc</I> in
+the user's home directory, (4) <I>ftnchek.ini</I> in the home
+directory.  If such a file is found, the options defined in it are
+used as defaults in place of the built-in defaults and overriding any
+defaults set in the environment..
+<P>
+
+Each option or setting in the preferences file must be on a separate
+line.  They are given in the same form as on the command line, except
+without the initial
+dash.
+The preferences file can contain blank lines and comments.  Comments
+are introduced at any point in a line by a space character (blank or
+tab) or the '#' character, and are terminated by the end of the line.
+<P>
+
+Command-line options override the defaults set in the environment
+or in the preferences file, in  the same way as they
+override the built-in defaults.
+<P>
+<P><HR><P>Next: <A HREF="lbAH.html">USING PROJECT FILES</A>
+</BODY></HTML>

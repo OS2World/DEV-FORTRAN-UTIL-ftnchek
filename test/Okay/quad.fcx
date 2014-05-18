@@ -1,0 +1,110 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File quad.f:
+
+      1 C  Test of parsing and checking quad precision variables & constants.
+      2 C  No intrinsic functions at this time.
+      3       real r
+      4       double precision d
+      5       real*8 r8
+                   ^
+"quad.f", line 5 col 12: Warning: Nonstandard syntax
+      6       real*16 q
+                   ^
+"quad.f", line 6 col 12: Warning: Nonstandard syntax
+      7       complex*32 cq
+                      ^
+"quad.f", line 7 col 15: Warning: Nonstandard syntax
+      8       q = 1.234Q5
+                  ^
+"quad.f", line 8 col 11: Warning: Nonstandard syntax: quad precision constant
+      9       q = 1.234Q+05
+                  ^
+"quad.f", line 9 col 11: Warning: Nonstandard syntax: quad precision constant
+     10       q = 1.234Q+345
+                  ^
+"quad.f", line 10 col 11: Warning: Nonstandard syntax: quad precision constant
+     11       q = 1.234Q-345
+                  ^
+"quad.f", line 11 col 11: Warning: Nonstandard syntax: quad precision constant
+     12       d = 1.234Q+05
+                  ^
+"quad.f", line 12 col 11: Warning: Nonstandard syntax: quad precision constant
+                ^
+"quad.f", line 12 col 9: Warning: real*16 const 1.234Q+05 truncated to dble D
+     13       r = 1.234Q+05
+                  ^
+"quad.f", line 13 col 11: Warning: Nonstandard syntax: quad precision constant
+                ^
+"quad.f", line 13 col 9: Warning: real*16 const 1.234Q+05 truncated to real R
+     14       d = q
+                ^
+"quad.f", line 14 col 9: Warning: real*16 Q truncated to dble D
+     15       q = d
+                ^
+"quad.f", line 15 col 9: Warning: dble D promoted to real*16 Q: may not give
+ desired precision
+     16       r = q
+                ^
+"quad.f", line 16 col 9: Warning: real*16 Q truncated to real R
+     17       q = r
+                ^
+"quad.f", line 17 col 9: Warning: real R promoted to real*16 Q: may not give
+ desired precision
+     18       cq = q
+     19       q = qsqrt(q)
+     20       cq = cqsqrt(cq)
+     21       r = qsqrt(q)
+                ^
+"quad.f", line 21 col 9: Warning: real*16 expr QSQRT(Q) truncated to real R
+     22       q = qsqrt(r)
+                        ^
+"quad.f", line 22 col 17: Error: illegal argument data type for intrinsic
+ function QSQRT: real R
+     23       q = qsqrt(d)
+                        ^
+"quad.f", line 23 col 17: Error: illegal argument data type for intrinsic
+ function QSQRT: dble D
+     24       r8 = qsqrt(q)
+                 ^
+"quad.f", line 24 col 10: Warning: real*16 expr QSQRT(Q) truncated to real*8 R8
+     25       q = qprod(d,r8)
+                          ^
+"quad.f", line 25 col 19: Nonportable usage: argument precision may not be
+ correct for intrinsic function QPROD: real*8 R8
+                        ^
+"quad.f", line 25 col 17: Nonportable usage: intrinsic argument list mixes
+ default and explicit precision operands: dble D , real*8 R8
+     26       q = qmax1(1.234Q5,q,1.234Q-5)
+                        ^
+"quad.f", line 26 col 17: Warning: Nonstandard syntax: quad precision constant
+                                  ^
+"quad.f", line 26 col 27: Warning: Nonstandard syntax: quad precision constant
+     27       end
+
+Module %MAIN: prog
+
+External subprograms referenced:
+
+    CQSQRT: intrns      QMAX1: intrns      QPROD: intrns      QSQRT: intrns 
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+        CQ cplx32            D dble             Q real16            R real   
+        R8 real8  
+
+
+
+
+"quad.f", line 20: Warning in module %MAIN: Non Fortran 77 intrinsic functions
+ referenced:
+"quad.f", line 20:     CQSQRT referenced
+"quad.f", line 26:     QMAX1 referenced
+"quad.f", line 25:     QPROD referenced
+"quad.f", line 19:     QSQRT referenced
+
+ 2 syntax errors detected in file quad.f
+ 22 warnings issued in file quad.f
+

@@ -1,0 +1,9 @@
+C====>Begin Module %MAIN                  File t208o.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      REAL                E
+      PARAMETER           (E = 5.4)
+C
+C====>End Module   %MAIN                  File t208o.f                  

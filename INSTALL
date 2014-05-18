@@ -1,0 +1,375 @@
+			  INSTALLING FTNCHEK
+
+To build and install ftnchek, follow the instructions below for your
+operating system.
+
+
+(1) UNIX and UNIX-like systems
+
+   Unpacking ftnchek: If the file you received is a UNIX compressed
+   tar file, suffix .Z, you should first unzip it using the UNIX
+   ``uncompress'' command, and then give it as input to ``tar'' to
+   unpack the files.  For example, assuming the file has been placed
+   in the desired directory, and is named ftnchek.tar.Z, you would
+   give the two UNIX commands
+
+      uncompress ftnchek.tar.Z
+      tar -xf ftnchek.tar
+
+   If the suffix is .gz instead of .Z, use the program ``gunzip'' in
+   place of ``uncompress''.  The gunzip program is publicly available
+   from the GNU project.
+
+   The tar command creates a directory named ftnchek-3.1.1 containing
+   the files of the distribution.  You should change directory to this
+   directory and follow the instructions below.
+
+   Next, configure a Makefile for your system with the command:
+
+      $ ./configure
+
+   This uses the file Makefile.in as a template.  If you want to change
+   some options, edit the file Makefile.in, not Makefile, and re-run
+   configure.
+
+   Next, build ftnchek with the command:
+
+      $ make
+
+   To verify correct operation of the newly created ftnchek, you can
+   now issue the command
+
+      $ make check
+
+   This will run ftnchek on the suite of test programs in the
+   subdirectory ``test'' and report on any discrepancies.
+
+   Note: if you have built and installed the ftnpp preprocessor
+   (provided separately), it will be tested for correct interaction
+   with ftnchek.  Otherwise this test will be skipped.  Similarly, if
+   your system has gawk or nawk installed, the dcl2inc script will
+   also be checked for correct operation.  Failure of either of these
+   tests usually does not indicate any problem with ftnchek itself.
+
+   Once ftnchek is working properly, issue the command (usually
+   requiring super-user authority):
+
+      $ make install
+
+   This will install the executable in /usr/local/bin and the manpage in
+   /usr/local/man by default.  (The dcl2inc program will also be
+   installed.)
+
+   There is also a small file, project.magic, which can be added to
+   your system's magic file, so that the ``file'' program will
+   recognize ftnchek project files for what they are.
+
+   If emacs is installed on your system, the lisp file ftnchek.el will
+   also be installed in the system site-lisp directory.
+
+   The HTML documentation is not installed by ``make install''.  See
+   the section on Associated Files below for details on installing
+   this component manually.
+
+   If you see a warning about "catman": on IRIX the manpage gets
+   specialized treatment, since man pages are pre-formatted and packed,
+   and nroff is not bundled with the OS.  If nroff is available, then it
+   is used to create the formatted man pages, and all is well.
+   Otherwise, the user should obtain the ftnchek "catman" file,
+   distributed separately.  (It is available from ftp.dsm.fordham.edu in
+   the pub/ftnchek directory).  Unpack this in the source directory and
+   proceed with "make install".  If the "catman" files are not found, a
+   notice will be issued, and the flat ascii ("doc") versions will be
+   used.
+
+   The UNIX Makefile employs a private script, man2ps, for converting
+   manual pages to PostScript (linked to names me2ps, mm2ps, and
+   ms2ps, it will support the -me, -mm, and -ms formats as well).  The
+   script currently knows about GNU groff, Sun Solaris 2.x troff +
+   dpost and psroff; it will use any of these, with groff preferred.
+   For troff + dpost, if you get errors like this
+
+troff: Can't open /usr/lib/font/devpost/C.out; line 818, file <standard input>
+
+   you can repair them if you have appropriate privileges:
+
+      % cd /usr/lib/font/devpost
+      % ln CO C
+      % ln CO.name C.name
+      % ln CO.out C.out
+
+   These commands simply create links between a Courier font that Sun
+   named CO, and the one named C that is expected by ftnchek.man.  If
+   some troff expert knows a better way to handle this, please tell
+   us.  Additional alternatives in the man2ps script to support
+   ditroff and other vendors' troff-to-PostScript solutions will also
+   be welcome.
+
+
+(2) VMS
+
+   Unpacking ftnchek: If the file you received is a VMS_SHAR.COM file,
+   unpack it in an empty directory by executing it as a DCL command
+   file.  For instance, if the file is named FTNCHEK_VMS_SHAR.COM and
+   located in the current directory, you would give the VMS command
+
+       @FTNCHEK_VMS_SHAR.COM
+
+   It is highly recommendend that VMS users also obtain the file
+   SHELL_MUNG.C.  This file is not necessary to build ftnchek, but
+   without it wildcards in file names on the command line will not be
+   expanded.  This file is no longer bundled with ftnchek, but is
+   obtainable at the ftnchek home site and elsewhere.  You should copy
+   SHELL_MUNG.C to the same directory as the ftnchek source before
+   proceeding to build ftnchek.
+
+   Rename the file "CONFIG-GENERIC.H" to "CONFIG.H".  Next, follow the
+   build instructions for Alpha or VAX.
+
+(2a) VMS on Alpha
+
+   Give the command
+
+        $ @BUILD
+
+   After the program has been compiled, you must turn it into a
+   so-called "DCL foreign command" so that it can be invoked by
+   giving its name on a command line, instead of using the RUN
+   command.  Do this with the command
+
+        $ FTNCHEK :== $disk:[directory]FTNCHEK
+
+   where you substitute the disk and directory names where the file
+   FTNCHEK.EXE resides.  This command must be executed once per
+   login.  It is suggested you put this command into your LOGIN.COM
+   file.
+
+   The BUILD procedure also creates a VMS help library named
+   FTNCHEK.HLB.  To access it from the VMS HELP command, you must
+   give the command
+
+        $ DEFINE HLP$LIBRARY disk:[directory]FTNCHEK.HLB"
+
+   Again, this command must be executed once per login to have effect.
+
+   Note that BUILD.COM uses the files CC.COM and LINK.COM
+   which are conditional compilation and link scripts that allow
+   re-making ftnchek by compiling only what has changed.
+
+   To verify correct operation of the newly created ftnchek, you can
+   now issue the command
+
+	$ @CHECK
+
+   This will run ftnchek on the suite of test programs in the
+   subdirectory [.TEST] and report on any discrepancies.  Note: thanks
+   to Bob Wells for yeoman service in providing CHECK.COM.
+
+(2b) VMS on DEC VAX
+
+   Same as (2a) except use BUILD-VAX.COM instead.  It has been found
+   that some compilers require the /VAXC qualifier in order to compile
+   this code properly.  If this is the case with your compiler, edit
+   CC.COM, changing cc to cc/vaxc at line 44.
+
+
+
+(3a) MS-DOS/Win with Borland BCC32
+
+   Edit CLIB in makefile.bcc32 (line 13) to reflect the location where
+   the BCC32 library is installed on your machine.  Rename the file
+   "makefile.bcc32" to "makefile".  Rename the file "config-win32.h"
+   to "config.h".  Then give the command:
+
+        C> MAKE
+
+   See Remark at (3c).
+
+(3b) MS-DOS/Win with Microsoft Visual C/C++
+
+   Open the workspace file ftnchek.dsw.  Rename the file
+   "config-win32.h" to "config.h".  Build ftnchek.exe.
+
+   See Remark at (3c).
+
+(3c) Other MS-DOS/Win
+
+   See the instructions at (6) below.  You should define the macro
+   MSDOS manually, if your compiler does not automatically define one
+   of the macros _WIN32, _MSDOS or __TURBOC__.  (If it does define one
+   of these, then MSDOS is defined automatically.)  The macro MSDOS is
+   needed in order to configure ftnchek's behavior to suit the
+   DOS/Windows environment.
+
+   You can verify correct operation of the MS-DOS/Win version of
+   ftnchek as follows.  Go to the TEST folder and unzip the file
+   CHECKBAT.ZIP into the same folder.  (Replace files that are
+   identically named.  CHECKBAT.ZIP contains replacements for some of
+   the master result files in the OKAY subdirectory.  These
+   replacements are needed in order for the check to work properly,
+   due to the differences between the Unix and DOS versions of
+   ftnchek.)  Execute the CHECK.BAT batch file.
+
+   Remark: for Borland C/C++ 5.0 and MS Visual C++ 6.0, there is (so
+   far as I have been able to determine) insufficient support for the
+   POSIX regular expression functions defined in the header file
+   regex.h to compile the functions needed for producing html
+   documentation (the /mkhtml commandline option).  Therefore this
+   feature is disabled if you compile according to the instructions
+   given here.  This will cause CHECK.BAT to report differences when
+   checking help.fcl and help.fcx.  These two files list all of
+   ftnchek's command-line options, and the line for /mkhtml will be
+   missing if regex support is lacking.  If anyone knows a way to get
+   regex support working for either of these compilers, please let me
+   know.
+
+   Note: Thanks to Gunnar Duus for providing  makefile.bcc32 and the
+   MSVC project files, as well as CHECK.BAT and its companion scripts.
+
+
+(4) Macintosh Programmer's Workshop (MPW)
+
+   Rename the file "makefile.mpw" to "makefile".  Edit the file,
+   changing character '+' to CHAR(182), option-d on the Macintosh
+   keyboard; and the character '/' to CHAR(196), option-f.  Rename the
+   file "config-generic.h" to "config.h".  Then use the "make" command
+   to create Ftnchek.
+
+
+(5) OS/2 with gcc
+
+   If you have installed the GNU utility "sed", you can customize the
+   makefile for your system.  Give the command:
+
+         configure_os2
+
+   This will create makefile.os2 with appropriate values for your
+   system.  You should rename it "makefile".  Rename the file
+   "config-generic.h" to "config.h".  Then run make to build ftnchek.
+   Configure_os2 also builds an OS/2 version of the dcl2inc script
+   that is configured for your system.  Many thanks to Jan Ftacnik,
+   Stefan A. Deutscher and Christian Bartels for producing and
+   improving this configuration script.
+
+
+(6a) Other systems having "make" utility
+
+   Rename the file "makefile.generic" to "makefile", edit it
+   appropriately for your system.  Rename the file "config-generic.h"
+   to "config.h", and edit it for your system.  Then run make.
+
+(6b) Other systems not having "make" utility
+
+   First rename the file "config-generic.h" to "config.h", and edit it
+   for your system.  Then it should suffice simply to compile all the
+   ".c" files and link them.  The main differences among the versions
+   for different operating systems have to do with:
+
+         -- the use of "/" vs. "-" as a command-line option prefix.
+            Define the macro name OPTION_PREFIX_SLASH if "/" is to be
+            accepted as an alternate to "-".  (No particular value
+            need be assigned to this macro, just define it.)  The "-"
+            prefix is always accepted.  NOTE: do not define this macro
+            if your system uses the "/" character as a separator in
+            path names.  Doing so will introduce ambiguities in the
+            command-line arguments.
+         -- the default filename extension ".for" vs. ".f".  Define
+            the macro name DEF_SRC_EXTENSION to the string value
+            corresponding to Fortran source files on your system.
+         -- the default home directory in which to search for
+            .ftnchekrc or ftnchek.ini.  Define SPECIAL_HOMEDIR to the
+            string value appropriate for your system.
+         -- the default systemwide directory in which to search for
+            include-files.  Define the macro DEFAULT_INCLUDE_DIR to
+            the string value of this directory.
+   These macros are all defined automatically to appropriate values
+   for Unix, VMS, and MSDOS systems.  You only need to define them by
+   hand if compiling ftnchek on other systems.
+
+   There are also some definitions in the file config.h that control
+   the use of certain system header files and library functions.  For
+   Unix systems, this file is automatically created by the configure
+   script.  If you are unable to use the configure script, the generic
+   version of config.h provided in the distribution will work for most
+   systems, but you may need to edit config.h manually to reflect the
+   situation on your own system.
+
+
+Once ftnchek is working, you can test it by giving the command:
+
+        $ ftnchek -list -sym average
+
+Then compare the output against the file ``average.out''.  A more
+thorough checkout is possible on Unix systems by giving the ``make
+check'' command described above.
+
+
+			   Associated files
+
+There are several auxiliary files included in the distribution.  Most
+of them are automatically installed by ``make install'' on a Unix
+system.  On non-Unix systems, you may not be able to use them.  If you
+can use them, you will need to install them in an appropriate place
+manually.
+
+dcl2inc is a script to convert the .dcl files produced by ftnchek with
+    the -makedcls option, into files suitable for inclusion in your
+    source code.  This script requires a modern version of awk.  The
+    dcl2inc script itself is a Bourne shell script that simply invokes
+    awk with suitable arguments.  On Unix systems, the dcl2inc script
+    is generated from dcl2inc.in by the configure script, which
+    substitutes apropriate values for the library where dcl2inc.awk is
+    installed and for the local version of awk (e.g. gawk or nawk).
+    If you wish to use this script on a non-Unix system, you can make
+    the substitutions by hand, since they are few and obvious
+    (assuming you have a suitable awk available).
+
+ftnchek.el is an Emacs lisp package that provides an ftnchek mode.
+    Using ``make install'' installs this in the system site-lisp
+    directory if there is one.  Read the comments at the head of the
+    file for details.  Each user should add a line like:
+      (add-hook 'fortran-mode-hook (require 'ftnchek-mode "ftnchek"))
+    to his or her personal .emacs file.  The author has said that this
+    package is still undergoing improvements, so the version included
+    in this distribution may well be out of date by now.  The most
+    recent version of ftnchek.el can be found at the URL given in that
+    file.
+
+ftnchek.1 and dcl2inc.1 are Unix man pages.  They are automatically
+    installed in the man directory by ``make install.''  They are not
+    much use on non-Unix systems.
+
+ftnchek.hlp is a VMS help document.  It is automatically converted to
+    a help library by BUILD.COM.  That script gives instructions for
+    making the help library available to VMS HELP.  You may wish to
+    install this in a suitable system-wide help directory.
+
+html is a directory containing a hypertext version of the
+    documentation.  This is NOT installed automatically by ``make
+    install.''  If you wish to make this documentation available on
+    your local system, install these files someplace where a browser
+    can access them.  A typical way to do this would be to create a
+    directory named "ftnchek" in a suitable place in the web server
+    directory, then copy all the files from the html directory to that
+    directory.  The file index.html is the top-level HTML file.
+
+    Note that the HTML documents contain some URLs pointing to other
+    man pages.  If your system has HTML man pages, or a cgi program
+    that converts man pages to HTML on the fly, you may want to edit
+    these links so they will work correctly.  As distributed, the html
+    files contain URLs of the form:
+       "http://localhost/cgi-bin/man/man2html?n+prog"
+    for a reference to program prog in manual section n.
+
+				Notes
+
+The suffix .prj for project files is also used by the program revision
+control system prcs (see http://scam.xcf.berkeley.edu/~jmacd/prcs.html) so
+that conflicts might occur.  Use the macro DEF_PROJ_EXTENSION to change the
+default suffix.  For Unix systems, you can specify the alternative
+extension on the make command line.  For example, to change the extension
+to .foo you would say:
+    make OPTIONS='-DDEF_PROJ_EXTENSION=\".foo\"'
+Alternatively, edit the Makefile to set the OPTIONS variable as above,
+or edit the file ftnchek.h to change the definition of DEF_PROJ_EXTENSION
+to the desired string.

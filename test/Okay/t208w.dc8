@@ -1,0 +1,109 @@
+c====>Begin Module S                      File t208w.f                  
+c---->Makedcls Options: All variables                                   
+c
+c     Intrinsic functions
+c
+      INTRINSIC           DSIN
+c
+c     External functions
+c
+      EXTERNAL            EXTSUB
+c
+      DOUBLE PRECISION    DFLOAT,      DSQRT
+c
+c     Argument variables
+c
+      DOUBLE PRECISION    X
+c
+c     Local variables
+c
+      DOUBLE PRECISION    Y
+c
+c     Common variables
+c
+      INTEGER             A,           B,           C
+c
+      COMMON / ONE    /   A,           B,           C
+c
+c     Common variables
+c
+      INTEGER             G,           H,           I
+c
+      REAL                U,           V,           W
+c
+      COMMON / THREE  /   G,           H,           I,           U
+      COMMON / THREE  /   V,           W
+c
+c     Common variables
+c
+      INTEGER             D,           E,           F
+c
+      COMMON / TWO    /   D,           E,           F
+c
+c====>End Module   S                      File t208w.f                  
+c====>Begin Module %MAIN                  File t208w.f                  
+c---->Makedcls Options: All variables                                   
+c
+c     Parameter variables
+c
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+c
+c     Common variables
+c
+      DOUBLE PRECISION    F(0:NBP1,0:NBP1,2)
+c
+      COMMON / FORCE  /   F
+c
+c     Equivalenced common variables
+c
+      DOUBLE PRECISION    W1(0:NBP1,0:NBP1,1:2)
+      DOUBLE PRECISION    W2(0:NBP1,0:NBP1,1:2)
+c
+c     Common variables
+c
+      DOUBLE PRECISION    P(0:NBP1,0:NBP1)
+c
+      COMMON / PRES   /   P
+c
+c     Equivalenced common variables
+c
+      DOUBLE PRECISION    D(0:NBP1,0:NBP1)
+c
+c====>End Module   %MAIN                  File t208w.f                  
+c====>Begin Module %MAIN                  File t208w.f                  
+c---->Makedcls Options: All variables                                   
+c
+c     Common variables
+c
+      DOUBLE PRECISION    X(10)
+c
+      COMMON / ONE    /   X
+c
+c     Equivalenced common variables
+c
+      DOUBLE PRECISION    Y
+c
+c====>End Module   %MAIN                  File t208w.f                  
+c====>Begin Module %MAIN                  File t208w.f                  
+c---->Makedcls Options: All variables                                   
+c
+c     Common variables
+c
+      DOUBLE PRECISION    X(10)
+c
+      COMMON / ONE    /   X
+c
+c     Equivalenced common variables
+c
+      DOUBLE PRECISION    Y(1),        Z(2)
+c
+c====>End Module   %MAIN                  File t208w.f                  

@@ -1,0 +1,91 @@
+<HTML>
+<HEAD>
+<TITLE>NEW FEATURES</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="lbAK.html">LIMITATIONS AND EXTENSIONS</A><HR><P>
+<A NAME="lbAL">&nbsp;</A> <H2>NEW FEATURES</H2>
+
+Here are the changes from Version 3.1 to Version 3.2:
+<DL COMPACT>
+<DT>1.<DD>
+New option <B><A HREF="mkhtml.html">-mkhtml</A></B> to generate HTML documentation files from
+the source code.  Thanks go to Mark McVeigh for contributing this feature.
+<DT>2.<DD>
+I/O unit usage information is now provided under the <B><A HREF="symtab.html">-symtab</A></B>
+option.  A table is printed listing each I/O unit by name and/or
+number, together with the operations performed on it.
+<DT>3.<DD>
+A single large project file, created by
+concatenating a number of separately produced
+project files, can be input for use as a library project file.
+<DT>4.<DD>
+Combined type declarations and data-statement-like initializers, as
+in INTEGER  N / 100 / are accepted. 
+<DT>5.<DD>
+Fixed a bug that caused <B>ftnchek</B> to crash if a parameter is declared
+with the same name as the subprogram containing it.  New error message
+for same.
+<DT>6.<DD>
+Fixed a bug in checking type agreement between variables and their
+initial values in Fortran 90<A HREF="style.html">-style</A> declarations with initializers, as
+in INTEGER :: N=100.
+<DT>7.<DD>
+New error message when an internal file is a constant rather than a
+variable.  Some compilers permit this for READ operations, but
+it is prohibited by the F90 Standard in section 9.2.2.1.
+</DL>
+<P>
+
+Here are the changes from Version 3.0 to Version 3.1:
+<DL COMPACT>
+<DT>1.<DD>
+New checks for proper nesting of block structures such as IF ...
+END IF.
+<DT>2.<DD>
+Limited support for attribute-based type declarations.  Read the
+section on Extensions for details.  Note that this new feature should
+be seen as a first step toward full support for Fortran 90 type
+declarations, but it is not there yet.  The level of support may be
+sufficient for novice programmers, but it is not yet ready for serious
+use.
+<DT>3.<DD>
+New flag <B><A HREF="style.html">-style</A></B> for users who want to adhere to a strict
+modern programming style.  This flag controls warnings about legal
+Fortran 77 constructs such as GOTO that are more error-prone
+than the newer constructs available in Fortran 90.
+<DT>4.<DD>
+The <B><A HREF="source.html">-source</A></B> options <B>parameter-implicit-type</B> and
+<B>dec-parameter-standard-type</B> were changed to
+<B>param-implicit-type</B> and <B>dec-param-standard-type</B>
+respectively for consistency with other options also related to
+parameters, which all use <B>param-</B>.
+<DT>5.<DD>
+New warnings: modification of a DO variable inside its loop (controlled by
+<B><A HREF="usage.html">-usage</A>=do-index-modified</B> option), and alternate return using
+a constant value that does not correspond to a label argument
+(controlled by a new <B><A HREF="pretty.html">-pretty</A>=alternate-return</B> option).
+<DT>6.<DD>
+Fixed a bug that caused project files to contain incorrect information
+about actual arguments that are parameters.  This bug had no effect on
+checking of programs using the project files, since the bogus information
+was not used in these cases.
+<DT>7.<DD>
+The <B><A HREF="project.html">-project</A></B> flag now takes options to control how much
+information about subprogram calls and common blocks should be
+stored.  These options are mainly of interest to those who want to use
+project files for purposes other than checking the program with
+<B>ftnchek</B>.
+<DT>8.<DD>
+Changed the way that the HTML documentation is produced.  The main
+change is that URLs referring to man pages have a different form.
+Also got rid of the symbolic links in the html directory, which cause
+problems on systems that do not support such links.
+<DT>9.<DD>
+Implementation changes for faster execution.  The speedup is about a
+factor of two in some cases.
+
+</DL>
+<P><HR><P>Next: <A HREF="lbAM.html">BUGS</A>
+</BODY></HTML>

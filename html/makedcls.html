@@ -1,0 +1,193 @@
+<HTML>
+<HEAD>
+<TITLE>Option: makedcls</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="list.html">-list</A><HR><P>
+<H2>Option: <font color=#FF0080>makedcls</font></H2><P>
+<A NAME="makedcls"></A><DT><B><A HREF="makedcls.html">-makedcls</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Prepare a neatly-formatted file of declarations of variables,
+common blocks, and namelist lists, for possible
+merging into the source code.  The declarations are stored in a file
+of the same name as the source code, but with the extension changed to
+<I>.dcl</I>.
+
+If no declarations are written to the file, it is deleted to reduce
+clutter from empty files.
+<P>
+
+If input comes from standard input, instead of a named file, then
+declarations are written to standard output.
+<P>
+
+Variables are declared in alphabetical order within each declaration
+class and type, with integer variables first, because of their later
+possible use in array dimensions.
+<P>
+
+PARAMETER statements are an exception to the alphabetical order
+rule, because the Fortran 77 Standard requires that the expressions
+defining parameter values refer only to constants and already-defined
+parameter names.  This forces the original source file order of such
+statements to be preserved in the declaration files.
+<P>
+
+Explicit declaration of
+<I>all</I>
+
+variables is considered good modern programming practice.  By using
+compiler options to reject undeclared variables, misspelled variable
+names (or names extending past column 72) can be caught at compile
+time.  Explicit declarations also greatly facilitate changing
+floating-point precision with filters such as
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+dtoq">dtoq</A></B>(1L),
+
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+dtos">dtos</A></B>(1L),
+
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+fd2s">fd2s</A></B>(1L),
+
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+fs2d">fs2d</A></B>(1L),
+
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+qtod">qtod</A></B>(1L),
+
+and
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+stod">stod</A></B>(1L).
+
+These programs are capable of changing types of explicit
+floating-point type declarations, intrinsic functions, and constants,
+but because they do not carry out rigorous lexical and grammatical
+analysis of the Fortran source code, they cannot provide modified type
+declarations for undeclared variables.
+Default setting = 0, turn-on = 1.
+<P>
+
+Various options for the form of the declarations file are controlled
+by the <I>list</I>, which consists of keywords
+separated by commas or colons.
+There are three special keywords: <B>all</B> to turn on all the
+options, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="makedcls.html">-makedcls</A></B> is equivalent to
+<B><A HREF="makedcls.html">-makedcls</A>=declarations</B> (i.e. produce the declarations file
+using the default options), and
+<B>-nomakedcls</B> is equivalent to <B><A HREF="makedcls.html">-makedcls</A>=none</B>.
+<P>
+
+For compatibility with previous versions of <B>ftnchek</B>, a numeric
+form of this setting is also accepted:  the <I>list</I> is replaced by
+a number which is the sum of the numbers in parentheses beside
+the keywords in the following list.
+The warning keywords with their meanings are as follows:
+<DL COMPACT>
+<DT><B>declarations</B> (1):<DD>
+Write a declaration file.  (This is implied by any of the other
+options, and can be omitted if any other options are given.)
+<DT><B>undeclared-only</B> (2):<DD>
+By default, all variables are included in the declaration file.  With
+this option, include only
+<I>undeclared</I>
+
+variables.  This setting is useful if you want to check for undeclared
+variables, since Fortran source files with all variables properly
+declared will not result in a
+<I>.dcl</I>
+
+file.
+With this option, common blocks and namelist lists will not be
+included in the declaration file, since by their nature they cannot be
+undeclared.
+<DT><B>compact</B> (4):<DD>
+The declarations are normally prettyprinted to line up neatly in
+common columns, as in the declaration files output by the Extended
+PFORT Verifier,
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+pfort">pfort</A></B>(1L).
+
+This option value selects instead compact output, without column
+alignment.
+<DT><B>use-continuation-lines</B> (8):<DD>
+Causes continuation lines to be used where permissible.
+The default is to begin a new declaration on each line.  This option
+is appropriate to use together with <B>compact</B>.
+<DT><B>keywords-lowercase</B> (16):<DD>
+Output Fortran keywords in lowercase, instead of the default
+uppercase.
+<DT><B>vars-and-consts-lowercase</B> (32):<DD>
+Output variables and constants in lowercase, instead of the default
+uppercase.   Character string constants are not affected by this
+option.
+<DT><B>exclude-sftran3</B> (64):<DD>
+Omit declarations of internal integer variables produced by the
+SFTRAN3 preprocessor,
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+xsf3">xsf3</A></B>(1L),
+
+as part of the translation of structured Fortran statements to
+ordinary Fortran.  These variables have six-character names of the
+form
+<I>NPRddd</I>,
+
+<I>NXdddd</I>,
+
+<I>N2dddd</I>,
+
+and
+<I>N3dddd</I>,
+
+where
+<I>d</I>
+
+is a decimal digit.  Because they are invisible in the SFTRAN3 source
+code, and will change if the SFTRAN3 code is modified, such variables
+should not be explicitly declared.  Instead, they should just assume
+the default Fortran INTEGER data type based on their initial letter,
+<I>N</I>.
+
+<DT><B>asterisk-comment</B> (128):<DD>
+Use an asterisk as the comment character; the default is otherwise 'C'.
+<DT><B>comment-char-lowercase</B> (256):<DD>
+Use 'c' instead of 'C' or '*' as the comment character.
+<DT><B>suppress-array-dimensions</B> (512):<DD>
+Suppress dimensioning of arrays in the generated declarations.
+This option is for use with code lacking type declarations, to allow
+the declaration files to be inserted without change into the code.  Since
+the code will have dimension statements already, dimensioning the
+array variables in the type statements of the declaration file is redundant.
+This option should be used only in conjunction with
+option 2 = undeclared-only because otherwise any arrays that were
+dimensioned in a type statement will lose their dimensioning.
+<DT><B>free-form</B> (1024):<DD>
+Produce declarations in free source form.  This mode is automatically
+used if the input source is free form.  Use this option to produce
+declarations in free form even if the input is in fixed form.  Free
+form declarations are indented only 2 columns instead of 6, use the
+exclamation mark as the comment character, and indicate continuation
+lines by an ampersand at the end of the line to be continued.
+</DL>
+<P>
+
+The declaration files contain distinctive comments that mark the start
+and end of declarations for each program unit, to facilitate using
+text editor macros for merging the declarations back into the source
+code.
+<P>
+
+The <B>ftnchek</B> distribution includes a program, <B>dcl2inc</B>,
+which processes declaration files to produce files containing
+declarations of all COMMON blocks, in a form suitable for use as
+INCLUDE files.  See the
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+dcl2inc">dcl2inc</A></B>(1L)
+
+man page for the details
+of its use.
+<P>
+
+See also: <B><A HREF="mkhtml.html">-mkhtml</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="mkhtml.html">-mkhtml</A>
+</BODY></HTML>

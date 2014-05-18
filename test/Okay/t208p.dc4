@@ -1,0 +1,20 @@
+C====>Begin Module %MAIN                  File t208p.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     External functions
+C
+      external            EX
+C
+      integer             IABS
+C
+      real                EX
+C
+C     Statement functions
+C
+      integer             IN
+C
+C     Local variables
+C
+      integer             IARG
+C
+C====>End Module   %MAIN                  File t208p.f                  

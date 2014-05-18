@@ -1,0 +1,59 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File animated_pendulum_main.f:
+     17         Pi = 4.0*ATAN(1.0)
+                   ^
+Warning near line 17 col 12 file animated_pendulum_main.f: real expr 
+ 4.0*ATAN(1.0) promoted to dble PI: may not give desired precision
+     34         g  = 9.81
+                   ^
+Warning near line 34 col 12 file animated_pendulum_main.f: real const 9.81 
+ promoted to dble G: may not give desired precision
+     35         ThetaM = Theta*Pi/180.0     
+                                 ^
+Warning near line 35 col 26 file animated_pendulum_main.f: promotion may not
+ give desired precision: dble expr THETA*PI / real const 180.0
+     37         t  = 0.0
+                   ^
+Warning near line 37 col 12 file animated_pendulum_main.f: real const 0.0 
+ promoted to dble T: may not give desired precision
+     38         w  = 0.0
+                   ^
+Warning near line 38 col 12 file animated_pendulum_main.f: real const 0.0 
+ promoted to dble W: may not give desired precision
+
+ 0 syntax errors detected in file animated_pendulum_main.f
+ 5 warnings issued in file animated_pendulum_main.f
+
+File animated_pendulum_cls.f:
+ 0 syntax errors detected in file animated_pendulum_cls.f
+File animated_pendulum_entergr.f:
+ 0 syntax errors detected in file animated_pendulum_entergr.f
+File animated_pendulum_plotball.f:
+      6         Row=Int(300.0*DSIN(Theta))
+                             ^
+Warning near line 6 col 22 file animated_pendulum_plotball.f: promotion may
+ not give desired precision: real const 300.0 * dble expr DSIN(THETA)
+      7         Col=Int(300.0*DCOS(Theta))
+                             ^
+Warning near line 7 col 22 file animated_pendulum_plotball.f: promotion may
+ not give desired precision: real const 300.0 * dble expr DCOS(THETA)
+
+Warning in module PLOTBALL in file animated_pendulum_plotball.f: Variables set
+ but never used:
+    COL set at line 7 file animated_pendulum_plotball.f
+    ROW set at line 6 file animated_pendulum_plotball.f
+
+ 0 syntax errors detected in file animated_pendulum_plotball.f
+ 3 warnings issued in file animated_pendulum_plotball.f
+
+File animated_pendulum_exitgr.f:
+ 0 syntax errors detected in file animated_pendulum_exitgr.f
+Tree of subprogram calls:
+ANIMATEDPENDULUM
+    CLS
+    ENTERGRAPHICSMODE
+    EXITGRAPHICSMODE
+    PLOTBALL
+

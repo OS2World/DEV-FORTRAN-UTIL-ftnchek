@@ -1,0 +1,8 @@
+C====>Begin Module FOO                    File t208k.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Argument variables
+C
+      CHARACTER*(*)       S
+C
+C====>End Module   FOO                    File t208k.f                  

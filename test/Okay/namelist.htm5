@@ -1,0 +1,54 @@
+<HTML>
+<HEAD><TITLE>Source namelist.f</TITLE></HEAD>
+<BODY>
+<a name="%MAIN"><h3>PROGRAM %MAIN ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>namelist.f</td></tr>
+<tr><td></td></tr>
+</table>
+
+<table><tr><td><b>I/O Operations:</b></td></tr>
+<tr><td><pre>Unit ID  Unit No       Access  Form   Operation
+      *                   SEQ  FMTD          RW  
+               1          SEQ  FMTD          RW  
+
+<small>Operation codes A=rewind,B=backspace,C=close,E=endfile
+                I=inquire,O=open,R=read,W=write</small></pre></td></tr></table>
+<table><tr><td align="left"><b>Local Variables</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER           +l,         +m
+REAL              +a,         +c,          x,          x1
+REAL               y,          y2z3,       z
+</pre></td></tr></table>
+<table>
+<tr><td align="left"><b>Namelists</b> <small>(+ indicates altered content)</small><b></b></td></tr>
+<tr><td><pre>N1                 REAL              +a,        +b,             +c
+N2                 REAL               x,         y,              z
+N3                 INTEGER           +l,        +m
+N4                 REAL               x1,        y2z3
+</pre></td></tr></table>
+<table>
+<tr><td align="left"><b>Referenced Common Block Variables</b> <small>(+ indicates altered content)</small><b></b></td></tr>
+<tr><td><pre>%BLANK             REAL              +b
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="GRFGG3"><h3>SUBROUTINE GRFGG3 ( )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Description</b></td></tr>
+<tr><td><pre>   (grfgg3) 
+   This is a substantial portion of the declaration section from 
+   the PLOT79 grfgg3.sf3 file.  The formatting was done by the 
+   Extended PFORT Verifier, and the extensive NAMELIST block serves 
+   as a test for ftnchek. 
+   (13-Mar-1995) 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ 
+   EXTERNAL FUNCTIONS AND SUBROUTINES</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>namelist.f</td></tr>
+<tr><td></td></tr>
+</table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

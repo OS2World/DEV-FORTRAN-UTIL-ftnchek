@@ -1,0 +1,111 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File assign.f:
+     10       c5 = 5Hhello
+                 ^
+Error near line 10 col 10 file assign.f: type mismatch: holl*5 const 5Hhello 
+ assigned to char*5 C5
+     11       c5 = 11Hhello there
+                 ^
+Error near line 11 col 10 file assign.f: type mismatch: holl*11 const 11Hhello
+ there assigned to char*5 C5
+
+Warning in module SIZEPROP in file assign.f: Variables declared but never
+ referenced:
+    C10 declared at line 4 file assign.f
+    I declared at line 2 file assign.f (dummy argument)
+    X declared at line 2 file assign.f (dummy argument)
+
+Warning in module SIZEPROP in file assign.f: Variables may be used before set:
+    C5 used at line 5 file assign.f
+    C5 set at line 6 file assign.f
+
+Warning in module SIZEPROP in file assign.f: Names longer than 6 chars
+ (nonstandard):
+    SIZEPROP declared at line 2 file assign.f
+     14       integer*4 m
+                      ^
+Warning near line 14 col 15 file assign.f: Nonstandard syntax
+     18       integer*2 i2
+                      ^
+Warning near line 18 col 15 file assign.f: Nonstandard syntax
+     19       integer*4 i4
+                      ^
+Warning near line 19 col 15 file assign.f: Nonstandard syntax
+     21       logical*2 L2
+                      ^
+Warning near line 21 col 15 file assign.f: Nonstandard syntax
+     22       logical*4 L4
+                      ^
+Warning near line 22 col 15 file assign.f: Nonstandard syntax
+     24       real*4 r4
+                   ^
+Warning near line 24 col 12 file assign.f: Nonstandard syntax
+     25       real*8 r8
+                   ^
+Warning near line 25 col 12 file assign.f: Nonstandard syntax
+     27       real*16 r16
+                   ^
+Warning near line 27 col 12 file assign.f: Nonstandard syntax
+     28       double complex z
+              ^
+Warning near line 28 col 7 file assign.f: Nonstandard syntax
+     29       complex*16 c16
+                      ^
+Warning near line 29 col 15 file assign.f: Nonstandard syntax
+     30       complex*32 c32
+                      ^
+Warning near line 30 col 15 file assign.f: Nonstandard syntax
+     39       i = 4habcd
+                ^
+Warning near line 39 col 9 file assign.f: Nonstandard syntax: incompatible
+ type combination: holl*4 const 4Habcd assigned to intg I
+     40       i = 8habcdefgh
+                ^
+Warning near line 40 col 9 file assign.f: Nonstandard syntax: incompatible
+ type combination: holl*8 const 8Habcdefgh assigned to intg I
+     55       i = L4
+                ^
+Error near line 55 col 9 file assign.f: type mismatch: logl*4 L4 assigned to 
+ intg I
+
+Warning in module %MAIN in file assign.f: Variables declared but never
+ referenced:
+    C16 declared at line 29 file assign.f
+    C32 declared at line 30 file assign.f
+    J declared at line 13 file assign.f
+    L declared at line 20 file assign.f
+    L2 declared at line 21 file assign.f
+    Y declared at line 17 file assign.f
+
+Warning in module %MAIN in file assign.f: Variables used before set
+    L4 used at line 55 file assign.f; never set
+    R4 used at line 41 file assign.f; never set
+    R8 used at line 42 file assign.f; never set
+
+Warning in module %MAIN in file assign.f: Variables may be used before set:
+    C used at line 43 file assign.f
+    C set at line 53 file assign.f
+    I2 used at line 34 file assign.f
+    I2 set at line 38 file assign.f
+    I4 used at line 35 file assign.f
+    I4 set at line 36 file assign.f
+
+Warning in module %MAIN in file assign.f: Names longer than 6 chars
+ (nonstandard):
+    SIZEPROP referenced at line 56 file assign.f
+
+ 3 syntax errors detected in file assign.f
+ 20 warnings issued in file assign.f
+
+Warning: Subprogram SIZEPROP argument data type mismatch at position 2:
+    Dummy arg I in module SIZEPROP line 2 file assign.f is type intg
+    Actual arg I2 in module %MAIN line 56 file assign.f is type intg*2
+  and at position 3:
+    Dummy arg X in module SIZEPROP line 2 file assign.f is type real
+    Actual arg R16 in module %MAIN line 56 file assign.f is type real*16
+
+Warning: Subprogram SIZEPROP argument usage mismatch at position 1:
+    Dummy arg CADJ in module SIZEPROP line 2 file assign.f is modified
+    Actual arg 'hello' in module %MAIN line 56 file assign.f is const or expr

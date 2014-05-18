@@ -1,0 +1,8 @@
+!====>Begin Module FOO                    File t208k.f                  
+!---->Makedcls Options: All variables                                   
+!
+!     Argument variables
+!
+  CHARACTER*(*)       S
+!
+!====>End Module   FOO                    File t208k.f                  

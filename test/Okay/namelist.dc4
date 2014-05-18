@@ -1,0 +1,133 @@
+C====>Begin Module %MAIN                  File namelist.f               
+C---->Makedcls Options: All variables                                   
+C
+C     Local variables
+C
+      integer             L,           L6,          M
+C
+      real                A,           C,           X,           X1
+      real                Y,           Y2Z3,        Z
+C
+C     Namelists
+C
+      namelist / N1     / A,           B,           C
+      namelist / N2     / X,           Y,           Z
+      namelist / N3     / L,           M
+      namelist / N4     / X1,          Y2Z3
+      namelist / N5     / L6
+C
+C     Common variables
+C
+      real                B,           E,           F
+C
+      common /        /   B,           E,           F
+C
+C====>End Module   %MAIN                  File namelist.f               
+C====>Begin Module GRFGG3                 File namelist.f               
+C---->Makedcls Options: All variables                                   
+C
+C     Local variables
+C
+      integer             BIGINT,      BLANK,       CARD(500),   CURCOL
+      integer             CURROW,      FSTYLE,      GREEK,       I
+      integer             I1MACH,      IABS,        IARG,        IARG1
+      integer             IARG2,       IDFONT,      IERVAL(1),   II
+      integer             J,           JX,          JY,          JZ
+      integer             K,           KX,          KXYZ,        KY
+      integer             KZ,          LSTYLE(06),  MARK(06),    MAX0
+      integer             MAXCRD,      MAXCRV,      MAXVAL,      MIN0
+      integer             MODEU,       MODEV,       MODEX,       MODEY
+      integer             MODEZ,       N(06),       NC,          NCELLX
+      integer             NCELLY,      NCINIT,      NCISAV,      NCSTEP
+      integer             NCTERM,      NCU,         NCV,         NCX
+      integer             NCY,         NCZ,         NIN,         NINT
+      integer             NJ,          NOUT,        NRINIT,      NRISAV
+      integer             NRSTEP,      NRTERM,      NSUM,        NU(06)
+      integer             NUJ,         NUMINT(06),  NUSUB,       NVSUB
+      integer             NXSUB,       NYSUB,       NZSUB,       PEN(06)
+      integer             QUOTE,       ROMAN,       TITLE(500),  UTISL
+      integer             UTITLE(500), VTITLE(500), XTITLE(500)
+      integer             YTITLE(500), ZTITLE(500)
+C
+      logical             AUTOX,       AUTOY,       AUTOZ
+      logical             AVRAGE(06),  AXES3D,      BCLIP,       BOX
+      logical             BYROWS,      CHKDUP,      CVTX(06)
+      logical             CVTY(06),    CVTZ(06),    DERIV(06),   EOFILE
+      logical             FCLIP,       IN,          INTGRT(06),  LOGX
+      logical             LOGY,        LOGZ,        LSTXYZ,      PARLEL
+      logical             PLOPEN,      PLOTID,      RESET,       RIGHT
+      logical             UAXIS,       UVAXES,      VARPEN,      VAXIS
+      logical             WCLIP,       XAXIS,       XFALLS,      YAXIS
+      logical             YFALLS,      ZAXIS,       ZFALLS
+C
+      real                ABS,         ALOG10,      AMAX1,       AMIN1
+      real                ARCLEN,      ARG,         ARG1,        ARG2
+      real                ARX,         ARY,         CMFACT,      CMTOIN
+      real                CMTOUN,      CPX,         CPY,         DEFHT
+      real                DEFMAR,      DT,          DUSUB,       DVSUB
+      real                DXSUB,       DYSUB,       DZSUB,       FLOAT
+      real                FRAC,        FSCALE,      GSCALE,      HALF
+      real                HH,          HSCALE,      HT,          HTDEF
+      real                HTFACT,      HX,          HY,          INFITY
+      real                INTOCM,      INTOUN,      LWIDTH(06)
+      real                MARGIN(4),   MMTOCM,      MSCALE,      NINETY
+      real                ONE,         PAGESQ,      PAGEX,       PAGEY
+      real                PENDIA,      PERDST,      PICTHX,      PICTHY
+      real                PICTX,       PICTY,       PPXYZ(3),    R1MACH
+      real                RPXYZ(3),    SIGMA(06),   SIGN,        SWAP
+      real                T(4,4),      TICDEF,      TICKU,       TICKV
+      real                TICKX,       TICKY,       TICKZ
+      real                TIMAGE(4,4), TMODEL(4,4), TOPMAR,      TT
+      real                TTLHEI,      TTLLEN,      TTOTAL(4,4), TWO
+      real                U1,          U2,          UDIST,       UMAX
+      real                UMAXP,       UMAXRC,      UMIN,        UMINP
+      real                UMINRC,      UNITS,       UNSPEC,      UNTOCM
+      real                UNTOIN,      UPXYZ(3),    UTRE3,       V1
+      real                V2,          VDIST,       VIEWD,       VMAX
+      real                VMAXP,       VMAXRC,      VMIN,        VMINP
+      real                VMINRC,      VNXYZ(3),    VPUMAX,      VPUMIN
+      real                VPVMAX,      VPVMIN,      VSCALE,      WMAX
+      real                WMAXP,       WMIN,        WMINP
+      real                WORK(1600,5),             X(1600,06),  X0
+      real                XDIST,       XFACT(06),   XINT,        XMAX
+      real                XMAXJ,       XMAXP,       XMIN,        XMINJ
+      real                XMINP,       XORG,        XSHIFT(06),  XX
+      real                Y(1600,06),  Y0,          YDIST
+      real                YFACT(06),   YINT,        YMAX,        YMAXJ
+      real                YMAXP,       YMIN,        YMINJ,       YMINP
+      real                YORG,        YSHIFT(06),  YY
+      real                Z(1600,06),  Z0,          ZDIST,       ZERO
+      real                ZFACT(06),   ZINT,        ZMAX,        ZMAXJ
+      real                ZMAXP,       ZMIN,        ZMINJ,       ZMINP
+      real                ZORG,        ZSHIFT(06),  ZZ
+C
+C     Namelists
+C
+      namelist / DATA   / AVRAGE,      AXES3D,      BCLIP,       BOX
+     x,                   BYROWS,      CHKDUP,      DERIV,       DUSUB
+     x,                   DVSUB,       DXSUB,       DYSUB,       DZSUB
+     x,                   FCLIP,       FSCALE,      FSTYLE,      GSCALE
+     x,                   HSCALE,      IDFONT,      INTGRT,      KX
+     x,                   KY,          KZ,          LOGX,        LOGY
+     x,                   LOGZ,        LSTXYZ,      LSTYLE,      LWIDTH
+     x,                   MARGIN,      MARK,        MODEU,       MODEV
+     x,                   MODEX,       MODEY,       MODEZ,       MSCALE
+     x,                   N,           NCINIT,      NCSTEP,      NCTERM
+     x,                   NRINIT,      NRSTEP,      NRTERM,      NU
+     x,                   NUMINT,      NUSUB,       NVSUB,       NXSUB
+     x,                   NYSUB,       NZSUB,       PARLEL,      PEN
+     x,                   PENDIA,      PERDST,      PLOTID,      PPXYZ
+     x,                   RESET,       RIGHT,       RPXYZ,       SIGMA
+     x,                   TICKU,       TICKV,       TICKX,       TICKY
+     x,                   TICKZ,       TIMAGE,      TMODEL,      UAXIS
+     x,                   UMAX,        UMIN,        UPXYZ,       UVAXES
+     x,                   VAXIS,       VIEWD,       VMAX,        VMIN
+     x,                   VNXYZ,       VSCALE,      WCLIP,       WMAX
+     x,                   WMIN,        X,           XAXIS,       XFACT
+     x,                   XFALLS,      XMAX,        XMIN,        XSHIFT
+     x,                   Y,           YAXIS,       YFACT,       YFALLS
+     x,                   YMAX,        YMIN,        YSHIFT,      Z
+     x,                   ZAXIS,       ZFACT,       ZFALLS,      ZMAX
+     x,                   ZMIN,        ZSHIFT
+C
+C====>End Module   GRFGG3                 File namelist.f               

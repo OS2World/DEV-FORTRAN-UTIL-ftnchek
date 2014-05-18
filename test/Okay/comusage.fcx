@@ -1,0 +1,56 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File comusage.f:
+ 0 syntax errors detected in file comusage.f
+Common block INP is volatile
+"comusage.f", line 10: Warning: Common block INP may become undefined between
+ activations
+"comusage.f", line 10:    Declared in module INPUT
+"comusage.f", line 20:    Declared in module COMP
+        Not declared in parent module MAIN
+Common block LAST is volatile
+
+"comusage.f", line 32: Warning: Common block LAST may become undefined between
+ activations
+"comusage.f", line 32:    Declared in module OUTPUT
+"comusage.f", line 12:    Declared in module INPUT
+        Not declared in parent module MAIN
+Common block ZAP is volatile
+Common block OUTP is volatile
+
+"comusage.f", line 30: Warning: Common block OUTP may become undefined between
+ activations
+"comusage.f", line 30:    Declared in module OUTPUT
+"comusage.f", line 23:    Declared in module COMP
+        Not declared in parent module MAIN
+
+"comusage.f", line 2: Warning: Common block %BLANK Elements used but never
+ set: all
+
+"comusage.f", line 10: Warning: Common block INP Elements never used, never
+ set:
+    X4
+
+"comusage.f", line 32: Warning: Common block LAST Elements used but never set:
+    N3
+
+"comusage.f", line 32: Warning: Common block LAST Elements set but never used:
+    N1 N2
+
+"comusage.f", line 21: Warning: Common block ZAP unused anywhere
+
+"comusage.f", line 10: Warning: Common block INP varying length:
+"comusage.f", line 10:    Has 4 variables in module INPUT
+"comusage.f", line 20:    Has 3 variables in module COMP
+
+"comusage.f", line 12: Warning: Common block LAST data type mismatch at
+ position 1:
+"comusage.f", line 12:    Variable Y1 in module INPUT is type real
+"comusage.f", line 32:    Variable N1 in module OUTPUT is type intg
+"comusage.f", line 12:  and at position 2:
+"comusage.f", line 12:    Variable Y2 in module INPUT is type real
+"comusage.f", line 32:    Variable N2 in module OUTPUT is type intg
+"comusage.f", line 12:  and at position 3:
+"comusage.f", line 12:    Variable Y3 in module INPUT is type real
+"comusage.f", line 32:    Variable N3 in module OUTPUT is type intg

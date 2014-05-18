@@ -1,0 +1,17 @@
+;----------------------------------------------------------------------
+; FTNCHEK.DEF module definition file for OS/2
+; Author:   J.Ftacnik, 1993
+; Modified: Fabio Mariotti, March 1995, S. A. Deutscher, March 1996
+;----------------------------------------------------------------------
+
+NAME           FTNCHEK  WINDOWCOMPAT
+
+DESCRIPTION    'OS2 version of FTNCHEK program'
+PROTMODE
+;----------------------------------------------------------------------
+; commented out and given explicitly as 64 kB with a command line
+; switch to the linker. 32 kB is too small on some settings and causes
+; traps.  S. A. Deutscher
+;----------------------------------------------------------------------
+; STACKSIZE      0x8000
+

@@ -1,0 +1,85 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File t208f.f:
+
+      1       integer m
+      2       n = m
+      3       end
+
+Module %MAIN: prog
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         M intg             N intg*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+Warning in module %MAIN: Variables set but never used:
+    N set at line 2
+
+Warning in module %MAIN: Variables used before set
+    M used at line 2; never set
+
+      4       subroutine big
+      5       integer a_very_long_variable_name, another_very_long_variable_name
+      6       integer a_long_variable_name, another_long_variable_name
+      7       integer a_variable_name, another_variable_name
+      8       real u, v, w, x, y, z
+      9       end
+Warning near line 9: Module contains no executable statements
+
+Module BIG: subr
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+ANOTHER_LONG_VARIABLE_NAME intg    ANOTHER_VARIABLE_NAME intg    ANOTHER_VERY_LONG_VARIABLE_NAME intg    A_LONG_VARIABLE_NAME intg   
+A_VARIABLE_NAME intg    A_VERY_LONG_VARIABLE_NAME intg             U real             V real   
+         W real             X real             Y real             Z real   
+
+
+
+Warning in module BIG: Variables declared but never referenced:
+    ANOTHER_LONG_VARIABLE_NAME declared at line 6
+    ANOTHER_VARIABLE_NAME declared at line 7
+    ANOTHER_VERY_LONG_VARIABLE_NAME declared at line 5
+    A_LONG_VARIABLE_NAME declared at line 6
+    A_VARIABLE_NAME declared at line 7
+    A_VERY_LONG_VARIABLE_NAME declared at line 5
+    U declared at line 8
+    V declared at line 8
+    W declared at line 8
+    X declared at line 8
+    Y declared at line 8
+    Z declared at line 8
+
+
+Warning in module BIG: Names longer than 6 chars (nonstandard):
+    ANOTHER_LONG_VARIABLE_NAME declared at line 6
+    ANOTHER_VARIABLE_NAME declared at line 7
+    ANOTHER_VERY_LONG_VARIABLE_NAME declared at line 5
+    A_LONG_VARIABLE_NAME declared at line 6
+    A_VARIABLE_NAME declared at line 7
+    A_VERY_LONG_VARIABLE_NAME declared at line 5
+
+Warning in module BIG: Names containing nonstandard characters:
+    ANOTHER_LONG_VARIABLE_NAME declared at line 6
+    ANOTHER_VARIABLE_NAME declared at line 7
+    ANOTHER_VERY_LONG_VARIABLE_NAME declared at line 5
+    A_LONG_VARIABLE_NAME declared at line 6
+    A_VARIABLE_NAME declared at line 7
+    A_VERY_LONG_VARIABLE_NAME declared at line 5
+
+Warning in module BIG: Identifiers which are not unique in first six chars:
+    ANOTHER_LONG_VARIABLE_NAME declared at line 6
+    ANOTHER_VARIABLE_NAME declared at line 7
+    ANOTHER_VERY_LONG_VARIABLE_NAME declared at line 5
+
+ 0 syntax errors detected in file t208f.f
+ 8 warnings issued in file t208f.f
+
+Warning: Subprogram BIG never invoked
+    Defined in module BIG line 4 file t208f.f

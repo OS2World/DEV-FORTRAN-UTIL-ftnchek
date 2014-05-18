@@ -1,0 +1,12 @@
+!====>Begin Module %MAIN                  File t208j.f                  
+!---->Makedcls Options: All variables                                   
+!
+!     Intrinsic functions
+!
+  INTRINSIC           SQRT
+!
+!     Local variables
+!
+  REAL                A
+!
+!====>End Module   %MAIN                  File t208j.f                  

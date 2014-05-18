@@ -1,0 +1,259 @@
+### ====================================================================
+###  @Awk-file{
+###     author          = "Nelson H. F. Beebe",
+###     version         = "1.1",
+###     date            = "13 March 1995",
+###     revision        = "10 March 2000",
+###     time            = "17:20:54 MST",
+###     filename        = "dcl2inc.awk",
+###     address         = "Center for Scientific Computing
+###                        Department of Mathematics
+###                        University of Utah
+###                        Salt Lake City, UT 84112
+###                        USA",
+###     telephone       = "+1 801 581 5254",
+###     FAX             = "+1 801 581 4148",
+###     checksum        = "3212047631 4467",
+###     email           = "beebe@math.utah.edu (Internet)",
+###     codetable       = "ISO/ASCII",
+###     keywords        = "Fortran, type declarations",
+###     supported       = "yes",
+###     docstring       = "Extract COMMON block declarations from .dcl
+###                        files output by ftnchek 2.8.2 (or later), and
+###                        provided that they are unique, output *.inc
+###                        include files, and modified .dcl files with
+###                        extension .dcn containing INCLUDE statements
+###                        in place of COMMON block declarations.  In
+###                        addition, write a sorted list of include file
+###                        dependencies on stdout, suitable for use in a
+###                        Makefile.
+###
+###                        Usage:
+###                        	ftnchek -makedcls=1 *.f
+###                        	nawk -f dcl2inc.awk *.dcl >tempfile
+###
+###                        You can then manually replace the old
+###                        declarations in the *.f files with the
+###                        contents of each corresponding *.dcn file.
+###                        Any COMMON blocks that are not identical to
+###                        their first occurrence will be left intact,
+###                        instead of being replaced by INCLUDE
+###                        statements, and a warning will be issued for
+###                        each of them.
+###
+###                        The checksum field above contains a CRC-32
+###                        checksum as the first value, followed by
+###                        the byte count, both computed on the
+###                        content beginning with the BEGIN line.
+###                        This checksum is produced by the GNU cksum
+###                        utility.  To reproduce it, use
+###                          sed -n '/^BEGIN/,$p' dcl2inc.awk.in | cksum
+###
+###                        Modified warning function to be configurable
+###                        for gawk or nawk: R. Moniot March 2000",
+###  }
+### ====================================================================
+
+BEGIN					{ dcn_file_name = "" }
+
+/^[cC*!]====>Begin Module/		{ begin_module() }
+
+/^[cC*!]====>End Module/		{ end_module() }
+
+/^[cC*!]     Common variables/		{ begin_common() }
+
+/^[cC*!]     Equivalenced common/	{ equivalenced_common() }
+
+/^  [ ]*COMMON /			{ get_common_name() }
+
+in_common == 1				{ add_common() }
+
+/./					{ output_dcn_line($0) }
+
+END   					{ output_declarations() }
+
+function add_common()
+{
+    common_block = common_block "\n" $0
+}
+
+function begin_common()
+{
+    end_module()
+    in_common = 1
+    common_block = substr($0,1,1) 	# start with empty comment line
+    common_name = ""
+    common_fnr = FNR
+    basename = FILENAME
+    sub(/[.].*$/,"",basename)
+}
+
+function begin_module()
+{
+    end_module()
+    # Typical line:
+    # c====>Begin Module PROB5_4DIM   File dp5_4dim.f     All variables
+    last_dcn_file_name = dcn_file_name
+    dcn_file_name = $5
+    sub(/[.].*$/,".dcn",dcn_file_name)
+    if ((last_dcn_file_name != "") && (last_dcn_file_name != dcn_file_name))
+	close(last_dcn_file_name)
+    if (last_dcn_file_name != dcn_file_name)
+	output_dependency_list()
+    if (last_dcn_file_name == "")
+	output_dcn_line(substr($0,1,1))
+}
+
+function clear_array(array, key)
+{
+    for (key in array)
+	delete array[key]
+}
+
+function end_common( name)
+{
+    in_common = 0
+    if (common_name == "")
+	return
+    if ((common_name in include_file_contents) &&
+	(include_file_contents[common_name] != common_block))
+    {
+	warning("Common block /" common_name "/ mismatch with definition at " \
+	    include_file_common_filename[common_name] ":" \
+	    include_file_common_position[common_name])
+	output_dcn_line(common_block)
+	common_name = ""
+	return
+    }
+    output_dcn_line("      INCLUDE '" common_name ".inc'")
+
+    name = common_name ".inc"
+    dependency_list[name] = name
+    include_file_contents[common_name] = common_block
+    include_file_common_position[common_name] = common_fnr "--" FNR
+    include_file_common_filename[common_name] = FILENAME
+    common_name = ""
+}
+
+function end_module()
+{
+    end_common()
+}
+
+function equivalenced_common()
+{
+    end_common()
+    output_dcn_line(substr($0,1,1))
+}
+
+
+function get_common_name( words)
+{
+    split($0, words, "/")
+    common_name = Tolower(trim(words[2]))
+}
+
+function output_declarations( common_file,name)
+{
+    output_dependency_list()
+    close(dcn_file_name)
+    for (name in include_file_contents)
+    {
+	common_file = name ".inc"
+	print include_file_contents[name] > common_file
+	close (common_file)
+    }
+}
+
+function output_dependency_list( k,line,prefix)
+{
+    sort_array(dependency_list)
+    prefix = "                "
+
+    for (k = 1; k in dependency_list; ++k)
+    {
+	if (k == 1)
+	{
+	    line = basename ".o:"
+	    line = line substr(prefix,1,16-length(line)) basename ".f"
+	}
+	if ((length(line) + 1 + length(dependency_list[k])) > 77)
+	{
+	    print line " \\"
+	    line = substr(prefix,1,15)
+	}
+	line = line " " dependency_list[k]
+    }
+    if (k > 1)
+	print line
+
+    clear_array(dependency_list)
+}
+
+function output_dcn_line(s)
+{
+    if ((!in_common) && (dcn_file_name != ""))
+	print s > dcn_file_name
+}
+
+function sort_array(array, k,key,m,n,sorted_copy)
+{
+    n = 0
+    for (key in array)
+    {
+	n++
+	sorted_copy[n] = array[key]
+    }
+
+    for (k = 1; k < n; ++k)
+    {
+	for (m = k + 1; m <= n; ++m)
+	{
+	    if (sorted_copy[k] > sorted_copy[m])
+	    {
+		key = sorted_copy[m]
+		sorted_copy[m] = sorted_copy[k]
+		sorted_copy[k] = key
+	    }
+	}
+    }
+
+    clear_array(array)
+
+    for (k = 1; k <= n; ++k)
+	array[k] = sorted_copy[k]
+}
+
+function Tolower(s, k,n,t)
+{
+    t = ""
+    for (k = 1; k <= length(s); ++k)
+    {
+	n = index("ABCDEFGHIJKLMNOPQRSTUVWXYZ", substr(s,k,1))
+	if (n > 0)
+	    t = t substr("abcdefghijklmnopqrstuvwxyz", n, 1)
+	else
+	    t = t substr(s,k,1)
+    }
+    return (t)
+}
+
+function trim(s)
+{
+    gsub(/^ */,"",s)
+    gsub(/ *$/,"",s)
+    return (s)
+}
+
+function warning(message)
+{
+    # Although gawk provides "/dev/stderr" for writing to stderr, nawk
+    # requires a subterfuge: see Aho, Kernighan, and Weinberger, ``The
+    # AWK Programming Language'', Addison-Wesley (1986), ISBN
+    # 0-201-07981-X, LCCN QA76.73.A95 A35 1988, p. 59.  We need to be
+    # able to output to the true stderr unit in order for the ftnchek
+    # validation suite to check these warnings.  The configure script
+    # puts in appropriate redirect for nawk or gawk, depending on which
+    # one your system has.
+    print FILENAME ":" FNR ":\t" message  > "/dev/stderr"
+}

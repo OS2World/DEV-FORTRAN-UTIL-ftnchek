@@ -1,0 +1,213 @@
+<HTML>
+<HEAD>
+<TITLE>Option: usage</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="truncation.html">-truncation</A><HR><P>
+<H2>Option: <font color=#FF0080>usage</font></H2><P>
+<A NAME="usage"></A><DT><B><A HREF="usage.html">-usage</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Warn about unused or possible uninitialized variables,
+unused common blocks, undefined or unused statement labels, and unused or undefined subprograms.
+By default, all warnings are
+turned on.
+<P>
+
+This setting provides detailed control over the warnings about
+possible usage errors.  The <I>list</I> consists of keywords
+separated by commas or colons.
+Since all warnings are on by default, include a keyword prefixed by
+<B>no-</B> to turn off a particular warning.
+There are three special keywords: <B>all</B> to turn on all the
+warnings about usage, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="usage.html">-usage</A></B> is equivalent to
+<B><A HREF="usage.html">-usage</A>=all</B>, and <B>-nousage</B> is equivalent to
+<B><A HREF="usage.html">-usage</A>=none</B>.
+These warnings cover four main categories of objects: subprogram dummy
+arguments, common blocks and variables, subprograms and functions, and
+local variables.  Warnings include undefined items, multiply defined
+items, unused items, etc.
+The warning keywords with their meanings are as follows:
+<DL COMPACT>
+<DT><B>arg-alias</B>:
+
+<DD>
+a scalar dummy argument is actually the same as another and is (or may be)
+modified.  The Fortran 77 standard (section 15.9.3.6) prohibits
+modifying an argument that is aliased to another.
+<DT><B>arg-array-alias</B>:
+
+<DD>
+a dummy argument which is an array or array element is in the same array as
+another and is modified.  This flag is similar to <B>arg-alias</B> but
+provides separate control over array arguments.  It is harder to
+tell if aliasing is occurring in the case of arrays, so if
+<B>ftnchek</B> gives too many false warnings, this flag allows the
+array-related ones to be turned off without suppressing the warnings
+for scalars.
+<DT><B>arg-common-alias</B>:
+
+<DD>
+a scalar dummy argument is the same as a common variable in the
+subprogram, and either is modified.  This is also prohibited by the
+Fortran 77 standard.  If common checking is not exact (see the
+<B><A HREF="common.html">-common</A></B> setting), it is harder to tell if aliasing is
+occurring, so the warning is
+given if the variable is anywhere in a common block that is declared
+by the subprogram.
+<DT><B>arg-common-array-alias</B>:
+
+<DD>
+a dummy argument which is an array or array element is in the same
+array as a common variable, and either is modified.  If common
+checking is not exact, the variable can be anywhere in a common block
+that is declared by the subprogram.
+<DT><B>arg-const-modified</B>:
+
+<DD>
+a subprogram modifies an argument which is a constant or an
+expression.  Such an action could cause anomalous behavior of the program.
+<DT><B>arg-unused</B>:
+
+<DD>
+a dummy argument is declared but never used.  This is similar to the
+<B>var-unused</B> keyword described below, but applies only to arguments.
+<DT><B>com-block-unused</B>:
+
+<DD>
+a common block is declared but none of the variables in it are
+used by any subprogram.
+This warning is suppressed if the common strictness setting is 0.
+<DT><B>com-block-volatile</B>:
+
+<DD>
+a common block may lose the definition of its contents if common
+blocks are volatile.  This option only has an effect if the
+<B><A HREF="common.html">-common</A>=volatile</B> flag is in effect.  See the discussion of the
+<B><A HREF="common.html">-common</A></B> setting above.
+<DT><B>com-var-set-unused</B>:
+
+<DD>
+a common variable is assigned a value, but its value is not used by
+any subprogram.
+This warning is suppressed if the common strictness setting is 0.
+<DT><B>com-var-uninitialized</B>:
+
+<DD>
+a common variable's value is used in some subprogram, but is not set
+anywhere.
+Unfortunately, <B>ftnchek</B> does
+not do a thorough enough analysis of the calling sequence to know
+which routines are called before others.  So warnings about this type
+of error will only be given for cases in which a variable is used in
+some routine but not set in any other routine.   Checking of
+individual COMMON variables is done only if the <B><A HREF="common.html">-common</A></B>
+setting is 3 (variable by variable agreement).
+This warning is suppressed if the common strictness setting is 0.
+<DT><B>com-var-unused</B>:
+
+<DD>
+a common variable is declared but not used by any subprogram.
+This warning is suppressed if the common strictness setting is 0.
+<DT><B>do-index-modified</B>:
+
+<DD>
+a variable that is the index of a DO loop is modified by some
+statement within the range of the loop.  The Standard permits an
+active DO variable to be modified only by the incrementation mechanism
+of the DO statement.
+<DT><B>ext-multiply-defined</B>:
+
+<DD>
+an external (a subroutine or function) is defined more than once.
+Definition of an external means providing the body of its source code.
+<DT><B>ext-declared-only</B>:
+
+<DD>
+a name is declared in an EXTERNAL statement in some module, but
+is not defined or used anywhere.
+<DT><B>ext-undefined</B>:
+
+<DD>
+an external is used (invoked) but not defined anywhere.  This option
+is equivalent to the <B><A HREF="extern.html">-extern</A>al</B> flag.  If the subprogram is
+invoked more than once, those invocations will still be checked for
+consistency.
+<DT><B>ext-unused</B>:
+
+<DD>
+an external is defined (its subprogram body is present) but it is not
+used.  A subprogram is considered unused even if it is
+invoked by some other subprogram, if it cannot be called from any thread
+of execution starting with the main program.
+The agreement of the subprogram's
+arguments with its invocations is still checked even if this warning is
+turned off.
+If there is no main program, then this warning is issued only if the
+subprogram is not invoked anywhere.
+This warning is suppressed in library mode, but library mode has the
+additional effect of suppressing argument checking for unused routines.
+<DT><B>label-undefined</B>:
+
+<DD>
+a statement refers to a label that has not been defined.
+<DT><B>label-unused</B>:
+
+<DD>
+a statement label is defined, but never referred to.
+<DT><B>var-set-unused</B>:
+
+<DD>
+a local variable is assigned a value, but that value is not used.
+<DT><B>var-uninitialized</B>:
+
+<DD>
+a local variable's value may be used before it is assigned.
+Sometimes <B>ftnchek</B> makes a mistake in the warnings about local
+variable usage.  Usually it errs on the side of giving a warning where no
+problem exists, but in rare cases it may fail to warn where the
+problem does exist.  See the section on Bugs for examples.  If
+variables are equivalenced, the rule used by <B>ftnchek</B> is that a
+reference to any variable implies the same reference to all variables
+it is equivalenced to.  For arrays, the rule is that a reference to
+any array element is treated as a reference to all elements of the array.
+<DT><B>var-unused</B>:
+
+<DD>
+a local variable is declared (for instance, in a type declaration) but
+is not used in the module.  Does not apply to dummy arguments: warnings
+about them are controlled by the keyword <B>arg-unused</B> described above.
+</DL>
+<P>
+
+Note: In versions of <B>ftnchek</B> prior to 2.10, the
+<B><A HREF="usage.html">-usage</A></B> flag took a numeric argument instead of a list of
+options.
+For the sake of users who may have written scripts invoking
+<B>ftnchek</B> in this way, the numeric form is still
+accepted.  The numeric setting is composed of three digits.  The first
+digit (hundreds
+place) controls warnings about subprograms (functions and
+subroutines), the second digit (tens place) warnings about common
+blocks and common variables,, and the third digit (ones place)
+warnings about local variables.  Each digit controls warnings
+according to the convention that a 1 means warn about undefined items
+and variables that are used before set,
+a 2 means warn about items that are unused, and a 3 means warn about
+both types.  These numbers are now converted to the appropriate
+values for the above-listed keywords, except for <B>com-block-volatile</B>,
+which is not affected by the numeric argument.
+<P>
+
+See also: <B><A HREF="common.html">-common</A></B>, <B><A HREF="declare.html">-declare</A></B>, <B><A HREF="extern.html">-extern</A></B>,
+<B><A HREF="library.html">-library</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="vcg.html">-vcg</A>
+</BODY></HTML>

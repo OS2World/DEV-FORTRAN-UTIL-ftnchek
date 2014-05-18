@@ -1,0 +1,39 @@
+C====>Begin Module DDIAPA                 File t208a.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     External functions
+C
+      external            TKIOLL
+C
+      integer             MAX0,        MIN0,        TKIOLL
+C
+C     Argument variables
+C
+      integer             IX,          IY
+C
+C     Local variables
+C
+      integer             BLANK,       DUMMY
+C
+C     Common variables
+C
+      integer             LASTX,       LASTY,       LINEWT,      MAGFAC
+      integer             MAXX,        MAXY,        MINX,        MINY
+      integer             MOVEX,       MOVEY,       NPATH,       PSXOFF
+      integer             PSYOFF
+C
+      logical             DVINIT,      IMAGE,       ROTATE,      VILAST
+C
+      real                DSSIZE,      LINEIN,      PLSTEP,      SX
+      real                SY,          TIMAGE(4,4), XMAX,        YMAX
+      real                ZMAX
+C
+      common / DDI01  /   DSSIZE,      LINEIN,      PLSTEP,      SX
+      common / DDI01  /   SY,          TIMAGE,      XMAX,        YMAX
+      common / DDI01  /   ZMAX,        LASTX,       LASTY,       LINEWT
+      common / DDI01  /   MAGFAC,      MAXX,        MAXY,        MINX
+      common / DDI01  /   MINY,        MOVEX,       MOVEY,       NPATH
+      common / DDI01  /   PSXOFF,      PSYOFF,      DVINIT,      IMAGE
+      common / DDI01  /   ROTATE,      VILAST
+C
+C====>End Module   DDIAPA                 File t208a.f                  

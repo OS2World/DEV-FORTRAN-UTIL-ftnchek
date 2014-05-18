@@ -1,0 +1,20 @@
+C====>Begin Module %MAIN                  File t208p.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     External functions
+C
+      EXTERNAL            EX
+C
+      INTEGER             IABS
+C
+      REAL                EX
+C
+C     Statement functions
+C
+      INTEGER             IN
+C
+C     Local variables
+C
+      INTEGER             IARG
+C
+C====>End Module   %MAIN                  File t208p.f                  

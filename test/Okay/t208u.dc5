@@ -1,0 +1,28 @@
+C====>Begin Module %MAIN                  File t208u.f                  
+C---->Makedcls Options: All variables                                   
+C
+C     Parameter variables
+C
+      INTEGER             maxtok
+      PARAMETER           (maxtok = 10)
+      INTEGER             maxtk1
+      PARAMETER           (maxtk1 = 10)
+      INTEGER             maxtk2
+      PARAMETER           (maxtk2 = 10)
+C
+C     Local variables
+C
+      CHARACTER*(2*maxtk1)             tk1ls2
+      CHARACTER*(maxtk1**2)            tk1ls3
+      CHARACTER*(maxtk1)  tk1lst
+      CHARACTER*(2*maxtk2)             tk2ar2(200)
+      CHARACTER*(maxtk2**2)            tk2ar3(300)
+      CHARACTER*(maxtk2)  tk2arr(100)
+      CHARACTER*(2*maxtok)             tokar2(200)
+      CHARACTER*(maxtok**2)            tokar3(300)
+      CHARACTER*(maxtok)  tokarr(100)
+      CHARACTER*(2*maxtok)             tokls2
+      CHARACTER*(maxtok**2)            tokls3
+      CHARACTER*(maxtok)  toklst
+C
+C====>End Module   %MAIN                  File t208u.f                  

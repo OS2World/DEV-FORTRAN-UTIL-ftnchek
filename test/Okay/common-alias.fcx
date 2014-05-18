@@ -1,0 +1,123 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File common-alias.f:
+
+      1 C Test program for checking aliasing of arguments to common variables
+      2 C
+      3       COMMON Q,F,X
+      4       COMMON /BLK1/ DAT(100)
+      5       W = 1.0
+      6       X = 2.0
+      7       Z = 4.0
+      8       CALL FOO(W,X,Y,Z)
+      9       CALL FOO(F,W,Y,Z)
+     10       CALL FOO(W,Y,Q,Z)
+     11       PRINT *, W,X,Y,Z
+     12       CALL BAR(DAT,100)
+     13       STOP
+     14       END
+
+Module %MAIN: prog
+
+External subprograms referenced:
+
+       BAR: subr          FOO: subr   
+
+Common blocks referenced:
+
+    %BLANK               BLK1         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+       DAT real* 1          F real*            Q real*            W real*  
+         X real*            Y real*            Z real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD PRINT        11 
+     15       SUBROUTINE FOO(A,B,C,D)
+     16       COMMON T,U,V
+     17       B = A+C+D
+     18       T = B + 1.0
+     19       RETURN
+     20       END
+
+Module FOO: subr
+
+Common blocks referenced:
+
+    %BLANK         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real*            B real*            C real*            D real*  
+         T real*            U real*            V real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+     21       SUBROUTINE BAR(D,N)
+     22       COMMON /BLK1/ TAD(100)
+     23       REAL D(N)
+     24       DO 10 I=1,N-1
+     25          TAD(I) = I
+     26          D(I) = TAD(I)*2.0
+     27  10   CONTINUE
+     28       END
+
+Module BAR: subr
+
+Common blocks referenced:
+
+      BLK1         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         D real  1          I intg*            N intg*          TAD real* 1
+
+* Variable not declared. Type has been implicitly defined.
+
+
+
+Statement labels defined:
+
+    Label   Line  StmtType
+     <10>     27      exec
+
+
+ 0 syntax errors detected in file common-alias.f
+ 3 warnings issued in file common-alias.f
+
+"common-alias.f", line 15: Warning: Subprogram FOO argument usage mismatch at
+ position 2:
+"common-alias.f", line 15:    Dummy arg B in module FOO is aliased to common
+ var 3: V in block %BLANK
+"common-alias.f", line 15:    Dummy arg B in module FOO is modified
+"common-alias.f", line 8:    Actual arg X in module %MAIN is in common block 
+ %BLANK
+"common-alias.f", line 15:  and at position 3:
+"common-alias.f", line 15:    Dummy arg C in module FOO is used before set
+"common-alias.f", line 8:    Actual arg Y in module %MAIN is not set
+
+"common-alias.f", line 15: Warning: Subprogram FOO argument usage mismatch at
+ position 3:
+"common-alias.f", line 15:    Dummy arg C in module FOO is aliased to common
+ var 1: T in block %BLANK which is modified
+"common-alias.f", line 10:    Actual arg Q in module %MAIN is in common block 
+ %BLANK
+
+"common-alias.f", line 21: Warning: Subprogram BAR argument usage mismatch at
+ position 1:
+"common-alias.f", line 21:    Dummy arg D in module BAR is aliased to common
+ var 1: TAD in block BLK1 which is modified
+"common-alias.f", line 21:    Dummy arg D in module BAR is modified
+"common-alias.f", line 12:    Actual arg DAT in module %MAIN is in common
+ block BLK1

@@ -1,0 +1,43 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File f95deleted.f:
+      4       assign 5 to label
+              ^
+Warning near line 4 col 7 file f95deleted.f: Syntax deleted in Fortran 95:
+ ASSIGN statement
+      5       assign 90 to format
+              ^
+Warning near line 5 col 7 file f95deleted.f: Syntax deleted in Fortran 95:
+ ASSIGN statement
+      8       do 10 x=1,5
+                    ^
+Warning near line 8 col 13 file f95deleted.f: Syntax deleted in Fortran 95: DO
+ index is not integer
+      9          print format,x,j*x**2
+                       ^
+Warning near line 9 col 16 file f95deleted.f: Syntax deleted in Fortran 95:
+ assigned format
+     12       if( j .eq. 2 ) goto label
+                             ^
+Warning near line 12 col 22 file f95deleted.f: Syntax deleted in Fortran 95:
+ assigned GOTO
+     14       assign 91 to format
+              ^
+Warning near line 14 col 7 file f95deleted.f: Syntax deleted in Fortran 95:
+ ASSIGN statement
+     15       write(*,format) i,j
+                      ^
+Warning near line 15 col 15 file f95deleted.f: Syntax deleted in Fortran 95:
+ assigned format
+     18  91   format(1x,2hi=,i5,3h j=,i5)
+                        ^
+Warning near line 18 col 17 file f95deleted.f: Syntax deleted in Fortran 95: H
+ edit descriptor
+                                ^
+Warning near line 18 col 25 file f95deleted.f: Syntax deleted in Fortran 95: H
+ edit descriptor
+
+ 0 syntax errors detected in file f95deleted.f
+ 9 warnings issued in file f95deleted.f
+

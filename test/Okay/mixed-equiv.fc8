@@ -1,0 +1,26 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File mixed-equiv.f:
+      1       real *8 x
+                    ^
+Warning near line 1 col 13 file mixed-equiv.f: Nonstandard syntax
+      6       x = 1.0
+                ^
+Warning near line 6 col 9 file mixed-equiv.f: real const 1.0 promoted to 
+ real*8 X: may not give desired precision
+
+Warning in module %MAIN in file mixed-equiv.f: Mixed default and explicit size
+ items equivalenced (not portable):
+    X declared at line 1 file mixed-equiv.f with type real*8
+    Y declared at line 2 file mixed-equiv.f with type dble
+
+Warning in module %MAIN in file mixed-equiv.f: Mixed types equivalenced (not
+ portable):
+    I first occurrence at line 5 file mixed-equiv.f with type intg (implicitly
+ typed)
+    R declared at line 4 file mixed-equiv.f with type real
+
+ 0 syntax errors detected in file mixed-equiv.f
+ 4 warnings issued in file mixed-equiv.f
+

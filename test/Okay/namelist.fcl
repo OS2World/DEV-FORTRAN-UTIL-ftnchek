@@ -1,0 +1,569 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File namelist.f:
+
+      1 c-----------------------------------------------------------------------
+      2 c     ftnchek test file: namelist.f, Mon Mar 13 14:01:03 1995
+      3 c-----------------------------------------------------------------------
+      4 
+      5       common b,e,f
+      6       namelist /n1/ a,b,c
+              ^
+Warning near line 6 col 7: Nonstandard syntax
+      7       namelist /n2/ x,y,z /n3/ l,m,
+                                          ^
+Error near line 7 col 35: trailing comma
+              ^
+Warning near line 7 col 7: Nonstandard syntax
+      8       namelist /n4/ x1,y2 z3, /n5/ l6
+                               ^
+Possibly misleading appearance near line 8 col 24: identifier Y2Z3 has
+ embedded space
+              ^
+Warning near line 8 col 7: Nonstandard syntax
+      9       read(*,n1)
+     10       write(*,n2)
+     11       read(1,nml=n3)
+                     ^
+Warning near line 11 col 14: Nonstandard syntax
+     12       write(1,nml=n4)
+                      ^
+Warning near line 12 col 15: Nonstandard syntax
+     13       end
+     14 
+
+Module %MAIN: prog
+
+Common blocks referenced:
+
+    %BLANK         
+
+Namelists defined:
+
+        N1                 N2                 N3                 N4         
+        N5         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real*            B real*            C real*            E real*  
+         F real*            L intg*           L6 intg*            M intg*  
+         X real*           X1 real*            Y real*         Y2Z3 real*  
+         Z real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+Warning in module %MAIN: Variables declared but never referenced:
+    L6 first occurrence at line 8
+
+Warning in module %MAIN: Variables set but never used:
+    A set at line 9
+    C set at line 9
+    L set at line 11
+    M set at line 11
+
+Warning in module %MAIN: Variables used before set
+    X used at line 10; never set
+    X1 used at line 12; never set
+    Y used at line 10; never set
+    Y2Z3 used at line 12; never set
+    Z used at line 10; never set
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             1          SEQ  FMTD READ         11 
+             1          SEQ  FMTD WRITE        12 
+           *            SEQ  FMTD READ          9 
+           *            SEQ  FMTD WRITE        10 
+     15 
+     16       subroutine grfgg3
+     17 C$    (grfgg3)
+     18 C$    This is a substantial portion of the declaration section from
+     19 C$    the PLOT79 grfgg3.sf3 file.  The formatting was done by the
+     20 C$    Extended PFORT Verifier, and the extensive NAMELIST block serves
+     21 C$    as a test for ftnchek.
+     22 C$    (13-Mar-1995)
+     23 C$ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     24 C$
+     25 C$    EXTERNAL FUNCTIONS AND SUBROUTINES
+     26 C$
+     27       INTEGER             I1MACH,      NINT,        UTISL
+     28       REAL                ALOG10,      R1MACH,      UTRE3
+     29 C$ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     30 C$
+     31 C$    INTRINSIC FUNCTIONS
+     32 C$
+     33       INTEGER             IABS,        MAX0,        MIN0
+     34       REAL                ABS,         AMAX1,       AMIN1,       FLOAT
+     35       REAL                SIGN
+     36 C$ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     37 C$
+     38 C$    STATEMENT FUNCTIONS
+     39 C$
+     40       LOGICAL             IN
+     41       REAL                CMTOIN,      CMTOUN,      FRAC,        INTOCM
+     42       REAL                INTOUN,      MMTOCM,      UNTOCM,      UNTOIN
+     43 C$ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     44 C$
+     45 C$    HOLLERITH STRING VARIABLES
+     46 C$
+     47       INTEGER             BLANK,       GREEK,       QUOTE,       ROMAN
+     48 C$
+     49 C$ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     50 C$
+     51 C$    NON-COMMON VARIABLES
+     52 C$
+     53       INTEGER             BIGINT,      CARD(500),   CURCOL,      CURROW
+     54       INTEGER             FSTYLE,      I,           IARG,        IARG1
+     55       INTEGER             IARG2,       IDFONT,      IERVAL(1),   II
+     56       INTEGER             J,           JX,          JY,          JZ
+     57       INTEGER             K,           KX,          KXYZ,        KY
+     58       INTEGER             KZ,          LSTYLE(06),  MARK(06),    MAXCRD
+     59       INTEGER             MAXCRV,      MAXVAL,      MODEU,       MODEV
+     60       INTEGER             MODEX,       MODEY,       MODEZ,       N(06)
+     61       INTEGER             NC,          NCELLX,      NCELLY,      NCINIT
+     62       INTEGER             NCISAV,      NCSTEP,      NCTERM,      NCU
+     63       INTEGER             NCV,         NCX,         NCY,         NCZ
+     64       INTEGER             NIN,         NJ,          NOUT,        NRINIT
+     65       INTEGER             NRISAV,      NRSTEP,      NRTERM,      NSUM
+     66       INTEGER             NU(06),      NUJ,         NUMINT(06),  NUSUB
+     67       INTEGER             NVSUB,       NXSUB,       NYSUB,       NZSUB
+     68       INTEGER             PEN(06),     TITLE(500),  UTITLE(500)
+     69       INTEGER             VTITLE(500), XTITLE(500), YTITLE(500)
+     70       INTEGER             ZTITLE(500)
+     71       LOGICAL             AUTOX,       AUTOY,       AUTOZ
+     72       LOGICAL             AVRAGE(06),  AXES3D,      BCLIP,       BOX
+     73       LOGICAL             BYROWS,      CHKDUP,      CVTX(06)
+     74       LOGICAL             CVTY(06),    CVTZ(06),    DERIV(06),   EOFILE
+     75       LOGICAL             FCLIP,       INTGRT(06),  LOGX,        LOGY
+     76       LOGICAL             LOGZ,        LSTXYZ,      PARLEL,      PLOPEN
+     77       LOGICAL             PLOTID,      RESET,       RIGHT,       UAXIS
+     78       LOGICAL             UVAXES,      VARPEN,      VAXIS,       WCLIP
+     79       LOGICAL             XAXIS,       XFALLS,      YAXIS,       YFALLS
+     80       LOGICAL             ZAXIS,       ZFALLS
+     81       REAL                ARCLEN,      ARG,         ARG1,        ARG2
+     82       REAL                ARX,         ARY,         CMFACT,      CPX
+     83       REAL                CPY,         DEFHT,       DEFMAR,      DT
+     84       REAL                DUSUB,       DVSUB,       DXSUB,       DYSUB
+     85       REAL                DZSUB,       FSCALE,      GSCALE,      HALF
+     86       REAL                HH,          HSCALE,      HT,          HTDEF
+     87       REAL                HTFACT,      HX,          HY,          INFITY
+     88       REAL                LWIDTH(06),  MARGIN(4),   MSCALE,      NINETY
+     89       REAL                ONE,         PAGESQ,      PAGEX,       PAGEY
+     90       REAL                PENDIA,      PERDST,      PICTHX,      PICTHY
+     91       REAL                PICTX,       PICTY,       PPXYZ(3)
+     92       REAL                RPXYZ(3),    SIGMA(06),   SWAP,        T(4,4)
+     93       REAL                TICDEF,      TICKU,       TICKV,       TICKX
+     94       REAL                TICKY,       TICKZ,       TIMAGE(4,4)
+     95       REAL                TMODEL(4,4), TOPMAR,      TT,          TTLHEI
+     96       REAL                TTLLEN,      TTOTAL(4,4), TWO,         U1
+     97       REAL                U2,          UDIST,       UMAX,        UMAXP
+     98       REAL                UMAXRC,      UMIN,        UMINP,       UMINRC
+     99       REAL                UNITS,       UNSPEC,      UPXYZ(3),    V1
+    100       REAL                V2,          VDIST,       VIEWD,       VMAX
+    101       REAL                VMAXP,       VMAXRC,      VMIN,        VMINP
+    102       REAL                VMINRC,      VNXYZ(3),    VPUMAX,      VPUMIN
+    103       REAL                VPVMAX,      VPVMIN,      VSCALE,      WMAX
+    104       REAL                WMAXP,       WMIN,        WMINP
+    105       REAL                WORK(1600,5),X(1600,06),  X0,          XDIST
+    106       REAL                XFACT(06),   XINT,        XMAX,        XMAXJ
+    107       REAL                XMAXP,       XMIN,        XMINJ,       XMINP
+    108       REAL                XORG,        XSHIFT(06),  XX
+    109       REAL                Y(1600,06),  Y0,          YDIST
+    110       REAL                YFACT(06),   YINT,        YMAX,        YMAXJ
+    111       REAL                YMAXP,       YMIN,        YMINJ,       YMINP
+    112       REAL                YORG,        YSHIFT(06),  YY
+    113       REAL                Z(1600,06),  Z0,          ZDIST,       ZERO
+    114       REAL                ZFACT(06),   ZINT,        ZMAX,        ZMAXJ
+    115       REAL                ZMAXP,       ZMIN,        ZMINJ,       ZMINP
+    116       REAL                ZORG,        ZSHIFT(06),  ZZ
+    117 C$ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    118 C$
+    119 C$    NAMELIST BLOCKS
+    120 C$
+    121       NAMELIST / DATA /
+    122      X                  AVRAGE, AXES3D, BCLIP,  BOX,    BYROWS, CHKDUP,
+    123      X                  DERIV,  DUSUB,  DVSUB,  DXSUB,  DYSUB,  DZSUB,
+    124      X                  FCLIP,  FSCALE, FSTYLE, GSCALE, HSCALE, IDFONT,
+    125      X                  INTGRT, KX,     KY,     KZ,     LOGX,   LOGY,
+    126      X                  LOGZ,   LSTXYZ, LSTYLE, LWIDTH, MARGIN, MARK,
+    127      X                  MODEU,  MODEV,  MODEX,  MODEY,  MODEZ,  MSCALE,
+    128      X                  N,      NCINIT, NCSTEP, NCTERM, NRINIT, NRSTEP,
+    129      X                  NRTERM, NU,     NUMINT, NUSUB,  NVSUB,  NXSUB,
+    130      X                  NYSUB,  NZSUB,  PARLEL, PEN,    PENDIA, PERDST,
+    131      X                  PLOTID, PPXYZ,  RESET,  RIGHT,  RPXYZ,  SIGMA,
+    132      X                  TICKU,  TICKV,  TICKX,  TICKY,  TICKZ,  TIMAGE,
+    133      X                  TMODEL, UAXIS,  UMAX,   UMIN,   UPXYZ,  UVAXES,
+    134      X                  VAXIS,  VIEWD,  VMAX,   VMIN,   VNXYZ,  VSCALE,
+    135      X                  WCLIP,  WMAX,   WMIN,   X,      XAXIS,  XFACT,
+    136      X                  XFALLS, XMAX,   XMIN,   XSHIFT, Y,      YAXIS,
+    137      X                  YFACT,  YFALLS, YMAX,   YMIN,   YSHIFT, Z,
+              ^
+Warning near line 121 col 7: Nonstandard syntax
+    138      X                  ZAXIS,  ZFACT,  ZFALLS, ZMAX,   ZMIN,   ZSHIFT
+    139       END
+Warning near line 139: Module contains no executable statements
+
+Module GRFGG3: subr
+
+Namelists defined:
+
+      DATA         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+       ABS real        ALOG10 real         AMAX1 real         AMIN1 real   
+    ARCLEN real           ARG real          ARG1 real          ARG2 real   
+       ARX real           ARY real         AUTOX logl         AUTOY logl   
+     AUTOZ logl        AVRAGE logl  1     AXES3D logl         BCLIP logl   
+    BIGINT intg         BLANK intg           BOX logl        BYROWS logl   
+      CARD intg  1     CHKDUP logl        CMFACT real        CMTOIN real   
+    CMTOUN real           CPX real           CPY real        CURCOL intg   
+    CURROW intg          CVTX logl  1       CVTY logl  1       CVTZ logl  1
+     DEFHT real        DEFMAR real         DERIV logl  1         DT real   
+     DUSUB real         DVSUB real         DXSUB real         DYSUB real   
+     DZSUB real        EOFILE logl         FCLIP logl         FLOAT real   
+      FRAC real        FSCALE real        FSTYLE intg         GREEK intg   
+    GSCALE real          HALF real            HH real        HSCALE real   
+        HT real         HTDEF real        HTFACT real            HX real   
+        HY real             I intg        I1MACH intg          IABS intg   
+      IARG intg         IARG1 intg         IARG2 intg        IDFONT intg   
+    IERVAL intg  1         II intg            IN logl        INFITY real   
+    INTGRT logl  1     INTOCM real        INTOUN real             J intg   
+        JX intg            JY intg            JZ intg             K intg   
+        KX intg          KXYZ intg            KY intg            KZ intg   
+      LOGX logl          LOGY logl          LOGZ logl        LSTXYZ logl   
+    LSTYLE intg  1     LWIDTH real  1     MARGIN real  1       MARK intg  1
+      MAX0 intg        MAXCRD intg        MAXCRV intg        MAXVAL intg   
+      MIN0 intg        MMTOCM real         MODEU intg         MODEV intg   
+     MODEX intg         MODEY intg         MODEZ intg        MSCALE real   
+         N intg  1         NC intg        NCELLX intg        NCELLY intg   
+    NCINIT intg        NCISAV intg        NCSTEP intg        NCTERM intg   
+       NCU intg           NCV intg           NCX intg           NCY intg   
+       NCZ intg           NIN intg        NINETY real          NINT intg   
+        NJ intg          NOUT intg        NRINIT intg        NRISAV intg   
+    NRSTEP intg        NRTERM intg          NSUM intg            NU intg  1
+       NUJ intg        NUMINT intg  1      NUSUB intg         NVSUB intg   
+     NXSUB intg         NYSUB intg         NZSUB intg           ONE real   
+    PAGESQ real         PAGEX real         PAGEY real        PARLEL logl   
+       PEN intg  1     PENDIA real        PERDST real        PICTHX real   
+    PICTHY real         PICTX real         PICTY real        PLOPEN logl   
+    PLOTID logl         PPXYZ real  1      QUOTE intg        R1MACH real   
+     RESET logl         RIGHT logl         ROMAN intg         RPXYZ real  1
+     SIGMA real  1       SIGN real          SWAP real             T real  2
+    TICDEF real         TICKU real         TICKV real         TICKX real   
+     TICKY real         TICKZ real        TIMAGE real  2      TITLE intg  1
+    TMODEL real  2     TOPMAR real            TT real        TTLHEI real   
+    TTLLEN real        TTOTAL real  2        TWO real            U1 real   
+        U2 real         UAXIS logl         UDIST real          UMAX real   
+     UMAXP real        UMAXRC real          UMIN real         UMINP real   
+    UMINRC real         UNITS real        UNSPEC real        UNTOCM real   
+    UNTOIN real         UPXYZ real  1      UTISL intg        UTITLE intg  1
+     UTRE3 real        UVAXES logl            V1 real            V2 real   
+    VARPEN logl         VAXIS logl         VDIST real         VIEWD real   
+      VMAX real         VMAXP real        VMAXRC real          VMIN real   
+     VMINP real        VMINRC real         VNXYZ real  1     VPUMAX real   
+    VPUMIN real        VPVMAX real        VPVMIN real        VSCALE real   
+    VTITLE intg  1      WCLIP logl          WMAX real         WMAXP real   
+      WMIN real         WMINP real          WORK real  2          X real  2
+        X0 real         XAXIS logl         XDIST real         XFACT real  1
+    XFALLS logl          XINT real          XMAX real         XMAXJ real   
+     XMAXP real          XMIN real         XMINJ real         XMINP real   
+      XORG real        XSHIFT real  1     XTITLE intg  1         XX real   
+         Y real  2         Y0 real         YAXIS logl         YDIST real   
+     YFACT real  1     YFALLS logl          YINT real          YMAX real   
+     YMAXJ real         YMAXP real          YMIN real         YMINJ real   
+     YMINP real          YORG real        YSHIFT real  1     YTITLE intg  1
+        YY real             Z real  2         Z0 real         ZAXIS logl   
+     ZDIST real          ZERO real         ZFACT real  1     ZFALLS logl   
+      ZINT real          ZMAX real         ZMAXJ real         ZMAXP real   
+      ZMIN real         ZMINJ real         ZMINP real          ZORG real   
+    ZSHIFT real  1     ZTITLE intg  1         ZZ real   
+
+
+
+Warning in module GRFGG3: Variables declared but never referenced:
+    ABS declared at line 34
+    ALOG10 declared at line 28
+    AMAX1 declared at line 34
+    AMIN1 declared at line 34
+    ARCLEN declared at line 81
+    ARG declared at line 81
+    ARG1 declared at line 81
+    ARG2 declared at line 81
+    ARX declared at line 82
+    ARY declared at line 82
+    AUTOX declared at line 71
+    AUTOY declared at line 71
+    AUTOZ declared at line 71
+    AVRAGE declared at line 72
+    AXES3D declared at line 72
+    BCLIP declared at line 72
+    BIGINT declared at line 53
+    BLANK declared at line 47
+    BOX declared at line 72
+    BYROWS declared at line 73
+    CARD declared at line 53
+    CHKDUP declared at line 73
+    CMFACT declared at line 82
+    CMTOIN declared at line 41
+    CMTOUN declared at line 41
+    CPX declared at line 82
+    CPY declared at line 83
+    CURCOL declared at line 53
+    CURROW declared at line 53
+    CVTX declared at line 73
+    CVTY declared at line 74
+    CVTZ declared at line 74
+    DEFHT declared at line 83
+    DEFMAR declared at line 83
+    DERIV declared at line 74
+    DT declared at line 83
+    DUSUB declared at line 84
+    DVSUB declared at line 84
+    DXSUB declared at line 84
+    DYSUB declared at line 84
+    DZSUB declared at line 85
+    EOFILE declared at line 74
+    FCLIP declared at line 75
+    FLOAT declared at line 34
+    FRAC declared at line 41
+    FSCALE declared at line 85
+    FSTYLE declared at line 54
+    GREEK declared at line 47
+    GSCALE declared at line 85
+    HALF declared at line 85
+    HH declared at line 86
+    HSCALE declared at line 86
+    HT declared at line 86
+    HTDEF declared at line 86
+    HTFACT declared at line 87
+    HX declared at line 87
+    HY declared at line 87
+    I declared at line 54
+    I1MACH declared at line 27
+    IABS declared at line 33
+    IARG declared at line 54
+    IARG1 declared at line 54
+    IARG2 declared at line 55
+    IDFONT declared at line 55
+    IERVAL declared at line 55
+    II declared at line 55
+    IN declared at line 40
+    INFITY declared at line 87
+    INTGRT declared at line 75
+    INTOCM declared at line 41
+    INTOUN declared at line 42
+    J declared at line 56
+    JX declared at line 56
+    JY declared at line 56
+    JZ declared at line 56
+    K declared at line 57
+    KX declared at line 57
+    KXYZ declared at line 57
+    KY declared at line 57
+    KZ declared at line 58
+    LOGX declared at line 75
+    LOGY declared at line 75
+    LOGZ declared at line 76
+    LSTXYZ declared at line 76
+    LSTYLE declared at line 58
+    LWIDTH declared at line 88
+    MARGIN declared at line 88
+    MARK declared at line 58
+    MAX0 declared at line 33
+    MAXCRD declared at line 58
+    MAXCRV declared at line 59
+    MAXVAL declared at line 59
+    MIN0 declared at line 33
+    MMTOCM declared at line 42
+    MODEU declared at line 59
+    MODEV declared at line 59
+    MODEX declared at line 60
+    MODEY declared at line 60
+    MODEZ declared at line 60
+    MSCALE declared at line 88
+    N declared at line 60
+    NC declared at line 61
+    NCELLX declared at line 61
+    NCELLY declared at line 61
+    NCINIT declared at line 61
+    NCISAV declared at line 62
+    NCSTEP declared at line 62
+    NCTERM declared at line 62
+    NCU declared at line 62
+    NCV declared at line 63
+    NCX declared at line 63
+    NCY declared at line 63
+    NCZ declared at line 63
+    NIN declared at line 64
+    NINETY declared at line 88
+    NINT declared at line 27
+    NJ declared at line 64
+    NOUT declared at line 64
+    NRINIT declared at line 64
+    NRISAV declared at line 65
+    NRSTEP declared at line 65
+    NRTERM declared at line 65
+    NSUM declared at line 65
+    NU declared at line 66
+    NUJ declared at line 66
+    NUMINT declared at line 66
+    NUSUB declared at line 66
+    NVSUB declared at line 67
+    NXSUB declared at line 67
+    NYSUB declared at line 67
+    NZSUB declared at line 67
+    ONE declared at line 89
+    PAGESQ declared at line 89
+    PAGEX declared at line 89
+    PAGEY declared at line 89
+    PARLEL declared at line 76
+    PEN declared at line 68
+    PENDIA declared at line 90
+    PERDST declared at line 90
+    PICTHX declared at line 90
+    PICTHY declared at line 90
+    PICTX declared at line 91
+    PICTY declared at line 91
+    PLOPEN declared at line 76
+    PLOTID declared at line 77
+    PPXYZ declared at line 91
+    QUOTE declared at line 47
+    R1MACH declared at line 28
+    RESET declared at line 77
+    RIGHT declared at line 77
+    ROMAN declared at line 47
+    RPXYZ declared at line 92
+    SIGMA declared at line 92
+    SIGN declared at line 35
+    SWAP declared at line 92
+    T declared at line 92
+    TICDEF declared at line 93
+    TICKU declared at line 93
+    TICKV declared at line 93
+    TICKX declared at line 93
+    TICKY declared at line 94
+    TICKZ declared at line 94
+    TIMAGE declared at line 94
+    TITLE declared at line 68
+    TMODEL declared at line 95
+    TOPMAR declared at line 95
+    TT declared at line 95
+    TTLHEI declared at line 95
+    TTLLEN declared at line 96
+    TTOTAL declared at line 96
+    TWO declared at line 96
+    U1 declared at line 96
+    U2 declared at line 97
+    UAXIS declared at line 77
+    UDIST declared at line 97
+    UMAX declared at line 97
+    UMAXP declared at line 97
+    UMAXRC declared at line 98
+    UMIN declared at line 98
+    UMINP declared at line 98
+    UMINRC declared at line 98
+    UNITS declared at line 99
+    UNSPEC declared at line 99
+    UNTOCM declared at line 42
+    UNTOIN declared at line 42
+    UPXYZ declared at line 99
+    UTISL declared at line 27
+    UTITLE declared at line 68
+    UTRE3 declared at line 28
+    UVAXES declared at line 78
+    V1 declared at line 99
+    V2 declared at line 100
+    VARPEN declared at line 78
+    VAXIS declared at line 78
+    VDIST declared at line 100
+    VIEWD declared at line 100
+    VMAX declared at line 100
+    VMAXP declared at line 101
+    VMAXRC declared at line 101
+    VMIN declared at line 101
+    VMINP declared at line 101
+    VMINRC declared at line 102
+    VNXYZ declared at line 102
+    VPUMAX declared at line 102
+    VPUMIN declared at line 102
+    VPVMAX declared at line 103
+    VPVMIN declared at line 103
+    VSCALE declared at line 103
+    VTITLE declared at line 69
+    WCLIP declared at line 78
+    WMAX declared at line 103
+    WMAXP declared at line 104
+    WMIN declared at line 104
+    WMINP declared at line 104
+    WORK declared at line 105
+    X declared at line 105
+    X0 declared at line 105
+    XAXIS declared at line 79
+    XDIST declared at line 105
+    XFACT declared at line 106
+    XFALLS declared at line 79
+    XINT declared at line 106
+    XMAX declared at line 106
+    XMAXJ declared at line 106
+    XMAXP declared at line 107
+    XMIN declared at line 107
+    XMINJ declared at line 107
+    XMINP declared at line 107
+    XORG declared at line 108
+    XSHIFT declared at line 108
+    XTITLE declared at line 69
+    XX declared at line 108
+    Y declared at line 109
+    Y0 declared at line 109
+    YAXIS declared at line 79
+    YDIST declared at line 109
+    YFACT declared at line 110
+    YFALLS declared at line 79
+    YINT declared at line 110
+    YMAX declared at line 110
+    YMAXJ declared at line 110
+    YMAXP declared at line 111
+    YMIN declared at line 111
+    YMINJ declared at line 111
+    YMINP declared at line 111
+    YORG declared at line 112
+    YSHIFT declared at line 112
+    YTITLE declared at line 69
+    YY declared at line 112
+    Z declared at line 113
+    Z0 declared at line 113
+    ZAXIS declared at line 80
+    ZDIST declared at line 113
+    ZERO declared at line 113
+    ZFACT declared at line 114
+    ZFALLS declared at line 80
+    ZINT declared at line 114
+    ZMAX declared at line 114
+    ZMAXJ declared at line 114
+    ZMAXP declared at line 115
+    ZMIN declared at line 115
+    ZMINJ declared at line 115
+    ZMINP declared at line 115
+    ZORG declared at line 116
+    ZSHIFT declared at line 116
+    ZTITLE declared at line 70
+    ZZ declared at line 116
+
+
+ 1 syntax error detected in file namelist.f
+ 13 warnings issued in file namelist.f
+
+Warning: Common block %BLANK Elements set but never used:
+    B
+
+Warning: Common block %BLANK Elements never used, never set:
+    E F
+
+Warning: Subprogram GRFGG3 never invoked
+    Defined in module GRFGG3 line 16 file namelist.f

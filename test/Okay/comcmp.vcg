@@ -1,0 +1,21 @@
+graph: {
+title: "comcmp.f"
+color: lightgray
+
+graph: {
+title:"[%MAIN]"
+node: { title: "%MAIN" label: "%MAIN \n (comcmp.f)" info1:"1" }
+edge: { sourcename: "%MAIN" targetname: "FOO" class:1} 
+
+graph: {
+title:"[FOO]"
+node: { title: "FOO" label: "FOO \n (comcmp.f)" info1:"2" }
+edge: { sourcename: "FOO" targetname: "BAR" class:2} 
+
+graph: {
+title:"[BAR]"
+node: { title: "BAR" label: "BAR \n (comcmp.f)" info1:"3" }
+}
+}
+}
+}

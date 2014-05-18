@@ -1,0 +1,11 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File f95deleted.f:
+      8       do 10 x=1,5
+                    ^
+Warning near line 8 col 13 file f95deleted.f: DO index is not integer
+
+ 0 syntax errors detected in file f95deleted.f
+ 1 warning issued in file f95deleted.f
+

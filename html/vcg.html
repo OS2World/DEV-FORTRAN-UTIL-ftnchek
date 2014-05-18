@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<TITLE>Option: vcg</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="usage.html">-usage</A><HR><P>
+<H2>Option: <font color=#FF0080>vcg</font></H2><P>
+<A NAME="vcg"></A><DT><B><A HREF="vcg.html">-vcg</A></B>
+
+<DD>
+<DL COMPACT><DT><DD>
+Produce the call graph in the form of a VCG graph description.  This
+description is written to a separate file, with the same stem as the
+file containing the main program, and suffix
+<I>.vcg</I>.
+
+This file is able to be given directly to
+<B><A HREF="http://localhost/cgi-bin/man/man2html?1L+xvcg">xvcg</A></B>(1L)
+
+to visualize the call graph.
+(If input is from the standard input, then the graph description is
+sent to standard output.)
+This switch is equivalent to <B><A HREF="calltree.html">-calltree</A>=vcg</B>.
+Default = no.
+<P>
+
+The VCG description as created is more complex than it need be. VCG allows
+graphs and nested subgraphs: each subroutine is created as a
+subgraph nested inside its calling routines.  This allows you to
+interactively display subgraphs or summarise them.
+<P>
+
+The
+<B><A HREF="vcg.html">-vcg</A></B>
+
+option for
+<B>ftnchek</B>
+
+was written by Dr. Philip Rubini (<A HREF="mailto:p.rubini@cranfield.ac.uk">p.rubini@cranfield.ac.uk</A>).
+<P>
+
+<B>xvcg</B> is a graph visualisation tool which runs under the X windows system.
+It is freely available from <A HREF="ftp://ftp.cs.uni-sb.de">ftp.cs.uni-sb.de</A>. It was written by G. Sander
+of the University of Saarland, Germany.
+<P>
+
+See also: <B><A HREF="calltree.html">-calltree</A></B>, <B><A HREF="crossref.html">-crossref</A></B>, <B><A HREF="reference.html">-reference</A></B>, <B><A HREF="sort.html">-sort</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="version.html">-version</A>
+</BODY></HTML>

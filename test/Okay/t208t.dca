@@ -1,0 +1,17 @@
+!====>Begin Module FOO                    File t208t.f                  
+!---->Makedcls Options: All variables                                   
+!
+!     Argument variables
+!
+  CHARACTER*(*)       D
+  CHARACTER*127       E
+  CHARACTER*(*)       F
+!
+!     Local variables
+!
+  CHARACTER*3         A
+  CHARACTER*4         B
+  CHARACTER*5         C
+  CHARACTER*255       G
+!
+!====>End Module   FOO                    File t208t.f                  

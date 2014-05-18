@@ -1,0 +1,23 @@
+<HTML>
+<HEAD><TITLE>Source dcltest.f</TITLE></HEAD>
+<BODY>
+<a name="TEST1"><h3>PROGRAM TEST1 ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>dcltest.f</td></tr>
+<tr><td></td></tr>
+</table>
+
+<table><tr><td><b>I/O Operations:</b></td></tr>
+<tr><td><pre>Unit ID  Unit No       Access  Form   Operation
+      *                   SEQ  FMTD           W  
+
+<small>Operation codes A=rewind,B=backspace,C=close,E=endfile
+                I=inquire,O=open,R=read,W=write</small></pre></td></tr></table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>CHARACTER*6        STRING1            (STRING1 = 'abc123')
+CHARACTER*(6)      STRING2            (STRING2 = 'xyz789')
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

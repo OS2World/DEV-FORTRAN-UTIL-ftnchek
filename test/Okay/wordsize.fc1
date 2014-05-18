@@ -1,0 +1,24 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File wordsize.f:
+
+      1       double precision function f(a,b)
+      2       double precision a,b
+      3       f = a+b
+      4       return
+      5       end
+
+
+      6       program main
+      7       real*8 f
+      8       real*8 x,y
+      9       x = 1.0
+     10       y = 2.0d0
+     11       write(*,*) f(x,y)
+     12       end
+
+
+
+ 0 syntax errors detected in file wordsize.f
+

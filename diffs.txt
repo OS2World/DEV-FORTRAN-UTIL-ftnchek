@@ -1,0 +1,245 @@
+*** Makefile.in.orig	Thu Mar 20 23:07:54 2003
+--- Makefile.in	Tue May  6 10:34:12 2003
+***************
+*** 174,179 ****
+--- 174,180 ----
+  OPT		= @OPT@
+  CFLAGS          = @CFLAGS@ $(DEBUG_FLAGS) $(DEVEL_CFLAGS)
+  LDFLAGS         = @LDFLAGS@ $(DEBUG_FLAGS) $(DEVEL_LDFLAGS)
++ LDLIBS          = @LDLIBS@
+  YFLAGS          = -d
+  
+  # fortran.o first because of possible remake if tokdefs.h changes (see below)
+***************
+*** 308,314 ****
+  	-$(RM) *.catman
+  
+  ftnchek$(EXE): $(OBJS)
+! 	$(CC) $(CFLAGS) $(LDFLAGS) -o ftnchek$(EXE) $(OBJS)
+  
+  # N.B. tokdefs.h is copy of y.tab.h used to avoid remaking stuff when
+  # grammar changes but not tokens.  If the parser is made by bison,
+--- 309,315 ----
+  	-$(RM) *.catman
+  
+  ftnchek$(EXE): $(OBJS)
+! 	$(CC) $(CFLAGS) $(LDFLAGS) -o ftnchek$(EXE) $(OBJS) $(LDLIBS)
+  
+  # N.B. tokdefs.h is copy of y.tab.h used to avoid remaking stuff when
+  # grammar changes but not tokens.  If the parser is made by bison,
+***************
+*** 371,377 ****
+  #	   one-liner man text)
+  #	7. change lines of form ``.if !\nh text'' to ``text'' (ditto)
+  ftnchek$(manext):	ftnchek.man average.f average.out correct.f
+! 	@if test -x $(SOELIM) ; \
+  	then \
+  	  echo "Making cleaned-up manpage ftnchek$(manext)" ; \
+  	  $(SOELIM) ftnchek.man | \
+--- 372,378 ----
+  #	   one-liner man text)
+  #	7. change lines of form ``.if !\nh text'' to ``text'' (ditto)
+  ftnchek$(manext):	ftnchek.man average.f average.out correct.f
+! 	@if test "$(SOELIM)" = "soelim$(EXE)"; \
+  	then \
+  	  echo "Making cleaned-up manpage ftnchek$(manext)" ; \
+  	  $(SOELIM) ftnchek.man | \
+*** configure_os2.cmd.orig	Sat Jun  2 02:32:50 2001
+--- configure_os2.cmd	Tue May  6 12:32:18 2003
+***************
+*** 7,27 ****
+       Jan Ftacnik, 1993
+       Stefan A. Deutscher, 1996 (sad@utk.edu)
+  
+!    The building of the makefile is a four phase process:
+     1) Parsing the command line arguments
+     2) Checking of the system configuration
+     3) Building of the actual substitutes for some variables
+     4) Processing of Makefile.in
+  
+     Extended by Stefan A. Deutscher to also generate stuff in test/
+!    directory automagically.  10/96
+  
+!    5) Processing of test/Makefile.in
+!    6) Processing of test/Compare.sh.in
+  
+     Updated by R. Moniot for changes in 2.11.  (Not tested.) 10/99
+     Updated by Stefan A. Deutscher for changes in 3.0.0, tested. 11/2000
+     Updated by Stefan A. Deutscher for changes in 3.1.0, tested. 06/2001
+  */
+  
+  /* load library REXXUTIL */
+--- 7,29 ----
+       Jan Ftacnik, 1993
+       Stefan A. Deutscher, 1996 (sad@utk.edu)
+  
+!    The building of the makefile is a five phase process:
+     1) Parsing the command line arguments
+     2) Checking of the system configuration
+     3) Building of the actual substitutes for some variables
+     4) Processing of Makefile.in
++    5) Processing of config-generic.h to write config.h
+  
+     Extended by Stefan A. Deutscher to also generate stuff in test/
+!    directory automagically.  10/1996 until 05/2003
+  
+!    6) Processing of test/Makefile.in
+!    7) Processing of test/Compare.sh.in
+  
+     Updated by R. Moniot for changes in 2.11.  (Not tested.) 10/99
+     Updated by Stefan A. Deutscher for changes in 3.0.0, tested. 11/2000
+     Updated by Stefan A. Deutscher for changes in 3.1.0, tested. 06/2001
++    Updated by Stefan A. Deutscher for changes in 3.2.2, tested. 05/2003
+  */
+  
+  /* load library REXXUTIL */
+***************
+*** 38,43 ****
+--- 40,48 ----
+    TmpFile     = SysTempFileName('Makefile.???')
+    OutputFile  = 'Makefile'
+  
++   ConfigGenericFile = 'config-generic.h'
++   ConfigOS2File     = 'config-os2.h'
++ 
+    TestDir         = 'test'
+    TestInputFile   = 'Makefile.in'
+    TestOutputFile  = 'Makefile'
+***************
+*** 49,54 ****
+--- 54,62 ----
+    Linking     = 'dynamic'
+    PrefixDir   = 'c:\usr\local'
+  
++   UseRegex = 'no'
++   RegexDef = '0'
++ 
+  
+  /*******************************************/
+  /*     parse command line arguments        */
+***************
+*** 96,101 ****
+--- 104,113 ----
+             PrefixDir = word(argv,i)
+             i = i + 1
+          end
++         when (c = 'r') then do
++            UseRegex = 'yes'
++            i = i + 1
++ 	end
+          otherwise do
+             say ' Error: Argument -'c' is unknown.'
+             say
+***************
+*** 307,314 ****
+          Ldflags = '-s -Zomf -Zsys -Zstack 8192 -Zlinker \/pm:vio'
+       end
+    else do
+!      if Linking = 'dynamic' then
+          Ldflags = '-s'
+       else
+          say ' Error: Static linking is not possible for ',
+              'aout object file format.'
+--- 319,334 ----
+          Ldflags = '-s -Zomf -Zsys -Zstack 8192 -Zlinker \/pm:vio'
+       end
+    else do
+!      if Linking = 'dynamic' then do
+          Ldflags = '-s'
++         if UseRegex = 'yes' then do
++           Ldflags = '-s'
++           Ldlibs = '-lregex'
++           RegexDef = '1'
++ 	end
++         else
++           Ldlibs = ''
++ 	end
+       else
+          say ' Error: Static linking is not possible for ',
+              'aout object file format.'
+***************
+*** 364,369 ****
+--- 384,390 ----
+        '-e "s/@TAR@/'TarProg'/" ',
+        '-e "s/@CFLAGS@/'Cflags'/" ',
+        '-e "s/@LDFLAGS@/'Ldflags'/" ',
++       '-e "s/@LDLIBS@/'Ldlibs'/" ',
+        '-e "s/@INSTALL_MAN@//" ',
+        '-e "s/@FTNPP@//" ',
+        '-e "s/@CPPFLAGS@//" ',
+***************
+*** 422,427 ****
+--- 443,476 ----
+    say '  Makefile written.'
+  
+  /****************************************/
++ /*     process config-generic.h         */
++ /****************************************/
++ 
++ /*
++  emx09d on OS/2 has unistd.h, stdlib.h.
++  regex.h. is available from GNU libregex-0_12 port, which must be
++  installed. To do so, one needs to fetch both
++  http://ftp-os2.nmsu.edu/pub/os2/dev/unix/libregex-0_12-bin.zip
++  http://ftp-os2.nmsu.edu/pub/os2/dev/unix/libregex-0_12.zip
++  as bin contains the actual library but the header file is in the
++  source archive
++  emx09d also has both memset and bzero, and stricmp instead of
++ 	 strcasecmp
++ */
++ 
++   say '  Processing ' ConfigGenericFile ' ...'
++ 
++   '@echo off'
++   'sed -e "s/#define HAVE_UNISTD_H.*0$/#define HAVE_UNISTD_H 1/" ',
++       '-e "s/#define HAVE_STRCASECMP.*1/#define HAVE_STRCASECMP 0/" ',
++       '-e "s/#define HAVE_STRICMP.*0/#define HAVE_STRICMP 1/" ',
++       '-e "s/#define HAVE_REGEX_H.*[01]/#define HAVE_REGEX_H 'RegexDef'/" ',
++       ConfigGenericFile ' > ' ConfigOS2File
++   say '  ' ConfigOS2File ' written.'
++ 
++ /** weiter hier ***/
++ 
++ /****************************************/
+  /*     process files in test directory: */
+  /****************************************/
+  
+***************
+*** 520,530 ****
+  
+    'cd ..'
+  
+!   say ' Done. Now run:'
+!   say '          make           to make ftnchek.exe'
+!   say '          make check     to run the tests (that takes time)'
+!   say '          make ftnchek.1 to make the manual page'
+    say
+    say ' To save about 80kB, you can compress the executable with LxLite,'
+    say ' if you have it installed:'
+    say '               lxlite ftnchek.exe'
+--- 569,583 ----
+  
+    'cd ..'
+  
+!   say ' Done. Now copy ' ConfigOS2File ' onto config.h and run make'
+!   say ' '
+!   say '   copy ' ConfigOS2File ' config.h'  
+!   say '   make        to make ftnchek.exe and the manual page ftnchek.1'
+!   say '   make check  to run the tests (that takes time)'
+    say
++   say ' In case you have the GNU regex library (*.h, *.a) installed, you'
++   say ' may wish to enable also the -makehtml option of ftnchek. To do so,'
++   say ' rerun configure_os2.cmd -r before the above four steps.'
+    say ' To save about 80kB, you can compress the executable with LxLite,'
+    say ' if you have it installed:'
+    say '               lxlite ftnchek.exe'
+***************
+*** 540,545 ****
+--- 593,599 ----
+       say '       -l <string>  linking: static, dynamic'
+       say '       -o <string>  name of newly created Makefile'
+       say '       -p <string>  prefix directory'
++      say '       -r           build using GNU regex library'
+       say '       -h           show this help'
+       exit 1
+  

@@ -1,0 +1,40 @@
+<HTML>
+<HEAD>
+<TITLE>DESCRIPTION</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="index.html">SYNOPSIS</A><HR><P>
+<A NAME="lbAD">&nbsp;</A> <H2>DESCRIPTION</H2>
+
+<P>
+
+<B>ftnchek</B> (short for Fortran checker)
+is designed to detect certain errors in a
+Fortran program that a compiler usually does not.
+<B>ftnchek</B> is not primarily
+intended to detect syntax errors.  Its purpose is to assist the user in finding
+semantic errors.  Semantic errors are legal in the Fortran language but are
+wasteful or may cause incorrect operation.  For example, variables which are
+never used may indicate some omission in the program; uninitialized variables
+contain garbage which may cause incorrect results to be calculated; and
+variables which are not declared may not have the intended type.
+<B>ftnchek</B> is
+intended to assist users in the debugging of their Fortran program.  It is not
+intended to catch all syntax errors.  This is the function of the compiler.
+Prior to using <B>ftnchek</B>,
+the user should verify that the program compiles
+correctly.
+
+<P>
+
+This document first summarizes how to invoke <B>ftnchek</B>.
+That section should be read before beginning to use <B>ftnchek</B>.
+Later sections describe <B>ftnchek</B>'s
+options in more detail, give an example of its use, and explain
+how to interpret the output.  The final sections mention the limitations
+and known bugs in
+<B>ftnchek</B>.
+
+<P><HR><P>Next: <A HREF="lbAE.html">INVOKING FTNCHEK</A>
+</BODY></HTML>

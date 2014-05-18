@@ -1,0 +1,69 @@
+		  Ftnchek Version 3.2  Patch Level 2
+			     March, 2003
+
+Changes made in Patch 2:
+
+   o  Fixed bug that generated bogus error message about missing
+      construct name on END DO of a DO WHILE loop that has no
+      construct name.
+
+   o  Fixed bug that caused parse error for a DO WHILE statement with a
+      construct name.
+
+   o  Fixed bug whereby a dummy argument that is a function with the
+      same name as an intrinsic function would be treated as the
+      intrinsic.
+
+   o  Fixed bug that caused incorrect or missing line number in warning
+      messages referring to the imaginary part of a complex constant.
+
+   o  Fixed bug in treatment of a function that uses its own name in an
+      expression.  The main (perhaps only) effect of this bug was to
+      suppress printing of the call tree (-call option) if said
+      function was the highest subprogram in call tree.
+
+   o  The build.com and build-vax.com files for building ftnchek on
+      VMS systems were updated to reflect some new source files
+      that need to be compiled and linked.
+
+   o  Source files can now use any of the three prevailing line-ending
+      conventions: <LF> (UNIX), <CR><LF> (MS-DOS), or <CR> (Mac).
+
+   o  Fixed a few minor syntax issues: replaced a few #ifdef's that
+      should have been #if's; shortened identifiers longer than 31
+      characters; provided replacements for strcasecmp and strncasecmp
+      for systems that lack them (the fix in patch 1 only allowed for
+      alternative library routine names; this one provides our own
+      code if no such library routine exists); removed trailing comma
+      (illegal in C89) from an enum definition; removed some unary +
+      signs; provided toascii() macro for systems that don't provide
+      it.
+
+Changes made in Patch 1:
+
+   o  Fixed bug that caused -portability to turn off a warning that
+      would normally be given for argument data type mismatch between
+      default real and default double types.
+
+   o  Provided improved version 0.9 of ftnchek.el (emacs-lisp file for
+      ftnchek mode).  Provided by Judah Milgram.
+
+   o  Various changes to configure and Makefile, to avoid some problems
+      in installing: check for existence of emacs, and if it is
+      present, the byte-compilation of ftnchek.el is done
+      automatically by "make install"; the install also removes any
+      pre-existing installed executable of ftnchek before installing
+      the new one, in case the old one is a link; check for existence
+      of soelim before trying to create ftnchek.1.
+
+   o  Various minor code and configure changes to avoid some problems
+      in building ftnchek on various systems: check for presence of
+      regex.h, and if not, disable -mkhtml code that requires it;
+      provide alternatives to strcasecmp for compilers that lack it;
+      fix some argument declarations for compatibility with C++;
+      work around faulty FreeBSD regex.h.
+
+   o  Updated versions of makefile.bcc32 (for Borland C/C++) and of
+      ftnchek.dsw and ftnchek.dsp (for MS Visual C++) have been made
+      and tested.  An updated makefile.mpw (for Mac Programmer's
+      Workbench) was also made but not tested.

@@ -1,0 +1,9 @@
+c====>Begin Module %MAIN                  File t208s.f                  
+c---->Makedcls Options: All variables                                   
+c
+c     Parameter variables
+c
+      CHARACTER*(*)       S
+      PARAMETER           (S = 'hello')
+c
+c====>End Module   %MAIN                  File t208s.f                  

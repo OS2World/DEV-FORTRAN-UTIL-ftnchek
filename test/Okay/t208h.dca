@@ -1,0 +1,14 @@
+!====>Begin Module FOO                    File t208h.f                  
+!---->Makedcls Options: All variables                                   
+!
+!     External functions
+!
+  EXTERNAL            R1MACH
+!
+  REAL                R1MACH
+!
+!     Argument variables
+!
+  REAL                X
+!
+!====>End Module   FOO                    File t208h.f                  

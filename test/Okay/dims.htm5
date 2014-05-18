@@ -1,0 +1,32 @@
+<HTML>
+<HEAD><TITLE>Source dims.f</TITLE></HEAD>
+<BODY>
+<a name="FOO"><h3>SUBROUTINE FOO ( D )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER            d(*,*)
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>dims.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Intrinsic Functions Called</b><br></td></tr>
+<tr><td><pre>CHARACTER          char
+INTEGER            ichar,      len
+</pre></td></tr></table>
+<table><tr><td align="left"><b>External Functions and Subroutines Called</b><br></td></tr>
+<tr><td><pre>CHARACTER          str
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>INTEGER            n                  (n = 1)
+INTEGER            m                  (m = 2)
+INTEGER            k                  (k = 3)
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Local Variables</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>CHARACTER*10      +c(len('won''t'))
+INTEGER           +a(1:m*n,-n+2)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

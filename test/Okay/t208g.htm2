@@ -1,0 +1,18 @@
+<HTML>
+<HEAD><TITLE>Source t208g.f</TITLE></HEAD>
+<BODY>
+<a name="FOO"><h3>SUBROUTINE FOO ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208g.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>External Functions and Subroutines Called</b><br></td></tr>
+<tr><td><pre>INTEGER  I1MACH
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Local Variables</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER +N
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

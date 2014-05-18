@@ -1,0 +1,19 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File strings.f:
+      4       S = '12345678901234567890123456789012345678901234567890123456789012
+                                                                                ^
+"strings.f", line 4 col 73: Possibly misleading appearance: characters past 72
+ columns
+      7       T = '12345678901234567890123456789012345678901234567890123456789012
+                                                                                ^
+"strings.f", line 7 col 73: Possibly misleading appearance: characters past 72
+ columns
+     16      $'12345678901234567890123456789012345678901234567890123456789012'
+"strings.f", near line 16: Error: parse error, unexpected string, expecting
+ end of statement
+
+ 1 syntax error detected in file strings.f
+ 2 warnings issued in file strings.f
+

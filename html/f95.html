@@ -1,0 +1,63 @@
+<HTML>
+<HEAD>
+<TITLE>Option: f95</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="f90.html">-f90</A><HR><P>
+<H2>Option: <font color=#FF0080>f95</font></H2><P>
+<A NAME="f95"></A><DT><B><A HREF="f95.html">-f95</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+This setting provides detailed control over warnings about standard Fortran 77
+features that were deleted from the Fortran 95 Standard.  Unlike the
+<B><A HREF="f77.html">-f77</A></B> and <B><A HREF="f90.html">-f90</A></B> settings, these warnings apply to syntax
+which is legal Fortran 77.  However, since these features have been deleted
+from the Standard, it is possible that programs containing
+them will be unacceptable to some newer compilers.
+<P>
+
+The <I>list</I>
+consists of keywords separated by commas or colons.
+There are three special keywords: <B>all</B> to turn on all the
+warnings about nonstandard extensions, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="f95.html">-f95</A></B> is equivalent to
+<B><A HREF="f95.html">-f95</A>=all</B>, and <B>-nof95</B> is equivalent to
+<B><A HREF="f95.html">-f95</A>=none</B>.
+The warning keywords with their meanings are as follows.
+<DL COMPACT>
+<DT><B>real-do</B>:
+
+<DD>
+A DO variable of any real numeric type.
+<DT><B>pause</B>:
+
+<DD>
+The PAUSE statement.
+<DT><B>assign</B>:
+
+<DD>
+The ASSIGN statement, assigned GOTO, or assigned format.
+<DT><B>h-edit</B>:
+
+<DD>
+The H edit descriptor in a format.
+</DL>
+<P>
+
+There is one other Fortran 77 syntax feature that was deleted in
+Fortran 95, namely  branching to an ENDIF from outside the
+IF block.  However, <B>ftnchek</B> is unable to analyze program
+flow, and so it does not provide a warning for this.
+<P>
+
+See also: <B><A HREF="f77.html">-f77</A></B>, <B><A HREF="f90.html">-f90</A></B>, <B><A HREF="portability.html">-portability</A></B>,
+<B><A HREF="pretty.html">-pretty</A></B>, <B><A HREF="style.html">-style</A></B>, <B><A HREF="wordsize.html">-wordsize</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="help.html">-help</A>
+</BODY></HTML>

@@ -1,0 +1,89 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File usage.f:
+     11      $ 		(9,9,100)
+             ^
+Possibly misleading appearance near line 11 col 6 file usage.f: Continuation
+ follows comment or blank line
+     23 	parameter (Pi = 3.14159265358979D0)
+                                ^
+Warning near line 23 col 25 file usage.f: dble const 3.14159265358979D0 
+ truncated to real PI
+     50 		www = 4.7 + (Pi * 2)**8
+                            ^
+Warning near line 50 col 21 file usage.f: real expr 4.7+(PI*2)**8 truncated to 
+ intg WWW
+     60 	dbl1 = 1.2345
+                     ^
+Warning near line 60 col 14 file usage.f: real const 1.2345 promoted to dble 
+ DBL1: may not give desired precision
+
+Warning in module YACCTEST in file usage.f: Variables declared but never
+ referenced:
+    COMPL1 declared at line 33 file usage.f
+    COMPL2 declared at line 33 file usage.f
+    DBL2 declared at line 31 file usage.f
+    PROGRAM declared at line 20 file usage.f
+
+Warning in module YACCTEST in file usage.f: Variables set but never used:
+    A123 set at line 35 file usage.f
+    END set at line 42 file usage.f
+    IFA set at line 35 file usage.f
+    WWW set at line 50 file usage.f
+
+Warning in module YACCTEST in file usage.f: Variables used before set
+    IUNIT used at line 43 file usage.f; never set
+    PAUSE used at line 42 file usage.f; never set
+    SAVE used at line 48 file usage.f; never set
+    STOP used at line 48 file usage.f; never set
+
+Warning in module YACCTEST in file usage.f: Variables may be used before set:
+    DBL1 used at line 38 file usage.f
+    DBL1 set at line 60 file usage.f
+
+Error in module YACCTEST in file usage.f: Labels referenced but not defined:
+    <5> referenced at line 47 file usage.f
+
+Warning in module YACCTEST in file usage.f: Labels defined but not used:
+    <22> defined at line 12 file usage.f
+     75 	if( beta ) xray = 1.0D0
+                                ^
+Warning near line 75 col 25 file usage.f: dble const 1.0D0 truncated to intg 
+ XRAY
+
+Warning in module XRAY in file usage.f: Variables declared but never
+ referenced:
+    GAMMA declared at line 71 file usage.f (dummy argument)
+     81 	if((x-1.0)**(sqrt(2.0))/(5/4+com6) .gt. com3) then
+                                            ^
+Warning near line 81 col 37 file usage.f: integer quotient expr 5/4  converted
+ to real
+     87 	com4(com2+com6) = com4(xray)
+                     ^
+Warning near line 87 col 14 file usage.f: subscript is not integer
+                                       ^
+Warning near line 87 col 32 file usage.f: subscript is not integer
+
+Warning in module HOME in file usage.f: Variables used before set
+    COM2 used at line 87 file usage.f; never set
+
+ 1 syntax error detected in file usage.f
+ 15 warnings issued in file usage.f
+
+Warning: Common block BLK1 Elements used but never set:
+    COM3 COM6
+
+Warning: Common block BLK2 unused anywhere
+
+Warning: Common block %BLANK unused anywhere
+
+Warning: Common block BLK3 unused anywhere
+
+Warning: Common block BLK4 Elements set but never used: all
+
+Warning: Subprogram XRAY never invoked
+    Defined in module XRAY line 70 file usage.f
+
+Warning: Subprogram HOME never invoked
+    Defined in module HOME line 78 file usage.f

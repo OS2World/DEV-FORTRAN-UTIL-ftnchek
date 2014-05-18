@@ -1,0 +1,195 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File initializers.f:
+
+      1 C  Testing syntax recognition and assignment type checking of
+      2 C  standard and non-standard initializing declarations.
+      3 
+      4 C  Here we use modern standard F90 initializers
+      5       subroutine f90
+      6       integer :: m, n = 100
+                              ^
+Warning near line 6 col 23: Nonstandard syntax: F90-style initializer
+                      ^
+Warning near line 6 col 15: Nonstandard syntax: attribute-based variable
+ declaration
+      7 C ftnchek does not recognize the following one yet
+      8       integer, dimension(5) :: a = (/ 1, 2, 3, 4, 5 /)
+                                              ^
+Error near line 8 col 39: parse error, unexpected '/'
+ (A parse error means that I am not able to make sense of this statement, 
+ because your program has broken some rule of Fortran syntax.)
+      9       real :: pi = 3.14159265358979d0
+                         ^
+Warning near line 9 col 18: Nonstandard syntax: F90-style initializer
+                           ^
+Warning near line 9 col 20: dble const 3.14159265358979D0 truncated to real PI
+                   ^
+Warning near line 9 col 12: Nonstandard syntax: attribute-based variable
+ declaration
+     10       character :: c = 32   ! type mismatch
+                                    ^
+Warning near line 10 col 29: Nonstandard syntax: inline comment
+                             ^
+Warning near line 10 col 22: Nonstandard syntax: F90-style initializer
+                               ^
+Error near line 10 col 24: type mismatch: intg const 32 assigned to char*1 C
+                        ^
+Warning near line 10 col 17: Nonstandard syntax: attribute-based variable
+ declaration
+     11       integer :: q = 'hello'   ! type mismatch
+                                       ^
+Warning near line 11 col 32: Nonstandard syntax: inline comment
+                           ^
+Warning near line 11 col 20: Nonstandard syntax: F90-style initializer
+                             ^
+Error near line 11 col 22: type mismatch: char*5 const 'hello' assigned to 
+ intg Q
+                      ^
+Warning near line 11 col 15: Nonstandard syntax: attribute-based variable
+ declaration
+     12       print *, 'F90 initializers:'
+     13       print *, m, n, a   ! m used before set
+                                 ^
+Warning near line 13 col 26: Nonstandard syntax: inline comment
+     14       print *, pi, c, q
+     15       end
+
+Module F90: subr
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A intg  1          C char             M intg             N intg   
+        PI real             Q intg   
+
+
+
+Warning in module F90: Variables used before set
+    A used at line 13; never set
+    M used at line 13; never set
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD PRINT        12     13     14 
+     16 C  Here we use archaic but standard F77 separate type decls and data stmts
+     17       subroutine f77
+     18       integer m, n, a(5)
+     19       real pi
+     20       character c
+     21       integer q
+     22       data n / 100 /
+     23       data a /  1, 2, 3, 4, 5 /
+     24       data pi / 3.14159265358979d0 /
+     25       data c / 32 /   ! type mismatch
+                              ^
+Warning near line 25 col 23: Nonstandard syntax: inline comment
+     26       data q / 'hello' /   ! type mismatch
+                                   ^
+Warning near line 26 col 28: Nonstandard syntax: inline comment
+     27       print *, 'F77 initializers:'
+     28       print *, m, n, a   ! m used before set
+                                 ^
+Warning near line 28 col 26: Nonstandard syntax: inline comment
+     29       print *, pi, c, q
+     30       end
+
+Module F77: subr
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A intg  1          C char             M intg             N intg   
+        PI real             Q intg   
+
+
+
+Warning in module F77: Variables used before set
+    M used at line 28; never set
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD PRINT        27     28     29 
+     31 C  This one uses "bastard" initializer form.
+     32       subroutine bastard
+     33       integer m, n / 100 /, a(5) / 1, 2, 3, 4, 5 /
+                           ^
+Warning near line 33 col 20: Nonstandard syntax: combined type declaration and
+ data-style initializer
+                                         ^
+Warning near line 33 col 34: Nonstandard syntax: combined type declaration and
+ data-style initializer
+     34       real pi / 3.14159265358979d0 /
+                      ^
+Warning near line 34 col 15: Nonstandard syntax: combined type declaration and
+ data-style initializer
+                        ^
+Warning near line 34 col 17: dble expr 3.14159265358979D0 truncated to real PI
+     35       character c / 32 /   ! type mismatch
+                                   ^
+Warning near line 35 col 28: Nonstandard syntax: inline comment
+                          ^
+Warning near line 35 col 19: Nonstandard syntax: combined type declaration and
+ data-style initializer
+                            ^
+Error near line 35 col 21: type mismatch: intg expr 32 assigned to char*1 C
+     36       integer q / 'hello' /   ! type mismatch
+                                      ^
+Warning near line 36 col 31: Nonstandard syntax: inline comment
+                        ^
+Warning near line 36 col 17: Nonstandard syntax: combined type declaration and
+ data-style initializer
+                          ^
+Error near line 36 col 19: type mismatch: char expr 'hello assigned to intg Q
+     37       print *, 'bastard initializers:'
+     38       print *, m, n, a   ! m used before set
+                                 ^
+Warning near line 38 col 26: Nonstandard syntax: inline comment
+     39       print *, pi, c, q
+     40       end
+
+Module BASTARD: subr
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A intg  1          C char             M intg             N intg   
+        PI real             Q intg   
+
+
+
+Warning in module BASTARD: Variables used before set
+    M used at line 38; never set
+
+
+Warning in module BASTARD: Names longer than 6 chars (nonstandard):
+    BASTARD declared at line 32
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+           *            SEQ  FMTD PRINT        37     38     39 
+     41 C  Main program just suppresses "never invoked" warnings.
+     42       program main
+     43       call f90
+     44       call f77
+     45       call bastard
+     46       end
+
+Module MAIN: prog
+
+External subprograms referenced:
+
+   BASTARD: subr          F77: subr          F90: subr   
+
+
+
+
+Warning in module MAIN: Names longer than 6 chars (nonstandard):
+    BASTARD referenced at line 45
+
+ 5 syntax errors detected in file initializers.f
+ 29 warnings issued in file initializers.f
+

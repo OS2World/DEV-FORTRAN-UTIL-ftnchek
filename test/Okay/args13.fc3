@@ -1,0 +1,8 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File args13.f:
+ 0 syntax errors detected in file args13.f
+Warning: Subprogram SUBA argument mismatch at position 1:
+    Dummy arg C in module SUBA line 4 file args13.f is type char*2
+    Actual arg C(1) in module %MAIN line 2 file args13.f is type char*1

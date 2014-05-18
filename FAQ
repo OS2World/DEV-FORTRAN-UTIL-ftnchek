@@ -1,0 +1,198 @@
+			     ftnchek FAQ
+
+This is a very preliminary FAQ.  Originally written February 28,
+1999. Slightly updated September 22, 2000 and August 23, 2002.
+
+Q1) Where can I get the latest version of ftnchek?
+
+Q2) Are there any plans for ftnchek to support Fortran 90?
+
+Q3) What other Fortran syntax checkers are there?
+
+Q4) Why is ftnchek not spelled ftncheck?
+
+Q5) What are some sources of Fortran information?
+
+Q6) Is ftnchek Year-2000 compliant?
+
+Q7) Ftnchek ignores my "#include" file (or other preprocessor directives)
+
+Q8) Ftnchek's error messages aren't interpreted properly by Emacs (or
+    other development tool) to allow it to jump automatically to the
+    location of the error.
+
+Q9) Is the Mike Myers mentioned in the comment section of average.f
+    the same as the Mike Myers who plays Austin Powers in the movies?
+
+==================================================================
+
+Q1) Where can I get the latest version of ftnchek?
+
+A1) Many places.  Probably the most reliable place to get it is Netlib,
+    whose net address is netlib.org.  The URL is
+		ftp://netlib.org/fortran/ftnchek.tar.gz
+    Unlike most software archives, the netlib maintainers keep naming the
+    file ftnchek.tar.gz regardless of the version.  But don't worry.  I
+    always make sure they have the newest version as soon as it is
+    released.
+
+    Ftnchek has its own home page.  The URL is
+	      http://www.dsm.fordham.edu/~ftnchek
+    This site has current information about the status of the ftnchek
+    project, as well as links for downloading the software.  This is
+    always the very most up-to-date site, since it is the location
+    where ftnchek is maintained.  But the server is old and slow, so if
+    you just want the software, you are better off finding a Netlib
+    mirror near you.
+
+    Ftnchek has also been placed onto many Linux software archives.
+    For instance, it can be found in
+	  http://www.ibiblio.org/pub/Linux/devel/lang/fortran/
+    A Debian package is available at
+	  http://www.debian.org/Packages/unstable/devel/ftnchek.html
+    The version available at these and other Linux sites is not always
+    the very latest, however, since it takes some time for the new
+    version to find its way there.
+
+
+Q2) Are there any plans for ftnchek to support Fortran 90?
+
+A2) Eventually, I hope so.  But basically, I work on ftnchek in my
+    spare time, of which I don't have much these days.  At the present
+    level of effort, progress is slow.  I am trying to recruit
+    volunteers to help get ftnchek to support more Fortran 90 features:
+    see http://www.dsm.fordham.edu/~ftnchek/f90-project.html for more
+    details if you are interested in volunteering.
+
+    On the bright side, Fortran 90 itself has many features to help avoid
+    the pitfalls that ftnchek was designed to catch.
+
+    Also, there are other static analyzer programs that do understand
+    Fortran 90 (see Q3).  Unfortunately they are not free, however.
+
+
+Q3) What other Fortran syntax checkers are there?
+
+A3) Here are a few I happen to have URL's for.  None of them are free.
+    They are listed in alphabetical order, with no ranking or endorsement
+    implied.
+
+    1. forcheck:
+	Forcheck Group
+	Leiden University
+	P.O. Box 9604
+	2300 RC Leiden
+	the Netherlands
+	fax: +31-71-5276782
+	Email: forchk@rullf2.LeidenUniv.nl
+	URL: http://www.medfac.leidenuniv.nl/forcheck/
+
+    2. FORTRAN-lint (flint and flint90)
+	Cleanscape Software International
+	1530 Meridian Ave Ste. 200
+	San Jose, CA 95125-5318
+	Phone: (408) 978-7000 and (800) 944-5468.
+	FAX: (650) 978-7002.
+	Email: sales@cleanscape.net
+	URL: http://www.cleanscape.net/
+
+    3. Forwarn
+	Quibus Enterprises, Inc.
+	3340 Marble Terrace
+	Colorado Springs, CO 80906 USA
+	+1-719-527-1384
+	URL: http://kumo.swcp.com/fortran/quibus_forwarn.html
+
+    4. OpenVMS Source Code Analyzer SCA
+	Available from Digital (now a division of Compaq).
+	URL: http://www.digital.com
+
+    Note: forcheck and flint90 support Fortran 90.  SCA supports
+    multiple languages including Fortran 90.
+
+Q4) Why is ftnchek not spelled ftncheck?
+
+A4) Originally, ftnchek was named forchek, which seemed like a spiffy
+    name at the time.  However, the Forcheck people (See Q3) objected
+    (rightly) that the two names were sufficiently similar to cause
+    confusion.  Since their program was first on the scene, mine had to
+    be renamed.  So I changed "for" to "ftn," and continued leaving the
+    "c" out of the name so as to increase the difference between it and
+    Forcheck.
+
+    By the way, you may pronounce the name any way you like.  Personal-
+    ly, I usually pronounce it "Eff-Tee-En-Chek."
+
+
+Q5) What are some sources of Fortran information?
+
+A5) The Fortran-FAQ, posted occasionally to comp.lang.fortran, is full
+    of useful information.  The Fortran Company has links to many
+    sources of information on the World-Wide-Web.  Its URL is
+		   http://www.fortran.com/
+
+
+Q6) Is ftnchek Year-2000 compliant?
+
+A6) Yes, ftnchek is safe for the Year 2000.  It cannot suffer from the
+    Millenium Bug any more than a bald man can have dandruff.  Since
+    ftnchek is a very simple application, and does not make any use of
+    date or time functions, it is immune to the Y2K problem.
+
+    Of course, ftnchek relies on the underlying operating system on
+    which it runs.  If the operating system fails due to a Y2K problem,
+    then ftnchek, like all other software on that system, may become
+    unavailable.
+
+
+Q7) Ftnchek ignores my "#include" file (or other preprocessor directives)
+   and gives all sorts of bogus errors as a result.
+
+A7) Ftnchek does not process any "#" directives except for "# line".  If
+    you want to use "#include" or "#define" in your program, then you must
+    run it through the preprocessor before giving it to ftnchek.  Since
+    ftnchek does process the "# line" directives generated by the
+    preprocessor, the error messages will have the correct file names and
+    line numbers.  Consult your compiler manual for how to make it run the
+    preprocessor only.
+
+    There is a program named ftnpp for use as a preprocessor with more
+    Fortran-awareness than cpp.  (The advantage of ftnpp over cpp is
+    that replacements and conditional compilation extend into files
+    included using the Fortran-standard INCLUDE statement.)  The ftnpp
+    program is available by anonymous ftp from ftp.dsm.fordham.edu.
+    At this writing, ftnpp has only been tested on a few platforms.
+    Fixes for operation on other platforms are requested.
+
+    Note that ftnchek does process INCLUDE statements, which are part
+    of Fortran 90 (unlike #include).  These have a completely different
+    syntax.  If you replace the "#include" statements by INCLUDE
+    statements, your program will be more portable.
+
+
+Q8) Ftnchek's error messages aren't interpreted properly by Emacs (or
+    other development tool) to allow it to jump automatically to the
+    location of the error.
+
+A8) Use the -nonovice flag.  This changes the format of the error
+    messages to one that is more similar to the messages generated by
+    typical compilers.  I designed ftnchek to give friendlier output
+    for novices by default, since novices by definition don't know how
+    to change the defaults.  Advanced users who need this feature know
+    how to read the docs to find the options they need.
+
+
+Q9) Is the Mike Myers mentioned in the comment section of average.f
+    the same as the Mike Myers who plays Austin Powers in the movies?
+
+A9) No.
+
+==================================================================
+
+Bob Moniot
+Fordham University
+Fordham College at Lincoln Center
+New York, NY  10023  (212) 636-6311
+
+Email: moniot@fordham.edu
+URL:   http://www.dsm.fordham.edu/~moniot/

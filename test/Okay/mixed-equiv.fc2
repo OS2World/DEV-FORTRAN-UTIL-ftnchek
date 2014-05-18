@@ -1,0 +1,11 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File mixed-equiv.f:
+      1       real *8 x
+                    ^
+Warning near line 1 col 13 file mixed-equiv.f: Nonstandard syntax
+
+ 0 syntax errors detected in file mixed-equiv.f
+ 1 warning issued in file mixed-equiv.f
+

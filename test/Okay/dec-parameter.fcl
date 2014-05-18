@@ -1,0 +1,101 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File dec-parameter.f:
+
+      1 C      IMPLICIT INTEGER(a-z)
+      2 
+      3       PARAMETER shipmoves=3
+                        ^
+Warning near line 3 col 17: Nonstandard syntax: PARAMETER implicitly typed 
+ differently from default type
+              ^
+Warning near line 3 col 7: Nonstandard syntax  : PARAMETER declaration without
+ parentheses
+      4       PARAMETER fightermoves=8
+                        ^
+Warning near line 4 col 17: Nonstandard syntax: PARAMETER implicitly typed 
+ differently from default type
+              ^
+Warning near line 4 col 7: Nonstandard syntax  : PARAMETER declaration without
+ parentheses
+      5       PARAMETER (stdparam = 7)
+      6       INTEGER g2(100)
+      7       INTEGER hits(15),tipe(15),crahit(15),craloc(15)
+      8 
+      9       BYTE      specal,pass
+              ^
+Warning near line 9 col 7: Nonstandard syntax
+     10       BYTE      ab,ac,ad,ao,e,own1,own2,own      !AVOID WORD REFERENCES TO THESE
+              ^
+Warning near line 10 col 7: Nonstandard syntax
+                                                         ^
+Warning near line 10 col 50: Nonstandard syntax: inline comment
+     11       INTEGER rlmap(3000)
+     12       LOGICAL      automv,autosave,savedone
+     13  
+     14       COMMON/AB9/ab9,prior,nshprf
+     15       COMMON/ARMTOT/armtot
+     16       end
+Warning near line 16: Module contains no executable statements
+
+Module %MAIN: prog
+
+Common blocks referenced:
+
+       AB9             ARMTOT         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+        AB intg1          AB9 real*           AC intg1           AD intg1  
+        AO intg1       ARMTOT real*       AUTOMV logl      AUTOSAVE logl   
+    CRAHIT intg  1     CRALOC intg  1          E intg1   FIGHTERMOVES intg   
+        G2 intg  1       HITS intg  1     NSHPRF intg*          OWN intg1  
+      OWN1 intg1         OWN2 intg1         PASS intg1        PRIOR real*  
+     RLMAP intg  1   SAVEDONE logl     SHIPMOVES intg        SPECAL intg1  
+  STDPARAM real*         TIPE intg  1
+
+* Variable not declared. Type has been implicitly defined.
+
+
+Warning in module %MAIN: Variables declared but never referenced:
+    AB declared at line 10
+    AC declared at line 10
+    AD declared at line 10
+    AO declared at line 10
+    AUTOMV declared at line 12
+    AUTOSAVE declared at line 12
+    CRAHIT declared at line 7
+    CRALOC declared at line 7
+    E declared at line 10
+    G2 declared at line 6
+    HITS declared at line 7
+    OWN declared at line 10
+    OWN1 declared at line 10
+    OWN2 declared at line 10
+    PASS declared at line 9
+    RLMAP declared at line 11
+    SAVEDONE declared at line 12
+    SPECAL declared at line 9
+    TIPE declared at line 7
+
+Warning in module %MAIN: Variables set but never used:
+    FIGHTERMOVES set at line 4
+    SHIPMOVES set at line 3
+    STDPARAM set at line 5
+
+
+Warning in module %MAIN: Names longer than 6 chars (nonstandard):
+    AUTOSAVE declared at line 12
+    FIGHTERMOVES declared at line 4
+    SAVEDONE declared at line 12
+    SHIPMOVES declared at line 3
+    STDPARAM first occurrence at line 5
+
+ 0 syntax errors detected in file dec-parameter.f
+ 12 warnings issued in file dec-parameter.f
+
+Warning: Common block AB9 unused anywhere
+
+Warning: Common block ARMTOT unused anywhere

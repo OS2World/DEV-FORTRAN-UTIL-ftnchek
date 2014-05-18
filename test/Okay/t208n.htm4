@@ -1,0 +1,18 @@
+<HTML>
+<HEAD><TITLE>Source t208n.f</TITLE></HEAD>
+<BODY>
+<a name="FOO"><h3>SUBROUTINE FOO ( A, B, C, D )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>real               A(1),       B(*),       C(21,*),    D(2)
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208n.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Intrinsic Functions Called</b><br></td></tr>
+<tr><td><pre>integer            ICHAR
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

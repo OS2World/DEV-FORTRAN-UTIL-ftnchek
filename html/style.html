@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<TITLE>Option: style</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="source.html">-source</A><HR><P>
+<H2>Option: <font color=#FF0080>style</font></H2><P>
+<A NAME="style"></A><DT><B><A HREF="style.html">-style</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Provides extra-picky warnings about obsolescent or old-fashioned
+programming constructions.  This option is helpful for efforts to follow a
+modern programming style.  (Most of the things complained about under
+this option are forbidden in the <B>F</B> subset language.)  By
+default, all warnings are turned off.
+<P>
+
+The <I>list</I> consists of keywords
+separated by commas or colons.
+There are three special keywords: <B>all</B> to turn on all the
+options, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="style.html">-style</A></B> is equivalent to
+<B><A HREF="style.html">-style</A>=all</B>, and <B>-nostyle</B> is equivalent to
+<B><A HREF="style.html">-style</A>=none</B>.
+The warning keywords with their meanings are as follows:
+<DL COMPACT>
+<DT><B>block-if</B>:
+
+<DD>
+Complain about arithmetic IF statement.  Accept block IF or logical IF
+(which controls a single statement).
+<DT><B>construct-name</B>:
+
+<DD>
+Complain about unnamed block constructs: IF,
+DO, and SELECT CASE.  Note that if a construct name is present on the
+opening statement of a construct, then it is required to be present on
+all other component statements (ELSE, END IF, etc.) of the construct.
+In that case a missing construct name on those statements generates a
+syntax error regardless of this option.  The purpose of this option is
+to warn if the construct completely lacks the optional name.
+<DT><B>distinct-do</B>:
+
+<DD>
+Complain if two DO loops share a common terminator statement.
+<DT><B>do-construct</B>:
+
+<DD>
+Complain if terminator of a DO loop is anything other than an END DO
+or CONTINUE statement.  This is the requirement in order for the loop to
+meet the Fortran 90 definition of a do-construct.
+<DT><B>do-enddo</B>:
+
+<DD>
+Complain if terminator of a DO loop is anything other than an END DO
+statement.  (This option overrides the <B>do-construct</B> option,
+being even stricter.)
+<DT><B>end-name</B>:
+
+<DD>
+Complain about the absence of the subprogram name on structured END
+statements.
+<DT><B>format-stmt</B>:
+
+<DD>
+Complain about the presence of FORMAT statements.  Only the FORMAT
+statements themselves are flagged, not the references to them in I/O lists.
+<DT><B>goto</B>:
+
+<DD>
+Complain about the presence of unconditional, computed or assigned
+GOTO statements.  Also complain about alternate returns (but not about
+labels as subprogram arguments).
+<DT><B>labeled-stmt</B>:
+
+<DD>
+Complain about the presence of labels (numbers) on statements other
+than FORMAT statements.  (Since FORMAT statements are arguably
+convenient and not readily abused, complaints about them are
+controlled by the separate <B>format-stmt</B> keyword.)
+<DT><B>program-stmt</B>:
+
+<DD>
+Complain about the absence of a PROGRAM statement at the head of the
+main program.
+<DT><B>structured-end</B>:
+
+<DD>
+Complain about the use of a plain END statement to end a subprogram,
+rather than a structured END statement (END PROGRAM, END SUBROUTINE,
+END FUNCTION, or END BLOCK DATA).
+</DL>
+<P>
+
+See also: <B><A HREF="f77.html">-f77</A></B>, <B><A HREF="f90.html">-f90</A></B>, <B><A HREF="f95.html">-f95</A></B>, <B><A HREF="pretty.html">-pretty</A></B>,
+<B><A HREF="portability.html">-portability</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="symtab.html">-symtab</A>
+</BODY></HTML>

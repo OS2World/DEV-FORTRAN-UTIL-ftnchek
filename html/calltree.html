@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<TITLE>Option: calltree</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="brief.html">-brief</A><HR><P>
+<H2>Option: <font color=#FF0080>calltree</font></H2><P>
+<A NAME="calltree"></A><DT><B><A HREF="calltree.html">-calltree</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+Causes <B>ftnchek</B> to print out the call structure of
+the complete program.
+<P>
+
+The <I>list</I> consists of keywords separated by commas or colons.
+There are two special keywords: <B>none</B> to turn off all the
+options, and
+<B>help</B> to print the list of all the keywords with a brief
+explanation of each.  (The keyword <B>all</B> turns on all the
+options, but should not normally be used since only one format should
+be specified.)
+If <I>list</I> is omitted, <B><A HREF="calltree.html">-calltree</A></B> is equivalent to
+<B><A HREF="calltree.html">-calltree</A>=tree</B>, and <B>-nocalltree</B> is equivalent to
+<B><A HREF="calltree.html">-calltree</A>=none</B>.
+By default no call graph is printed.
+<P>
+
+If the <A HREF="mkhtml.html">-mkhtml</A> option is invoked <I>and</I> tree is the applied
+calltree option, a file named CallTree.html, will also be produced
+depicting the tree in HTML format.  This file is useful as a starting
+point for browsing the HTML files describing each component of the
+program.
+<P>
+
+The keywords which control which format is used are as follows:
+<DL COMPACT>
+<DT><B>tree</B>:
+
+<DD>
+produce the call graph in tree format.
+<DT><B>reference</B>:
+
+<DD>
+produce the call graph in who-calls-who format (same as
+<B><A HREF="reference.html">-reference</A></B> switch).
+<DT><B>vcg</B>:
+
+<DD>
+produce the call graph in VCG format (same as <B><A HREF="vcg.html">-vcg</A></B>
+switch).
+</DL>
+<P>
+
+Only one of the formats <B>tree</B>, <B>reference</B>, or <B>vcg</B> may
+be specified.
+<P>
+
+The following keywords control options affecting the output:
+<DL COMPACT>
+<DT><B>prune</B>:
+
+<DD>
+prune repeated subtrees (applicable only with <B>tree</B>).  This
+the default.
+<DT><B>sort</B>:
+
+<DD>
+sort children of each routine into alphabetical order.  This is the default.
+</DL>
+<P>
+
+See the discussion of the <B><A HREF="reference.html">-reference</A></B>
+and <B><A HREF="vcg.html">-vcg</A></B> flags for details about these formats.
+<P>
+
+For <B>tree</B> format, The call graph is printed out
+starting from the main program, which is listed on the first line at
+the left margin.  Then on the following lines, each routine called by
+the main program is listed, indented a few spaces, followed by the
+subtree starting at that routine.
+<P>
+
+In the default mode,
+if a routine is called by more than one other routine,
+its call subtree is printed only the first time it is encountered
+Later calls give only the routine name and the notice ``(see above)''.
+To have the subtree printed for each occurrence of the routine,
+use option <B>no-prune</B>.
+<P>
+
+Note that the call tree will be incomplete if any of the input files
+are project files containing more than one module
+that were created in <B><A HREF="library.html">-library</A></B> mode.  See the
+discussion of project files below.
+<P>
+
+Technical points: Each list of routines called by a given routine is
+printed in alphabetical order unless the <B>no-sort</B> option is given.
+If multiple main programs are found, the call tree of each is printed
+separately.
+If no main program is found, a report to that effect is printed out,
+and the call trees of any top-level non-library routines are printed.
+This flag only controls the printing of the call tree: <B>ftnchek</B>
+constructs the call tree in any case because it is used to determine
+which library modules will be cross-checked.  See the discussion
+of the <B><A HREF="library.html">-library</A></B> flag.
+<P>
+
+For compatibility with previous versions of <B>ftnchek</B>,  a numeric
+form of this setting is also accepted: the <I>list</I> is replaced by a
+number from 0 to 15.  This number is formed from 1 for
+<B>tree</B> format, 2 for <B>reference</B> format, or 3 for <B>vcg</B>
+format, plus 4 for <B>no-prune</B>, and 8 for <B>no-sort</B>.
+<P>
+
+See also:
+<B><A HREF="crossref.html">-crossref</A></B>, <B><A HREF="library.html">-library</A></B>, <B><A HREF="reference.html">-reference</A></B>, <B><A HREF="sort.html">-sort</A></B>,
+<B><A HREF="symtab.html">-symtab</A></B>, <B><A HREF="vcg.html">-vcg</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="check.html">-check</A>
+</BODY></HTML>

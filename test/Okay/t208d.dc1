@@ -1,0 +1,21 @@
+C====>Begin Module SYMSF                  File t208d.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Local variables
+C
+      INTEGER             N20147,      NPR001,      NPR002,      NPR003
+      INTEGER             NPR004,      NPR005,      NPR006,      NPR007
+      INTEGER             NPR008,      NPR009,      NPR010,      NPR011
+      INTEGER             NPR012,      NPR013,      NPR014,      NPR015
+      INTEGER             NPR016,      NPR017,      NPR018,      NPR019
+      INTEGER             NPR020,      NPR021,      NPR022,      NPR023
+      INTEGER             NPR024,      NPR025,      NPR026,      NPR027
+      INTEGER             NPR028,      NPR029,      NPR030,      NPR031
+      INTEGER             NPR032,      NPR033,      NPR034,      NPR035
+      INTEGER             NPR036,      NPR037,      NPR038,      NPR039
+      INTEGER             NPR040,      NPR041,      NPR042,      NPR043
+      INTEGER             NPR044,      NPR045,      NX0028,      NX0050
+      INTEGER             NX0061,      NX0100,      NX0114,      NX0141
+      INTEGER             NX0204,      NX0244
+C
+C====>End Module   SYMSF                  File t208d.f                  

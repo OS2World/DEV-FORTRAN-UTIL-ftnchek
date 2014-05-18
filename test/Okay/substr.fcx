@@ -1,0 +1,33 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File substr.f:
+
+      1 C This program tickled a bug in gcc under DEC Unix for Alpha
+      2        PROGRAM X
+      3        CHARACTER*80 LINE
+      4        INTEGER LSTART, LEND
+      5        PARAMETER (LSTART=2,LEND=11)
+      6        READ (5,'(A)') LINE(1:9)
+      7        PRINT *,LINE(9:10)
+      8        READ (5,'(A)') LINE(LSTART:LEND)
+      9        PRINT *,LINE(2:LEND)
+     10        END
+
+Module X: prog
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+      LEND intg          LINE char80       LSTART intg   
+
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             5          SEQ  FMTD READ          6      8 
+           *            SEQ  FMTD PRINT         7      9 
+
+ 0 syntax errors detected in file substr.f
+

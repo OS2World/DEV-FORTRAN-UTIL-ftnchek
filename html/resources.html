@@ -1,0 +1,151 @@
+<HTML>
+<HEAD>
+<TITLE>Option: resources</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="reference.html">-reference</A><HR><P>
+<H2>Option: <font color=#FF0080>resources</font></H2><P>
+<A NAME="resources"></A><DT><B><A HREF="resources.html">-resources</A></B>
+
+<DD>
+<DL COMPACT><DT><DD>
+Prints the amount of resources used by <B>ftnchek</B> in processing the
+program.  This listing may be useful in analyzing the size and
+complexity of a program.  It can also help in choosing larger
+sizes for <B>ftnchek</B>'s internal tables if they are too small to
+analyze a particular program.
+Default = no.
+<P>
+
+In this listing, the term ``chunk size'' is the size of the blocks of
+memory allocated to store the item in question, in units of the size
+of one item, not necessarily in bytes.  When the initially allocated
+space is filled up, more memory is allocated in chunks of this size.
+The following is an explanation of the items printed:
+<DL COMPACT>
+<DT><I>Source lines processed:</I>
+
+<DD>
+Total number of lines of code, with separate totals for statement
+lines and comment lines.  Comment lines include lines with 'C' or '*'
+in column 1 as well as blank lines and lines containing only an inline
+comment.  Statement lines are all other lines, including lines that
+have an inline comment following some code.  Continuation lines are
+counted as separate lines.  Lines in include files are counted each
+time the file is included.
+<DT><I>Total executable statements:</I>
+
+<DD>
+Number of statements in the program, other than specification, data,
+statement-function, FORMAT, ENTRY, and END statements.
+<DT><I>Total number of modules:</I>
+
+<DD>
+A module is any external subprogram, including the main program,
+subroutines, functions, and block data units.  This count is of
+modules defined within the source, not modules referenced.  Statement
+functions are not included.  A subprogram with multiple entry points
+is only counted once.
+<DT><I>Total statement labels defined</I>
+
+<DD>
+Number of labels attached to statements (often called statement
+numbers).  The total label count for the entire program is given, as well as
+the maximum number in any single subprogram.
+<DT><I>Max identifier name chars:</I>
+
+<DD>
+Number of characters used for storing identifier names.  An identifier
+is a variable, subprogram, or common block name.  Local names are
+those of local variables in a subprogram, whereas
+global names refer
+to subprogram and common block names, as well as dummy argument names
+and common variable names.  Actual argument text (up to 15 characters
+for each argument) is also included here.  The space used for local
+names is not recovered at the end of each module, so this number, like
+global space,
+grows until the whole program is analyzed.  Unfortunately, this figure
+may include some text stored more than
+once, although a heuristic is used that will avoid duplicates in many
+cases.
+<DT><I>Max token text chars:</I>
+
+<DD>
+A token is the smallest syntactic unit of the FORTRAN language above
+the level of individual characters. For instance a token can be a
+variable name, a numerical constant, a quoted text string, or a
+punctuation character.  Token text is stored while a module is being
+processed.  For technical reasons, single-character tokens are not
+included in this total.  Items that are not represented in the
+symbol table may be duplicated.  The space for token text is recovered
+at the end of each module, so this figure represents the maximum for
+any one module.
+<DT><I>Max local symbols:</I>
+
+<DD>
+This is the largest number of entries in the local symbol table for
+any module.  Local symbol table entries include all variables and
+parameters, common block names, statement functions, external
+subprograms and intrinsic functions referenced by the module.  Literal
+constants are not stored in the local symbol table.
+<DT><I>Max global symbols:</I>
+
+<DD>
+This is the number of entries in the global symbol table at the end of
+processing.  Global symbol table entries include external subprogram
+and common block names.  Intrinsic functions and statement functions
+are not included.
+<DT><I>Max number of tokenlists:</I>
+
+<DD>
+A token list is a sequence of tokens representing the actual or dummy
+argument list of a subprogram, or the list of variables in a common
+block or namelist.  Therefore this number represents the largest sum
+of COMMON, CALL, NAMELIST and ENTRY statements and function invocations for any
+one module.  The space is recovered at the end of each module.
+<DT><I>Max token list/tree space:</I>
+
+<DD>
+This is the largest number of tokens in all the token lists and token
+trees of any one module.  A token tree is formed when analyzing an
+expression: each operand is a leaf of the tree, and the operators are
+the nodes.  Therefore this number is a measure of the maximum
+complexity of an individual module.  For instance a module with many
+long arithmetic expressions will have a high number.  Note that unlike
+token text described above, the number of tokens is independent of the
+length of the variable names or literal constants in the expressions.
+<DT><I>Number of subprogram invocations:</I>
+
+<DD>
+This is the sum over all modules of the number of
+CALL statements and function invocations (except intrinsic functions
+and statement functions).
+<DT><I>Number of common block decls:</I>
+
+<DD>
+This is the sum over all modules of the number of common block
+declarations.  That is, each declaration of a block in a different
+module is counted separately.  (The standard allows multiple
+declarations of a block within the same module; these are counted as
+only one declaration since they are equivalent to a single long
+declaration.)
+<DT><I>Number of array dim &amp; param ptrs:</I>
+
+<DD>
+This is the sum over all modules of the number of array dimension and
+parameter definition text strings saved for use by the
+<B><A HREF="makedcls.html">-makedcls</A></B> option.  The length of the text strings is not
+counted.  Each dimension of a multidimensional array is counted separately.
+</DL>
+<P>
+
+These numbers are obviously not the same when project files are used
+in place of the original source code.  Even the numbers for global
+entities may be different, since some redundant information is
+eliminated in project files.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="sixchar.html">-sixchar</A>
+</BODY></HTML>

@@ -1,0 +1,105 @@
+<HTML>
+<HEAD>
+<TITLE>Option: portability</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="pointersize.html">-pointersize</A><HR><P>
+<H2>Option: <font color=#FF0080>portability</font></H2><P>
+<A NAME="portability"></A><DT><B><A HREF="portability.html">-portability</A>=</B><I>list</I>
+
+<DD>
+<DL COMPACT><DT><DD>
+<B>ftnchek</B> will give warnings for a variety of
+non-portable usages.  Examples include the use of tabs except in comments
+or inside strings, the use of Hollerith constants, and the
+equivalencing of variables of different data types.  This option does
+not produce warnings for supported extensions to the Fortran 77 Standard, which
+may also cause portability problems.  To catch those, use
+the <B><A HREF="f77.html">-f77</A></B> setting.
+By default, all warnings are turned off.
+<P>
+
+This setting provides detailed control over the warnings about
+possible portability problems.  The <I>list</I> consists of keywords
+separated by commas or colons.
+There are three special keywords: <B>all</B> to turn on all the
+warnings about nonportable usages, <B>none</B> to turn them all
+off, and <B>help</B> to print the list of all the keywords with a brief
+explanation of each.
+If <I>list</I> is omitted, <B><A HREF="portability.html">-portability</A></B> is equivalent to
+<B><A HREF="portability.html">-portability</A>=all</B>, and <B>-noportability</B> is equivalent to
+<B><A HREF="portability.html">-portability</A>=none</B>.
+The warning keywords with their meanings are as follows:
+<DL COMPACT>
+<DT><B>backslash</B>:
+
+<DD>
+Backslash character in strings.  Since some compilers treat the
+backslash as an escape character, its presence can cause problems even
+though it is used in a standard-conforming way.
+<DT><B>common-alignment</B>:
+
+<DD>
+COMMON block variables not in descending order of storage size.  Some
+compilers require this ordering because of storage alignment requirements.
+<DT><B>hollerith</B>:
+
+<DD>
+Hollerith constants (other than within FORMAT
+specifications).  The Hollerith data type is a feature of Fortran IV
+that has been deleted in the Fortran 77 standard.  It is superseded
+by the character data type.  Storing Hollerith data in variables of a
+numeric or logical data type is nonportable due to differing word sizes.
+<DT><B>long-string</B>:
+
+<DD>
+String constants, variables, or expressions over 255 chars long.
+<DT><B>mixed-equivalence</B>:
+
+<DD>
+Variables of different data types equivalenced.
+<DT><B>mixed-size</B>:
+
+<DD>
+Variables declared with default precision used with variables given
+explicit precision, in expressions, assignments, or as arguments.  For
+example, if a variable declared as REAL*8 is treated as
+equivalent to DOUBLE PRECISION.
+<DT><B>real-do</B>:
+
+<DD>
+Non-integer DO loop index and bounds.  These can cause a program's
+results to depend on the hardware characteristics of the particular
+computer used.
+<DT><B>param-implicit-type</B>:
+
+<DD>
+Implicit typing of a parameter by the data type of the value assigned,
+if it differs from the default type.  This warning can only occur if
+implicit parameter typing has been turned on by the
+<B><A HREF="source.html">-source</A>=param-implicit-type</B> option, or
+if the PARAMETER statement is of the nonstandard form without
+parentheses.  If this option is turned on,
+then any instances where implicit parameter typing
+occurs and where the implicit type is different from the default type based
+on the first letter of the parameter name, will be warned
+about.  Implicit parameter typing can change the
+semantics of statements where the parameter is used, causing
+portability problems.
+<DT><B>tab</B>:
+
+<DD>
+Tabs in source code.  Tabs are interpreted differently by different
+compilers.  This warning will be given only once, at the end of the
+file.
+</DL>
+<P>
+
+See also: <B><A HREF="f77.html">-f77</A></B>, <B><A HREF="f90.html">-f90</A></B>, <B><A HREF="f95.html">-f95</A></B>,
+<B><A HREF="pretty.html">-pretty</A></B>, <B><A HREF="style.html">-style</A></B>, <B><A HREF="wordsize.html">-wordsize</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="pretty.html">-pretty</A>
+</BODY></HTML>

@@ -1,0 +1,98 @@
+# Borland C++ Win32 (BCC32) version of Makefile for Fortran program checker
+#
+#  NOTE: For simplicity and to avoid a possibly overly long command line,
+#  the linker links "*.obj".  Therefore, make in a directory with no
+#  extraneous .obj files.  Alternatively, a response file could be used.
+#
+#  (gunnar.duus@epost.de)
+
+#  Name of C compiler
+CC=BCC32
+#  Name of directory where WILDARGS.OBJ is located (required to correctly
+#  handle wildcards in arguments).  Adapt this to your installation.
+CLIB="C:\Program Files\Borland\CBuilder5\Lib"
+
+#  Command to execute to make .obj file from .c file
+.c.obj:
+        $(CC) $(CFLAGS) $(OPTIONS) $<
+
+#  No additional options at this time.
+OPTIONS=
+
+#  Compiler flags, choose additional options by modifying OPTIONS above.
+#  -c: compile only  -O: optimise   -w-: no warnings
+#  -v- -l-v: turn off debugging
+CFLAGS= -c -O -w- -v- -l-v
+
+#  Object files
+OBJS  = fortran.obj advance.obj argcheck.obj calltree.obj comcheck.obj exprtype.obj \
+	forlex.obj ftnchek.obj include.obj intrins.obj iokeywds.obj keywords.obj labels.obj \
+	loccheck.obj makedcls.obj makehtml.obj message.obj options.obj pgsymtab.obj \
+	plsymtab.obj prlists.obj prlocsym.obj project.obj \
+	symspace.obj symtab.obj symutils.obj utils.obj
+
+#  Command to build ftnchek from object files.
+ftnchek.exe: $(OBJS)
+        $(CC) -eFTNCHEK.EXE *.obj $(CLIB)\wildargs.obj
+
+# dependencies
+advance.obj:	advance.c config.h ftnchek.h symtab.h tokdefs.h forlex.h advance.h
+
+argcheck.obj:	argcheck.c config.h ftnchek.h pgsymtab.h symtab.h
+
+calltree.obj:	calltree.c config.h ftnchek.h pgsymtab.h symtab.h
+
+comcheck.obj:	comcheck.c config.h ftnchek.h pgsymtab.h symtab.h
+
+exprtype.obj:	exprtype.c config.h ftnchek.h symtab.h tokdefs.h
+
+forlex.obj:	forlex.c config.h ftnchek.h symtab.h tokdefs.h forlex.h advance.h
+
+fortran.obj:	fortran.c config.h ftnchek.h symtab.h block_match.h fortran.c
+
+ftnchek.obj:	ftnchek.c config.h ftnchek.h intrins.h options.h utils.h
+
+include.obj:	include.c config.h ftnchek.h symtab.h forlex.h advance.h
+
+intrins.obj:	intrins.c config.h ftnchek.h intrins.h symtab.h
+
+iokeywds.obj:	iokeywds.c config.h ftnchek.h symtab.h tokdefs.h iokeywds.h iokeywds_enum.h utils.h
+
+keywords.obj:	keywords.c config.h ftnchek.h symtab.h tokdefs.h forlex.h
+
+labels.obj:	labels.c config.h ftnchek.h plsymtab.h symtab.h
+
+loccheck.obj:	loccheck.c config.h ftnchek.h loccheck.h plsymtab.h symtab.h
+
+makedcls.obj:	makedcls.c config.h ftnchek.h plsymtab.h symtab.h
+
+makehtml.obj:	makehtml.c config.h ftnchek.h plsymtab.h symtab.h
+
+message.obj:	message.c config.h ftnchek.h
+
+options.obj:	options.c config.h ftnchek.h options.h utils.h
+
+pgsymtab.obj:	pgsymtab.c config.h ftnchek.h pgsymtab.h symtab.h
+
+plsymtab.obj:	plsymtab.c config.h ftnchek.h plsymtab.h symtab.h
+
+prlists.obj:	prlists.c config.h ftnchek.h symtab.h symutils.h
+
+prlocsym.obj:	prlocsym.c config.h ftnchek.h loccheck.h plsymtab.h symtab.h
+
+project.obj:	project.c config.h ftnchek.h symtab.h
+
+symspace.obj:	symspace.c config.h ftnchek.h symtab.h symspace.h symutils.h
+
+symtab.obj:	symtab.c config.h ftnchek.h iokeywds.h intrins.h symtab.h \
+		symspace.h symutils.h tokdefs.h
+
+symutils.obj:	symutils.c config.h ftnchek.h symtab.h symutils.h
+
+utils.obj:	utils.c config.h utils.h
+
+#  Command to clean up after building ftnchek.
+clean:
+        del ftnchek.tds
+        del *.obj
+

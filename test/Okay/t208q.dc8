@@ -1,0 +1,13 @@
+c====>Begin Module %MAIN                  File t208q.f                  
+c---->Makedcls Options: All variables                                   
+c
+c     Parameter variables
+c
+      INTEGER             MAXTOK
+      PARAMETER           (MAXTOK = 10)
+c
+c     Local variables
+c
+      CHARACTER*10        TOKL10,      TOKLMX
+c
+c====>End Module   %MAIN                  File t208q.f                  

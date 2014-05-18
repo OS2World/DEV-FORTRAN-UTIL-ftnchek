@@ -1,0 +1,31 @@
+<HTML>
+<HEAD><TITLE>Source t208p.f</TITLE></HEAD>
+<BODY>
+<a name="%MAIN"><h3>PROGRAM %MAIN ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208p.f</td></tr>
+<tr><td></td></tr>
+</table>
+
+<table><tr><td><b>I/O Operations:</b></td></tr>
+<tr><td><pre>Unit ID  Unit No       Access  Form   Operation
+               6          SEQ  FMTD           W  
+
+<small>Operation codes A=rewind,B=backspace,C=close,E=endfile
+                I=inquire,O=open,R=read,W=write</small></pre></td></tr></table>
+<table><tr><td align="left"><b>Intrinsic Functions Called</b><br></td></tr>
+<tr><td><pre>INTEGER  IABS
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Statement functions Defined</b><br></td></tr>
+<tr><td><pre>INTEGER +IN
+</pre></td></tr></table>
+<table><tr><td align="left"><b>External Functions and Subroutines Called</b><br></td></tr>
+<tr><td><pre>REAL  EX
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Local Variables</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER  IARG
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

@@ -1,0 +1,11 @@
+c====>Begin Module %MAIN                  File t208m.f                  
+c---->Makedcls Options: All variables                                   
+c
+c     Parameter variables
+c
+      INTEGER             MAXDIM
+      PARAMETER           (MAXDIM = 100+200)
+      INTEGER             MAXARR
+      PARAMETER           (MAXARR = MAXDIM+100)
+c
+c====>End Module   %MAIN                  File t208m.f                  

@@ -1,0 +1,24 @@
+<HTML>
+<HEAD><TITLE>Source params.f</TITLE></HEAD>
+<BODY>
+<a name="%MAIN"><h3>PROGRAM %MAIN ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>params.f</td></tr>
+<tr><td></td></tr>
+</table>
+
+<table><tr><td><b>I/O Operations:</b></td></tr>
+<tr><td><pre>Unit ID  Unit No       Access  Form   Operation
+      *                   SEQ  FMTD           W  
+
+<small>Operation codes A=rewind,B=backspace,C=close,E=endfile
+                I=inquire,O=open,R=read,W=write</small></pre></td></tr></table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>REAL*8             PI                 (PI = .31415926535897932D+01)
+REAL*8             MINUS1             (MINUS1 = -.01D2)
+REAL*8             HALF               (HALF = 5.D-1)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

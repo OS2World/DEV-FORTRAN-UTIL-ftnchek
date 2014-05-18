@@ -1,0 +1,71 @@
+!====>Begin Module %MAIN                  File t208e.f                  
+!---->Makedcls Options: All variables                                   
+!
+!     Local variables
+!
+  CHARACTER           C
+  CHARACTER*81        LINE
+!
+  COMPLEX             Z,           ZZ
+!
+  DOUBLE COMPLEX      ZZZ,         ZZZZ
+!
+  DOUBLE PRECISION    D(10,20,30), E(40,50),    F(60)
+!
+  INTEGER             I,           J,           K,           M
+!
+  LOGICAL             LOGVAR
+!
+  REAL                R,           S(70,80)
+!
+!====>End Module   %MAIN                  File t208e.f                  
+!====>Begin Module SUB                    File t208e.f                  
+!---->Makedcls Options: All variables                                   
+!
+!     Local variables
+!
+  REAL                X,           Y,           Z
+!
+!     Common variables
+!
+  REAL                A,           B,           C
+!
+  COMMON / SHARE  /   A,           B,           C
+!
+!====>End Module   SUB                    File t208e.f                  
+!====>Begin Module FUN                    File t208e.f                  
+!---->Makedcls Options: All variables                                   
+!
+!     Local variables
+!
+  REAL                X,           Y,           Z
+!
+!     Common variables
+!
+  REAL                A,           B,           C
+!
+  COMMON / SHARE  /   A,           B,           C
+!
+!====>End Module   FUN                    File t208e.f                  
+!====>Begin Module BAR                    File t208e.f                  
+!---->Makedcls Options: All variables                                   
+!
+!     Intrinsic functions
+!
+  INTRINSIC           COS,         SIN,         SQRT
+!
+!     External functions
+!
+  EXTERNAL            MYSQRT,      MYSUB
+!
+  REAL                MYSQRT
+!
+!     Parameter variables
+!
+  INTEGER             NPI
+  PARAMETER           (NPI = 9)
+!
+  REAL                PI
+  PARAMETER           (PI = 3.14159265)
+!
+!====>End Module   BAR                    File t208e.f                  

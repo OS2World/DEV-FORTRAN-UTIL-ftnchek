@@ -1,0 +1,1121 @@
+C====>Begin Module PROB5_4DIM             File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             NR
+      PARAMETER           (NR = 32)
+      INTEGER             NT
+      PARAMETER           (NT = 16)
+      INTEGER             NR2
+      PARAMETER           (NR2 = NR+2)
+      INTEGER             NT1
+      PARAMETER           (NT1 = NT+1)
+      INTEGER             NW
+      PARAMETER           (NW = 2*NT+15)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Local variables
+C
+      CHARACTER*18        CFILE,       E10FILE,     E11FILE,     E12FILE
+      CHARACTER*18        E13FILE,     E14FILE,     E15FILE,     E16FILE
+      CHARACTER*18        E17FILE,     E18FILE,     E19FILE,     E1FILE
+      CHARACTER*18        E20FILE,     E21FILE,     E22FILE,     E23FILE
+      CHARACTER*18        E24FILE,     E2FILE,      E3FILE,      E4FILE
+      CHARACTER*18        E5FILE,      E6FILE,      E7FILE,      E8FILE
+      CHARACTER*18        E9FILE,      EFILE,       FFILE,       FMFILE
+      CHARACTER*18        MAIFILE,     MFILE,       MMFILE,      PAFILE
+      CHARACTER*18        PARFILE,     PNFILE
+      CHARACTER*15        RNAME
+      CHARACTER*18        SYMFILE,     UFILE,       ZFILE
+C
+      DOUBLE PRECISION    CMAX,        CMIN,        F0,          FBMAX
+      DOUBLE PRECISION    FLMAX,       PHIAMAX,     PHIAMIN,     PHINMAX
+      DOUBLE PRECISION    PHINMIN,     Q,           TCOEF,       TFREQ
+      DOUBLE PRECISION    TIME,        TPI,         UMAX
+      DOUBLE PRECISION    UOLD(0:NBP1,0:NBP1,2),    USMAX
+      DOUBLE PRECISION    ZAGI(0:NBP1,0:NBP1),      ZAGMAX,      ZAGMIN
+C
+      INTEGER             RLEN
+C
+      LOGICAL             AVRAGE(06),  AXES3D,      BCLIP,       BOX
+      LOGICAL             BYROWS,      CHKDUP,      DERIV(06)
+C
+      REAL                DUSUB,       DVSUB,       DXSUB,       DYSUB
+      REAL                DZSUB
+C
+C     Namelists
+C
+      NAMELIST / DATA   / AVRAGE,      AXES3D,      BCLIP,       BOX
+     x,                   BYROWS,      CHKDUP,      DERIV,       DUSUB
+     x,                   DVSUB,       DXSUB,       DYSUB,       DZSUB
+C
+C     Common variables
+C
+      DOUBLE PRECISION    C(0:NBP1,0:NBP1),         CN(0:NBP1,0:NBP1)
+C
+      COMMON / ADP    /   C,           CN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    ZAG(0:NBP1,0:NBP1),       ZAGN(0:NBP1,0:NBP1)
+C
+      COMMON / AGG    /   ZAG,         ZAGN
+C
+C     Common variables
+C
+      INTEGER             NFIL
+C
+      COMMON / EFNUM  /   NFIL
+C
+C     Common variables
+C
+      DOUBLE PRECISION    XM(MMAX,2)
+C
+      COMMON / FMARKERS/  XM
+C
+C     Common variables
+C
+      DOUBLE PRECISION    F(0:NBP1,0:NBP1,2)
+C
+      COMMON / FORCE  /   F
+C
+C     Common variables
+C
+      DOUBLE PRECISION    FB(0:NBP1,0:NBP1,2)
+C
+      COMMON / FORCEB /   FB
+C
+C     Common variables
+C
+      DOUBLE PRECISION    ELF(0:NBP1,0:NBP1,0:NR2,NT1)
+      DOUBLE PRECISION    ELFN(0:NBP1,0:NBP1,0:NR2,NT1)
+C
+      COMMON / LINK   /   ELF,         ELFN
+C
+C     Common variables
+C
+      INTEGER             METHOD,      MTHLIM
+C
+      COMMON / MTH    /   METHOD,      MTHLIM
+C
+C     Common variables
+C
+      DOUBLE PRECISION    PHIA(0:NBP1,0:NBP1),      PHIAN(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    PHIN(0:NBP1,0:NBP1),      PHINN(0:NBP1,0:NBP1)
+C
+      COMMON / PHI    /   PHIN,        PHINN,       PHIA,        PHIAN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    DR(NR2),     R(0:NR2)
+C
+      INTEGER             NK
+C
+      COMMON / RSIZE  /   DR,          R,           NK
+C
+C     Common variables
+C
+      DOUBLE PRECISION    DLT,         H
+C
+      COMMON / STEPS  /   H,           DLT
+C
+C     Common variables
+C
+      DOUBLE PRECISION    K0
+C
+      COMMON / STIFF  /   K0
+C
+C     Common variables
+C
+      DOUBLE PRECISION    U(0:NBP1,0:NBP1,2),       UX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    UY(0:NBP1,0:NBP1),        VX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    VY(0:NBP1,0:NBP1)
+C
+      COMMON / VEL    /   U,           UY,          VY,          UX
+      COMMON / VEL    /   VX
+C
+C     Common variables
+C
+      DOUBLE PRECISION    WSAVE(NW)
+C
+      COMMON / WAVE   /   WSAVE
+C
+C====>End Module   PROB5_4DIM             File t208x.f                  
+C====>Begin Module UINIT                  File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             NR
+      PARAMETER           (NR = 32)
+      INTEGER             NT
+      PARAMETER           (NT = 16)
+      INTEGER             NR2
+      PARAMETER           (NR2 = NR+2)
+      INTEGER             NT1
+      PARAMETER           (NT1 = NT+1)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Local variables
+C
+      DOUBLE PRECISION    A0,          A2,          ACHEM,       ADP0
+      DOUBLE PRECISION    ANG,         AX,          AY,          B0
+      DOUBLE PRECISION    C0,          C1,          C2,          CCHAR
+      DOUBLE PRECISION    CMAX,        CMIN,        CO,          CT
+      DOUBLE PRECISION    CX,          CXH,         CY,          CYH
+      DOUBLE PRECISION    D,           DC,          DN,          ELF0
+      DOUBLE PRECISION    ELFCHAR,     MU,          PCHAR,       PHI0
+      DOUBLE PRECISION    PI,          R0,          RO,          S0
+      DOUBLE PRECISION    SI,          SX,          SXH,         SY
+      DOUBLE PRECISION    SYH,         TCHAR,       TH,          TPI
+      DOUBLE PRECISION    U0,          UCHAR,       WL,          XCHAR
+      DOUBLE PRECISION    XH,          XLOW,        YH,          YLOW
+      DOUBLE PRECISION    Z0
+C
+C     Common variables
+C
+      DOUBLE PRECISION    C(0:NBP1,0:NBP1),         CN(0:NBP1,0:NBP1)
+C
+      COMMON / ADP    /   C,           CN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    ZAG(0:NBP1,0:NBP1),       ZAGN(0:NBP1,0:NBP1)
+C
+      COMMON / AGG    /   ZAG,         ZAGN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    FCHAR,       PHICHAR,     ZCHAR
+C
+      COMMON / CHAR   /   FCHAR,       ZCHAR,       PHICHAR
+C
+C     Common variables
+C
+      DOUBLE PRECISION    CND1,        CND2,        CND3,        CND4
+      DOUBLE PRECISION    CND5
+C
+      COMMON / CND    /   CND1,        CND2,        CND3,        CND4
+      COMMON / CND    /   CND5
+C
+C     Common variables
+C
+      DOUBLE PRECISION    A,           RE,          S1,          S2
+      DOUBLE PRECISION    S3
+C
+      COMMON / COEFS  /   S1,          S2,          S3,          RE
+      COMMON / COEFS  /   A
+C
+C     Common variables
+C
+      DOUBLE PRECISION    PEC
+C
+      COMMON / DIFFC  /   PEC
+C
+C     Common variables
+C
+      DOUBLE PRECISION    PEN
+C
+      COMMON / DIFFN  /   PEN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    XM(MMAX,2)
+C
+      COMMON / FMARKERS/  XM
+C
+C     Common variables
+C
+      DOUBLE PRECISION    FB(0:NBP1,0:NBP1,2)
+C
+      COMMON / FORCEB /   FB
+C
+C     Common variables
+C
+      DOUBLE PRECISION    X(0:NBP1),   Y(0:NBP1)
+C
+      COMMON / GRID   /   X,           Y
+C
+C     Common variables
+C
+      DOUBLE PRECISION    ELF(0:NBP1,0:NBP1,0:NR2,NT1)
+      DOUBLE PRECISION    ELFN(0:NBP1,0:NBP1,0:NR2,NT1)
+C
+      COMMON / LINK   /   ELF,         ELFN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    BETA0
+C
+      COMMON / LINKB  /   BETA0
+C
+C     Common variables
+C
+      DOUBLE PRECISION    ALPHA0
+C
+      COMMON / LINKF  /   ALPHA0
+C
+C     Common variables
+C
+      DOUBLE PRECISION    PHIA(0:NBP1,0:NBP1),      PHIAN(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    PHIN(0:NBP1,0:NBP1),      PHINN(0:NBP1,0:NBP1)
+C
+      COMMON / PHI    /   PHIN,        PHINN,       PHIA,        PHIAN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    THETA
+C
+      COMMON / PSTEPS /   THETA
+C
+C     Common variables
+C
+      DOUBLE PRECISION    DR(NR2),     R(0:NR2)
+C
+      INTEGER             NK
+C
+      COMMON / RSIZE  /   DR,          R,           NK
+C
+C     Common variables
+C
+      DOUBLE PRECISION    DLT,         H
+C
+      COMMON / STEPS  /   H,           DLT
+C
+C     Common variables
+C
+      DOUBLE PRECISION    K0
+C
+      COMMON / STIFF  /   K0
+C
+C     Common variables
+C
+      DOUBLE PRECISION    U(0:NBP1,0:NBP1,2),       UX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    UY(0:NBP1,0:NBP1),        VX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    VY(0:NBP1,0:NBP1)
+C
+      COMMON / VEL    /   U,           UY,          VY,          UX
+      COMMON / VEL    /   VX
+C
+C====>End Module   UINIT                  File t208x.f                  
+C====>Begin Module XINIT                  File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Local variables
+C
+      DOUBLE PRECISION    PI,          SI,          SJ,          TPON
+C
+C     Common variables
+C
+      DOUBLE PRECISION    A,           RE,          S1,          S2
+      DOUBLE PRECISION    S3
+C
+      COMMON / COEFS  /   S1,          S2,          S3,          RE
+      COMMON / COEFS  /   A
+C
+C     Common variables
+C
+      DOUBLE PRECISION    BZERO(0:NBP1,0:NBP1),     SINSQ(0:NBP1,0:NBP1)
+C
+      COMMON / FFT    /   SINSQ,       BZERO
+C
+C     Common variables
+C
+      DOUBLE PRECISION    Z(0:NBP1,0:NBP1)
+C
+      COMMON / PTDS   /   Z
+C
+C     Common variables
+C
+      DOUBLE PRECISION    DLT,         H
+C
+      COMMON / STEPS  /   H,           DLT
+C
+C====>End Module   XINIT                  File t208x.f                  
+C====>Begin Module NAVS2D                 File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Local variables
+C
+      DOUBLE PRECISION    B(0:NBP1,0:NBP1),         C(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    LAM(NG),     PRO,         R(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    XL,          YH(0:NBP1,0:NBP1),        YL
+      DOUBLE PRECISION    YP(0:NBP1,0:NBP1)
+C
+C     Common variables
+C
+      DOUBLE PRECISION    A,           RE,          S1,          S2
+      DOUBLE PRECISION    S3
+C
+      COMMON / COEFS  /   S1,          S2,          S3,          RE
+      COMMON / COEFS  /   A
+C
+C     Common variables
+C
+      DOUBLE PRECISION    BZERO(0:NBP1,0:NBP1),     SINSQ(0:NBP1,0:NBP1)
+C
+      COMMON / FFT    /   SINSQ,       BZERO
+C
+C     Common variables
+C
+      DOUBLE PRECISION    F(0:NBP1,0:NBP1,2)
+C
+      COMMON / FORCE  /   F
+C
+C     Equivalenced common variables
+C
+      DOUBLE PRECISION    W1(0:NBP1,0:NBP1,1:2)
+      DOUBLE PRECISION    W2(0:NBP1,0:NBP1,1:2)
+C
+C     Common variables
+C
+      DOUBLE PRECISION    P(0:NBP1,0:NBP1)
+C
+      COMMON / PRES   /   P
+C
+C     Equivalenced common variables
+C
+      DOUBLE PRECISION    D(0:NBP1,0:NBP1)
+C
+C     Common variables
+C
+      DOUBLE PRECISION    Z(0:NBP1,0:NBP1)
+C
+      COMMON / PTDS   /   Z
+C
+C     Common variables
+C
+      DOUBLE PRECISION    DLT,         H
+C
+      COMMON / STEPS  /   H,           DLT
+C
+C     Common variables
+C
+      DOUBLE PRECISION    U(0:NBP1,0:NBP1,2),       UX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    UY(0:NBP1,0:NBP1),        VX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    VY(0:NBP1,0:NBP1)
+C
+      COMMON / VEL    /   U,           UY,          VY,          UX
+      COMMON / VEL    /   VX
+C
+C====>End Module   NAVS2D                 File t208x.f                  
+C====>Begin Module TRIDGX                 File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             N
+      PARAMETER           (N = NG-1)
+      INTEGER             NP1
+      PARAMETER           (NP1 = N+1)
+      INTEGER             NM1
+      PARAMETER           (NM1 = N-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    A,           B(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    C(0:NBP1,0:NBP1),         W(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    Y(0:NBP1,0:NBP1)
+C
+C     Common variables
+C
+      DOUBLE PRECISION    D(0:NBP1,0:NBP1),         L(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    R(0:NBP1,0:NBP1),         X(0:NBP1,0:NBP1)
+C
+      COMMON / TDSPACE/   X,           L,           R,           D
+C
+C====>End Module   TRIDGX                 File t208x.f                  
+C====>Begin Module TRIDGY                 File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             N
+      PARAMETER           (N = NG-1)
+      INTEGER             NP1
+      PARAMETER           (NP1 = N+1)
+      INTEGER             NM1
+      PARAMETER           (NM1 = N-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    A,           B(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    C(0:NBP1,0:NBP1),         W(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    Y(0:NBP1,0:NBP1)
+C
+C     Common variables
+C
+      DOUBLE PRECISION    D(0:NBP1,0:NBP1),         L(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    R(0:NBP1,0:NBP1),         X(0:NBP1,0:NBP1)
+C
+      COMMON / TDSPACE/   X,           L,           R,           D
+C
+C====>End Module   TRIDGY                 File t208x.f                  
+C====>Begin Module NEWU                   File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    P(0:NBP1,0:NBP1),         W2(0:NBP1,0:NBP1,2)
+C
+C     Local variables
+C
+      DOUBLE PRECISION    S
+C
+C     Common variables
+C
+      DOUBLE PRECISION    H,           K
+C
+      COMMON / STEPS  /   H,           K
+C
+C     Common variables
+C
+      DOUBLE PRECISION    U(0:NBP1,0:NBP1,2),       UX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    UY(0:NBP1,0:NBP1),        VX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    VY(0:NBP1,0:NBP1)
+C
+      COMMON / VEL    /   U,           UY,          VY,          UX
+      COMMON / VEL    /   VX
+C
+C====>End Module   NEWU                   File t208x.f                  
+C====>Begin Module DIV                    File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    D(0:NBP1,0:NBP1),         S3
+      DOUBLE PRECISION    W2(0:NBP1,0:NBP1,2)
+C
+C====>End Module   DIV                    File t208x.f                  
+C====>Begin Module FFT2D                  File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             N
+      PARAMETER           (N = NG)
+      INTEGER             M
+      PARAMETER           (M = L2NG)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    A(0:NBP1,0:NBP1),         B(0:NBP1,0:NBP1)
+C
+      INTEGER             ISIGN
+C
+C     Local variables
+C
+      DOUBLE PRECISION    ANG,         PI,          SSIGN,       T1(N)
+      DOUBLE PRECISION    T2(N),       T3(N),       T4(N),       TU1
+      DOUBLE PRECISION    U1,          U2,          W1,          W2
+C
+C====>End Module   FFT2D                  File t208x.f                  
+C====>Begin Module PHIA2D                 File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      INTEGER             N
+C
+C     Common variables
+C
+      DOUBLE PRECISION    PHIA(0:NBP1,0:NBP1),      PHIAN(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    PHIN(0:NBP1,0:NBP1),      PHINN(0:NBP1,0:NBP1)
+C
+      COMMON / PHI    /   PHIN,        PHINN,       PHIA,        PHIAN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    H,           K
+C
+      COMMON / STEPS  /   H,           K
+C
+C     Common variables
+C
+      DOUBLE PRECISION    U(0:NBP1,0:NBP1,2),       UX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    UY(0:NBP1,0:NBP1),        VX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    VY(0:NBP1,0:NBP1)
+C
+      COMMON / VEL    /   U,           UY,          VY,          UX
+      COMMON / VEL    /   VX
+C
+C====>End Module   PHIA2D                 File t208x.f                  
+C====>Begin Module ZAG2D                  File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      INTEGER             N
+C
+C     Common variables
+C
+      DOUBLE PRECISION    ZAG(0:NBP1,0:NBP1),       ZAGN(0:NBP1,0:NBP1)
+C
+      COMMON / AGG    /   ZAG,         ZAGN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    H,           K
+C
+      COMMON / STEPS  /   H,           K
+C
+C     Common variables
+C
+      DOUBLE PRECISION    U(0:NBP1,0:NBP1,2),       UX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    UY(0:NBP1,0:NBP1),        VX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    VY(0:NBP1,0:NBP1)
+C
+      COMMON / VEL    /   U,           UY,          VY,          UX
+      COMMON / VEL    /   VX
+C
+C====>End Module   ZAG2D                  File t208x.f                  
+C====>Begin Module PLOT                   File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             NR
+      PARAMETER           (NR = 32)
+      INTEGER             NT
+      PARAMETER           (NT = 16)
+      INTEGER             NR2
+      PARAMETER           (NR2 = NR+2)
+      INTEGER             NT1
+      PARAMETER           (NT1 = NT+1)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    C(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    ELF(0:NBP1,0:NBP1,0:NR2,NT1)
+      DOUBLE PRECISION    F(0:NBP1,0:NBP1,2),       PHIA(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    PHIN(0:NBP1,0:NBP1),      TIME
+      DOUBLE PRECISION    U(0:NBP1,0:NBP1,2),       XM(MMAX,2)
+      DOUBLE PRECISION    ZAG(0:NBP1,0:NBP1)
+C
+      INTEGER             N,           NK
+C
+C     Common variables
+C
+      INTEGER             NFIL
+C
+      COMMON / EFNUM  /   NFIL
+C
+C====>End Module   PLOT                   File t208x.f                  
+C====>Begin Module MARKERS                File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Local variables
+C
+      DOUBLE PRECISION    AX,          AY,          UM,          UMN
+      DOUBLE PRECISION    VM,          VMN,         X,           XN
+      DOUBLE PRECISION    Y,           YN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    XM(MMAX,2)
+C
+      COMMON / FMARKERS/  XM
+C
+C     Common variables
+C
+      DOUBLE PRECISION    DLT,         H
+C
+      COMMON / STEPS  /   H,           DLT
+C
+C     Common variables
+C
+      DOUBLE PRECISION    U(0:NBP1,0:NBP1,2),       UX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    UY(0:NBP1,0:NBP1),        VX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    VY(0:NBP1,0:NBP1)
+C
+      COMMON / VEL    /   U,           UY,          VY,          UX
+      COMMON / VEL    /   VX
+C
+C====>End Module   MARKERS                File t208x.f                  
+C====>Begin Module PHIN2D                 File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Argument variables
+C
+      INTEGER             N
+C
+C     Common variables
+C
+      DOUBLE PRECISION    PEN
+C
+      COMMON / DIFFN  /   PEN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    PHIA(0:NBP1,0:NBP1),      PHIAN(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    PHIN(0:NBP1,0:NBP1),      PHINN(0:NBP1,0:NBP1)
+C
+      COMMON / PHI    /   PHIN,        PHINN,       PHIA,        PHIAN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    H,           K
+C
+      COMMON / STEPS  /   H,           K
+C
+C     Common variables
+C
+      DOUBLE PRECISION    U(0:NBP1,0:NBP1,2),       UX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    UY(0:NBP1,0:NBP1),        VX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    VY(0:NBP1,0:NBP1)
+C
+      COMMON / VEL    /   U,           UY,          VY,          UX
+      COMMON / VEL    /   VX
+C
+C====>End Module   PHIN2D                 File t208x.f                  
+C====>Begin Module CHEM2D                 File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             MMAX
+      PARAMETER           (MMAX = 200)
+C
+C     Argument variables
+C
+      INTEGER             N
+C
+C     Common variables
+C
+      DOUBLE PRECISION    C(0:NBP1,0:NBP1),         CN(0:NBP1,0:NBP1)
+C
+      COMMON / ADP    /   C,           CN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    PEC
+C
+      COMMON / DIFFC  /   PEC
+C
+C     Common variables
+C
+      DOUBLE PRECISION    H,           K
+C
+      COMMON / STEPS  /   H,           K
+C
+C     Common variables
+C
+      DOUBLE PRECISION    U(0:NBP1,0:NBP1,2),       UX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    UY(0:NBP1,0:NBP1),        VX(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    VY(0:NBP1,0:NBP1)
+C
+      COMMON / VEL    /   U,           UY,          VY,          UX
+      COMMON / VEL    /   VX
+C
+C====>End Module   CHEM2D                 File t208x.f                  
+C====>Begin Module CHLFAC                 File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    DIAG(NN),    SUBD(NN)
+C
+      INTEGER             NN
+C
+C====>End Module   CHLFAC                 File t208x.f                  
+C====>Begin Module CHLSLV                 File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             MAX
+      PARAMETER           (MAX = NBP1)
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    B(NM1+1),    DIAG(NM1),   SUB(NM1),    X(NM1)
+C
+      INTEGER             NM1
+C
+C     Local variables
+C
+      DOUBLE PRECISION    Y(MAX)
+C
+C====>End Module   CHLSLV                 File t208x.f                  
+C====>Begin Module PERIOD                 File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    PH(0:NBP1,0:NBP1)
+C
+C====>End Module   PERIOD                 File t208x.f                  
+C====>Begin Module SOL                    File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    L,           R,           V
+C
+C====>End Module   SOL                    File t208x.f                  
+C====>Begin Module DIFFU                  File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C     Argument variables
+C
+      DOUBLE PRECISION    ALPHA,       K1,          PH(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    PHN(0:NBP1,0:NBP1)
+C
+C     Local variables
+C
+      DOUBLE PRECISION    B(NB),       ETA,         GDIAG(NB-1)
+      DOUBLE PRECISION    GSUB(NB-1),  LAM,         Y(NB-1),     Z(NB-1)
+C
+C     Common variables
+C
+      DOUBLE PRECISION    H,           K
+C
+      COMMON / STEPS  /   H,           K
+C
+C====>End Module   DIFFU                  File t208x.f                  
+C====>Begin Module REACT                  File t208x.f                  
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NGP1
+      PARAMETER           (NGP1 = NG+1)
+      INTEGER             NGP2
+      PARAMETER           (NGP2 = NG+2)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+      INTEGER             NR
+      PARAMETER           (NR = 32)
+      INTEGER             NT
+      PARAMETER           (NT = 16)
+      INTEGER             NR2
+      PARAMETER           (NR2 = NR+2)
+      INTEGER             NT1
+      PARAMETER           (NT1 = NT+1)
+C
+C     Local variables
+C
+      DOUBLE PRECISION    ALPHA,       C4,          RC(0:NBP1),  TEMP1
+      DOUBLE PRECISION    TEMP2,       TEMP3,       TEMP4
+      DOUBLE PRECISION    Y(0:NBP1,4), YN(0:NBP1,4)
+C
+C     Common variables
+C
+      DOUBLE PRECISION    C(0:NBP1,0:NBP1),         CN(0:NBP1,0:NBP1)
+C
+      COMMON / ADP    /   C,           CN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    ZAG(0:NBP1,0:NBP1),       ZAGN(0:NBP1,0:NBP1)
+C
+      COMMON / AGG    /   ZAG,         ZAGN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    CND1,        CND2,        CND3,        CND4
+      DOUBLE PRECISION    CND5
+C
+      COMMON / CND    /   CND1,        CND2,        CND3,        CND4
+      COMMON / CND    /   CND5
+C
+C     Common variables
+C
+      DOUBLE PRECISION    ELF(0:NBP1,0:NBP1,0:NR2,NT1)
+      DOUBLE PRECISION    ELFN(0:NBP1,0:NBP1,0:NR2,NT1)
+C
+      COMMON / LINK   /   ELF,         ELFN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    PHIA(0:NBP1,0:NBP1),      PHIAN(0:NBP1,0:NBP1)
+      DOUBLE PRECISION    PHIN(0:NBP1,0:NBP1),      PHINN(0:NBP1,0:NBP1)
+C
+      COMMON / PHI    /   PHIN,        PHINN,       PHIA,        PHIAN
+C
+C     Common variables
+C
+      DOUBLE PRECISION    DR(NR2),     R(0:NR2)
+C
+      INTEGER             NK
+C
+      COMMON / RSIZE  /   DR,          R,           NK
+C
+C     Common variables
+C
+      DOUBLE PRECISION    H,           K
+C
+      COMMON / STEPS  /   H,           K
+C
+C====>End Module   REACT                  File t208x.f                  

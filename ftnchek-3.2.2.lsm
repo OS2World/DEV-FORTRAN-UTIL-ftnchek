@@ -1,0 +1,20 @@
+Begin3
+Title:          FTNCHEK
+Version:        3.2.2 Entered-date:   30 March 2003
+Description:    Static analyzer for Fortran 77 programs.  It is
+                designed to detect errors in a Fortran program
+                that a compiler usually does not catch.
+Keywords:       Fortran f77 checker analyzer
+Author:         moniot@fordham.edu (Robert Moniot)
+Maintained-by:  moniot@fordham.edu (Robert Moniot)
+Primary-site:   ibiblio.org:/pub/Linux/devel/lang/fortran
+                876 bytes ftnchek-3.2.2.lsm
+                972 kB ftnchek-3.2.2.tar.gz
+Alternate-site: ftp.netlib.org:/fortran
+                972 kB ftnchek.tar.gz
+Original-site:  ftp.dsm.fordham.edu:/pub/ftnchek
+                972 kB ftnchek-3.2.2.tar.gz
+Platforms:      (optional) xvcg to view call graphs in VCG format;
+                gawk >= 2.0 to use dcl2inc component.
+Copying-policy: MIT
+End

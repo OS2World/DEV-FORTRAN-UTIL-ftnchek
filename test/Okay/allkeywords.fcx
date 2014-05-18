@@ -1,0 +1,326 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File allkeywords.f:
+
+      1 ! All the keywords recognized by ftnchek as of 21 July 2000
+        ^
+"allkeywords.f", line 1 col 1: Warning: Nonstandard syntax: inline comment
+      2       PROGRAM allkeys
+      3       IMPLICIT NONE
+                       ^
+"allkeywords.f", line 3 col 16: Warning: Nonstandard syntax
+      4       BYTE b(100)
+              ^
+"allkeywords.f", line 4 col 7: Warning: Nonstandard syntax
+      5       CHARACTER *100 c
+      6       DOUBLE COMPLEX a
+              ^
+"allkeywords.f", line 6 col 7: Warning: Nonstandard syntax
+      7       COMPLEX z
+      8       DOUBLEPRECISION d
+      9       DOUBLE PRECISION f
+     10       EXTERNAL f, foo, iftn_calloc
+     11       INTEGER i, l, u, iftn_calloc
+     12       LOGICAL bool
+     13       POINTER (ptr, ptee)
+              ^
+"allkeywords.f", line 13 col 7: Warning: Nonstandard syntax
+     14       INTEGER ptee(*)
+                           ^
+"allkeywords.f", line 14 col 20: Warning: Nonstandard syntax: local array cannot
+ have variable size
+     15       REAL pi
+     16       EQUIVALENCE (b(1), i)
+     17       NAMELIST /n1/ a,b,c
+              ^
+"allkeywords.f", line 17 col 7: Warning: Nonstandard syntax
+     18       PARAMETER (pi = 3.1415926)
+     19       INCLUDE 'block2.i'
+              ^
+"allkeywords.f", line 19 col 7: Warning: Nonstandard syntax
+Including file block2.i:
+      1 !  Include file with common block definition for allkeywords.f
+        ^
+"block2.i", line 1 col 1: Warning: Nonstandard syntax: inline comment
+      2       REAL x, y
+      3       COMMON /block2/ x, y
+      4 
+Resuming file allkeywords.f:
+     20       ACCEPT *, c
+              ^
+"allkeywords.f", line 20 col 7: Warning: Nonstandard syntax
+     21       OPEN(unit=10, file=c)
+     22       u = 10
+     23       ASSIGN 100 TO l
+     24  100  CONTINUE
+     25       READ(10,*) a, x, i, z, d
+     26       BACKSPACE 10
+     27       BACKSPACE u
+     28       BACKSPACE (unit=10)
+     29       ptr = iftn_calloc (1000, 4)
+                  ^
+"allkeywords.f", line 29 col 11: Nonportable usage: mixed default and explicit 
+ precision items: intg expr IFTN_CALLOC(1000,4) assigned to intg*4 PTR
+     30       CALL foo
+     31       SELECTCASE (i)
+              ^
+"allkeywords.f", line 31 col 7: Warning: Nonstandard syntax
+     32       CASE (1)
+     33          ptee(i) = 2
+     34       CASEDEFAULT
+     35          ptee(i) = ptee(1)
+     36       ENDSELECT
+     37       SELECT CASE (i)
+              ^
+"allkeywords.f", line 37 col 7: Warning: Nonstandard syntax
+     38       CASE (2)
+     39          i = 3
+     40       CASE DEFAULT
+     41          i = 4
+     42       END SELECT
+     43       DO 200 i=1,10
+     44  200  PRINT *, i
+     45       IF( x .eq. i ) GOTO l
+     46       INQUIRE(UNIT=u, IOSTAT=i)
+     47       ENDFILE 10
+     48       END FILE u
+     49       ENDFILE (unit=10,err=100)
+     50       REWIND 10
+     51       REWIND u
+     52       REWIND (unit=10)
+     53       CLOSE (UNIT=10)
+     54       bool = .TRUE.
+     55       IF( bool ) THEN
+     56       WRITE(10,*) a, y, z         
+     57       ELSEIF( .NOT. .FALSE. ) THEN
+     58          WRITE(UNIT=10,FMT=900) 'Testing 1, 2, 3'
+     59  900  FORMAT(1x,a20)
+     60       ELSE
+     61          CALL bar
+     62          STOP
+     63       ENDIF
+     64       DOWHILE( i .lt. 100 )
+              ^
+"allkeywords.f", line 64 col 7: Warning: Nonstandard syntax
+     65       IF( f(d) .gt. 3.14) THEN
+     66          CYCLE
+                 ^
+"allkeywords.f", line 66 col 10: Warning: Nonstandard syntax: CYCLE statement
+     67       ELSE
+     68          EXIT
+                 ^
+"allkeywords.f", line 68 col 10: Warning: Nonstandard syntax: EXIT statement
+     69       END IF
+     70       ENDDO
+              ^
+"allkeywords.f", line 70 col 7: Warning: Nonstandard syntax
+     71       i = 1
+     72       DO WHILE( i .lt. 100 )
+              ^
+"allkeywords.f", line 72 col 7: Warning: Nonstandard syntax
+     73          i = i*2
+     74       END DO
+              ^
+"allkeywords.f", line 74 col 7: Warning: Nonstandard syntax
+     75       DO 300 WHILE( x .gt. 0.0 )
+              ^
+"allkeywords.f", line 75 col 7: Warning: Nonstandard syntax
+     76          TYPE *, pi, 'Over and over'
+                 ^
+"allkeywords.f", line 76 col 10: Warning: Nonstandard syntax
+     77  300  CONTINUE
+     78       DO 4321, WHILE( x .gt. 0.0 )
+              ^
+"allkeywords.f", line 78 col 7: Warning: Nonstandard syntax
+     79          TYPE *, pi, 'Over and over'
+                 ^
+"allkeywords.f", line 79 col 10: Warning: Nonstandard syntax
+     80  4321 CONTINUE
+     81       GO TO 100
+     82       END
+
+Module ALLKEYS: prog
+
+External subprograms referenced:
+
+       BAR: subr            F: dble          FOO: subr   IFTN_CALLOC: intg   
+
+Common blocks referenced:
+
+    BLOCK2         
+
+Namelists defined:
+
+        N1         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A dcpx             B intg1 1       BOOL logl             C char100  
+         D dble             I intg             L intg            PI real   
+      PTEE intg  1        PTR intg4            U intg             X real   
+         Y real             Z cplx   
+
+
+
+"allkeywords.f", line 29: Warning in module ALLKEYS: Variables set but never
+ used:
+"allkeywords.f", line 29:     PTR set
+
+
+"allkeywords.f", line 2: Warning in module ALLKEYS: Names longer than 6 chars
+ (nonstandard):
+"allkeywords.f", line 2:     ALLKEYS declared
+"allkeywords.f", line 11:     IFTN_CALLOC defined
+
+"allkeywords.f", line 11: Warning in module ALLKEYS: Names containing
+ nonstandard characters:
+"allkeywords.f", line 11:     IFTN_CALLOC defined
+
+"allkeywords.f", line 4: Warning in module ALLKEYS: Mixed sizes equivalenced
+ (not portable):
+"allkeywords.f", line 4:     B declared with type intg*1
+"allkeywords.f", line 11:     I declared with type intg
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             10         SEQ       BACKSPACE    26     28 
+             10                   CLOSE        53 
+             10         SEQ       ENDFILE      47     49 
+             10         SEQ  FMTD OPEN         21 
+             10         SEQ  FMTD READ         25 
+             10         SEQ       REWIND       50     52 
+             10         SEQ  FMTD WRITE        56     58 
+           *            SEQ  FMTD ACCEPT       20 
+           *            SEQ  FMTD PRINT        44 
+           *            SEQ  FMTD TYPE         76     79 
+           U            SEQ       BACKSPACE    27 
+           U            SEQ       ENDFILE      48 
+           U                      INQUIRE      46 
+           U            SEQ       REWIND       51 
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType    Label   Line  StmtType
+    <100>     24      exec    <200>     44      exec    <300>     77      exec
+    <900>     59    format   <4321>     80      exec
+
+     83       DOUBLEPRECISION FUNCTION f(x)
+     84       DOUBLE PRECISION x
+     85       REAL y1, y2
+     86       DOUBLECOMPLEX a
+              ^
+"allkeywords.f", line 86 col 7: Warning: Nonstandard syntax
+     87       SAVE a
+     88       DIMENSION a(2)
+     89       INTRINSIC sqrt
+     90       COMMON /block1/ y1, y2
+     91       a(1) = (1.0d1, 2.0d2)
+                     ^
+"allkeywords.f", line 91 col 14: Warning: nonstandard double precision complex
+ constant
+     92       a(2) = a(1)
+     93       f = x*dble(y1*y2)* sqrt(real(a(1)))
+     94       RETURN
+     95       END
+
+Module F: func: dble
+
+External subprograms referenced:
+
+      DBLE: intrns       REAL: intrns       SQRT: intrns 
+
+Common blocks referenced:
+
+    BLOCK1         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A dcpx  1          F dble             X dble            Y1 real   
+        Y2 real   
+
+
+
+     96       SUBROUTINE foo
+     97       IMPLICIT INTEGER (A-Z)
+     98       WRITE(10,*) 'foo'
+     99       RETURN
+    100       ENTRY bar
+    101       WRITE(10,*) 'bar'
+    102       PAUSE
+    103       RETURN
+    104       END
+
+Module FOO: subr
+
+Entry Points
+
+       BAR                FOO         
+
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             10         SEQ  FMTD WRITE        98    101 
+    105       BLOCKDATA bdat1
+    106       COMMON /block1/ a, b
+    107       DATA a, b /1.0, 2.0/
+    108       END
+
+Module BDAT1: data
+
+Common blocks referenced:
+
+    BLOCK1         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         A real*            B real*  
+
+* Variable not declared. Type has been implicitly defined.
+
+
+    109       BLOCK DATA bdat2
+    110       IMPLICITNONE
+                      ^
+"allkeywords.f", line 110 col 15: Possibly misleading appearance: keyword NONE 
+ not clearly separated from context
+                      ^
+"allkeywords.f", line 110 col 15: Warning: Nonstandard syntax
+    111       INCLUDE 'block2.i'
+              ^
+"allkeywords.f", line 111 col 7: Warning: Nonstandard syntax
+Including file block2.i:
+      1 !  Include file with common block definition for allkeywords.f
+        ^
+"block2.i", line 1 col 1: Warning: Nonstandard syntax: inline comment
+      2       REAL x, y
+      3       COMMON /block2/ x, y
+      4 
+Resuming file allkeywords.f:
+    112       DATA x, y /1.0, 2.0/
+    113       END
+
+Module BDAT2: data
+
+Common blocks referenced:
+
+    BLOCK2         
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+         X real             Y real   
+
+
+
+
+ 0 syntax errors detected in file allkeywords.f
+ 34 warnings issued in file allkeywords.f
+
+"allkeywords.f", line 29: Warning: Subprogram IFTN_CALLOC never defined
+"allkeywords.f", line 29:    Invoked in module ALLKEYS

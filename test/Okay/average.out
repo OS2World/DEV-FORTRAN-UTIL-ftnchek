@@ -1,0 +1,113 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File average.f:
+
+      1 C       AUTHORS: MIKE MYERS AND LUCIA SPAGNUOLO
+      2 C       DATE:    MAY 8, 1989
+      3 
+      4 C       Variables:
+      5 C               SCORE -> an array of test scores
+      6 C               SUM ->   sum of the test scores
+      7 C               COUNT -> counter of scores read in
+      8 C               I ->     loop counter
+      9 
+     10         REAL FUNCTION COMPAV(SCORE,COUNT)
+     11             INTEGER SUM,COUNT,J,SCORE(5)
+     12 
+     13             DO 30 I = 1,COUNT
+     14                 SUM = SUM + SCORE(I)
+     15 30          CONTINUE
+     16             COMPAV = SUM/COUNT
+                           ^
+Warning near line 16 col 20: integer quotient expr SUM/COUNT  converted to
+ real
+     17         END
+     18 
+
+Module COMPAV: func: real
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+    COMPAV real         COUNT intg             I intg*            J intg   
+     SCORE intg  1        SUM intg   
+
+* Variable not declared. Type has been implicitly defined.
+
+
+Warning in module COMPAV: Variables declared but never referenced:
+    J declared at line 11
+
+Warning in module COMPAV: Variables may be used before set:
+    SUM used at line 14
+    SUM set at line 14
+
+
+Statement labels defined:
+
+    Label   Line  StmtType
+     <30>     15      exec
+
+     19 
+     20         PROGRAM AVENUM
+     21 C
+     22 C                       MAIN PROGRAM
+     23 C
+     24 C       AUTHOR:   LOIS BIGBIE
+     25 C       DATE:     MAY 15, 1990
+     26 C
+     27 C       Variables:
+     28 C               MAXNOS -> maximum number of input values
+     29 C               NUMS    -> an array of numbers
+     30 C               COUNT   -> exact number of input values
+     31 C               AVG     -> average returned by COMPAV
+     32 C               I       -> loop counter
+     33 C
+     34 
+     35             PARAMETER(MAXNOS=5)
+     36             INTEGER I, COUNT
+     37             REAL NUMS(MAXNOS), AVG
+     38             COUNT = 0
+     39             DO 80 I = 1,MAXNOS
+     40                 READ (5,*,END=100) NUMS(I)
+     41                 COUNT = COUNT + 1
+     42 80          CONTINUE
+     43 100         AVG = COMPAV(NUMS, COUNT)
+     44         END
+
+Module AVENUM: prog
+
+External subprograms referenced:
+
+    COMPAV: real*  
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+       AVG real         COUNT intg             I intg        MAXNOS intg*  
+      NUMS real  1
+
+* Variable not declared. Type has been implicitly defined.
+
+
+Warning in module AVENUM: Variables set but never used:
+    AVG set at line 43
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             5          SEQ  FMTD READ         40 
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType
+     <80>     42      exec    <100>     43      exec
+
+
+ 0 syntax errors detected in file average.f
+ 6 warnings issued in file average.f
+
+Warning: Subprogram COMPAV argument data type mismatch at position 1:
+    Dummy arg SCORE in module COMPAV line 10 file average.f is type intg
+    Actual arg NUMS in module AVENUM line 43 file average.f is type real

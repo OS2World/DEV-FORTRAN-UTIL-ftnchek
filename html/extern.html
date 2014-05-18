@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<TITLE>Option: extern</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="errors.html">-errors</A><HR><P>
+<H2>Option: <font color=#FF0080>extern</font></H2><P>
+<A NAME="extern"></A><DT><B><A HREF="extern.html">-extern</A></B>
+
+<DD>
+<DL COMPACT><DT><DD>
+Causes <B>ftnchek</B> to report whether any subprograms
+invoked by the program are never defined.
+Ordinarily, if <B>ftnchek</B> is being run on a complete program, each
+subprogram other than the intrinsic functions should be defined
+somewhere.  Turn off this switch if you just want to
+check a subset of files which form part of a larger complete program.
+Subprogram arguments will still be
+checked for correctness.  Default = yes.
+<P>
+
+The <B><A HREF="extern.html">-extern</A></B> flag is now superseded by the
+<B><A HREF="usage.html">-usage</A>=ext-undefined</B> option.  For the sake of convenience, the
+<B><A HREF="extern.html">-extern</A></B> flag is retained, so that <B>-noextern</B> is
+equivalent to <B><A HREF="usage.html">-usage</A>=no-ext-undefined</B> option.  The
+<B><A HREF="extern.html">-extern</A></B> switch may be retired eventually.
+<P>
+
+See also: <B><A HREF="library.html">-library</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="f77.html">-f77</A>
+</BODY></HTML>

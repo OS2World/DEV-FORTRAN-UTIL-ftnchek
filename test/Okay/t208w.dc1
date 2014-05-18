@@ -1,0 +1,17 @@
+C====>Begin Module %MAIN                  File t208w.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             L2NG
+      PARAMETER           (L2NG = 6)
+      INTEGER             NG
+      PARAMETER           (NG = 2**L2NG)
+      INTEGER             NB
+      PARAMETER           (NB = NG+2)
+      INTEGER             NGM1
+      PARAMETER           (NGM1 = NG-1)
+      INTEGER             NBP1
+      PARAMETER           (NBP1 = NB+1)
+C
+C====>End Module   %MAIN                  File t208w.f                  

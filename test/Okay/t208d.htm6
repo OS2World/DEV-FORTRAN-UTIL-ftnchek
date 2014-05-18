@@ -1,0 +1,176 @@
+<HTML>
+<HEAD><TITLE>Source t208d.f</TITLE></HEAD>
+<BODY>
+<a name="SYMSF"><h3>SUBROUTINE SYMSF ( FONT, SWCHAR )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER            FONT(1),    SWCHAR(1)
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Description</b></td></tr>
+<tr><td><pre>   (Select Font) 
+   Select  one  of  the  Hershey  fonts  for  subsequent  text 
+   plotting.  Up to five fonts may  be in effect at one  time. 
+   The last selected is  the default one.   If more than  five 
+   fonts are requested, the sixth will replace the first,  the 
+   seventh the second, and  so on in  a cyclic fashion.   This 
+   restriction  is  purely  dimensional,  and  may  easily  be 
+   changed  if  required.   The  case  switch  characters  are 
+   initialized to  "<"  and  ">"  for  to-upper  and  to-lower 
+   respectively.    The   backspace   character   switch    is 
+   initialized to 0, suppressing the backspace facility.   The 
+   arguments are: 
+ 
+   FONT(*).....5-character string selecting font (see below). 
+   SWCHAR(*)...Single  character (e.g. 1H=)  used  as a switch 
+               character to return to this font from  another. 
+               It will be interpreted as a switch character if 
+               it occurs only  once.  However, two  successive 
+               switch characters  for a  single font  will  be 
+               collapsed to a single character and will not be 
+               interpreted as a font switch.  A blank or  zero 
+               value indicates  that  no switch  character  is 
+               selected. 
+ 
+   The fonts are selected by  a five-character string made  up 
+   of a  2-character case  specification, a  2-character  type 
+   specification, and a 1-character variant specification,  as 
+   follows: 
+ 
+   Case: UC - Upper Case 
+         LC - Lower Case 
+ 
+   Type: KR - Cartographic Roman (9) 
+         KG - Cartographic Greek (9) 
+         IR - Indexical Roman (13) 
+         II - Indexical Roman Italic (13) 
+         IG - Indexical Greek (13) 
+         SA - Simplex ASCII (15) 
+         BA - Block ASCII (15) 
+         SR - Simplex Roman (21) 
+         SS - Simplex Roman Script (21) 
+         SG - Simplex Greek (21) 
+         CR - Complex Normal Roman (21) 
+         CI - Complex Normal Roman Italic (21) 
+         CG - Complex Normal Greek (21) 
+         CS - Complex Script (21) 
+         DR - Duplex Roman (21) 
+         TR - Triplex Roman (21) 
+         GE - Gothic English (21) 
+         GI - Gothic Italian (21) 
+         GG - Gothic German (21) 
+         CC - Complex Cyrillic (21) 
+ 
+   Variant: 1 - Principal 
+            2 - Secondary 
+            3 - Tertiary 
+            4 - Quaternary 
+ 
+   Selector letters may be  either upper- or lower-case.   The 
+   case specification is arranged  such that if upper-case  is 
+   requested, upper-case text will be mapped into  upper-case, 
+   and  lower-case   into   lower-case.   If   lower-case   is 
+   requested, both upper-  and lower-case  letters are  mapped 
+   into lower case.  The four  variants are provided to  allow 
+   representation of  special  characters within  the  limited 
+   FORTRAN set.  The Gothic and  Cyrillic fonts have only  two 
+   variants available.  Requests for variants  3 or 4 will  be 
+   reduced to  variant  2.   The ASCII  fonts  have  only  one 
+   variant, and  requests for  variants  2, 3,  or 4  will  be 
+   reduced to variant 1. 
+ 
+   The numbers (9),  (13), (15), and  (21) following the  type 
+   indicate the height of the characters in raster units.  The 
+   spacing between lines of text is conventionally measured by 
+   the printer's  unit  "em",  giving the  distance  from  the 
+   bottom of one line of type to the bottom of the next  line. 
+   It should be  21 raster  units for indexical  size, and  32 
+   raster units for normal size. 
+ 
+   If any of the three parts  of the font specification is  in 
+   error, a message  will be  issued, and a  default for  that 
+   part will be assumed.  The default corresponds to  "UCTR1". 
+   (01-APR-83) 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ 
+   EXTERNAL REFERENCES (FUNCTION,SUBROUTINE,COMMON) 
+ 
+   EXTERNAL REFS       ERRAT,       ERRCK,       ERRMS,       KARASC 
+   EXTERNAL REFS       KARCM2,      KARUC,       KARUPK,      MIN0 
+   EXTERNAL REFS       MOD 
+ 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+ 
+   EXTERNAL FUNCTIONS AND SUBROUTINES</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208d.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Intrinsic Functions Called</b><br></td></tr>
+<tr><td><pre>INTEGER            MIN0,       MOD
+</pre></td></tr></table>
+<table><tr><td align="left"><b>External Functions and Subroutines Called</b><br></td></tr>
+<tr><td><pre>INTEGER            KARASC,     KARCM2,     KARUC
+SUBROUTINE         ERRAT,      ERRCK,      ERRMS,      KARUPK
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Local Variables</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>INTEGER           +ACCENT,    +ALPHA,     +AMPSND,    +AT
+INTEGER           +BA,        +BETA,      +CARET,     +CC
+INTEGER           +CG,        +CHI,       +CI,        +COLON
+INTEGER           +COMMA,     +CR,        +CS,        +CYA
+INTEGER           +CYB,       +CYCHE,     +CYD,       +CYE
+INTEGER           +CYEE,      +CYEEK,     +CYF,       +CYG
+INTEGER           +CYK,       +CYKHA,     +CYL,       +CYM
+INTEGER           +CYMZNK,    +CYN,       +CYO,       +CYOO
+INTEGER           +CYP,       +CYR,       +CYS,       +CYSH
+INTEGER           +CYSHCH,    +CYT,       +CYTSE,     +CYTZNK
+INTEGER           +CYV,       +CYYA,      +CYYE,      +CYYIRI
+INTEGER           +CYYOO,     +CYZ,       +CYZHE,     +DEL
+INTEGER           +DELTA,     +DOLLAR,    +DQUOTE,    +DR
+INTEGER           +EPSLON,    +EQUALS,    +ETA,       +EXCLPT
+INTEGER           +FCASE,     +FTYPE,     +FVAR,      +GAMMA
+INTEGER           +GE,        +GG,        +GI,        +I
+INTEGER           +IDIG,      +IG,        +II,        +ILC
+INTEGER           +IOTA,      +IR,        +IUC,       +KAPPA
+INTEGER           +KG,        +KR,        +LAMBDA,    +LANGLE
+INTEGER           +LBRACE,    +LBRAKT,    +LCA,       +LCB
+INTEGER           +LCC,       +LCD,       +LCE,       +LCF
+INTEGER           +LCG,       +LCH,       +LCI,       +LCJ
+INTEGER           +LCK,       +LCL,       +LCM,       +LCN
+INTEGER           +LCO,       +LCP,       +LCQ,       +LCR
+INTEGER           +LCS,       +LCT,       +LCU,       +LCV
+INTEGER           +LCW,       +LCX,       +LCY,       +LCZ
+INTEGER           +LOC0,      +LOC0SV,    +LOCLC,     +LOCUC
+INTEGER           +LPAREN,    +MINUS,     +MU,        +NOCHAR
+INTEGER           +NU,        +NUL,       +NUMBER,    +OMCRON
+INTEGER           +OMEGA,     +PERCNT,    +PERIOD,    +PHI
+INTEGER           +PI,        +PLUS,      +PSI,       +QUERY
+INTEGER           +RANGLE,    +RBRACE,    +RBRAKT,    +RHO
+INTEGER           +RPAREN,    +RSLANT,    +SA,        +SCOLON
+INTEGER           +SG,        +SIGMA,     +SLASH,     +SPACE
+INTEGER           +SQUOTE,    +SR,        +SS,        +STAR
+INTEGER           +TAU,       +THETA,     +TILDE,     +TR
+INTEGER           +UCA,       +UCB,       +UCC,       +UCD
+INTEGER           +UCE,       +UCF,       +UCG,       +UCH
+INTEGER           +UCI,       +UCJ,       +UCK,       +UCL
+INTEGER           +UCM,       +UCN,       +UCO,       +UCP
+INTEGER           +UCQ,       +UCR,       +UCS,       +UCT
+INTEGER           +UCU,       +UCV,       +UCW,       +UCX
+INTEGER           +UCY,       +UCZ,       +UPSLON,    +USCORE
+INTEGER           +VBAR,      +XI,        +ZETA
+LOGICAL           +ERROR
+</pre></td></tr></table>
+<table>
+<tr><td align="left"><b>Referenced Common Block Variables</b> <small>(+ indicates altered content)</small><b></b></td></tr>
+<tr><td><pre>SYM02              INTEGER           +KFONT,     MAXFNT
+SYM02              INTEGER           +NFONT,    +NFUSED
+SYM03              INTEGER           +ASCII(96,5)
+SYM03              INTEGER           +BSWTCH(5)
+SYM03              INTEGER           +FONTID(5)
+SYM03              INTEGER           +FONTNM(5,5)
+SYM03              INTEGER           +FSWTCH(5)
+SYM03              INTEGER           +LSWTCH(5)
+SYM03              INTEGER           +USWTCH(5)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

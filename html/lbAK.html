@@ -1,0 +1,350 @@
+<HTML>
+<HEAD>
+<TITLE>LIMITATIONS AND EXTENSIONS</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="lbAJ.html">INTERPRETING THE OUTPUT</A><HR><P>
+<A NAME="lbAK">&nbsp;</A> <H2>LIMITATIONS AND EXTENSIONS</H2>
+
+<P>
+<B>ftnchek</B> accepts ANSI standard Fortran-77 programs with some minor
+limitations and numerous common extensions.
+<DL COMPACT>
+<DT><B>Limitations</B>:
+
+<DD>
+<DL COMPACT><DT><DD>
+<B>ftnchek</B> uses only one line of lookahead when
+analyzing a program into its basic syntactic elements.  If a
+particular statement is difficult to identify, it may be handled
+improperly if the ambiguity is not resolved on a single line.  This
+limitation applies to complex constants except in DATA
+statements, and to situations in which a variable name might be
+confused with a keyword.  For example, if the variable name
+WRITE is used for an array, then a very long
+statement assigning a value
+to some element of this array could be mistaken as a WRITE
+statement if the equals sign is not on the same line as the word
+WRITE.
+<P>
+
+The dummy arguments in statement functions are treated like ordinary
+variables of the program.  That is, their scope is the entire subprogram, not
+just the statement function definition.
+<P>
+
+The checking of FORMAT statements is lax, tolerating missing separators
+(comma, etc.) between format descriptors in places where the Standard
+requires them, and allowing <I>.d</I> fields on descriptors that should
+not have them.  It does warn under <B><A HREF="f77.html">-f77</A>=format-edit-descr</B>
+about nonstandard descriptor types (like
+O), and supported extensions.
+<P>
+
+If a user-supplied subprogram has the same name as one of the
+nonstandard intrinsic functions recognized by <B>ftnchek</B>, it must
+be declared in an EXTERNAL statement in any routine that invokes
+it.  Otherwise it will be subject to the checking normally given to
+the intrinsic function.  Since the nonstandard intrinsics are not
+standard, this EXTERNAL statement is not required by the Fortran
+77 Standard.  Using the <B><A HREF="intrinsic.html">-intrinsic</A>=none</B> setting, recognition of most
+nonstandard intrinsics (excepting only those needed to support the
+double complex data type) can be turned off.  See the lists of
+supported nonstandard intrinsic functions under the discussion of the
+<B><A HREF="intrinsic.html">-intrinsic</A></B> setting above.
+</DL>
+
+<DT><B>Extensions</B>:
+
+<DD>
+<DL COMPACT><DT><DD>
+All of these extensions (except lower-case characters) will generate
+warnings if the relevant <B><A HREF="f77.html">-f77</A></B>
+option is set.
+Some of the extensions listed below are part of the Fortran-90
+Standard.  These are indicated by the notation (F90).
+<P>
+
+Tabs are permitted, and translated into equivalent blanks which correspond
+to tab stops every 8 columns.  The standard does not recognize tabs.
+Note that some compilers allow tabs, but treat them differently.  The
+treatment defined for DEC FORTRAN can be achieved using the
+<B><A HREF="source.html">-source</A>=dec-tab</B> setting.
+<P>
+
+Strings may be delimited by either quote marks or apostrophes.  A
+sequence of two delimiter characters is interpreted as a single
+embedded delimiter character.  (F90)
+<P>
+
+Strings may contain UNIX<A HREF="style.html">-style</A> backslash escape sequences.  They will
+be interpreted as such if the <B><A HREF="source.html">-source</A>=unix-backslash</B> setting is given.
+Otherwise the backslash character will be treated as a normal
+printing character.
+<P>
+
+Source code can be in either Fortran 90 free format or traditional fixed
+format.  (F90)
+<P>
+
+A semicolon is allowed as a statement separator.  (F90)
+<P>
+
+Lower case characters are permitted, and are converted internally to
+uppercase except in character strings.  The standard specifies upper case only,
+except in comments and strings.  (F90)
+<P>
+
+Hollerith constants are permitted, in accordance with the Fortran 77
+Standard, appendix C.  They should not be used in expressions, or confused
+with datatype CHARACTER.
+<P>
+
+The letter 'D' (upper or lower case) in column 1 is treated as
+the beginning of a comment.  There is no option to treat such lines as
+statements instead of comments.
+<P>
+
+Statements may be longer than 72 columns provided that the setting
+<B><A HREF="columns.html">-columns</A></B>
+was used to increase the limit.  According to the standard, all
+text from columns 73 through 80 is ignored, and no line may be longer
+than 80 columns.
+<P>
+
+Variable names may be longer than six characters.  The standard specifies
+six as the maximum.  <B>ftnchek</B> permits names up to 31 characters
+long (F90).
+<P>
+
+Variable names may contain underscores and dollar signs (or other
+non-alphabetic characters as specified by the
+<B><A HREF="identifier-chars.html">-identifier-chars</A></B> option).  These characters are
+are treated the same as alphabetic letters.  The default type
+for variables beginning with these characters is REAL.
+In IMPLICIT type statements specifying a range of characters,
+the dollar sign follows Z and is followed by underscore.
+(Any other user-defined characters are treated the same as the dollar sign.)
+Fortran 90 permits underscores in variable names.
+<P>
+
+The UNIX version tolerates the presence of preprocessor directives,
+namely lines beginning with the pound sign
+(#).
+These are treated as comments, except for
+#line
+directives, which are interpreted, and are used to set the line number
+and source file name for warnings and error messages.  Note that
+#include
+directives are not processed by <B>ftnchek</B>.  Programs that use them for
+including source files should be passed through the preprocessor
+before being input to <B>ftnchek</B>.
+As noted below, <B>ftnchek</B> does process
+INCLUDE statements, which have a different syntax.
+An optional program, <B><A HREF="http://localhost/cgi-bin/man/man2html?1L+ftnpp">ftnpp</A></B>(1L) (available separately)
+provides  preprocessing that properly handles
+INCLUDE files.
+<P>
+
+The Fortran 90 DO ...  ENDDO control structure is permitted.
+The CYCLE and EXIT statements are accepted.  All of these may
+have an optional do-construct name, but construct names are not checked for
+consistency. (F90)
+<P>
+
+The Fortran 90 SELECT CASE construct is accepted. (F90)
+<P>
+
+Construct names are also accepted on IF, THEN, ELSE,
+ENDIF and SELECT CASE statements. (F90)
+<P>
+
+The ACCEPT and TYPE statements (for terminal I/O) are
+permitted, with the same syntax as PRINT.
+<P>
+
+The so-called ``Cray pointer'' syntax is tolerated. It is not the same as the
+Fortran 90 POINTER statement.  There is no real checking
+of the statement other than basic syntax.
+The form of this statement is
+<BR>
+
+
+POINTER (<I>pointer</I>, <I>pointee</I>)
+[,(<I>pointer</I>, <I>pointee</I>)]
+
+<BR>
+
+The pointer variables are assigned a data type of INTEGER *4.
+Usage checking of the pointee variables is suppressed, since in
+practice they are accessed indirectly via the pointers.
+<P>
+
+Statements may have any number of continuation lines.  The Fortran 77
+and Fortran 90 standards allow a maximum of 19 in fixed source form.
+The Fortran 90 standard allows a maximum of 39 in free source form.
+<P>
+
+Relational (comparison) operators composed of punctuation, namely: &lt;
+&lt;= == /= &gt; &gt;= are allowed.  (F90)
+<P>
+
+Inline comments, beginning with an exclamation mark, are
+permitted.  (F90)
+<P>
+
+NAMELIST I/O is supported.  The syntax is the same as in Fortran 90.
+<P>
+
+FORMAT statements can contain a dollar sign to indicate suppression of
+carriage-return.
+An integer expression enclosed in angle brackets can be used anywhere in a
+FORMAT statement where
+the Fortran 77 Standard allows an integer constant (except for the length of a
+Hollerith constant),
+to provide a run-time value for a repeat specification or field width.
+<P>
+
+Nonstandard keywords are allowed in I/O statements,
+corresponding to those in VMS Fortran.
+<P>
+
+The IMPLICIT NONE statement is supported.  The meaning of this
+statement is that all variables must have their data types explicitly
+declared.  Rather than flag the occurrences of such variables with
+syntax error messages, <B>ftnchek</B> waits till the end of the module,
+and then prints out a list of all undeclared variables,
+as it does for the <B><A HREF="declare.html">-declare</A></B> option.  (F90)
+<P>
+
+Data types INTEGER, REAL, COMPLEX, and
+LOGICAL are allowed to have an optional precision specification in
+type declarations.  For instance, REAL*8 means an 8-byte
+floating point data type.  The REAL*8 datatype is not
+necessarily considered equivalent to DOUBLE PRECISION,
+depending on the <B><A HREF="wordsize.html">-wordsize</A></B> setting.
+The Fortran 77 Standard allows
+a length specification only for CHARACTER data.
+<P>
+
+<B>ftnchek</B> supports the DOUBLE COMPLEX type
+specification for a complex quantity whose real and imaginary parts
+are double precision.  Mixed-mode arithmetic involving
+single-precision complex with double-precision real data,
+prohibited under the Standard, yields a double complex result.
+<P>
+
+Combined type declarations and data-statement-like initializers are
+accepted.  These have the form of a standard Fortran 77 type
+declaration, followed by a slash-delimited list of constants like that
+used in a DATA statement.  An example of the syntax is
+<BR>
+
+
+INTEGER  N / 100 /
+
+<BR>
+
+This bastard form of initializing declaration was not
+adopted in Fortran 90.  Such declarations should be written using
+the standard form described below, which is accepted by <B>ftnchek</B>.
+<P>
+
+There is limited support for Fortran 90 attribute-based type
+declarations.  This style of declaration is distinguished by the use
+of a double colon (::) between the list of attributes and the list of
+declared variables.  The features supported may be
+adequate for novice programmers, but are not yet sufficient for
+professional-quality Fortran 90 programs.  I hope to add
+support for more features in future releases.  I invite volunteers to
+assist in this task.  See the ToDo file in the source code
+distribution for details.
+The attributes currently accepted, besides all
+the usual data types, are DIMENSION, EXTERNAL,
+INTRINSIC, PARAMETER, and SAVE.  The new form of
+declaration also allows assignment of values to the variables
+declared.  At present, the (LEN=<I>value</I>) form of specifying
+character lengths is also accepted.  Kind specifications, using
+(KIND=<I>value</I>) are parsed but are not processed: all kinds
+are treated as default kind.  Also, there is little checking of these
+declarations beyond basic syntax.
+<P>
+
+Many commonly found nonstandard intrinsic functions are provided.  See
+the discussion of <B><A HREF="intrinsic.html">-intrinsic</A></B> for a list of functions and how to
+control which ones are recognized.
+<P>
+
+Argument checking is not tight for those nonstandard intrinsics
+that take arrays or mixed argument types.
+<P>
+
+<B>ftnchek</B> permits the INCLUDE statement, which causes
+inclusion of the text of the given file.  The syntax is
+<BR>
+
+
+INCLUDE '<I>filename</I>'
+
+<BR>
+
+This is compatible with Fortran 90.
+If the <B><A HREF="source.html">-source</A>=vms-include</B> option is given, <B>ftnchek</B> follows
+VMS conventions with respect to this statement: it assumes a default
+extension of <I>.for</I> if no filename extension is given, and
+allows the qualifier /[NO]LIST following the filename, to
+control the listing of the included file.  There is no support for
+including VMS text modules.
+<P>
+
+In diagnostic output relating to items contained in include
+files, the location of the error is specified by both
+its location in the include file and the location in the parent file
+where the file was included.
+<P>
+
+<B>ftnchek</B> accepts PARAMETER statements which lack
+parentheses.  These will be warned about if the
+<B><A HREF="f77.html">-f77</A>=param-noparen</B> flag is given.
+<P>
+
+<B>ftnchek</B> accepts PARAMETER definitions that involve
+intrinsic functions
+and exponentiation by a non-integer exponent.  Both of these cases are
+prohibited by the Fortran 77
+Standard, and will be warned about if the <B><A HREF="f77.html">-f77</A>=param-intrinsic</B>
+flag is given.  If an intrinsic function value
+is a compile-time integer constant,
+<B>ftnchek</B> will evaluate it.  This allows better checking if the
+parameter is used in declaring array sizes.  Fortran 90 allows
+intrinsic functions in PARAMETER definitions.
+<P>
+
+The intrinsic functions that are evaluated are:
+
+<CENTER><TABLE>
+<TR VALIGN=top><TD>ABS</TD><TD>IABS</TD><TD>DIM</TD><TD>IDIM</TD><TD>MAX<BR></TD></TR>
+<TR VALIGN=top><TD>MAX0</TD><TD>MIN</TD><TD>MIN0</TD><TD>MOD</TD><TD>SIGN<BR></TD></TR>
+<TR VALIGN=top><TD>ISIGN</TD><TD>LEN</TD><TD>ICHAR</TD><TD>INDEX</TD><TD><BR></TD></TR>
+</TABLE></CENTER>
+
+
+<BR>
+
+The functions of integer arguments are evaluated only if the arguments
+are integer constant expressions.  (These may involve integer
+constants, parameters, and evaluated intrinsic functions.)  The
+function LEN is evaluated if its argument is an expression
+involving only character constants and variables whose length is not
+adjustable.  The functions ICHAR and INDEX are evaluated
+only if the arguments are character constants.  <B>ftnchek</B> gives a
+warning if it needs the value of some intrinsic function that is not
+evaluated.
+</DL>
+
+
+
+</DL>
+<P><HR><P>Next: <A HREF="lbAL.html">NEW FEATURES</A>
+</BODY></HTML>

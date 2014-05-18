@@ -1,0 +1,20 @@
+C====>Begin Module %MAIN                  File builtin.f                
+C---->Makedcls Options: All variables except SFTRAN3 internals          
+C
+C     Intrinsic functions
+C
+      INTRINSIC           DSQRT,       SQRT
+C
+C     Built-in functions
+C
+      DOUBLE PRECISION    DSQRT
+C
+      DOUBLE PRECISION    DSQRT
+C
+C     Local variables
+C
+      DOUBLE PRECISION    X
+C
+      REAL                Y
+C
+C====>End Module   %MAIN                  File builtin.f                

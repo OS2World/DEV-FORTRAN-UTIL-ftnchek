@@ -1,0 +1,73 @@
+SHELL = /bin/sh
+
+
+# Major (X), minor (Y), and patch (Z) levels:
+X=3
+Y=2
+Z=2
+
+# different formats for the version numbering in file names and such:
+VDOTS=$(X).$(Y).$(Z)
+VDASH=$(X)_$(Y)_$(Z)
+VNUMS=$(X)$(Y)$(Z)
+
+BINARIES = \
+ftnchek-$(VDOTS)/ftnchek.exe \
+ftnchek-$(VDOTS)/README \
+ftnchek-$(VDOTS)/PATCHES \
+ftnchek-$(VDOTS)/LICENSE \
+ftnchek-$(VDOTS)/FAQ \
+ftnchek-$(VDOTS)/ftnchek.el \
+ftnchek-$(VDOTS)/patches.emx \
+ftnchek-$(VDOTS)/*.ps \
+ftnchek-$(VDOTS)/*.1 \
+ftnchek-$(VDOTS)/*.man \
+ftnchek-$(VDOTS)/*doc \
+ftnchek-$(VDOTS)/*txt \
+ftnchek-$(VDOTS)/average* \
+ftnchek-$(VDOTS)/dcl2inc* \
+ftnchek-$(VDOTS)/html/*
+
+OS2README = \
+ftnchek-$(VDOTS)/readme.os2 \
+ftnchek-$(VDOTS)/make-os2distro-$(VNUMS)
+
+
+.PHONY: all clean binary bobbin os2readme source
+
+all: clean binary bobbin os2readme source
+
+bobbin: os2readme
+	cp -p ftnchek-$(VDOTS)/ftnchek.exe \
+		ftnchek-$(VDOTS)/ftnchek_$(X).$(Y)$(Z)_i386_os2v2x_emx.exe
+	zip -um9j ftnchek-$(VDOTS)/ftnchek_$(VDASH)_i386_os2_exe.zip \
+		ftnchek-$(VDOTS)/ftnchek_$(X).$(Y)$(Z)_i386_os2v2x_emx.exe
+	zip -u9j  ftnchek-$(VDOTS)/ftnchek_$(VDASH)_i386_os2_exe.zip \
+		$(OS2README)
+
+
+binary: clean os2readme
+	zip -u9 fchk$(VNUMS)b.zip $(BINARIES) $(OS2README)
+
+
+source: clean os2readme
+	chmod u-w $(OS2README)
+	zip -umr9 fchk$(VNUMS)s.zip $(BINARIES) $(OS2README) \
+		ftnchek-$(VDOTS)/* \
+		-x ftnchek-$(VDOTS)/ftnchek_$(VDASH)_i386_os2_exe.zip
+	chmod u+w $(OS2README)
+
+# os2readme: ftnchek-$(VDOTS)/readme.os2
+os2readme:
+	sed \
+	-e 's/XYZ/$(VNUMS)/g' \
+	-e 's/X\.Y\.Z/$(VDOTS)/g' \
+	-e 's/X\.Y/$(X).$(Y)/g'      \
+	-e 's/DATEDATEDATE/'`date +%d-%b-%Y`'/' \
+	os2rc/readme.os2 > ftnchek-$(VDOTS)/readme.os2
+
+clean:
+	rm -f ftnchek-$(VDOTS)/*.o
+	rm -f ftnchek-$(VDOTS)/*~
+
+# eof.

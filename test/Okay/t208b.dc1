@@ -1,0 +1,9 @@
+C====>Begin Module %MAIN                  File t208b.f                  
+C---->Makedcls Options: Undeclared variables                            
+C
+C     Parameter variables
+C
+      INTEGER             NPI
+      PARAMETER           (NPI = 9)
+C
+C====>End Module   %MAIN                  File t208b.f                  

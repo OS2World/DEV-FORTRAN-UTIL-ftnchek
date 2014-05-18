@@ -1,0 +1,35 @@
+<HTML>
+<HEAD>
+<TITLE>Option: sixchar</TITLE>
+</HEAD>
+<BODY bgcolor=white>
+<A HREF="toc.html">Table of Contents</A><P>
+<P>Previous: <A HREF="resources.html">-resources</A><HR><P>
+<H2>Option: <font color=#FF0080>sixchar</font></H2><P>
+<A NAME="sixchar"></A><DT><B><A HREF="sixchar.html">-sixchar</A></B>
+
+<DD>
+<DL COMPACT><DT><DD>
+One of the goals of the <B>ftnchek</B> program is to
+help users to write portable Fortran programs.  One potential source
+of nonportability is the use of variable names that are longer than
+six characters.  Some compilers just ignore the extra characters.
+This behavior could potentially lead to two different variables being
+considered as the same.  For instance, variables named AVERAGECOST
+and AVERAGEPRICE are the same in the first six characters.  If
+you wish to catch such possible conflicts, use this flag.  Default =
+no.
+<P>
+
+Use the <B><A HREF="f77.html">-f77</A>=long-names</B> if you want to
+list <I>all</I>
+variables longer than six characters, not just those pairs that are the same in
+the first six.
+<P>
+
+See also: <B><A HREF="f77.html">-f77</A></B>, <B><A HREF="portability.html">-portability</A></B>.
+</DL>
+
+<P>
+<P><HR><P>Next: <A HREF="sort.html">-sort</A>
+</BODY></HTML>

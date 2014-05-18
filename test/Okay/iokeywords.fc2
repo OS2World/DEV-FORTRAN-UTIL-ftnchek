@@ -1,0 +1,27 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File iokeywords.f:
+     10       open(unit=1,carriagecontrol='none',recordtype='fixed',
+                          ^
+Warning near line 10 col 19 file iokeywords.f: Nonstandard syntax (not adopted
+ in Fortran 90)
+                                                 ^
+Warning near line 10 col 42 file iokeywords.f: Nonstandard syntax (not adopted
+ in Fortran 90)
+     12       open(unit=2,carriagecontrol='none',recl=512,status='old',err=1)
+                          ^
+Warning near line 12 col 19 file iokeywords.f: Nonstandard syntax (not adopted
+ in Fortran 90)
+
+Warning in module F90_STUFF in file iokeywords.f: Variables set but never
+ used:
+    C1 set at line 55 file iokeywords.f
+    C2 set at line 55 file iokeywords.f
+    I1 set at line 55 file iokeywords.f
+    INPUTSIZE set at line 53 file iokeywords.f
+    VAL set at line 54 file iokeywords.f
+
+ 0 syntax errors detected in file iokeywords.f
+ 4 warnings issued in file iokeywords.f
+

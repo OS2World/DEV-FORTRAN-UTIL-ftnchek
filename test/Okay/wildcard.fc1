@@ -1,0 +1,17 @@
+
+Portability Warning Options:
+  backslash [no]: Backslash in standard-conforming strings
+  common-alignment [no]: COMMON not in descending size order
+  hollerith [no]: Hollerith constants (except in FORMAT)
+  long-string [no]: Strings over 255 chars long
+  mixed-equivalence [yes]: Different data types equivalenced
+  mixed-size [yes]: Default and explicit size types mixed
+  real-do [no]: Non-integer DO loops
+  param-implicit-type [no]: Implicit type of PARAMETER differs from default type
+  tab [no]: Tabs in source code
+Prefix option name with no- to turn off option
+If no options given, equivalent to -portability=all
+Special keywords:
+  help: Print this list
+  all: Set all options
+  none: Clear all options

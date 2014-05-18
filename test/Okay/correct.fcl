@@ -1,0 +1,106 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File correct.f:
+
+      1 C	AUTHORS: MIKE MYERS & LUCIA SPAGNUOLO
+      2 C	DATE:    MAY 8, 1989
+      3                    
+      4 C	Variables:
+      5 C		SCORE -> an array of test scores
+      6 C		SUM ->   sum of the test scores
+      7 C		COUNT -> counter of scores read in
+      8 C		I ->     loop counter              
+      9 
+     10 	REAL FUNCTION COMPAV(SCORE,COUNT)
+     11             INTEGER SUM,COUNT,I,SCORE(5)
+     12     
+     13 	    SUM = 0
+     14 	    DO 30 I = 1,COUNT      
+     15 		SUM = SUM + SCORE(I)
+     16 30	    CONTINUE
+     17 	    COMPAV = FLOAT(SUM)/FLOAT(COUNT)
+     18         END
+     19 
+
+Module COMPAV: func: real
+
+External subprograms referenced:
+
+     FLOAT: intrns 
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+    COMPAV real         COUNT intg             I intg         SCORE intg  1
+       SUM intg   
+
+
+
+
+Statement labels defined:
+
+    Label   Line  StmtType
+     <30>     16      exec
+
+     20 
+     21 	PROGRAM AVENUM
+     22 C
+     23 C			MAIN PROGRAM
+     24 C
+     25 C	AUTHOR:   LOIS BIGBIE
+     26 C	DATE:	  MAY 15, 1990
+     27 C
+     28 C	Variables:
+     29 C		MAXNOS -> maximum number of input values
+     30 C		NUMS    -> an array of numbers
+     31 C		COUNT   -> exact number of input values
+     32 C		AVG     -> average returned by COMPAV
+     33 C		I       -> loop counter
+     34 C	
+     35 
+     36 	    INTEGER MAXNOS
+     37 	    PARAMETER(MAXNOS=5)
+     38 	    INTEGER I, NUMS(MAXNOS), COUNT
+     39 	    REAL AVG
+     40 	    COUNT = 0
+     41 	    DO 80 I = 1,MAXNOS
+     42 		READ (5,*,END=100) NUMS(I)
+     43 		COUNT = COUNT + 1
+     44 80	    CONTINUE
+     45 100	    AVG = COMPAV(NUMS, COUNT)
+     46 	    WRITE(6,*) 'AVERAGE =',AVG
+     47 	END
+
+Module AVENUM: prog
+
+External subprograms referenced:
+
+    COMPAV: real*  
+
+Variables:
+ 
+      Name Type Dims     Name Type Dims     Name Type Dims     Name Type Dims
+       AVG real         COUNT intg             I intg        MAXNOS intg   
+      NUMS intg  1
+
+* Variable not declared. Type has been implicitly defined.
+
+
+I/O Operations:
+
+     Unit ID Unit No. Access Form Operation   Line
+             5          SEQ  FMTD READ         42 
+             6          SEQ  FMTD WRITE        46 
+
+Statement labels defined:
+
+    Label   Line  StmtType    Label   Line  StmtType
+     <80>     44      exec    <100>     45      exec
+
+
+Nonportable usage: File contains tabs
+
+ 0 syntax errors detected in file correct.f
+ 2 warnings issued in file correct.f
+

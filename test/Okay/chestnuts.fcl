@@ -1,0 +1,59 @@
+
+FTNCHEK Version 3.2 November 2002
+
+File chestnuts.f:
+      6       DOUBLE PRECISION I=1,10
+                ^
+Warning near line 6 col 9 file chestnuts.f: DO index is not integer
+              ^
+Warning near line 6 col 7 file chestnuts.f: Nonstandard syntax
+      8       END DO
+              ^
+Warning near line 8 col 7 file chestnuts.f: Nonstandard syntax
+
+Warning in module %MAIN in file chestnuts.f: Variables set but never used:
+    DO10I set at line 4 file chestnuts.f
+    DOUBLEPRECISIONI set at line 7 file chestnuts.f
+    FORMAT set at line 10 file chestnuts.f
+
+Warning in module %MAIN in file chestnuts.f: Variables used before set
+    H3 used at line 10 file chestnuts.f; never set
+    I10 used at line 10 file chestnuts.f; never set
+    I9 used at line 10 file chestnuts.f; never set
+
+Warning in module %MAIN in file chestnuts.f: Names longer than 6 chars
+ (nonstandard):
+    DOUBLEPRECISIONI first occurrence at line 7 file chestnuts.f
+    UBLEPRECISIONI first occurrence at line 6 file chestnuts.f
+
+Warning in module %MAIN in file chestnuts.f: Labels defined but not used:
+    <1> defined at line 9 file chestnuts.f
+    <2> defined at line 10 file chestnuts.f
+     13       REALFUNCTIONF(M,N)
+                            ^
+Warning near line 13 col 21 file chestnuts.f: Nonstandard syntax: local array
+ cannot have variable size
+                              ^
+Warning near line 13 col 23 file chestnuts.f: Nonstandard syntax: local array
+ cannot have variable size
+                  ^
+Warning near line 13 col 11 file chestnuts.f: Possible intended function
+ declaration is not first line of module
+
+Warning in module F in file chestnuts.f: Statement functions defined but never
+ referenced:
+    REALFUNCTIONF defined at line 14 file chestnuts.f
+
+Warning in module F in file chestnuts.f: Variables set but never used:
+    FUNCTIONF set at line 15 file chestnuts.f
+
+Warning in module F in file chestnuts.f: Names longer than 6 chars
+ (nonstandard):
+    FUNCTIONF declared at line 13 file chestnuts.f
+    REALFUNCTIONF defined at line 14 file chestnuts.f
+
+ 0 syntax errors detected in file chestnuts.f
+ 13 warnings issued in file chestnuts.f
+
+Warning: Subprogram F never invoked
+    Defined in module F line 12 file chestnuts.f

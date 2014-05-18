@@ -1,0 +1,16 @@
+<HTML>
+<HEAD><TITLE>Source t208o.f</TITLE></HEAD>
+<BODY>
+<a name="%MAIN"><h3>PROGRAM %MAIN ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208o.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>REAL               c                  (c = 1.23)
+REAL               b                  (b = 2.0*c)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

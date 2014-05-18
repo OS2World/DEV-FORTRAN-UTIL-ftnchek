@@ -1,0 +1,382 @@
+<HTML>
+<HEAD><TITLE>Source t208x.f</TITLE></HEAD>
+<BODY>
+<a name="PROB5_4DIM"><h3>PROGRAM PROB5_4DIM ( )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Description</b></td></tr>
+<tr><td><pre>   ftnchek test file: t208x.f, Mon Mar 13 14:13:16 1995 
+   Adapted from a benchmark program at the University of Utah, with 
+   code bodies and most comments eliminated.  ftnchek's -makedcls 
+   option and the dcl2inc program have been subsequently used on 
+   the original copy of this program to replace all in-line COMMON 
+   blocks with INCLUDE statements and separate include files. 
+ 
+Modified Sat Feb  3 10:07:52 EST 2001 by R. Moniot to include a 
+NAMELIST declaration to improve it as a test of ftnchek.  The 
+declarations were excerpted from the PLOT79 grfgg3.sf3 file.</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+integer            NR                 (NR = 32)
+integer            NT                 (NT = 16)
+integer            NR2                (NR2 = NR+2)
+integer            NT1                (NT1 = NT+1)
+integer            NW                 (NW = 2*NT+15)
+integer            MMAX               (MMAX = 200)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="UINIT"><h3>SUBROUTINE UINIT ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+integer            NR                 (NR = 32)
+integer            NT                 (NT = 16)
+integer            NR2                (NR2 = NR+2)
+integer            NT1                (NT1 = NT+1)
+integer            MMAX               (MMAX = 200)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="XINIT"><h3>SUBROUTINE XINIT ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="NAVS2D"><h3>SUBROUTINE NAVS2D ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="TRIDGX"><h3>SUBROUTINE TRIDGX ( A, B, C, W, Y )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   A,          B(0:NBP1,0:NBP1)
+double precision   C(0:NBP1,0:NBP1),       W(0:NBP1,0:NBP1)
+double precision   Y(0:NBP1,0:NBP1)
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            N                  (N = NG-1)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="TRIDGY"><h3>SUBROUTINE TRIDGY ( A, B, C, W, Y )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   A,          B(0:NBP1,0:NBP1)
+double precision   C(0:NBP1,0:NBP1),       W(0:NBP1,0:NBP1)
+double precision   Y(0:NBP1,0:NBP1)
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            N                  (N = NG-1)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="NEWU"><h3>SUBROUTINE NEWU ( W2, P )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   P(0:NBP1,0:NBP1),       W2(0:NBP1,0:NBP1,2)
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="DIV"><h3>SUBROUTINE DIV ( S3, W2, D )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   D(0:NBP1,0:NBP1),       S3
+double precision   W2(0:NBP1,0:NBP1,2)
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="FFT2D"><h3>SUBROUTINE FFT2D ( A, B, ISIGN )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   A(0:NBP1,0:NBP1),       B(0:NBP1,0:NBP1)
+integer            ISIGN
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            N                  (N = NG)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="PHIA2D"><h3>SUBROUTINE PHIA2D ( N )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>integer            N
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="ZAG2D"><h3>SUBROUTINE ZAG2D ( N )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>integer            N
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="PLOT"><h3>SUBROUTINE PLOT ( TIME, N, U, F, PHIA, PHIN, C, ZAG, XM, ELF, NK )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   C(0:NBP1,0:NBP1)
+double precision   ELF(0:NBP1,0:NBP1,0:NR2,NT1)
+double precision   F(0:NBP1,0:NBP1,2),     PHIA(0:NBP1,0:NBP1)
+double precision   PHIN(0:NBP1,0:NBP1),    TIME
+double precision   U(0:NBP1,0:NBP1,2),     XM(MMAX,2)
+double precision   ZAG(0:NBP1,0:NBP1)
+integer            N,          NK
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Description</b></td></tr>
+<tr><td><pre>prints out data(0:ng,0:ng) for subsequent plotting</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+integer            NR                 (NR = 32)
+integer            NT                 (NT = 16)
+integer            NR2                (NR2 = NR+2)
+integer            NT1                (NT1 = NT+1)
+integer            MMAX               (MMAX = 200)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="MARKERS"><h3>SUBROUTINE MARKERS ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+integer            MMAX               (MMAX = 200)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="PHIN2D"><h3>SUBROUTINE PHIN2D ( N )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>integer            N
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="CHEM2D"><h3>SUBROUTINE CHEM2D ( N )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>integer            N
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="CHLFAC"><h3>SUBROUTINE CHLFAC ( DIAG, SUBD, NN )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   DIAG(NN),   SUBD(NN)
+integer            NN
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+</blockquote>
+<BR>
+<a name="CHLSLV"><h3>SUBROUTINE CHLSLV ( DIAG, SUB, NM1, B, X )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   B(NM1+1),   DIAG(NM1),  SUB(NM1),   X(NM1)
+integer            NM1
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+integer            MAX                (MAX = NBP1)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="PERIOD"><h3>SUBROUTINE PERIOD ( PH )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   PH(0:NBP1,0:NBP1)
+</pre></td></tr></table>
+<table><tr><td align="left"><b>Description</b></td></tr>
+<tr><td><pre>extend ph periodically</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="SOL"><h3>DOUBLE PRECISION FUNCTION SOL ( V, L, R )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   L,          R,          V
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+</blockquote>
+<BR>
+<a name="DIFFU"><h3>SUBROUTINE DIFFU ( PH, PHN, K1, ALPHA )</h3></a>
+<blockquote>
+<table><tr><td align="left"><b>Argument Definitions</b> <small>(+ indicates altered content)</small><b></b><br></td></tr>
+<tr><td><pre>double precision   ALPHA,      K1,         PH(0:NBP1,0:NBP1)
+double precision   PHN(0:NBP1,0:NBP1)
+</pre></td></tr></table>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+<a name="REACT"><h3>SUBROUTINE REACT ( )</h3></a>
+<blockquote>
+<table><tr><td><b>Source file:</b></td><td>t208x.f</td></tr>
+<tr><td></td></tr>
+</table>
+<table><tr><td align="left"><b>Parameter Variables Used</b><br></td></tr>
+<tr><td><pre>integer            L2NG               (L2NG = 6)
+integer            NG                 (NG = 2**L2NG)
+integer            NB                 (NB = NG+2)
+integer            NBP1               (NBP1 = NB+1)
+integer            NR                 (NR = 32)
+integer            NT                 (NT = 16)
+integer            NR2                (NR2 = NR+2)
+integer            NT1                (NT1 = NT+1)
+</pre></td></tr></table>
+</pre></td></tr></table>
+</blockquote>
+<BR>
+</BODY>
+</HTML>

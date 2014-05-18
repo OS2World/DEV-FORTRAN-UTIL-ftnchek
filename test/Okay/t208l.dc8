@@ -1,0 +1,14 @@
+c====>Begin Module FOO                    File t208l.f                  
+c---->Makedcls Options: All variables                                   
+c
+c     Argument variables
+c
+      INTEGER             M,           N
+c
+      REAL                A(M,N)
+c
+c     Local variables
+c
+      REAL                B(1,2,3,4,5,6,7)
+c
+c====>End Module   FOO                    File t208l.f                  

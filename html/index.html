@@ -1,0 +1,305 @@
+
+<HTML><HEAD><TITLE>Manpage of "FTNCHEK 3.2"</TITLE>
+</HEAD><BODY bgcolor=white>
+<H1>"FTNCHEK 3.2"</H1>
+Section: Misc. Reference Manual Pages (1L)<BR>Updated: November 2002<BR><A HREF="toc.html">Table of Contents</A>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<A NAME="lbAB">&nbsp;</A> <H2>NAME</H2>
+
+ftnchek - Fortran 77 program checker
+<A NAME="lbAC">&nbsp;</A> <H2>SYNOPSIS</H2>
+
+<B>ftnchek</B>
+
+[
+<B><A HREF="arguments.html">-arguments</A></B>[=<I>list</I>]
+
+]
+[
+<B><A HREF="array.html">-array</A></B>[=<I>list</I>]
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<A HREF="brief.html"><B>-</B>[<B>no</B>]<B>brief</A></B>
+
+]
+[
+<B><A HREF="calltree.html">-calltree</A></B>[=<I>list</I>]
+
+]
+[
+<A HREF="check.html"><B>-</B>[<B>no</B>]<B>check</A></B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+[
+<B><A HREF="columns.html">-columns</A></B>[=<I>num</I>]
+
+]
+[
+<B><A HREF="common.html">-common</A></B>[=<I>list</I>]
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<A HREF="crossref.html"><B>-</B>[<B>no</B>]<B>crossref</A></B>[=<I>list</I>]
+
+]
+[
+<A HREF="declare.html"><B>-</B>[<B>no</B>]<B>declare</A></B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+[
+<A HREF="division.html"><B>-</B>[<B>no</B>]<B>division</A></B>
+
+]
+[
+<B><A HREF="errors.html">-errors</A></B>[=<I>num</I>]
+
+]
+[
+<A HREF="extern.html"><B>-</B>[<B>no</B>]<B>extern</A></B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<A HREF="f77.html"><B>-</B>[<B>no</B>]<B>f77</A></B>[<B>=</B><I>list</I>]
+
+]
+[
+<A HREF="f90.html"><B>-</B>[<B>no</B>]<B>f90</A></B>[<B>=</B><I>list</I>]
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+[
+<A HREF="f95.html"><B>-</B>[<B>no</B>]<B>f95</A></B>[<B>=</B><I>list</I>]
+
+]
+[
+<A HREF="help.html"><B>-</B>[<B>no</B>]<B>help</A></B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<A HREF="identifier-chars.html"><B>-</B>[<B>no</B>]<B>identifier-chars</A></B>[<B>=</B><I>list</I>]
+
+]
+[
+<B><A HREF="include.html">-include</A>=</B><I>str</I>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+[
+<B><A HREF="intrinsic.html">-intrinsic</A></B>[=<I>list</I>]
+
+]
+[
+<A HREF="library.html"><B>-</B>[<B>no</B>]<B>library</A></B>
+
+]
+[
+<A HREF="list.html"><B>-</B>[<B>no</B>]<B>list</A></B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<B><A HREF="makedcls.html">-makedcls</A></B>[=<I>list</I>]
+
+]
+[
+<B><A HREF="mkhtml.html">-mkhtml</A></B>[=<I>list</I>]
+
+]
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<A HREF="novice.html"><B>-</B>[<B>no</B>]<B>novice</A></B>
+
+]
+[
+<B><A HREF="output.html">-output</A>=</B><I>str</I>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<B><A HREF="pointersize.html">-pointersize</A></B>[=<I>num</I>]
+
+]
+[
+<A HREF="portability.html"><B>-</B>[<B>no</B>]<B>portability</A></B>[<B>=</B><I>list</I>]
+
+]
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<A HREF="pretty.html"><B>-</B>[<B>no</B>]<B>pretty</A></B>[<B>=</B><I>list</I>]
+
+]
+[
+<B><A HREF="project.html">-project</A></B>[=<I>list</I>]
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<A HREF="pure.html"><B>-</B>[<B>no</B>]<B>pure</A></B>
+
+]
+[
+<A HREF="quiet.html"><B>-</B>[<B>no</B>]<B>quiet</A></B>
+
+]
+[
+<A HREF="reference.html"><B>-</B>[<B>no</B>]<B>reference</A></B>
+
+]
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<A HREF="resources.html"><B>-</B>[<B>no</B>]<B>resources</A></B>
+
+]
+[
+<A HREF="sixchar.html"><B>-</B>[<B>no</B>]<B>sixchar</A></B>
+
+]
+[
+<A HREF="sort.html"><B>-</B>[<B>no</B>]<B>sort</A></B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<B><A HREF="source.html">-source</A></B>[=<I>list</I>]
+
+]
+[
+<B><A HREF="style.html">-style</A></B>[=<I>list</I>]
+
+]
+
+[
+<A HREF="symtab.html"><B>-</B>[<B>no</B>]<B>symtab</A></B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<A HREF="truncation.html"><B>-</B>[<B>no</B>]<B>truncation</A></B>[<B>=</B><I>list</I>]
+
+]
+[
+<B><A HREF="usage.html">-usage</A></B>[=<I>list</I>]
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<A HREF="vcg.html"><B>-</B>[<B>no</B>]<B>vcg</A></B>
+
+]
+[
+<A HREF="version.html"><B>-</B>[<B>no</B>]<B>version</A></B>
+
+]
+
+[
+<A HREF="volatile.html"><B>-</B>[<B>no</B>]<B>volatile</A></B>
+
+]
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+[
+<B><A HREF="wordsize.html">-wordsize</A></B>[=<I>num</I>]
+
+]
+[
+<B><A HREF="wrap.html">-wrap</A></B>[=<I>num</I>]
+
+]
+[
+<I>files ...</I>
+
+]
+<P><HR><P>Next: <A HREF="lbAD.html">DESCRIPTION</A>
+</BODY></HTML>
